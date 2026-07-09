@@ -1789,10 +1789,10 @@ body{
 
 // ── CONFIG — fill these in after Supabase setup ────────────────────────────
 var AAROH_CONFIG = {
-  supabaseUrl:    '',   // e.g. 'https://xyzxyz.supabase.co'
-  supabaseKey:    '',   // your anon public key
-  userId:         'pratiksha',  // your unique user id
-  configured:     false         // set to true after filling above
+  supabaseUrl:    'https://xsfljuakylxctytiozup.supabase.co',
+  supabaseKey:    'sb_publishable_Z2W81kF_sSXxC7OLP50bUw_YLJ9qwNu',
+  userId:         'pratiksha',
+  configured:     true
 };
 
 // ── SUPABASE CLIENT (lightweight fetch wrapper) ────────────────────────────
@@ -1805,6 +1805,7 @@ var _sb = {
     this.url = url;
     this.key = key;
     this.ready = !!(url && key);
+    console.log('Supabase init:', url ? 'URL set' : 'NO URL', key ? 'Key set' : 'NO KEY', 'ready:', this.ready);
   },
 
   _headers: function() {
@@ -1812,7 +1813,7 @@ var _sb = {
       'Content-Type': 'application/json',
       'apikey': this.key,
       'Authorization': 'Bearer ' + this.key,
-      'Prefer': 'resolution=merge-duplicates'
+      'Prefer': 'return=minimal,resolution=merge-duplicates'
     };
   },
 
@@ -1858,7 +1859,7 @@ var _sb = {
       }
       return map;
     })
-    .catch(function(e) { console.warn('Supabase getAll failed:', e); return {}; });
+    .catch(function(e) { console.error('Supabase getAll failed:', e.message || e); return {}; });
   }
 };
 
@@ -1890,6 +1891,7 @@ function _cloudLoad() {
   _showSyncStatus('☁ Loading your data…', 'var(--blue)');
 
   return _sb.getAll().then(function(cloudData) {
+    console.log('Cloud data received:', Object.keys(cloudData).length, 'keys');
     var count = Object.keys(cloudData).length;
     if (count === 0) {
       console.log('Aaroh OS: no cloud data yet — using local data');
