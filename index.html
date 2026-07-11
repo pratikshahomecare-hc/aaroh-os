@@ -912,182 +912,128 @@ body{
 
     <!-- ═══════════ DASHBOARD / TODAY ═══════════ -->
     <section class="page" id="page-dashboard">
+  <div style="display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start">
 
-  <!-- TWO-COLUMN LAYOUT -->
-  <div style="display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start">
-
-    <!-- LEFT COLUMN (70%) -->
+    <!-- LEFT COLUMN -->
     <div style="min-width:0">
 
-      <!-- 1. Welcome & Mission -->
-      <div style="margin-bottom:20px">
-        <div class="dash-greeting-eyebrow">Aaroh — Rise with purpose, build with intention, leave a legacy</div>
-        <h1 class="dash-greeting-text" id="dashGreeting">Good morning, Pratiksha 🌿</h1>
-        <div class="dash-mission-label">Mission of the week</div>
-        <div class="dash-mission" id="dashMission" contenteditable="true">Build the foundation — daily thinking, first story, living knowledge hub.</div>
+      <!-- Welcome -->
+      <div style="margin-bottom:18px">
+        <div style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);margin-bottom:6px">Aaroh — Rise with purpose, build with intention, leave a legacy</div>
+        <h1 class="dash-greeting-text" id="dashGreeting" style="font-family:'Playfair Display',serif;font-size:26px;font-weight:400;margin-bottom:6px">Good morning, Pratiksha 🌿</h1>
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--hint);margin-bottom:4px">Mission of the week</div>
+        <div id="dashMission" contenteditable="true" style="font-size:13px;color:var(--muted);line-height:1.6;outline:none" onblur="saveLS('ace_dashMission',this.textContent)">Build the foundation — daily thinking, first story, living knowledge hub.</div>
       </div>
 
-      <!-- 2. Today's Top 3 -->
-      <div class="dash-top3" style="margin-bottom:20px">
+      <!-- Today's Top 3 -->
+      <div class="dash-top3" style="margin-bottom:16px">
         <div class="dash-top3-label">Today's top 3</div>
         <div id="dashTop3Container"><div style="padding:6px 0;color:var(--hint);font-size:13px">Loading…</div></div>
       </div>
 
-      <!-- 3. Strategic Pillars -->
-      <div style="margin-bottom:20px">
-        <div class="dash-section-title">Strategic pillars</div>
-        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px">
-          <div class="dash-pillar">
-            <div class="dash-pillar-icon">🌍</div>
-            <div class="dash-pillar-name">Lead</div>
-            <div class="dash-pillar-item"><div class="dash-pillar-item-label">Current focus</div><div class="dash-pillar-item-val" contenteditable="true">Hospital network expansion · MOU pipeline</div></div>
-            <div class="dash-pillar-item"><div class="dash-pillar-item-label">Done this week</div><div class="dash-pillar-item-val" contenteditable="true">KIST meeting completed</div></div>
-            <div class="dash-pillar-item"><div class="dash-pillar-item-label">Next milestone</div><div class="dash-pillar-item-val" contenteditable="true">Grande MOU follow-up</div></div>
-          </div>
-          <div class="dash-pillar">
-            <div class="dash-pillar-icon">🏥</div>
-            <div class="dash-pillar-name">Build</div>
-            <div class="dash-pillar-item"><div class="dash-pillar-item-label">Current focus</div><div class="dash-pillar-item-val" contenteditable="true">Aaroh OS · Knowledge system daily use</div></div>
-            <div class="dash-pillar-item"><div class="dash-pillar-item-label">Done this week</div><div class="dash-pillar-item-val" contenteditable="true">Sprint 1 &amp; 2 complete</div></div>
-            <div class="dash-pillar-item"><div class="dash-pillar-item-label">Next milestone</div><div class="dash-pillar-item-val" contenteditable="true">First story in Human Library</div></div>
-          </div>
-          <div class="dash-pillar">
-            <div class="dash-pillar-icon">📖</div>
-            <div class="dash-pillar-name">Develop</div>
-            <div class="dash-pillar-item"><div class="dash-pillar-item-label">Current focus</div><div class="dash-pillar-item-val" contenteditable="true">Aging &amp; dignity deep learning</div></div>
-            <div class="dash-pillar-item"><div class="dash-pillar-item-label">Done this week</div><div class="dash-pillar-item-val" contenteditable="true">Session 1 — crisis, planning, dignity</div></div>
-            <div class="dash-pillar-item"><div class="dash-pillar-item-label">Next milestone</div><div class="dash-pillar-item-val" contenteditable="true">Cross-cultural models session</div></div>
-          </div>
-          <div class="dash-pillar">
-            <div class="dash-pillar-icon">✍️</div>
-            <div class="dash-pillar-name">Create</div>
-            <div class="dash-pillar-item"><div class="dash-pillar-item-label">Current focus</div><div class="dash-pillar-item-val" contenteditable="true">Today's notes become tomorrow's legacy. — presentation</div></div>
-            <div class="dash-pillar-item"><div class="dash-pillar-item-label">Done this week</div><div class="dash-pillar-item-val" contenteditable="true">10-slide PPTX built &amp; delivered</div></div>
-            <div class="dash-pillar-item"><div class="dash-pillar-item-label">Next milestone</div><div class="dash-pillar-item-val" contenteditable="true">First public essay</div></div>
-          </div>
-          <div class="dash-pillar">
-            <div class="dash-pillar-icon">🌱</div>
-            <div class="dash-pillar-name">Grow</div>
-            <div class="dash-pillar-item"><div class="dash-pillar-item-label">Current focus</div><div class="dash-pillar-item-val" contenteditable="true">Building Aaroh movement privately</div></div>
-            <div class="dash-pillar-item"><div class="dash-pillar-item-label">Done this week</div><div class="dash-pillar-item-val" contenteditable="true">Project structure established</div></div>
-            <div class="dash-pillar-item"><div class="dash-pillar-item-label">Next milestone</div><div class="dash-pillar-item-val" contenteditable="true">10 stories written</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4. Learning -->
-      <div style="margin-bottom:20px">
+      <!-- Learning -->
+      <div style="margin-bottom:16px">
         <div class="dash-section-title">Learning</div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
-          <div class="dash-learn-card">
-            <div class="dash-learn-icon">📚</div>
-            <div class="dash-learn-label">Current book</div>
-            <div class="dash-learn-val" id="learnBook" contenteditable="true">Being Mortal — Atul Gawande</div>
-          </div>
-          <div class="dash-learn-card">
-            <div class="dash-learn-icon">🔬</div>
-            <div class="dash-learn-label">Current research</div>
-            <div class="dash-learn-val" id="learnResearch" contenteditable="true">Compound frailty and care system failures — cross-cultural models</div>
-          </div>
-          <div class="dash-learn-card featured">
-            <div class="dash-learn-icon">💡</div>
-            <div class="dash-learn-label">Today's insight</div>
-            <div class="dash-learn-val" id="learnInsight" contenteditable="true">Dignity is not a trend — it is a whole-life human issue, not something that arrives only in old age.</div>
-          </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+          <div class="dash-learn-card"><div class="dash-learn-icon">📚</div><div class="dash-learn-label">Current book</div><div class="dash-learn-val" id="learnBook" contenteditable="true" onblur="saveLS('ace_learnBook',this.textContent)">Being Mortal — Atul Gawande</div></div>
+          <div class="dash-learn-card"><div class="dash-learn-icon">🔬</div><div class="dash-learn-label">Current research</div><div class="dash-learn-val" id="learnResearch" contenteditable="true" onblur="saveLS('ace_learnResearch',this.textContent)">Compound frailty and care system failures</div></div>
+          <div class="dash-learn-card featured"><div class="dash-learn-icon">💡</div><div class="dash-learn-label">Today's insight</div><div class="dash-learn-val" id="learnInsight" contenteditable="true" onblur="saveLS('ace_learnInsight',this.textContent)">Dignity is not a trend — it is a whole-life human issue.</div></div>
         </div>
       </div>
 
-      <!-- 5. Human Library -->
-      <div style="margin-bottom:20px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <!-- Strategic Pillars -->
+      <div style="margin-bottom:16px">
+        <div class="dash-section-title">Strategic pillars</div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
+          <div class="dash-pillar"><div class="dash-pillar-icon">🌍</div><div class="dash-pillar-name">Lead</div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Focus</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p1focus',this.textContent)">Hospital MOU pipeline</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Done</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p1done',this.textContent)">KIST meeting</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Next</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p1next',this.textContent)">Grande MOU</div></div></div>
+          <div class="dash-pillar"><div class="dash-pillar-icon">🏥</div><div class="dash-pillar-name">Build</div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Focus</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p2focus',this.textContent)">Aaroh OS daily use</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Done</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p2done',this.textContent)">Sprint 1 &amp; 2</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Next</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p2next',this.textContent)">First story</div></div></div>
+          <div class="dash-pillar"><div class="dash-pillar-icon">📖</div><div class="dash-pillar-name">Develop</div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Focus</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p3focus',this.textContent)">Aging deep learning</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Done</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p3done',this.textContent)">Session 1</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Next</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p3next',this.textContent)">Cross-cultural models</div></div></div>
+          <div class="dash-pillar"><div class="dash-pillar-icon">✍️</div><div class="dash-pillar-name">Create</div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Focus</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p4focus',this.textContent)">Dignity presentation</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Done</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p4done',this.textContent)">10-slide PPTX</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Next</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p4next',this.textContent)">First essay</div></div></div>
+          <div class="dash-pillar"><div class="dash-pillar-icon">🌱</div><div class="dash-pillar-name">Grow</div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Focus</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p5focus',this.textContent)">Aaroh movement</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Done</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p5done',this.textContent)">Structure set</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Next</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p5next',this.textContent)">10 stories</div></div></div>
+        </div>
+      </div>
+
+      <!-- Human Library -->
+      <div style="margin-bottom:16px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
           <div class="dash-section-title" style="margin-bottom:0">Human library</div>
-          <button class="btn btn-teal" style="font-size:11px;padding:5px 12px" onclick="showPage('stories',null)">View all stories →</button>
+          <button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="showPage('stories',null)">View all →</button>
         </div>
         <div id="dashLibraryContainer">
-          <div class="card" style="padding:20px 24px">
-            <div class="dash-library">
-              <div><div class="dash-library-avatar">👴</div></div>
-              <div style="flex:1;min-width:0">
-                <div class="dash-library-eyebrow">Featured story · Session 1</div>
-                <div class="dash-library-quote" id="libQuote" contenteditable="true">"I kept waiting for someone to ask me what I wanted. Nobody ever did. But I still knew."</div>
-                <div class="dash-library-row"><span class="dash-library-tag">Lesson</span><span class="dash-library-text" id="libLesson" contenteditable="true">Dignity is not given — it must be sought, and sometimes it must be demanded.</span></div>
-                <div class="dash-library-row"><span class="dash-library-tag green">Reflection</span><span class="dash-library-text" id="libReflection" contenteditable="true">What would it have meant for this person if someone had simply asked?</span></div>
-                <button class="btn btn-ghost" style="margin-top:10px;font-size:11px" onclick="openWisdomModal('story')">+ Add new story</button>
-              </div>
-            </div>
+          <div class="card" style="padding:18px 22px">
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);margin-bottom:8px">Featured story</div>
+            <div style="font-size:14px;font-style:italic;color:var(--text);border-left:2px solid var(--green);padding-left:12px;margin-bottom:10px;line-height:1.55">"I kept waiting for someone to ask me what I wanted. Nobody ever did. But I still knew."</div>
+            <div style="font-size:12px;color:var(--muted);margin-bottom:6px"><span style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--hint);margin-right:6px">Lesson</span>Dignity is not given — it must be sought.</div>
+            <button class="btn btn-ghost" style="font-size:11px;padding:4px 10px;margin-top:4px" onclick="openWisdomModal('story')">+ Add story</button>
           </div>
         </div>
       </div>
 
-    </div><!-- /left column -->
-
-    <!-- RIGHT COLUMN (30%) -->
-    <div style="position:sticky;top:20px;display:flex;flex-direction:column;gap:16px">
-
-      <!-- Follow-ups -->
-      <div class="card" style="padding:18px 20px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-          <div class="dash-card-title" style="margin-bottom:0">Follow-ups</div>
-          <button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="showPage('followups',null)">See all</button>
+      <!-- Today's Thought -->
+      <div style="margin-bottom:16px">
+        <div class="dash-section-title">Today's thought</div>
+        <div class="card" style="padding:18px 22px">
+          <div id="todaysThought" contenteditable="true" style="font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:var(--text);line-height:1.7;outline:none;min-height:40px" onblur="saveLS('ace_todaysThought',this.textContent)">What is the purpose I am most afraid of losing as I get older?</div>
+          <div style="font-size:11px;color:var(--hint);margin-top:8px">Click to write your thought for today</div>
         </div>
-        <div id="dashFollowUps"><div style="color:var(--hint);font-size:12px;padding:8px 0">Loading…</div></div>
       </div>
 
-      <!-- Relationships -->
-      <div class="card" style="padding:18px 20px">
-        <div class="dash-card-title">Key Relationships</div>
-        <div id="dashKeyRelContainer"><div style="color:var(--hint);font-size:12px;padding:4px 0">Loading…</div></div>
+    </div><!-- /left -->
+
+    <!-- RIGHT COLUMN -->
+    <div style="display:flex;flex-direction:column;gap:14px;position:sticky;top:20px">
+
+      <!-- Key Relationships -->
+      <div class="card" style="padding:16px 18px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <div class="dash-card-title" style="margin-bottom:0">Key Relationships</div>
+          <button class="btn btn-ghost" style="font-size:10px;padding:3px 8px" onclick="showPage('followups',null)">See all</button>
+        </div>
+        <div id="dashKeyRelContainer"><div style="color:var(--hint);font-size:12px">Loading…</div></div>
+      </div>
+
+      <!-- Follow-ups -->
+      <div class="card" style="padding:16px 18px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <div class="dash-card-title" style="margin-bottom:0">Follow-ups</div>
+          <button class="btn btn-ghost" style="font-size:10px;padding:3px 8px" onclick="showPage('followups',null)">See all</button>
+        </div>
+        <div id="dashFollowUps"><div style="color:var(--hint);font-size:12px">Loading…</div></div>
       </div>
 
       <!-- Organisations -->
-      <div class="card" style="padding:18px 20px">
+      <div class="card" style="padding:16px 18px">
         <div class="dash-card-title">Organisations</div>
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <div style="background:var(--content-bg);border-radius:8px;padding:12px 14px;margin-bottom:10px">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-              <div style="font-size:13px;font-weight:600;color:var(--text)">🏥 Heal Home Care</div>
-              <span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;background:var(--green-light);color:var(--green-text)">Active</span>
-            </div>
-            <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Current Focus</div>
-            <div id="healFocus" contenteditable="true" style="font-size:12px;color:var(--text);outline:none;margin-bottom:8px" onblur="saveLS('ace_healFocus',this.textContent)">Hospital network expansion · MOU pipeline</div>
-            <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Next Activity</div>
-            <div id="healNext" contenteditable="true" style="font-size:12px;color:var(--text);outline:none;margin-bottom:8px" onblur="saveLS('ace_healNext',this.textContent)">Grande MOU follow-up</div>
-            <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Pending Follow-up</div>
-            <div id="healPending" contenteditable="true" style="font-size:12px;color:var(--coral);outline:none" onblur="saveLS('ace_healPending',this.textContent)">MOU follow-up – Green Tara College</div>
+        <div style="background:var(--content-bg);border-radius:8px;padding:10px 12px;margin-bottom:10px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+            <div style="font-size:12px;font-weight:600">🏥 Heal Home Care</div>
+            <span style="font-size:10px;font-weight:600;padding:1px 7px;border-radius:10px;background:var(--green-light);color:var(--green-text)">Active</span>
           </div>
-          <div style="background:var(--content-bg);border-radius:8px;padding:12px 14px">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-              <div style="font-size:13px;font-weight:600;color:var(--text)">🏡 Naman Care Home</div>
-              <span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;background:var(--green-light);color:var(--green-text)">Active</span>
-            </div>
-            <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Current Focus</div>
-            <div id="namanFocus" contenteditable="true" style="font-size:12px;color:var(--text);outline:none;margin-bottom:8px" onblur="saveLS('ace_namanFocus',this.textContent)">Quality care operations · Staff training</div>
-            <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Next Activity</div>
-            <div id="namanNext" contenteditable="true" style="font-size:12px;color:var(--text);outline:none;margin-bottom:8px" onblur="saveLS('ace_namanNext',this.textContent)">Monthly quality review</div>
-            <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Pending Follow-up</div>
-            <div id="namanPending" contenteditable="true" style="font-size:12px;color:var(--coral);outline:none" onblur="saveLS('ace_namanPending',this.textContent)">Nursing staff orientation</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:2px">Focus</div>
+          <div id="healFocus" contenteditable="true" style="font-size:11px;color:var(--text);outline:none;margin-bottom:6px" onblur="saveLS('ace_healFocus',this.textContent)">Hospital network · MOU pipeline</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:2px">Next</div>
+          <div id="healNext" contenteditable="true" style="font-size:11px;color:var(--text);outline:none;margin-bottom:6px" onblur="saveLS('ace_healNext',this.textContent)">Grande MOU follow-up</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:2px">Pending</div>
+          <div id="healPending" contenteditable="true" style="font-size:11px;color:var(--coral);outline:none" onblur="saveLS('ace_healPending',this.textContent)">Green Tara MOU follow-up</div>
+        </div>
+        <div style="background:var(--content-bg);border-radius:8px;padding:10px 12px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+            <div style="font-size:12px;font-weight:600">🏡 Naman Care Home</div>
+            <span style="font-size:10px;font-weight:600;padding:1px 7px;border-radius:10px;background:var(--green-light);color:var(--green-text)">Active</span>
           </div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:2px">Focus</div>
+          <div id="namanFocus" contenteditable="true" style="font-size:11px;color:var(--text);outline:none;margin-bottom:6px" onblur="saveLS('ace_namanFocus',this.textContent)">Quality care · Staff training</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:2px">Next</div>
+          <div id="namanNext" contenteditable="true" style="font-size:11px;color:var(--text);outline:none;margin-bottom:6px" onblur="saveLS('ace_namanNext',this.textContent)">Monthly quality review</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:2px">Pending</div>
+          <div id="namanPending" contenteditable="true" style="font-size:11px;color:var(--coral);outline:none" onblur="saveLS('ace_namanPending',this.textContent)">Nursing staff orientation</div>
         </div>
       </div>
 
-    </div><!-- /right column -->
-
-  </div><!-- /two-column -->
-
-  <!-- Modals carried over -->
-  <div class="modal-overlay" id="modal-addStory">
-    <div class="modal">
-      <div class="modal-hdr"><div class="modal-title">Add story to Human Library</div><button class="close-btn" onclick="closeModal('addStory')">×</button></div>
-      <div class="form-row"><label class="form-label">Quote or what they said</label><textarea class="form-textarea" id="storyQuoteOld" placeholder="Their words, exactly as you remember them..."></textarea></div>
-      <div class="form-row"><label class="form-label">Lesson</label><input class="form-input" id="storyLessonOld" placeholder="What this story teaches about dignity, aging, or care..."></div>
-      <div class="form-row"><label class="form-label">Reflection</label><input class="form-input" id="storyReflectionOld" placeholder="A question it leaves you with..."></div>
-      <div class="form-row"><label class="form-label">Context (no identifying details)</label><input class="form-input" id="storyContextOld" placeholder="Who, where, when..."></div>
-      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px">
-        <button class="btn btn-ghost" onclick="closeModal('addStory')">Cancel</button>
-        <button class="btn btn-teal" onclick="saveStory()">Save story</button>
-      </div>
-    </div>
+    </div><!-- /right -->
   </div>
+
+  <!-- Modals -->
   <div class="dash-capture-overlay" id="captureOverlay" onclick="closeCaptureMenu()"></div>
   <div class="dash-capture-menu" id="captureMenu">
     <button class="dash-capture-option" onclick="quickCapture('Idea')">💡 Idea</button>
@@ -1107,7 +1053,6 @@ body{
       </div>
     </div>
   </div>
-
 </section>
 
     <!-- ═══════════ COLLEGES ═══════════ -->
@@ -1719,7 +1664,7 @@ body{
   </div>
 </div>
 
-<div class="modal-overlay" id="modal-addCollege">
+<div class="modal-overlay" id="modal-addCollege"><div class="modal" style="width:600px"><div class="modal-hdr"><div class="modal-title" id="addColTitle">Add College</div><button class="close-btn" onclick="closeModal('addCollege')">×</button></div><div class="form-row"><label class="form-label">College Name</label><input class="form-input" id="newColName"></div><div class="form-row"><label class="form-label">Address</label><input class="form-input" id="newColAddr"></div><div class="form-2col"><div class="form-row"><label class="form-label">Phone / Email</label><input class="form-input" id="newColContact"></div><div class="form-row"><label class="form-label">Contact Person</label><input class="form-input" id="newColPerson"></div></div><div class="form-row"><label class="form-label">Programs</label><input class="form-input" id="newColPrograms" placeholder="e.g. B.Sc Nursing, ANM"></div><div class="form-2col"><div class="form-row"><label class="form-label">First Presentation</label><input type="date" class="form-input" id="newColFirstDate"></div><div class="form-row"><label class="form-label">Last Presentation</label><input type="date" class="form-input" id="newColDate"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Total Presentations</label><input type="number" class="form-input" id="newColPresentations" min="0" value="1"></div><div class="form-row"><label class="form-label">Status</label><select class="form-select" id="newColStatus"><option value="done">Continuing Collaboration</option><option value="pending">In Progress</option><option value="followup">Follow-up Needed</option><option value="mou">MOU Signed</option></select></div></div><div class="form-row"><label class="form-label">Remarks / Notes</label><textarea class="form-textarea" id="newColRemarks"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('addCollege')">Cancel</button><button class="btn btn-teal" onclick="addNewCollege()">Save</button></div></div></div><div class="modal-overlay" id="modal-addCollege">
   <div class="modal">
     <div class="modal-hdr"><div class="modal-title">Add College</div><button class="close-btn" onclick="closeModal('addCollege')">×</button></div>
     <div class="form-row"><label class="form-label">College Name</label><input class="form-input" id="newColName"></div>
@@ -1907,20 +1852,37 @@ document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click
 // COLLEGES
 // ════════════════════════════════════════
 function renderColleges(filter='all', search='') {
-  const tbody = document.getElementById('collegeBody');
+  const tbody = document.getElementById('colBody');
   if(!tbody) return;
   tbody.innerHTML = '';
   let n = 0;
+  const statusLabel={done:'Continuing',pending:'In Progress',followup:'Follow-up',mou:'MOU Signed'};
+  const statusColor={done:'#3B6D11;background:#e8f5e9',pending:'var(--amber-dark);background:var(--amber-light)',followup:'var(--coral);background:var(--coral-light)',mou:'var(--blue);background:var(--blue-light)'};
   colleges.forEach((c, idx) => {
-    const mf = filter==='all'||(filter==='done'&&c.status==='done')||(filter==='followup'&&c.status==='followup')||(filter==='pending'&&(c.status==='pending'||c.status==='followup'));
-    const ms = !search || c.name.toLowerCase().includes(search)||(c.addr||'').toLowerCase().includes(search)||(c.contact||'').toLowerCase().includes(search)||(c.person||'').toLowerCase().includes(search);
-    if(!mf||!ms) return;
+    const mf=filter==='all'||(filter==='done'&&c.status==='done')||(filter==='pending'&&c.status==='pending')||(filter==='followup'&&c.status==='followup')||(filter==='mou'&&c.status==='mou');
+    const ms=!search||c.name.toLowerCase().includes(search)||(c.addr||'').toLowerCase().includes(search)||(c.contact||'').toLowerCase().includes(search)||(c.person||'').toLowerCase().includes(search);
+    if(!mf||!ms)return;
     n++;
-    const sp = c.status==='done'?'<span class="pill pill-done">Done</span>':c.status==='followup'?'<span class="pill pill-pending">Follow-up</span>':'<span class="pill pill-pending">Pending</span>';
-    tbody.innerHTML += `<tr><td style="color:var(--hint);font-size:11px">${n}</td><td><b style="font-size:13px">${c.name}</b>${c.date?'<div style="font-size:11px;color:var(--hint)">'+c.date+'</div>':''}</td><td style="font-size:12px;color:var(--text-2)">${c.addr}</td><td style="font-size:12px">${c.person}<br><span style="color:var(--muted);font-size:11px">${c.contact}</span></td><td style="font-size:11px;color:var(--muted)">${c.programs||'—'}</td><td>${sp}</td><td style="white-space:nowrap"><button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" data-action="editCollege" data-idx="${idx}">Edit</button> <button class="btn btn-ghost" style="font-size:11px;padding:4px 10px;color:var(--coral);border-color:var(--coral)" data-action="deleteCollege" data-idx="${idx}">Del</button></td></tr>`;
+    const presentations=c.presentations||c.presentationCount||1;
+    const firstD=c.firstDate||c.date||'—';
+    const lastD=c.lastDate||c.date||'—';
+    const st=c.status||'done';
+    const sc=statusColor[st]||'var(--hint);background:var(--border)';
+    const sl=statusLabel[st]||st;
+    const contact=c.contact||c.person||'—';
+    tbody.innerHTML+=`<tr>
+      <td style="color:var(--hint);font-size:11px">${n}</td>
+      <td><div style="font-size:13px;font-weight:600;color:var(--text)">${c.name}</div><div style="font-size:11px;color:var(--muted)">${c.addr||''}</div>${c.programs?`<div style="font-size:10px;color:var(--hint)">${c.programs}</div>`:''}</td>
+      <td style="font-size:12px;color:var(--text-2)">${contact}</td>
+      <td style="font-size:12px;color:var(--text-2)">${firstD}</td>
+      <td style="font-size:12px;color:var(--text-2)">${lastD}</td>
+      <td style="text-align:center"><span style="font-size:14px;font-weight:700;color:var(--green)">${presentations}</span></td>
+      <td><span style="font-size:10px;font-weight:600;padding:2px 9px;border-radius:10px;color:${sc}">${sl}</span></td>
+      <td style="white-space:nowrap"><button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" data-action="editCollege" data-idx="${idx}">Edit</button> <button class="btn btn-ghost" style="font-size:11px;padding:4px 10px;color:var(--coral);border-color:var(--coral)" data-action="deleteCollege" data-idx="${idx}">Del</button></td>
+    </tr>`;
   });
-  const countEl = document.getElementById('colSubCount');
-  if(countEl) countEl.textContent = `· ${colleges.length} colleges`;
+  const countEl=document.getElementById('colSubCount');
+  if(countEl)countEl.textContent=`· ${colleges.length} colleges`;
 }
 function filterColleges(){renderColleges(window._colTab||'all',(document.getElementById('collegeSearch')||{value:''}).value.toLowerCase());}
 
@@ -2068,7 +2030,42 @@ function deleteHospital(idx){if(!confirm('Delete '+hospitals[idx].name+'?'))retu
 function editCollege(idx){const c=colleges[idx];if(!c)return;document.getElementById('editCollegeIdx').value=idx;document.getElementById('eColName').value=c.name;document.getElementById('eColAddr').value=c.addr;document.getElementById('eColContact').value=c.contact;document.getElementById('eColPerson').value=c.person;document.getElementById('eColPrograms').value=c.programs||'';document.getElementById('eColStatus').value=c.status||'pending';document.getElementById('eColDate').value=c.date||'';document.getElementById('eColRemarks').value=c.remarks||'';openModal('editCollege');}
 function saveCollege(){const idx=parseInt(document.getElementById('editCollegeIdx').value);if(isNaN(idx)||!colleges[idx])return;colleges[idx].name=document.getElementById('eColName').value.trim();colleges[idx].addr=document.getElementById('eColAddr').value.trim();colleges[idx].contact=document.getElementById('eColContact').value.trim();colleges[idx].person=document.getElementById('eColPerson').value.trim();colleges[idx].programs=document.getElementById('eColPrograms').value.trim();colleges[idx].status=document.getElementById('eColStatus').value;colleges[idx].date=document.getElementById('eColDate').value.trim();colleges[idx].remarks=document.getElementById('eColRemarks').value.trim();closeModal('editCollege');renderColleges(window._colTab||'all');updateStats();saveAndNotify();}
 function deleteCollege(idx){if(!confirm('Delete '+colleges[idx].name+'?'))return;colleges.splice(idx,1);renderColleges(window._colTab||'all');updateStats();saveAndNotify();}
-function addNewCollege(){const name=(document.getElementById('newColName')||{value:''}).value.trim();if(!name){alert('Please enter a college name.');return;}colleges.push({name,addr:document.getElementById('newColAddr').value.trim(),contact:document.getElementById('newColContact').value.trim(),person:document.getElementById('newColPerson').value.trim(),programs:document.getElementById('newColPrograms').value.trim(),status:document.getElementById('newColStatus').value||'pending',date:document.getElementById('newColDate').value.trim(),remarks:document.getElementById('newColRemarks').value.trim()});['newColName','newColAddr','newColContact','newColPerson','newColPrograms','newColDate','newColRemarks'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});closeModal('addCollege');renderColleges(window._colTab||'all');updateStats();saveAndNotify();}
+function addNewCollege(){
+  const name=(document.getElementById('newColName')||{value:''}).value.trim();
+  if(!name){alert('Please enter a college name.');return;}
+  // Duplicate check - update presentation count
+  const existing=colleges.findIndex(c=>c.name.toLowerCase()===name.toLowerCase());
+  if(existing>=0){
+    const c=colleges[existing];
+    const lastD=(document.getElementById('newColDate')||{value:''}).value||new Date().toISOString().split('T')[0];
+    c.presentations=(c.presentations||c.presentationCount||1)+1;
+    c.presentationCount=c.presentations;
+    c.date=lastD;c.lastDate=lastD;
+    if((document.getElementById('newColPerson')||{value:''}).value)c.person=document.getElementById('newColPerson').value.trim();
+    if((document.getElementById('newColRemarks')||{value:''}).value)c.remarks=document.getElementById('newColRemarks').value.trim();
+    saveData();closeModal('addCollege');
+    renderColleges(window._colTab||'all',(document.getElementById('collegeSearch')||{value:''}).value.toLowerCase());
+    alert('Presentation count updated for '+name+'. Total: '+c.presentations);
+    return;
+  }
+  const firstD=(document.getElementById('newColFirstDate')||{value:''}).value||new Date().toISOString().split('T')[0];
+  const lastD=(document.getElementById('newColDate')||{value:''}).value||firstD;
+  colleges.push({
+    sn:colleges.length+1,
+    name:name,
+    addr:(document.getElementById('newColAddr')||{value:''}).value.trim(),
+    contact:(document.getElementById('newColContact')||{value:''}).value.trim(),
+    person:(document.getElementById('newColPerson')||{value:''}).value.trim(),
+    programs:(document.getElementById('newColPrograms')||{value:''}).value.trim(),
+    firstDate:firstD,date:lastD,lastDate:lastD,
+    presentations:parseInt((document.getElementById('newColPresentations')||{value:'1'}).value)||1,
+    presentationCount:parseInt((document.getElementById('newColPresentations')||{value:'1'}).value)||1,
+    status:(document.getElementById('newColStatus')||{value:'done'}).value||'done',
+    remarks:(document.getElementById('newColRemarks')||{value:''}).value.trim()
+  });
+  saveData();closeModal('addCollege');
+  renderColleges(window._colTab||'all',(document.getElementById('collegeSearch')||{value:''}).value.toLowerCase());
+}
 function addNewHospital(){const name=(document.getElementById('newHospName')||{value:''}).value.trim();if(!name){alert('Please enter a hospital name.');return;}hospitals.push({sn:hospitals.length+1,name,addr:document.getElementById('newHospAddr').value.trim(),phone:document.getElementById('newHospPhone').value.trim(),desc:document.getElementById('newHospDesc').value.trim(),activity:document.getElementById('newHospActivity').value||'',date:document.getElementById('newHospDate').value.trim(),contact:document.getElementById('newHospContact').value.trim(),status:document.getElementById('newHospStatus').value||'pending'});['newHospName','newHospAddr','newHospPhone','newHospDate','newHospContact'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});closeModal('addHosp');renderHospitals(window._hospTab||'all');updateStats();saveAndNotify();}
 
 // ════════════════════════════════════════
@@ -2226,7 +2223,19 @@ document.addEventListener('blur',function(e){
 
 // ═══════════════════════════════════════ AAROH OS SPRINT 3 ═══════════════════
 function showToast(){var t=document.getElementById('autoSaveToast');if(!t)return;t.style.opacity='1';clearTimeout(t._t);t._t=setTimeout(function(){t.style.opacity='0';},1400);}
-function saveLS(k,v){try{localStorage.setItem(k,typeof v==='string'?v:JSON.stringify(v));}catch(e){}}
+function saveLS(k,v){
+  var str=typeof v==='string'?v:JSON.stringify(v);
+  try{localStorage.setItem(k,str);}catch(e){}
+  if(typeof _sb!=='undefined'&&_sb.ready){
+    _sb.set(k,str).then(function(){
+      var el=document.getElementById('syncStatus');
+      if(el){el.textContent='☁ Synced';el.style.opacity='1';clearTimeout(el._t);el._t=setTimeout(function(){el.style.opacity='0';},2000);}
+    }).catch(function(e){
+      var el=document.getElementById('syncStatus');
+      if(el){el.textContent='⚠ Saved locally';el.style.opacity='1';clearTimeout(el._t);el._t=setTimeout(function(){el.style.opacity='0';},3000);}
+    });
+  }
+}
 function getLS(k){try{return localStorage.getItem(k);}catch(e){return null;}}
 function restoreCE(ids){ids.forEach(function(id){var el=document.getElementById(id);var v=getLS('ace_'+id);if(el&&v!==null)el.textContent=v;});}
 document.addEventListener('blur',function(e){var el=e.target;if(el&&el.contentEditable==='true'&&el.id){saveLS('ace_'+el.id,el.textContent);showToast();}},true);
@@ -2456,7 +2465,7 @@ function delSpk(i){if(!confirm('Delete?'))return;_spkEngs.splice(i,1);saveLS('aa
 function renderSpk(){var c=document.getElementById('spkEngList');if(!c)return;var q=((document.getElementById('spkSearch')||{}).value||'').toLowerCase();var sC={Upcoming:'var(--amber-dark)',Completed:'#3B6D11',Cancelled:'var(--coral)'};var sB={Upcoming:'var(--amber-light)',Completed:'#e8f5e9',Cancelled:'var(--coral-light)'};var list=_spkEngs.filter(function(e){return !q||JSON.stringify(e).toLowerCase().includes(q);});if(!list.length){c.innerHTML='<div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No engagements yet</div>';return;}c.innerHTML=list.map(function(e,i){var st=e.status||'Upcoming';var tags=(e.tags||'').split(',').filter(Boolean).map(function(t){return'<span class="wtag">'+t.trim()+'</span>';}).join('');return'<div class="spkcard"><div class="spkcard-hdr"><div><div class="spkcard-event">'+e.event+'</div>'+(e.org?'<div style="font-size:12px;color:var(--muted);margin-top:2px">'+e.org+'</div>':'')+'</div><div style="display:flex;gap:4px;align-items:center;flex-shrink:0"><span style="font-size:10px;font-weight:600;padding:2px 9px;border-radius:10px;background:'+(sB[st]||'var(--border)')+';color:'+(sC[st]||'var(--muted)')+'">'+st+'</span><button class="btn btn-ghost btn-sm" onclick="openSpkModal('+i+')">Edit</button><button class="btn btn-ghost btn-sm" style="color:var(--coral);border-color:var(--coral)" onclick="delSpk('+i+')">Del</button></div></div><div class="spkmeta">'+(e.date?'<div><div class="spkml">Date</div><div class="spkmv">'+e.date+'</div></div>':'')+(e.topic?'<div><div class="spkml">Topic</div><div class="spkmv">'+e.topic+'</div></div>':'')+(e.aud?'<div><div class="spkml">Audience</div><div class="spkmv">'+e.aud+(e.audSz?' ('+e.audSz+')':'')+'</div></div>':'')+(e.loc?'<div><div class="spkml">Location</div><div class="spkmv">'+e.loc+'</div></div>':'')+'</div>'+(e.msg?'<div style="font-size:12px;color:var(--text-2);font-style:italic;padding:6px 10px;background:var(--green-light);border-radius:4px;border-left:2px solid var(--green);margin-bottom:6px">'+e.msg+'</div>':'')+(e.notes?'<div style="font-size:12px;color:var(--muted);margin-bottom:6px">'+e.notes+'</div>':'')+(e.fu?'<div style="font-size:11px;font-weight:600;color:var(--amber-dark)">→ Follow-up: '+e.fu+'</div>':'')+(tags?'<div class="wtags" style="margin-top:6px">'+tags+'</div>':'')+'</div>';}).join('');}
 
 // EXTEND showPage
-var _origSP=showPage;showPage=function(id,clickedItem){document.querySelectorAll('[contenteditable="true"][id]').forEach(function(el){if(el.id)saveLS('ace_'+el.id,el.textContent);});_origSP(id,clickedItem);if(id==='priorities'){loadDaily();renderDaily();renderPris();updatePriStats();}if(id==='followups'){renderFUs();updateFUStats();}if(id==='capture'){renderCapGrid();renderCaps();}if(id==='govt'){renderGovt();updateGovtStats();}if(id==='heal'){renderOrgT('heal');updateOrgStats('heal');}if(id==='naman'){renderOrgT('naman');updateOrgStats('naman');}if(id==='stories'){renderWis('story');}if(id==='bookshelf'){renderWis('book');}if(id==='insights'){renderWis('insight');}if(id==='studio'){renderWis('studio');}if(id==='archive'){renderArchive();}if(id==='movement'){renderASection('mvGoals');renderASection('mvInits');renderASection('mvMiles');renderAList('mvPrinciples','Write a core principle…');}if(id==='book'){renderASection('bookChapters');}if(id==='speaking'){renderSpk();renderASection('spkSpeeches');renderASection('spkMedia');renderASection('spkOpps');renderAList('spkTopics','Add a speaking topic…');}if(id==='dashboard'){setTimeout(renderDashTop3,80);setTimeout(renderDashFollowUps,120);setTimeout(renderKeyRelationships,150);}setTimeout(function(){_notifs=buildLiveNotifs();_updateNotifBadge();},120);};
+var _origSP=showPage;showPage=function(id,clickedItem){document.querySelectorAll('[contenteditable="true"][id]').forEach(function(el){if(el.id)saveLS('ace_'+el.id,el.textContent);});_origSP(id,clickedItem);if(id==='priorities'){loadDaily();renderDaily();renderPris();updatePriStats();}if(id==='followups'){renderFUs();updateFUStats();}if(id==='capture'){renderCapGrid();renderCaps();}if(id==='govt'){renderGovt();updateGovtStats();}if(id==='heal'){renderOrgT('heal');updateOrgStats('heal');}if(id==='naman'){renderOrgT('naman');updateOrgStats('naman');}if(id==='stories'){renderWis('story');}if(id==='bookshelf'){renderWis('book');}if(id==='insights'){renderWis('insight');}if(id==='studio'){renderWis('studio');}if(id==='archive'){renderArchive();}if(id==='movement'){renderASection('mvGoals');renderASection('mvInits');renderASection('mvMiles');renderAList('mvPrinciples','Write a core principle…');}if(id==='book'){renderASection('bookChapters');}if(id==='speaking'){renderSpk();renderASection('spkSpeeches');renderASection('spkMedia');renderASection('spkOpps');renderAList('spkTopics','Add a speaking topic…');}if(id==='dashboard'){setTimeout(renderDashTop3,80);setTimeout(renderDashFollowUps,120);setTimeout(renderKeyRelationships,150);setTimeout(renderDashLibrary,180);setTimeout(restoreTodaysThought,200);}setTimeout(function(){_notifs=buildLiveNotifs();_updateNotifBadge();},120);};
 
 // EXPORT
 function exportSnapshot(){var a=document.createElement('a');a.href='data:text/html;charset=utf-8,'+encodeURIComponent(document.documentElement.outerHTML);a.download='AarohOS-'+new Date().toISOString().split('T')[0]+'.html';document.body.appendChild(a);a.click();document.body.removeChild(a);}
@@ -2486,18 +2495,24 @@ function buildLiveNotifs(){
 // ── SPRINT 4: renderDashTop3 — sync dashboard with priorities ─────────────────
 function renderDashTop3(){
   var c=document.getElementById('dashTop3Container');if(!c)return;
-  // Try daily priorities first
-  var items=(_daily||[]).filter(function(p){return p.text&&p.text.trim();}).slice(0,3);
-  if(!items.length){
-    // Fallback: top 3 from priority list
-    var order={critical:0,high:1,medium:2,low:3};
-    var sorted=(_pris||[]).slice().sort(function(a,b){return(order[a.level]||2)-(order[b.level]||2);});
-    items=sorted.slice(0,3).map(function(p){return{text:p.title,done:p.status==='completed'};});
-  }
-  if(!items.length){c.innerHTML='<div style="padding:8px 0;color:var(--hint);font-size:13px">No priorities yet — go to Priorities to add your Top 3.</div>';return;}
   var cols=['var(--coral)','var(--amber-dark)','var(--blue)'];
   var bgs=['var(--coral-light)','var(--amber-light)','var(--blue-light)'];
-  c.innerHTML=items.map(function(p,i){var done=p.done||false;return'<div class="dash-priority-item" style="opacity:'+(done?0.5:1)+';text-decoration:'+(done?'line-through':'none')+'"><div class="dash-priority-num" style="background:'+(done?'var(--border)':bgs[i])+';color:'+(done?'var(--hint)':cols[i])+'flex-shrink:0">'+(i+1)+'</div>'+(p.text||p.title||'')+'</div>';}).join('');
+  // Get top 3 from daily priorities
+  var items=(_daily||[]).filter(function(p){return p.text&&p.text.trim();}).slice(0,3);
+  // If no daily, pull from priority list sorted by level
+  if(!items.length){
+    var order={critical:0,high:1,medium:2,low:3};
+    var sorted=(_pris||[]).filter(function(p){return p.status!=='completed';}).slice().sort(function(a,b){return(order[a.level]||2)-(order[b.level]||2);});
+    items=sorted.slice(0,3).map(function(p){return{text:p.title,done:false};});
+  }
+  if(!items.length){c.innerHTML='<div style="padding:6px 0;color:var(--hint);font-size:13px">No priorities set — go to Priorities to add some.</div>';return;}
+  c.innerHTML=items.map(function(p,i){
+    var done=p.done||false;
+    return '<div class="dash-priority-item" style="opacity:'+(done?0.5:1)+';text-decoration:'+(done?'line-through':'none')+'">'+
+      '<div class="dash-priority-num" style="background:'+(done?'var(--border)':bgs[i])+';color:'+(done?'var(--hint)':cols[i])+'">+(i+1)+'</div>'+
+      (p.text||p.title||'')+
+    '</div>';
+  }).join('');
 }
 
 function renderDashFollowUps(){
@@ -2530,7 +2545,20 @@ function renderDashFollowUps(){
     '</div>';
   }).join('');
 }
-(function(){loadNotifs();loadDaily();loadPris();updatePriStats();loadFUs();updateFUStats();loadCaps();loadGovt();updateGovtStats();loadOrgT();updateOrgStats('heal');updateOrgStats('naman');loadWis();loadAaroh();_notifs=buildLiveNotifs();_updateNotifBadge();setTimeout(renderDashTop3,200);console.log('Aaroh OS Sprint 4 — fully functional');})();
+(function(){
+  _cloudLoad().then(function(){
+    loadNotifs();loadDaily();loadPris();updatePriStats();loadFUs();updateFUStats();
+    loadCaps();loadGovt();updateGovtStats();loadOrgT();updateOrgStats('heal');updateOrgStats('naman');
+    loadWis();loadAaroh();
+    _notifs=buildLiveNotifs();_updateNotifBadge();
+    setTimeout(renderDashTop3,200);
+    setTimeout(renderDashFollowUps,250);
+    setTimeout(renderKeyRelationships,300);
+    setTimeout(renderDashLibrary,350);
+    setTimeout(restoreTodaysThought,400);
+    console.log(console.log('Aaroh OS Sprint 4 — fully functional');
+  });
+})(););
 </script>
 
 <div id="autoSaveToast" style="position:fixed;bottom:24px;right:24px;background:var(--green);color:#fff;padding:6px 14px;border-radius:20px;font-size:11px;font-weight:600;z-index:9999;opacity:0;transition:opacity 0.2s;pointer-events:none">✓ Saved</div>
@@ -2600,3 +2628,36 @@ function renderDashFollowUps(){
 </div>
 </body>
 </html>
+function renderDashLibrary(){
+  var c=document.getElementById('dashLibraryContainer');if(!c)return;
+  var stories=(_wis&&_wis.story)||[];
+  if(!stories.length){
+    c.innerHTML='<div class="card" style="padding:18px 22px"><div style="font-size:13px;color:var(--hint)">No stories yet — <button class="btn btn-ghost" style="font-size:11px;padding:3px 8px;display:inline" onclick="openWisdomModal('story')">add your first story</button></div></div>';
+    return;
+  }
+  var s=stories[0]; // most recent
+  c.innerHTML='<div class="card" style="padding:18px 22px;cursor:pointer" onclick="openSR(0)">' +
+    '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">' +
+      '<div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--green)">Latest story</div>' +
+      '<div style="display:flex;gap:6px">' +
+        '<button class="btn btn-teal" style="font-size:11px;padding:4px 10px" onclick="event.stopPropagation();openSR(0)">Read</button>' +
+        '<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="event.stopPropagation();openWisdomModal('story')">+ Add</button>' +
+      '</div>' +
+    '</div>' +
+    '<div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">'+s.name+'</div>' +
+    (s.quote?'<div style="font-size:13px;font-style:italic;color:var(--text);border-left:2px solid var(--green);padding-left:10px;margin-bottom:8px;line-height:1.5">&ldquo;'+s.quote+'&rdquo;</div>':'') +
+    (s.less?'<div style="font-size:11px;color:var(--muted);"><span style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--hint);margin-right:4px">Lesson</span>'+s.less+'</div>':'') +
+  '</div>';
+}
+
+function restoreTodaysThought(){
+  ['todaysThought','dashMission','learnBook','learnResearch','learnInsight',
+   'healFocus','healNext','healPending','namanFocus','namanNext','namanPending',
+   'p1focus','p1done','p1next','p2focus','p2done','p2next','p3focus','p3done','p3next',
+   'p4focus','p4done','p4next','p5focus','p5done','p5next'].forEach(function(id){
+    var el=document.getElementById(id);
+    var v=getLS('ace_'+id);
+    if(el&&v!==null&&v!=='')el.textContent=v;
+  });
+}
+
