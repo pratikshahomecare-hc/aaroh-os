@@ -2607,25 +2607,62 @@ function renderKeyRelationships(){
 })();
 
 function renderDashLibrary(){
-  var c=document.getElementById('dashLibraryContainer');if(!c)return;
+  var c=document.getElementById('dashLibraryContainer');
+  if(!c)return;
   var stories=(_wis&&_wis.story)||[];
   if(!stories.length){
-    c.innerHTML='<div class="card" style="padding:18px 22px"><div style="color:var(--hint);font-size:13px">No stories yet.</div><button class="btn btn-ghost" style="margin-top:8px;font-size:11px" onclick="openWisdomModal('story')">+ Add first story</button></div>';
+    c.innerHTML='<div class="card" style="padding:18px 22px"><div style="color:var(--hint);font-size:13px">No stories yet.</div><button class="btn btn-ghost" style="margin-top:8px;font-size:11px" id="dashAddStoryBtn">+ Add first story</button></div>';
+    var btn=document.getElementById('dashAddStoryBtn');
+    if(btn)btn.onclick=function(){openWisdomModal('story');};
     return;
   }
   var s=stories[0];
-  var html2='<div class="card" style="padding:18px 22px">';
-  html2+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">';
-  html2+='<div style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--green)">Latest story</div>';
-  html2+='<div style="display:flex;gap:6px">';
-  html2+='<button class="btn btn-teal" style="font-size:11px;padding:4px 10px" onclick="openSR(0)">Read</button>';
-  html2+='<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="openWisdomModal('story')">+ Add</button>';
-  html2+='</div></div>';
-  html2+='<div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">'+(s.name||'')+'</div>';
-  if(s.quote)html2+='<div style="font-size:13px;font-style:italic;color:var(--text);border-left:2px solid var(--green);padding-left:10px;margin-bottom:8px;line-height:1.5">&ldquo;'+s.quote+'&rdquo;</div>';
-  if(s.less)html2+='<div style="font-size:11px;color:var(--muted)"><span style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--hint);margin-right:4px">Lesson</span>'+s.less+'</div>';
-  html2+='</div>';
-  c.innerHTML=html2;
+  var card=document.createElement('div');
+  card.className='card';
+  card.style.cssText='padding:18px 22px;cursor:pointer';
+  card.onclick=function(){openSR(0);};
+  var hdr=document.createElement('div');
+  hdr.style.cssText='display:flex;align-items:center;justify-content:space-between;margin-bottom:8px';
+  var lbl=document.createElement('div');
+  lbl.style.cssText='font-size:9px;font-weight:700;text-transform:uppercase;color:var(--green)';
+  lbl.textContent='Latest story';
+  var btns=document.createElement('div');
+  btns.style.cssText='display:flex;gap:6px';
+  var readBtn=document.createElement('button');
+  readBtn.className='btn btn-teal';
+  readBtn.style.cssText='font-size:11px;padding:4px 10px';
+  readBtn.textContent='Read';
+  readBtn.onclick=function(e){e.stopPropagation();openSR(0);};
+  var addBtn=document.createElement('button');
+  addBtn.className='btn btn-ghost';
+  addBtn.style.cssText='font-size:11px;padding:4px 10px';
+  addBtn.textContent='+ Add';
+  addBtn.onclick=function(e){e.stopPropagation();openWisdomModal('story');};
+  btns.appendChild(readBtn);btns.appendChild(addBtn);
+  hdr.appendChild(lbl);hdr.appendChild(btns);
+  card.appendChild(hdr);
+  var name=document.createElement('div');
+  name.style.cssText='font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px';
+  name.textContent=s.name||'';
+  card.appendChild(name);
+  if(s.quote){
+    var q=document.createElement('div');
+    q.style.cssText='font-size:13px;font-style:italic;color:var(--text);border-left:2px solid var(--green);padding-left:10px;margin-bottom:8px;line-height:1.5';
+    q.textContent='“'+s.quote+'”';
+    card.appendChild(q);
+  }
+  if(s.less){
+    var l=document.createElement('div');
+    l.style.cssText='font-size:11px;color:var(--muted)';
+    var lspan=document.createElement('span');
+    lspan.style.cssText='font-size:9px;font-weight:700;text-transform:uppercase;color:var(--hint);margin-right:4px';
+    lspan.textContent='Lesson';
+    l.appendChild(lspan);
+    l.appendChild(document.createTextNode(s.less));
+    card.appendChild(l);
+  }
+  c.innerHTML='';
+  c.appendChild(card);
 }
 
 function restoreTodaysThought(){
