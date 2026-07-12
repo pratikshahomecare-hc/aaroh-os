@@ -2678,22 +2678,22 @@ function renderDashLibrary(){
   var c=document.getElementById('dashLibraryContainer');if(!c)return;
   var stories=(_wis&&_wis.story)||[];
   if(!stories.length){
-    c.innerHTML='<div class="card" style="padding:18px 22px"><div style="font-size:13px;color:var(--hint)">No stories yet — <button class="btn btn-ghost" style="font-size:11px;padding:3px 8px;display:inline" onclick="openWisdomModal('story')">add your first story</button></div></div>';
+    c.innerHTML='<div class="card" style="padding:18px 22px"><div style="color:var(--hint);font-size:13px">No stories yet.</div><button class="btn btn-ghost" style="margin-top:8px;font-size:11px" onclick="openWisdomModal('story')">+ Add first story</button></div>';
     return;
   }
-  var s=stories[0]; // most recent
-  c.innerHTML='<div class="card" style="padding:18px 22px;cursor:pointer" onclick="openSR(0)">' +
-    '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">' +
-      '<div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--green)">Latest story</div>' +
-      '<div style="display:flex;gap:6px">' +
-        '<button class="btn btn-teal" style="font-size:11px;padding:4px 10px" onclick="event.stopPropagation();openSR(0)">Read</button>' +
-        '<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="event.stopPropagation();openWisdomModal('story')">+ Add</button>' +
-      '</div>' +
-    '</div>' +
-    '<div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">'+s.name+'</div>' +
-    (s.quote?'<div style="font-size:13px;font-style:italic;color:var(--text);border-left:2px solid var(--green);padding-left:10px;margin-bottom:8px;line-height:1.5">&ldquo;'+s.quote+'&rdquo;</div>':'') +
-    (s.less?'<div style="font-size:11px;color:var(--muted);"><span style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--hint);margin-right:4px">Lesson</span>'+s.less+'</div>':'') +
-  '</div>';
+  var s=stories[0];
+  var html2='<div class="card" style="padding:18px 22px">';
+  html2+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">';
+  html2+='<div style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--green)">Latest story</div>';
+  html2+='<div style="display:flex;gap:6px">';
+  html2+='<button class="btn btn-teal" style="font-size:11px;padding:4px 10px" onclick="openSR(0)">Read</button>';
+  html2+='<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="openWisdomModal('story')">+ Add</button>';
+  html2+='</div></div>';
+  html2+='<div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">'+(s.name||'')+'</div>';
+  if(s.quote)html2+='<div style="font-size:13px;font-style:italic;color:var(--text);border-left:2px solid var(--green);padding-left:10px;margin-bottom:8px;line-height:1.5">&ldquo;'+s.quote+'&rdquo;</div>';
+  if(s.less)html2+='<div style="font-size:11px;color:var(--muted)"><span style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--hint);margin-right:4px">Lesson</span>'+s.less+'</div>';
+  html2+='</div>';
+  c.innerHTML=html2;
 }
 
 function restoreTodaysThought(){
