@@ -2605,6 +2605,42 @@ function renderKeyRelationships(){
     console.log('Aaroh OS — live');
   });
 })();
+
+function renderDashLibrary(){
+  var c=document.getElementById('dashLibraryContainer');if(!c)return;
+  var stories=(_wis&&_wis.story)||[];
+  if(!stories.length){
+    c.innerHTML='<div class="card" style="padding:18px 22px"><div style="color:var(--hint);font-size:13px">No stories yet.</div><button class="btn btn-ghost" style="margin-top:8px;font-size:11px" onclick="openWisdomModal('story')">+ Add first story</button></div>';
+    return;
+  }
+  var s=stories[0];
+  var html2='<div class="card" style="padding:18px 22px">';
+  html2+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">';
+  html2+='<div style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--green)">Latest story</div>';
+  html2+='<div style="display:flex;gap:6px">';
+  html2+='<button class="btn btn-teal" style="font-size:11px;padding:4px 10px" onclick="openSR(0)">Read</button>';
+  html2+='<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="openWisdomModal('story')">+ Add</button>';
+  html2+='</div></div>';
+  html2+='<div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">'+(s.name||'')+'</div>';
+  if(s.quote)html2+='<div style="font-size:13px;font-style:italic;color:var(--text);border-left:2px solid var(--green);padding-left:10px;margin-bottom:8px;line-height:1.5">&ldquo;'+s.quote+'&rdquo;</div>';
+  if(s.less)html2+='<div style="font-size:11px;color:var(--muted)"><span style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--hint);margin-right:4px">Lesson</span>'+s.less+'</div>';
+  html2+='</div>';
+  c.innerHTML=html2;
+}
+
+function restoreTodaysThought(){
+  var bt=document.getElementById('bookTagline');
+  if(bt&&!bt.textContent.trim())bt.textContent="Today's notes become tomorrow's legacy.";
+
+  ['todaysThought','dashMission','learnBook','learnResearch','learnInsight',
+   'healFocus','healNext','healPending','namanFocus','namanNext','namanPending',
+   'p1focus','p1done','p1next','p2focus','p2done','p2next','p3focus','p3done','p3next',
+   'p4focus','p4done','p4next','p5focus','p5done','p5next'].forEach(function(id){
+    var el=document.getElementById(id);
+    var v=getLS('ace_'+id);
+    if(el&&v!==null&&v!=='')el.textContent=v;
+  });
+}
 </script>
 
 <div id="autoSaveToast" style="position:fixed;bottom:24px;right:24px;background:var(--green);color:#fff;padding:6px 14px;border-radius:20px;font-size:11px;font-weight:600;z-index:9999;opacity:0;transition:opacity 0.2s;pointer-events:none">✓ Saved</div>
@@ -2674,39 +2710,3 @@ function renderKeyRelationships(){
 </div>
 </body>
 </html>
-function renderDashLibrary(){
-  var c=document.getElementById('dashLibraryContainer');if(!c)return;
-  var stories=(_wis&&_wis.story)||[];
-  if(!stories.length){
-    c.innerHTML='<div class="card" style="padding:18px 22px"><div style="color:var(--hint);font-size:13px">No stories yet.</div><button class="btn btn-ghost" style="margin-top:8px;font-size:11px" onclick="openWisdomModal('story')">+ Add first story</button></div>';
-    return;
-  }
-  var s=stories[0];
-  var html2='<div class="card" style="padding:18px 22px">';
-  html2+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">';
-  html2+='<div style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--green)">Latest story</div>';
-  html2+='<div style="display:flex;gap:6px">';
-  html2+='<button class="btn btn-teal" style="font-size:11px;padding:4px 10px" onclick="openSR(0)">Read</button>';
-  html2+='<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="openWisdomModal('story')">+ Add</button>';
-  html2+='</div></div>';
-  html2+='<div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">'+(s.name||'')+'</div>';
-  if(s.quote)html2+='<div style="font-size:13px;font-style:italic;color:var(--text);border-left:2px solid var(--green);padding-left:10px;margin-bottom:8px;line-height:1.5">&ldquo;'+s.quote+'&rdquo;</div>';
-  if(s.less)html2+='<div style="font-size:11px;color:var(--muted)"><span style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--hint);margin-right:4px">Lesson</span>'+s.less+'</div>';
-  html2+='</div>';
-  c.innerHTML=html2;
-}
-
-function restoreTodaysThought(){
-  var bt=document.getElementById('bookTagline');
-  if(bt&&!bt.textContent.trim())bt.textContent="Today's notes become tomorrow's legacy.";
-
-  ['todaysThought','dashMission','learnBook','learnResearch','learnInsight',
-   'healFocus','healNext','healPending','namanFocus','namanNext','namanPending',
-   'p1focus','p1done','p1next','p2focus','p2done','p2next','p3focus','p3done','p3next',
-   'p4focus','p4done','p4next','p5focus','p5done','p5next'].forEach(function(id){
-    var el=document.getElementById(id);
-    var v=getLS('ace_'+id);
-    if(el&&v!==null&&v!=='')el.textContent=v;
-  });
-}
-
