@@ -2607,15 +2607,16 @@ function loadColleges(){
 }
 function saveColleges(){saveLS('aaroh_colleges',JSON.stringify(colleges));}
 (function(){
+  _cloudLoad().then(function(){
     loadNotifs();loadDaily();loadPris();updatePriStats();loadFUs();updateFUStats();
     loadCaps();loadGovt();updateGovtStats();loadOrgT();updateOrgStats('heal');updateOrgStats('naman');
-    loadWis();loadAaroh();
+    loadWis();loadAaroh();loadColleges();
     _notifs=buildLiveNotifs();_updateNotifBadge();
     setTimeout(renderDashTop3,200);
-    setTimeout(renderKeyRelationships,260);setTimeout(renderDashFollowUps,280);setTimeout(renderDashLibrary,300);setTimeout(restoreTodaysThought,320);
-    setTimeout(renderKeyRelationships,300);
-    setTimeout(renderDashLibrary,350);
-    setTimeout(restoreTodaysThought,400);
+    setTimeout(renderKeyRelationships,250);
+    setTimeout(renderDashFollowUps,280);
+    setTimeout(renderDashLibrary,320);
+    setTimeout(restoreTodaysThought,360);
     console.log('Aaroh OS — live');
   });
 })();
