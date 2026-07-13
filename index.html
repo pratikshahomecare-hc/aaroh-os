@@ -1780,25 +1780,10 @@ function _cloudLoad(){
   if(!_sb.ready){console.log('Aaroh OS: running offline (localStorage only)');return Promise.resolve();}
   return _sb.getAll().then(function(cloudData){
     var count=Object.keys(cloudData).length;
-    console.log('Cloud data received:',count,'keys');
-    if(count===0){
-      console.log('Aaroh OS: using localStorage data');
-      return;
-    }
-    // Merge cloud data into localStorage — cloud wins for data keys, keep local for others
-    Object.keys(cloudData).forEach(function(k){
-      try{
-        var cv=cloudData[k];
-        // Only update if cloud has actual content
-        if(cv&&cv!=='[]'&&cv!=='null'&&cv!=='{}'){
-          localStorage.setItem(k,cv);
-        }
-      }catch(e){}
-    });
-    console.log('Aaroh OS: loaded',count,'keys from Supabase');
-  }).catch(function(e){
-    console.warn('Supabase load failed — using localStorage:',e.message||e);
-  });
+    if(count===0){console.log('Aaroh OS: no cloud data yet — using local data');return;}
+    Object.keys(cloudData).forEach(function(k){try{localStorage.setItem(k,cloudData[k]);}catch(e){}});
+    console.log('Aaroh OS: loaded',count,'keys from cloud');
+  }).catch(function(e){console.warn('Cloud load failed:',e);});
 }
 
 // Init Supabase
@@ -2650,11 +2635,6 @@ function saveColleges(){saveLS('aaroh_colleges',JSON.stringify(colleges));}
     setTimeout(renderDashLibrary,320);
     setTimeout(restoreTodaysThought,360);
     console.log('Aaroh OS — live');
-    // Debug: show what data was loaded
-    var priData=localStorage.getItem('aaroh_priorities');
-    var fuData=localStorage.getItem('aaroh_followups');
-    console.log('Priorities:',priData?JSON.parse(priData).length+' items':'empty');
-    console.log('Follow-ups:',fuData?JSON.parse(fuData).length+' items':'empty');
   });
 })();
 
