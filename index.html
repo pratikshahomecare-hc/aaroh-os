@@ -1057,28 +1057,31 @@ body{
 
     <!-- ═══════════ COLLEGES ═══════════ -->
     <section class="page" id="page-colleges">
-      <div class="page-hdr">
-        <div class="t-label">Network · Colleges</div>
-        <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:4px">
-          <div class="t-section">Nursing Colleges <span style="font-size:14px;font-weight:400;color:var(--muted);font-family:'DM Sans',sans-serif" id="colSubCount"></span></div>
-          <button class="btn btn-teal" onclick="openModal('addCollege')">+ Add college</button>
-        </div>
-      </div>
-      <div class="search-bar">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
-        <input type="text" placeholder="Search by name, address, contact…" id="collegeSearch" oninput="filterColleges()">
-      </div>
-      <div class="page-tabs">
-        <button class="page-tab" onclick="showSubTab('col','all',this)">All</button>
-        <button class="page-tab" onclick="showSubTab('col','done',this)">Presented</button>
-        <button class="page-tab active" onclick="showSubTab('col','pending',this)">Pending</button>
-        <button class="page-tab" onclick="showSubTab('col','followup',this)">Follow-up</button>
-      </div>
-      <div class="card" style="padding:0">
-        <table class="tbl"><thead><tr><th>#</th><th>College</th><th>Address</th><th>Contact</th><th>Programs</th><th>Status</th><th>Actions</th></tr></thead>
-        <tbody id="collegeBody"></tbody></table>
-      </div>
-    </section>
+  <div class="page-hdr">
+    <div class="t-label">Network · Colleges</div>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:4px">
+      <div class="t-section">Nursing Colleges <span style="font-size:14px;font-weight:400;color:var(--muted);font-family:'DM Sans',sans-serif" id="colSubCount"></span></div>
+      <button class="btn btn-teal" onclick="openModal('addCollege')">+ Add college</button>
+    </div>
+  </div>
+  <div class="search-bar">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+    <input type="text" placeholder="Search by name, address, contact…" id="collegeSearch" oninput="filterColleges()">
+  </div>
+  <div class="page-tabs">
+    <button class="page-tab active" onclick="showSubTab('col','all',this)">All</button>
+    <button class="page-tab" onclick="showSubTab('col','done',this)">Continuing</button>
+    <button class="page-tab" onclick="showSubTab('col','pending',this)">In Progress</button>
+    <button class="page-tab" onclick="showSubTab('col','followup',this)">Follow-up</button>
+    <button class="page-tab" onclick="showSubTab('col','mou',this)">MOU</button>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden">
+    <table class="tbl">
+      <thead><tr><th>#</th><th>College</th><th>Contact</th><th>First Presentation</th><th>Last Presentation</th><th>Presentations</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody id="colBody"></tbody>
+    </table>
+  </div>
+</section>
 
     <!-- ═══════════ HOSPITALS ═══════════ -->
     <section class="page" id="page-hospitals">
@@ -1824,7 +1827,8 @@ function showPage(id, clickedItem) {
 
   if(id==='colleges'){renderColleges(window._colTab||'pending'); updateStats();}
   if(id==='hospitals'){renderHospitals(window._hospTab||'all'); updateStats();}
-  if(id==='training'){populateHospitalDropdown(); renderTrainings(window._trainTab||'all');}
+
+    if(id==='colleges'){renderColleges(window._colTab||'all',(document.getElementById('collegeSearch')||{value:''}).value.toLowerCase());}  if(id==='training'){populateHospitalDropdown(); renderTrainings(window._trainTab||'all');}
   if(id==='tours'){renderTours(window._tourTab||'all');}
   if(id==='meetings'){renderMeetings(window._meetTab||'all');}
   if(id==='dashboard'){updateStats();}
