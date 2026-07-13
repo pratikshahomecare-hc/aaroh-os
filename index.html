@@ -1753,7 +1753,11 @@ var _sb = {
   _h:function(){return{'Content-Type':'application/json','apikey':this.key,'Authorization':'Bearer '+this.key,'Prefer':'return=minimal,resolution=merge-duplicates'};},
   set:function(k,v){
     if(!this.ready)return Promise.resolve(null);
-    return fetch(this.url+'/rest/v1/aaroh_store',{method:'POST',headers:this._h(),body:JSON.stringify({user_id:AAROH_CONFIG.userId,data_key:k,data_value:typeof v==='string'?v:JSON.stringify(v),updated_at:new Date().toISOString()})})
+    var url=this.url+'/rest/v1/aaroh_store';
+    var body=JSON.stringify({user_id:AAROH_CONFIG.userId,data_key:k,data_value:typeof v==='string'?v:JSON.stringify(v),updated_at:new Date().toISOString()});
+    var h={'Content-Type':'application/json','apikey':this.key,'Authorization':'Bearer '+this.key,'Prefer':'resolution=merge-duplicates,return=minimal'};
+    return fetch(url,{method:'POST',headers:h,body:body}).catch(function(e){console.warn('SB write:',e);});
+  })})
     .catch(function(e){console.warn('Supabase write failed:',e);});
   },
   getAll:function(){
@@ -2624,6 +2628,22 @@ function loadColleges(){
 }
 function saveColleges(){saveLS('aaroh_colleges',JSON.stringify(colleges));}
 (function(){
+  _cloudLoad().then(function(){
+    loadNotifs();loadDaily();loadPris();updatePriStats();loadFUs();updateFUStats();
+    loadCaps();loadGovt();updateGovtStats();loadOrgT();updateOrgStats('heal');updateOrgStats('naman');
+    loadWis();loadAaroh();loadColleges();
+    _notifs=buildLiveNotifs();_updateNotifBadge();
+    setTimeout(renderDashTop3,200);
+    setTimeout(renderKeyRelationships,250);
+    setTimeout(renderDashFollowUps,280);
+    setTimeout(renderDashLibrary,320);
+    setTimeout(restoreTodaysThought,360);
+    console.log('Aaroh OS — live');
+    var pd=localStorage.getItem('aaroh_priorities');
+    var fd=localStorage.getItem('aaroh_followups');
+    console.log('DATA CHECK - Priorities:',pd?JSON.parse(pd).length+' items':'empty','Follow-ups:',fd?JSON.parse(fd).length+' items':'empty');
+  });
+})();(function(){
   _cloudLoad().then(function(){
     loadNotifs();loadDaily();loadPris();updatePriStats();loadFUs();updateFUStats();
     loadCaps();loadGovt();updateGovtStats();loadOrgT();updateOrgStats('heal');updateOrgStats('naman');
