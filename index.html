@@ -2639,22 +2639,6 @@ function saveColleges(){saveLS('aaroh_colleges',JSON.stringify(colleges));}
     setTimeout(renderDashLibrary,320);
     setTimeout(restoreTodaysThought,360);
     console.log('Aaroh OS — live');
-    var pd=localStorage.getItem('aaroh_priorities');
-    var fd=localStorage.getItem('aaroh_followups');
-    console.log('DATA CHECK - Priorities:',pd?JSON.parse(pd).length+' items':'empty','Follow-ups:',fd?JSON.parse(fd).length+' items':'empty');
-  });
-})();(function(){
-  _cloudLoad().then(function(){
-    loadNotifs();loadDaily();loadPris();updatePriStats();loadFUs();updateFUStats();
-    loadCaps();loadGovt();updateGovtStats();loadOrgT();updateOrgStats('heal');updateOrgStats('naman');
-    loadWis();loadAaroh();loadColleges();
-    _notifs=buildLiveNotifs();_updateNotifBadge();
-    setTimeout(renderDashTop3,200);
-    setTimeout(renderKeyRelationships,250);
-    setTimeout(renderDashFollowUps,280);
-    setTimeout(renderDashLibrary,320);
-    setTimeout(restoreTodaysThought,360);
-    console.log('Aaroh OS — live');
   });
 })();
 
@@ -2693,10 +2677,10 @@ function renderDashLibrary(){
   btns.appendChild(readBtn);btns.appendChild(addBtn);
   hdr.appendChild(lbl);hdr.appendChild(btns);
   card.appendChild(hdr);
-  var name=document.createElement('div');
-  name.style.cssText='font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px';
-  name.textContent=s.name||'';
-  card.appendChild(name);
+  var nameEl=document.createElement('div');
+  nameEl.style.cssText='font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px';
+  nameEl.textContent=s.name||'';
+  card.appendChild(nameEl);
   if(s.quote){
     var q=document.createElement('div');
     q.style.cssText='font-size:13px;font-style:italic;color:var(--text);border-left:2px solid var(--green);padding-left:10px;margin-bottom:8px;line-height:1.5';
