@@ -1498,7 +1498,7 @@ body{
 <div class="asec" id="mv-notes"><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:20px">Notes</div><div id="mvNotes" contenteditable="true" class="afield" placeholder="Write freely…" style="min-height:300px" onblur="saveAF('mvNotes')"></div></div>
 </section>
 
-<section class="page" id="page-book"><div style="padding:36px 0 28px;border-bottom:1px solid var(--border);margin-bottom:32px"><div style="font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:12px">Aaroh · Book</div><div id="bookHeroTitle" contenteditable="true" style="font-family:'Playfair Display',serif;font-size:28px;font-weight:400;color:var(--text);line-height:1.25;margin-bottom:12px;outline:none" onblur="saveAF('bookHeroTitle')">Dignity Is Not a Trend</div><div id="bookTagline" contenteditable="true" style="font-size:15px;color:var(--muted);line-height:1.7;max-width:640px;outline:none;border-bottom:1px dashed transparent" placeholder="Today's notes become tomorrow's legacy." onblur="saveAF('bookTagline')"></div></div><div style="display:flex;gap:0;margin-bottom:28px;border-bottom:1.5px solid var(--border);overflow-x:auto" id="bookTabsRow"><button class="atab active" onclick="setATab('book','vision',this)">Vision</button><button class="atab" onclick="setATab('book','chapters',this)">Chapters</button><button class="atab" onclick="setATab('book','progress',this)">Progress</button><button class="atab" onclick="setATab('book','audience',this)">Audience</button><button class="atab" onclick="setATab('book','publisher',this)">Publisher</button><button class="atab" onclick="setATab('book','notes',this)">Notes</button></div>
+<section class="page" id="page-book"><div style="padding:36px 0 28px;border-bottom:1px solid var(--border);margin-bottom:32px"><div style="font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:12px">Aaroh · Book</div><div id="bookHeroTitle" contenteditable="true" style="font-family:'Playfair Display',serif;font-size:28px;font-weight:400;color:var(--text);line-height:1.25;margin-bottom:12px;outline:none" onblur="saveAF('bookHeroTitle')">Today's notes become tomorrow's legacy.</div><div id="bookTagline" contenteditable="true" style="font-size:15px;color:var(--muted);line-height:1.7;max-width:640px;outline:none;border-bottom:1px dashed transparent" placeholder="Today's notes become tomorrow's legacy." onblur="saveAF('bookTagline')"></div></div><div style="display:flex;gap:0;margin-bottom:28px;border-bottom:1.5px solid var(--border);overflow-x:auto" id="bookTabsRow"><button class="atab active" onclick="setATab('book','vision',this)">Vision</button><button class="atab" onclick="setATab('book','chapters',this)">Chapters</button><button class="atab" onclick="setATab('book','progress',this)">Progress</button><button class="atab" onclick="setATab('book','audience',this)">Audience</button><button class="atab" onclick="setATab('book','publisher',this)">Publisher</button><button class="atab" onclick="setATab('book','notes',this)">Notes</button></div>
 <div class="asec active" id="book-vision"><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:4px">Book Vision</div><div style="font-size:12px;color:var(--muted);margin-bottom:20px">What this book is, why it must exist, who it will change</div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Book Summary</div><div id="bookSummaryF" contenteditable="true" class="afield" placeholder="What is this book about in 3–5 sentences?" onblur="saveAF('bookSummaryF')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Why I am the person to write this</div><div id="bookWhy" contenteditable="true" class="afield" placeholder="16 years, hundreds of stories, a practitioner's truth…" onblur="saveAF('bookWhy')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">The one idea this book must leave in the reader</div><div id="bookCoreIdea" contenteditable="true" class="afield" placeholder="The single most important thought…" onblur="saveAF('bookCoreIdea')"></div></div></div>
 <div class="asec" id="book-chapters"><div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px"><div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:4px">Chapters</div><div style="font-size:12px;color:var(--muted)">The architecture of the book</div></div><button class="btn btn-teal" onclick="openAM('bookChapter')">+ Add chapter</button></div><div id="bookChaptersList"><div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No chapters yet</div></div></div>
 <div class="asec" id="book-progress"><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:4px">Writing Progress</div><div style="font-size:12px;color:var(--muted);margin-bottom:20px">Track your journey from blank page to finished manuscript</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px"><div class="aicard"><div id="bk-ch-total" contenteditable="true" class="ainum" onblur="saveAF('bk-ch-total')">0</div><div class="ailabel">Total Chapters</div></div><div class="aicard"><div id="bk-ch-done" contenteditable="true" class="ainum" style="color:#3B6D11" onblur="saveAF('bk-ch-done')">0</div><div class="ailabel">Completed</div></div><div class="aicard"><div id="bk-words" contenteditable="true" class="ainum" onblur="saveAF('bk-words')">0</div><div class="ailabel">Words Written</div></div><div class="aicard"><div id="bk-stories" contenteditable="true" class="ainum" onblur="saveAF('bk-stories')">0</div><div class="ailabel">Stories Included</div></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Current writing focus</div><div id="bkFocus" contenteditable="true" class="afield" placeholder="What are you working on right now?" onblur="saveAF('bkFocus')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Next milestone</div><div id="bkNextMile" contenteditable="true" class="afield" placeholder="What does the next milestone look like?" onblur="saveAF('bkNextMile')"></div></div></div>
@@ -1667,7 +1667,7 @@ body{
   </div>
 </div>
 
-<div class="modal-overlay" id="modal-addCollege"><div class="modal" style="width:600px"><div class="modal-hdr"><div class="modal-title" id="addColTitle">Add College</div><button class="close-btn" onclick="closeModal('addCollege')">×</button></div><div class="form-row"><label class="form-label">College Name</label><input class="form-input" id="newColName"></div><div class="form-row"><label class="form-label">Address</label><input class="form-input" id="newColAddr"></div><div class="form-2col"><div class="form-row"><label class="form-label">Phone / Email</label><input class="form-input" id="newColContact"></div><div class="form-row"><label class="form-label">Contact Person</label><input class="form-input" id="newColPerson"></div></div><div class="form-row"><label class="form-label">Programs</label><input class="form-input" id="newColPrograms" placeholder="e.g. B.Sc Nursing, ANM"></div><div class="form-2col"><div class="form-row"><label class="form-label">First Presentation</label><input type="date" class="form-input" id="newColFirstDate"></div><div class="form-row"><label class="form-label">Last Presentation</label><input type="date" class="form-input" id="newColDate"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Total Presentations</label><input type="number" class="form-input" id="newColPresentations" min="0" value="1"></div><div class="form-row"><label class="form-label">Status</label><select class="form-select" id="newColStatus"><option value="done">Continuing Collaboration</option><option value="pending">In Progress</option><option value="followup">Follow-up Needed</option><option value="mou">MOU Signed</option></select></div></div><div class="form-row"><label class="form-label">Remarks / Notes</label><textarea class="form-textarea" id="newColRemarks"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('addCollege')">Cancel</button><button class="btn btn-teal" onclick="addNewCollege()">Save</button></div></div></div><div class="modal-overlay" id="modal-addCollege">
+<div class="modal-overlay" id="modal-addCollege"><div class="modal" style="width:620px"><div class="modal-hdr"><div class="modal-title">Add / Update College Presentation</div><button class="close-btn" onclick="closeModal('addCollege')">×</button></div><div class="form-row"><label class="form-label">College Name <span style="color:var(--hint);font-weight:400">(same name = updates count)</span></label><input class="form-input" id="newColName" placeholder="e.g. Nobel College of Nursing"></div><div class="form-2col"><div class="form-row"><label class="form-label">Contact No</label><input class="form-input" id="newColContact" placeholder="01-XXXXXXX"></div><div class="form-row"><label class="form-label">Address</label><input class="form-input" id="newColAddr"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Topic / Program</label><input class="form-input" id="newColPrograms" placeholder="e.g. Elder Care Awareness"></div><div class="form-row"><label class="form-label">No. of Participants</label><input type="number" class="form-input" id="newColParticipants" min="0" placeholder="e.g. 120"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Presentation 1 Date</label><input type="date" class="form-input" id="newColFirstDate"></div><div class="form-row"><label class="form-label">Presentation 2 Date</label><input type="date" class="form-input" id="newColPres2"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Presentation 3 Date</label><input type="date" class="form-input" id="newColPres3"></div><div class="form-row"><label class="form-label">Status</label><select class="form-select" id="newColStatus"><option value="scheduled">Scheduled</option><option value="done">Continuing</option><option value="pending">In Progress</option><option value="followup">Follow-up Needed</option><option value="completed">Completed</option></select></div></div><div class="form-row"><label class="form-label">Remarks</label><textarea class="form-textarea" id="newColRemarks" rows="2"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('addCollege')">Cancel</button><button class="btn btn-teal" onclick="addNewCollege()">Save</button></div></div></div><div class="modal-overlay" id="modal-addCollege"><div class="modal" style="width:600px"><div class="modal-hdr"><div class="modal-title" id="addColTitle">Add College</div><button class="close-btn" onclick="closeModal('addCollege')">×</button></div><div class="form-row"><label class="form-label">College Name</label><input class="form-input" id="newColName"></div><div class="form-row"><label class="form-label">Address</label><input class="form-input" id="newColAddr"></div><div class="form-2col"><div class="form-row"><label class="form-label">Phone / Email</label><input class="form-input" id="newColContact"></div><div class="form-row"><label class="form-label">Contact Person</label><input class="form-input" id="newColPerson"></div></div><div class="form-row"><label class="form-label">Programs</label><input class="form-input" id="newColPrograms" placeholder="e.g. B.Sc Nursing, ANM"></div><div class="form-2col"><div class="form-row"><label class="form-label">First Presentation</label><input type="date" class="form-input" id="newColFirstDate"></div><div class="form-row"><label class="form-label">Last Presentation</label><input type="date" class="form-input" id="newColDate"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Total Presentations</label><input type="number" class="form-input" id="newColPresentations" min="0" value="1"></div><div class="form-row"><label class="form-label">Status</label><select class="form-select" id="newColStatus"><option value="done">Continuing Collaboration</option><option value="pending">In Progress</option><option value="followup">Follow-up Needed</option><option value="mou">MOU Signed</option></select></div></div><div class="form-row"><label class="form-label">Remarks / Notes</label><textarea class="form-textarea" id="newColRemarks"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('addCollege')">Cancel</button><button class="btn btn-teal" onclick="addNewCollege()">Save</button></div></div></div><div class="modal-overlay" id="modal-addCollege">
   <div class="modal">
     <div class="modal-hdr"><div class="modal-title">Add College</div><button class="close-btn" onclick="closeModal('addCollege')">×</button></div>
     <div class="form-row"><label class="form-label">College Name</label><input class="form-input" id="newColName"></div>
@@ -2035,40 +2035,44 @@ function editCollege(idx){const c=colleges[idx];if(!c)return;document.getElement
 function saveCollege(){const idx=parseInt(document.getElementById('editCollegeIdx').value);if(isNaN(idx)||!colleges[idx])return;colleges[idx].name=document.getElementById('eColName').value.trim();colleges[idx].addr=document.getElementById('eColAddr').value.trim();colleges[idx].contact=document.getElementById('eColContact').value.trim();colleges[idx].person=document.getElementById('eColPerson').value.trim();colleges[idx].programs=document.getElementById('eColPrograms').value.trim();colleges[idx].status=document.getElementById('eColStatus').value;colleges[idx].date=document.getElementById('eColDate').value.trim();colleges[idx].remarks=document.getElementById('eColRemarks').value.trim();closeModal('editCollege');renderColleges(window._colTab||'all');updateStats();saveAndNotify();}
 function deleteCollege(idx){if(!confirm('Delete '+colleges[idx].name+'?'))return;colleges.splice(idx,1);renderColleges(window._colTab||'all');updateStats();saveAndNotify();}
 function addNewCollege(){
-  const name=(document.getElementById('newColName')||{value:''}).value.trim();
+  var name=(document.getElementById('newColName')||{value:''}).value.trim();
   if(!name){alert('Please enter a college name.');return;}
-  // Duplicate check - update presentation count
-  const existing=colleges.findIndex(c=>c.name.toLowerCase()===name.toLowerCase());
+  var today=new Date().toISOString().split('T')[0];
+  var existing=colleges.findIndex(function(c){return c.name.toLowerCase()===name.toLowerCase();});
   if(existing>=0){
-    const c=colleges[existing];
-    const lastD=(document.getElementById('newColDate')||{value:''}).value||new Date().toISOString().split('T')[0];
-    c.presentations=(c.presentations||c.presentationCount||1)+1;
+    var c=colleges[existing];
+    c.presentations=(c.presentations||0)+1;
     c.presentationCount=c.presentations;
-    c.date=lastD;c.lastDate=lastD;
-    if((document.getElementById('newColPerson')||{value:''}).value)c.person=document.getElementById('newColPerson').value.trim();
-    if((document.getElementById('newColRemarks')||{value:''}).value)c.remarks=document.getElementById('newColRemarks').value.trim();
+    var newDate=(document.getElementById('newColDate')||{value:''}).value||today;
+    if(c.presentations===2)c.pres2=newDate;
+    else if(c.presentations>=3)c.pres3=newDate;
+    c.date=newDate;c.lastDate=newDate;
+    var p=(document.getElementById('newColParticipants')||{value:''}).value;
+    if(p)c.participants=(c.participants||0)+parseInt(p);
+    var t=(document.getElementById('newColPrograms')||{value:''}).value.trim();
+    if(t)c.topic=t;
     saveData();closeModal('addCollege');
-    renderColleges(window._colTab||'all',(document.getElementById('collegeSearch')||{value:''}).value.toLowerCase());
-    alert('Presentation count updated for '+name+'. Total: '+c.presentations);
-    return;
+    renderColleges(window._colTab||'all',(document.getElementById('collegeSearch')||{value:''}).value);
+    alert('Updated: '+name+' — Total presentations: '+c.presentations);return;
   }
-  const firstD=(document.getElementById('newColFirstDate')||{value:''}).value||new Date().toISOString().split('T')[0];
-  const lastD=(document.getElementById('newColDate')||{value:''}).value||firstD;
+  var p1=(document.getElementById('newColFirstDate')||{value:''}).value||today;
   colleges.push({
-    sn:colleges.length+1,
-    name:name,
+    sn:colleges.length+1,name:name,
     addr:(document.getElementById('newColAddr')||{value:''}).value.trim(),
     contact:(document.getElementById('newColContact')||{value:''}).value.trim(),
-    person:(document.getElementById('newColPerson')||{value:''}).value.trim(),
+    phone:(document.getElementById('newColContact')||{value:''}).value.trim(),
+    topic:(document.getElementById('newColPrograms')||{value:''}).value.trim(),
     programs:(document.getElementById('newColPrograms')||{value:''}).value.trim(),
-    firstDate:firstD,date:lastD,lastDate:lastD,
-    presentations:parseInt((document.getElementById('newColPresentations')||{value:'1'}).value)||1,
-    presentationCount:parseInt((document.getElementById('newColPresentations')||{value:'1'}).value)||1,
-    status:(document.getElementById('newColStatus')||{value:'done'}).value||'done',
+    participants:parseInt((document.getElementById('newColParticipants')||{value:'0'}).value)||0,
+    firstDate:p1,pres1:p1,
+    pres2:(document.getElementById('newColPres2')||{value:''}).value||'',
+    pres3:(document.getElementById('newColPres3')||{value:''}).value||'',
+    date:p1,lastDate:p1,
+    presentations:1,presentationCount:1,
+    status:(document.getElementById('newColStatus')||{value:'scheduled'}).value||'scheduled',
     remarks:(document.getElementById('newColRemarks')||{value:''}).value.trim()
   });
-  saveData();closeModal('addCollege');
-  renderColleges(window._colTab||'all',(document.getElementById('collegeSearch')||{value:''}).value.toLowerCase());
+  saveData();closeModal('addCollege');renderColleges(window._colTab||'all','');
 }
 
 function addHospital(){
@@ -2596,6 +2600,12 @@ function renderKeyRelationships(){
       '<div class="dash-rel-meta">'+(org?org+' · ':'')+reason+' · '+f.cat+'</div></div></div>';
   }).join('');
 }
+
+function loadColleges(){
+  var saved=getLS('aaroh_colleges');
+  if(saved){try{var d=JSON.parse(saved);if(Array.isArray(d)&&d.length)colleges=d;}catch(e){}}
+}
+function saveColleges(){saveLS('aaroh_colleges',JSON.stringify(colleges));}
 (function(){
     loadNotifs();loadDaily();loadPris();updatePriStats();loadFUs();updateFUStats();
     loadCaps();loadGovt();updateGovtStats();loadOrgT();updateOrgStats('heal');updateOrgStats('naman');
