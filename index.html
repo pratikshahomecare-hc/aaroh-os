@@ -920,7 +920,7 @@ body{
       <!-- Welcome -->
       <div style="margin-bottom:18px">
         <div style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);margin-bottom:6px">Aaroh — Rise with purpose, build with intention, leave a legacy</div>
-        <h1 class="dash-greeting-text" id="dashGreeting" style="font-family:'Playfair Display',serif;font-size:26px;font-weight:400;margin-bottom:6px">Good morning, Pratiksha 🌿</h1>
+        <h1 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:400;margin-bottom:6px" id="dashGreeting">Good morning, Pratiksha 🌿</h1>
         <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--hint);margin-bottom:4px">Mission of the week</div>
         <div id="dashMission" contenteditable="true" style="font-size:13px;color:var(--muted);line-height:1.6;outline:none" onblur="saveLS('ace_dashMission',this.textContent)">Build the foundation — daily thinking, first story, living knowledge hub.</div>
       </div>
@@ -941,15 +941,12 @@ body{
         </div>
       </div>
 
-      <!-- Strategic Pillars -->
+      <!-- Today's Thought -->
       <div style="margin-bottom:16px">
-        <div class="dash-section-title">Strategic pillars</div>
-        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
-          <div class="dash-pillar"><div class="dash-pillar-icon">🌍</div><div class="dash-pillar-name">Lead</div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Focus</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p1focus',this.textContent)">Hospital MOU pipeline</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Done</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p1done',this.textContent)">KIST meeting</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Next</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p1next',this.textContent)">Grande MOU</div></div></div>
-          <div class="dash-pillar"><div class="dash-pillar-icon">🏥</div><div class="dash-pillar-name">Build</div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Focus</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p2focus',this.textContent)">Aaroh OS daily use</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Done</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p2done',this.textContent)">Sprint 1 &amp; 2</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Next</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p2next',this.textContent)">First story</div></div></div>
-          <div class="dash-pillar"><div class="dash-pillar-icon">📖</div><div class="dash-pillar-name">Develop</div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Focus</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p3focus',this.textContent)">Aging deep learning</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Done</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p3done',this.textContent)">Session 1</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Next</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p3next',this.textContent)">Cross-cultural models</div></div></div>
-          <div class="dash-pillar"><div class="dash-pillar-icon">✍️</div><div class="dash-pillar-name">Create</div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Focus</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p4focus',this.textContent)">Dignity presentation</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Done</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p4done',this.textContent)">10-slide PPTX</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Next</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p4next',this.textContent)">First essay</div></div></div>
-          <div class="dash-pillar"><div class="dash-pillar-icon">🌱</div><div class="dash-pillar-name">Grow</div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Focus</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p5focus',this.textContent)">Aaroh movement</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Done</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p5done',this.textContent)">Structure set</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Next</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p5next',this.textContent)">10 stories</div></div></div>
+        <div class="dash-section-title">Today's thought</div>
+        <div class="card" style="padding:18px 22px">
+          <div id="todaysThought" contenteditable="true" style="font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:var(--text);line-height:1.7;outline:none;min-height:40px" onblur="saveLS('ace_todaysThought',this.textContent)">What is the purpose I am most afraid of losing as I get older?</div>
+          <div style="font-size:11px;color:var(--hint);margin-top:8px">Click to write your thought for today</div>
         </div>
       </div>
 
@@ -962,19 +959,20 @@ body{
         <div id="dashLibraryContainer">
           <div class="card" style="padding:18px 22px">
             <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);margin-bottom:8px">Featured story</div>
-            <div style="font-size:14px;font-style:italic;color:var(--text);border-left:2px solid var(--green);padding-left:12px;margin-bottom:10px;line-height:1.55">"I kept waiting for someone to ask me what I wanted. Nobody ever did. But I still knew."</div>
-            <div style="font-size:12px;color:var(--muted);margin-bottom:6px"><span style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--hint);margin-right:6px">Lesson</span>Dignity is not given — it must be sought.</div>
-            <button class="btn btn-ghost" style="font-size:11px;padding:4px 10px;margin-top:4px" onclick="openWisdomModal('story')">+ Add story</button>
+            <div style="font-size:13px;color:var(--hint)">Loading stories…</div>
           </div>
         </div>
       </div>
 
-      <!-- Today's Thought -->
+      <!-- Strategic Pillars (at bottom) -->
       <div style="margin-bottom:16px">
-        <div class="dash-section-title">Today's thought</div>
-        <div class="card" style="padding:18px 22px">
-          <div id="todaysThought" contenteditable="true" style="font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:var(--text);line-height:1.7;outline:none;min-height:40px" onblur="saveLS('ace_todaysThought',this.textContent)">What is the purpose I am most afraid of losing as I get older?</div>
-          <div style="font-size:11px;color:var(--hint);margin-top:8px">Click to write your thought for today</div>
+        <div class="dash-section-title">Strategic pillars</div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
+          <div class="dash-pillar"><div class="dash-pillar-icon">🌍</div><div class="dash-pillar-name">Lead</div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Focus</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p1focus',this.textContent)">Hospital MOU pipeline</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Done</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p1done',this.textContent)">KIST meeting</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Next</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p1next',this.textContent)">Grande MOU</div></div></div>
+          <div class="dash-pillar"><div class="dash-pillar-icon">🏥</div><div class="dash-pillar-name">Build</div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Focus</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p2focus',this.textContent)">Aaroh OS daily use</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Done</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p2done',this.textContent)">Sprint 1 &amp; 2</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Next</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p2next',this.textContent)">First story</div></div></div>
+          <div class="dash-pillar"><div class="dash-pillar-icon">📖</div><div class="dash-pillar-name">Develop</div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Focus</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p3focus',this.textContent)">Aging deep learning</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Done</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p3done',this.textContent)">Session 1</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Next</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p3next',this.textContent)">Cross-cultural models</div></div></div>
+          <div class="dash-pillar"><div class="dash-pillar-icon">✍️</div><div class="dash-pillar-name">Create</div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Focus</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p4focus',this.textContent)">Dignity presentation</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Done</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p4done',this.textContent)">10-slide PPTX</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Next</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p4next',this.textContent)">First essay</div></div></div>
+          <div class="dash-pillar"><div class="dash-pillar-icon">🌱</div><div class="dash-pillar-name">Grow</div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Focus</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p5focus',this.textContent)">Aaroh movement</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Done</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p5done',this.textContent)">Structure set</div></div><div class="dash-pillar-item"><div class="dash-pillar-item-label">Next</div><div class="dash-pillar-item-val" contenteditable="true" onblur="saveLS('ace_p5next',this.textContent)">10 stories</div></div></div>
         </div>
       </div>
 
@@ -1033,7 +1031,7 @@ body{
     </div><!-- /right -->
   </div>
 
-  <!-- Modals -->
+  <!-- Capture overlays -->
   <div class="dash-capture-overlay" id="captureOverlay" onclick="closeCaptureMenu()"></div>
   <div class="dash-capture-menu" id="captureMenu">
     <button class="dash-capture-option" onclick="quickCapture('Idea')">💡 Idea</button>
@@ -1058,26 +1056,38 @@ body{
     <!-- ═══════════ COLLEGES ═══════════ -->
     <section class="page" id="page-colleges">
   <div class="page-hdr">
-    <div class="t-label">Network · Colleges</div>
+    <div class="t-label">Network · Education</div>
     <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:4px">
-      <div class="t-section">Nursing Colleges <span style="font-size:14px;font-weight:400;color:var(--muted);font-family:'DM Sans',sans-serif" id="colSubCount"></span></div>
-      <button class="btn btn-teal" onclick="openModal('addCollege')">+ Add college</button>
+      <div class="t-section">Nursing Colleges <span style="font-size:14px;font-weight:400;color:var(--muted)" id="colSubCount"></span></div>
+      <button class="btn btn-teal" onclick="openModal('addCollege')">+ Add / Update</button>
     </div>
   </div>
   <div class="search-bar">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
-    <input type="text" placeholder="Search by name, address, contact…" id="collegeSearch" oninput="filterColleges()">
+    <input type="text" placeholder="Search colleges…" id="collegeSearch" oninput="filterColleges()">
   </div>
   <div class="page-tabs">
     <button class="page-tab active" onclick="showSubTab('col','all',this)">All</button>
     <button class="page-tab" onclick="showSubTab('col','done',this)">Continuing</button>
     <button class="page-tab" onclick="showSubTab('col','pending',this)">In Progress</button>
-    <button class="page-tab" onclick="showSubTab('col','followup',this)">Follow-up</button>
-    <button class="page-tab" onclick="showSubTab('col','mou',this)">MOU</button>
+    <button class="page-tab" onclick="showSubTab('col','scheduled',this)">Scheduled</button>
+    <button class="page-tab" onclick="showSubTab('col','completed',this)">Completed</button>
   </div>
-  <div class="card" style="padding:0;overflow:hidden">
+  <div class="card" style="padding:0;overflow:hidden;overflow-x:auto">
     <table class="tbl">
-      <thead><tr><th>#</th><th>College</th><th>Contact</th><th>First Presentation</th><th>Last Presentation</th><th>Presentations</th><th>Status</th><th>Actions</th></tr></thead>
+      <thead><tr>
+        <th>#</th>
+        <th>College Name</th>
+        <th>Contact No</th>
+        <th>Topic</th>
+        <th>Participants</th>
+        <th>Presentation 1</th>
+        <th>Presentation 2</th>
+        <th>Presentation 3</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr></thead>
       <tbody id="colBody"></tbody>
     </table>
   </div>
@@ -1855,38 +1865,47 @@ document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click
 // ════════════════════════════════════════
 // COLLEGES
 // ════════════════════════════════════════
-function renderColleges(filter='all', search='') {
-  const tbody = document.getElementById('colBody');
+function renderColleges(filter, search) {
+  filter = filter || window._colTab || 'all';
+  search = (search || (document.getElementById('collegeSearch')||{value:''}).value || '').toLowerCase();
+  var tbody = document.getElementById('colBody');
   if(!tbody) return;
   tbody.innerHTML = '';
-  let n = 0;
-  const statusLabel={done:'Continuing',pending:'In Progress',followup:'Follow-up',mou:'MOU Signed'};
-  const statusColor={done:'#3B6D11;background:#e8f5e9',pending:'var(--amber-dark);background:var(--amber-light)',followup:'var(--coral);background:var(--coral-light)',mou:'var(--blue);background:var(--blue-light)'};
-  colleges.forEach((c, idx) => {
-    const mf=filter==='all'||(filter==='done'&&c.status==='done')||(filter==='pending'&&c.status==='pending')||(filter==='followup'&&c.status==='followup')||(filter==='mou'&&c.status==='mou');
-    const ms=!search||c.name.toLowerCase().includes(search)||(c.addr||'').toLowerCase().includes(search)||(c.contact||'').toLowerCase().includes(search)||(c.person||'').toLowerCase().includes(search);
-    if(!mf||!ms)return;
+  var n = 0;
+  var statusLabel = {done:'Continuing',pending:'In Progress',followup:'Follow-up',scheduled:'Scheduled',completed:'Completed',mou:'MOU Signed'};
+  var statusColor = {done:'color:#3B6D11;background:#e8f5e9',pending:'color:var(--amber-dark);background:var(--amber-light)',followup:'color:var(--coral);background:var(--coral-light)',scheduled:'color:var(--blue);background:var(--blue-light)',completed:'color:#555;background:#eee',mou:'color:var(--blue);background:var(--blue-light)'};
+  (colleges||[]).forEach(function(c, idx) {
+    var mf = filter==='all' || c.status===filter;
+    var ms = !search || (c.name||'').toLowerCase().includes(search) || (c.contact||c.phone||'').toLowerCase().includes(search) || (c.topic||c.programs||'').toLowerCase().includes(search);
+    if(!mf||!ms) return;
     n++;
-    const presentations=c.presentations||c.presentationCount||1;
-    const firstD=c.firstDate||c.date||'—';
-    const lastD=c.lastDate||c.date||'—';
-    const st=c.status||'done';
-    const sc=statusColor[st]||'var(--hint);background:var(--border)';
-    const sl=statusLabel[st]||st;
-    const contact=c.contact||c.person||'—';
-    tbody.innerHTML+=`<tr>
-      <td style="color:var(--hint);font-size:11px">${n}</td>
-      <td><div style="font-size:13px;font-weight:600;color:var(--text)">${c.name}</div><div style="font-size:11px;color:var(--muted)">${c.addr||''}</div>${c.programs?`<div style="font-size:10px;color:var(--hint)">${c.programs}</div>`:''}</td>
-      <td style="font-size:12px;color:var(--text-2)">${contact}</td>
-      <td style="font-size:12px;color:var(--text-2)">${firstD}</td>
-      <td style="font-size:12px;color:var(--text-2)">${lastD}</td>
-      <td style="text-align:center"><span style="font-size:14px;font-weight:700;color:var(--green)">${presentations}</span></td>
-      <td><span style="font-size:10px;font-weight:600;padding:2px 9px;border-radius:10px;color:${sc}">${sl}</span></td>
-      <td style="white-space:nowrap"><button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" data-action="editCollege" data-idx="${idx}">Edit</button> <button class="btn btn-ghost" style="font-size:11px;padding:4px 10px;color:var(--coral);border-color:var(--coral)" data-action="deleteCollege" data-idx="${idx}">Del</button></td>
-    </tr>`;
+    var st = c.status || 'scheduled';
+    var sc = statusColor[st] || 'color:var(--hint);background:var(--border)';
+    var sl = statusLabel[st] || st;
+    var pres = c.presentations || c.presentationCount || 1;
+    var p1 = c.pres1 || c.firstDate || (pres>=1?'✓':'—');
+    var p2 = c.pres2 || (pres>=2?(c.date||'✓'):'—');
+    var p3 = c.pres3 || (pres>=3?'✓':'—');
+    var row = document.createElement('tr');
+    row.innerHTML =
+      '<td style="color:var(--hint);font-size:11px">'+n+'</td>'+
+      '<td><div style="font-size:13px;font-weight:600;color:var(--text)">'+c.name+'</div>'+(c.addr?'<div style="font-size:11px;color:var(--muted)">'+c.addr+'</div>':'')+'</td>'+
+      '<td style="font-size:12px;white-space:nowrap">'+(c.contact||c.phone||'—')+'</td>'+
+      '<td style="font-size:12px;color:var(--text-2);max-width:140px">'+(c.topic||c.programs||'—')+'</td>'+
+      '<td style="text-align:center;font-size:13px;font-weight:700;color:var(--green)">'+(c.participants||'—')+'</td>'+
+      '<td style="text-align:center;font-size:11px;color:var(--text-2)">'+p1+'</td>'+
+      '<td style="text-align:center;font-size:11px;color:var(--text-2)">'+p2+'</td>'+
+      '<td style="text-align:center;font-size:11px;color:var(--text-2)">'+p3+'</td>'+
+      '<td style="text-align:center;font-size:13px;font-weight:700;color:var(--green)">'+pres+'</td>'+
+      '<td><span style="font-size:10px;font-weight:600;padding:2px 9px;border-radius:10px;'+sc+'">'+sl+'</span></td>'+
+      '<td style="white-space:nowrap">'+
+        '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px" data-action="editCollege" data-idx="'+idx+'">Edit</button> '+
+        '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px;color:var(--coral);border-color:var(--coral)" data-action="deleteCollege" data-idx="'+idx+'">Del</button>'+
+      '</td>';
+    tbody.appendChild(row);
   });
-  const countEl=document.getElementById('colSubCount');
-  if(countEl)countEl.textContent=`· ${colleges.length} colleges`;
+  var el = document.getElementById('colSubCount');
+  if(el) el.textContent = '· '+((colleges||[]).length)+' colleges';
 }
 function filterColleges(){renderColleges(window._colTab||'all',(document.getElementById('collegeSearch')||{value:''}).value.toLowerCase());}
 
@@ -2681,14 +2700,13 @@ function renderDashLibrary(){
 function restoreTodaysThought(){
   var bt=document.getElementById('bookTagline');
   if(bt&&!bt.textContent.trim())bt.textContent="Today's notes become tomorrow's legacy.";
-
   ['todaysThought','dashMission','learnBook','learnResearch','learnInsight',
    'healFocus','healNext','healPending','namanFocus','namanNext','namanPending',
    'p1focus','p1done','p1next','p2focus','p2done','p2next','p3focus','p3done','p3next',
    'p4focus','p4done','p4next','p5focus','p5done','p5next'].forEach(function(id){
     var el=document.getElementById(id);
     var v=getLS('ace_'+id);
-    if(el&&v!==null&&v!=='')el.textContent=v;
+    if(el&&v!==null&&v!==undefined&&v!=='')el.textContent=v;
   });
 }
 </script>
