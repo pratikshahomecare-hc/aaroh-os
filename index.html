@@ -1062,29 +1062,38 @@ body{
       <button class="btn btn-teal" onclick="openModal('addCollege')">+ Add / Update</button>
     </div>
   </div>
+
+  <!-- Analysis cards -->
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px">
+    <div class="card" style="padding:14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Total Colleges</div><div style="font-size:24px;font-weight:700;color:var(--green)" id="colStatTotal">0</div></div>
+    <div class="card" style="padding:14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Presentations</div><div style="font-size:24px;font-weight:700;color:var(--blue)" id="colStatPres">0</div></div>
+    <div class="card" style="padding:14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Participants</div><div style="font-size:24px;font-weight:700;color:#534AB7" id="colStatPart">0</div></div>
+    <div class="card" style="padding:14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Scheduled</div><div style="font-size:24px;font-weight:700;color:var(--amber-dark)" id="colStatSched">0</div></div>
+    <div class="card" style="padding:14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Completed</div><div style="font-size:24px;font-weight:700;color:#3B6D11" id="colStatDone">0</div></div>
+  </div>
+
   <div class="search-bar">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
     <input type="text" placeholder="Search colleges…" id="collegeSearch" oninput="filterColleges()">
   </div>
   <div class="page-tabs">
     <button class="page-tab active" onclick="showSubTab('col','all',this)">All</button>
-    <button class="page-tab" onclick="showSubTab('col','done',this)">Continuing</button>
     <button class="page-tab" onclick="showSubTab('col','pending',this)">In Progress</button>
     <button class="page-tab" onclick="showSubTab('col','scheduled',this)">Scheduled</button>
     <button class="page-tab" onclick="showSubTab('col','completed',this)">Completed</button>
+    <button class="page-tab" onclick="showSubTab('col','done',this)">Continuing</button>
   </div>
   <div class="card" style="padding:0;overflow:hidden;overflow-x:auto">
     <table class="tbl">
       <thead><tr>
         <th>#</th>
         <th>College Name</th>
-        <th>Contact No</th>
+        <th>Address</th>
         <th>Topic</th>
         <th>Participants</th>
-        <th>Presentation 1</th>
-        <th>Presentation 2</th>
-        <th>Presentation 3</th>
-        <th>Total</th>
+        <th>Pres 1</th>
+        <th>Pres 2</th>
+        <th>Pres 3</th>
         <th>Status</th>
         <th>Actions</th>
       </tr></thead>
@@ -1102,7 +1111,16 @@ body{
           <button class="btn btn-teal" onclick="openModal('addHosp')">+ Add hospital</button>
         </div>
       </div>
-      <div class="search-bar">
+      
+  <!-- Analysis cards -->
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px">
+    <div class="card" style="padding:14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Total Hospitals</div><div style="font-size:24px;font-weight:700;color:var(--green)" id="hospStatTotal">0</div></div>
+    <div class="card" style="padding:14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Total Visits</div><div style="font-size:24px;font-weight:700;color:var(--blue)" id="hospStatVisits">0</div></div>
+    <div class="card" style="padding:14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Active</div><div style="font-size:24px;font-weight:700;color:#3B6D11" id="hospStatActive">0</div></div>
+    <div class="card" style="padding:14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">In Progress</div><div style="font-size:24px;font-weight:700;color:var(--amber-dark)" id="hospStatProgress">0</div></div>
+    <div class="card" style="padding:14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">MOU Signed</div><div style="font-size:24px;font-weight:700;color:#534AB7" id="hospStatMOU">0</div></div>
+  </div>
+<div class="search-bar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
         <input type="text" placeholder="Search hospital, address…" id="hospSearch" oninput="filterHospitals()">
       </div>
@@ -1677,7 +1695,7 @@ body{
   </div>
 </div>
 
-<div class="modal-overlay" id="modal-addCollege"><div class="modal" style="width:620px"><div class="modal-hdr"><div class="modal-title">Add / Update College Presentation</div><button class="close-btn" onclick="closeModal('addCollege')">×</button></div><div class="form-row"><label class="form-label">College Name <span style="color:var(--hint);font-weight:400">(same name = updates count)</span></label><input class="form-input" id="newColName" placeholder="e.g. Nobel College of Nursing"></div><div class="form-2col"><div class="form-row"><label class="form-label">Contact No</label><input class="form-input" id="newColContact" placeholder="01-XXXXXXX"></div><div class="form-row"><label class="form-label">Address</label><input class="form-input" id="newColAddr"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Topic / Program</label><input class="form-input" id="newColPrograms" placeholder="e.g. Elder Care Awareness"></div><div class="form-row"><label class="form-label">No. of Participants</label><input type="number" class="form-input" id="newColParticipants" min="0" placeholder="e.g. 120"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Presentation 1 Date</label><input type="date" class="form-input" id="newColFirstDate"></div><div class="form-row"><label class="form-label">Presentation 2 Date</label><input type="date" class="form-input" id="newColPres2"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Presentation 3 Date</label><input type="date" class="form-input" id="newColPres3"></div><div class="form-row"><label class="form-label">Status</label><select class="form-select" id="newColStatus"><option value="scheduled">Scheduled</option><option value="done">Continuing</option><option value="pending">In Progress</option><option value="followup">Follow-up Needed</option><option value="completed">Completed</option></select></div></div><div class="form-row"><label class="form-label">Remarks</label><textarea class="form-textarea" id="newColRemarks" rows="2"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('addCollege')">Cancel</button><button class="btn btn-teal" onclick="addNewCollege()">Save</button></div></div></div><div class="modal-overlay" id="modal-addCollege"><div class="modal" style="width:600px"><div class="modal-hdr"><div class="modal-title" id="addColTitle">Add College</div><button class="close-btn" onclick="closeModal('addCollege')">×</button></div><div class="form-row"><label class="form-label">College Name</label><input class="form-input" id="newColName"></div><div class="form-row"><label class="form-label">Address</label><input class="form-input" id="newColAddr"></div><div class="form-2col"><div class="form-row"><label class="form-label">Phone / Email</label><input class="form-input" id="newColContact"></div><div class="form-row"><label class="form-label">Contact Person</label><input class="form-input" id="newColPerson"></div></div><div class="form-row"><label class="form-label">Programs</label><input class="form-input" id="newColPrograms" placeholder="e.g. B.Sc Nursing, ANM"></div><div class="form-2col"><div class="form-row"><label class="form-label">First Presentation</label><input type="date" class="form-input" id="newColFirstDate"></div><div class="form-row"><label class="form-label">Last Presentation</label><input type="date" class="form-input" id="newColDate"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Total Presentations</label><input type="number" class="form-input" id="newColPresentations" min="0" value="1"></div><div class="form-row"><label class="form-label">Status</label><select class="form-select" id="newColStatus"><option value="done">Continuing Collaboration</option><option value="pending">In Progress</option><option value="followup">Follow-up Needed</option><option value="mou">MOU Signed</option></select></div></div><div class="form-row"><label class="form-label">Remarks / Notes</label><textarea class="form-textarea" id="newColRemarks"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('addCollege')">Cancel</button><button class="btn btn-teal" onclick="addNewCollege()">Save</button></div></div></div><div class="modal-overlay" id="modal-addCollege">
+<div class="modal-overlay" id="modal-addCollege"><div class="modal" style="width:640px"><div class="modal-hdr"><div class="modal-title">Add / Update College Presentation</div><button class="close-btn" onclick="closeModal('addCollege')">×</button></div><div class="form-row"><label class="form-label">College Name <span style="color:var(--hint);font-weight:400">(same name = adds presentation)</span></label><input class="form-input" id="newColName" placeholder="e.g. Nobel College of Nursing"></div><div class="form-2col"><div class="form-row"><label class="form-label">Address</label><input class="form-input" id="newColAddr" placeholder="e.g. Sinamangal, Kathmandu"></div><div class="form-row"><label class="form-label">Contact No</label><input class="form-input" id="newColContact" placeholder="01-XXXXXXX"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Topic</label><input class="form-input" id="newColPrograms" placeholder="e.g. Elder Care Awareness"></div><div class="form-row"><label class="form-label">No. of Participants</label><input type="number" class="form-input" id="newColParticipants" min="0" placeholder="e.g. 120"></div></div><div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--hint);margin:10px 0 6px">Presentation Dates</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px"><div class="form-row"><label class="form-label">Presentation 1</label><input type="date" class="form-input" id="newColFirstDate"></div><div class="form-row"><label class="form-label">Presentation 2</label><input type="date" class="form-input" id="newColPres2"></div><div class="form-row"><label class="form-label">Presentation 3</label><input type="date" class="form-input" id="newColPres3"></div></div><div class="form-row"><label class="form-label">Status</label><select class="form-select" id="newColStatus"><option value="scheduled">Scheduled</option><option value="pending">In Progress</option><option value="completed">Completed</option><option value="done">Continuing Collaboration</option><option value="followup">Follow-up Needed</option></select></div><div class="form-row"><label class="form-label">Remarks</label><textarea class="form-textarea" id="newColRemarks" rows="2"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('addCollege')">Cancel</button><button class="btn btn-teal" onclick="addNewCollege()">Save</button></div></div></div><div class="modal-overlay" id="modal-addCollege"><div class="modal" style="width:620px"><div class="modal-hdr"><div class="modal-title">Add / Update College Presentation</div><button class="close-btn" onclick="closeModal('addCollege')">×</button></div><div class="form-row"><label class="form-label">College Name <span style="color:var(--hint);font-weight:400">(same name = updates count)</span></label><input class="form-input" id="newColName" placeholder="e.g. Nobel College of Nursing"></div><div class="form-2col"><div class="form-row"><label class="form-label">Contact No</label><input class="form-input" id="newColContact" placeholder="01-XXXXXXX"></div><div class="form-row"><label class="form-label">Address</label><input class="form-input" id="newColAddr"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Topic / Program</label><input class="form-input" id="newColPrograms" placeholder="e.g. Elder Care Awareness"></div><div class="form-row"><label class="form-label">No. of Participants</label><input type="number" class="form-input" id="newColParticipants" min="0" placeholder="e.g. 120"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Presentation 1 Date</label><input type="date" class="form-input" id="newColFirstDate"></div><div class="form-row"><label class="form-label">Presentation 2 Date</label><input type="date" class="form-input" id="newColPres2"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Presentation 3 Date</label><input type="date" class="form-input" id="newColPres3"></div><div class="form-row"><label class="form-label">Status</label><select class="form-select" id="newColStatus"><option value="scheduled">Scheduled</option><option value="done">Continuing</option><option value="pending">In Progress</option><option value="followup">Follow-up Needed</option><option value="completed">Completed</option></select></div></div><div class="form-row"><label class="form-label">Remarks</label><textarea class="form-textarea" id="newColRemarks" rows="2"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('addCollege')">Cancel</button><button class="btn btn-teal" onclick="addNewCollege()">Save</button></div></div></div><div class="modal-overlay" id="modal-addCollege"><div class="modal" style="width:600px"><div class="modal-hdr"><div class="modal-title" id="addColTitle">Add College</div><button class="close-btn" onclick="closeModal('addCollege')">×</button></div><div class="form-row"><label class="form-label">College Name</label><input class="form-input" id="newColName"></div><div class="form-row"><label class="form-label">Address</label><input class="form-input" id="newColAddr"></div><div class="form-2col"><div class="form-row"><label class="form-label">Phone / Email</label><input class="form-input" id="newColContact"></div><div class="form-row"><label class="form-label">Contact Person</label><input class="form-input" id="newColPerson"></div></div><div class="form-row"><label class="form-label">Programs</label><input class="form-input" id="newColPrograms" placeholder="e.g. B.Sc Nursing, ANM"></div><div class="form-2col"><div class="form-row"><label class="form-label">First Presentation</label><input type="date" class="form-input" id="newColFirstDate"></div><div class="form-row"><label class="form-label">Last Presentation</label><input type="date" class="form-input" id="newColDate"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Total Presentations</label><input type="number" class="form-input" id="newColPresentations" min="0" value="1"></div><div class="form-row"><label class="form-label">Status</label><select class="form-select" id="newColStatus"><option value="done">Continuing Collaboration</option><option value="pending">In Progress</option><option value="followup">Follow-up Needed</option><option value="mou">MOU Signed</option></select></div></div><div class="form-row"><label class="form-label">Remarks / Notes</label><textarea class="form-textarea" id="newColRemarks"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('addCollege')">Cancel</button><button class="btn btn-teal" onclick="addNewCollege()">Save</button></div></div></div><div class="modal-overlay" id="modal-addCollege">
   <div class="modal">
     <div class="modal-hdr"><div class="modal-title">Add College</div><button class="close-btn" onclick="closeModal('addCollege')">×</button></div>
     <div class="form-row"><label class="form-label">College Name</label><input class="form-input" id="newColName"></div>
@@ -1887,30 +1905,28 @@ function renderColleges(filter, search) {
   tbody.innerHTML = '';
   var n = 0;
   var statusLabel = {done:'Continuing',pending:'In Progress',followup:'Follow-up',scheduled:'Scheduled',completed:'Completed',mou:'MOU Signed'};
-  var statusColor = {done:'color:#3B6D11;background:#e8f5e9',pending:'color:var(--amber-dark);background:var(--amber-light)',followup:'color:var(--coral);background:var(--coral-light)',scheduled:'color:var(--blue);background:var(--blue-light)',completed:'color:#555;background:#eee',mou:'color:var(--blue);background:var(--blue-light)'};
+  var statusColor = {done:'color:#3B6D11;background:#e8f5e9',pending:'color:var(--amber-dark);background:var(--amber-light)',followup:'color:var(--coral);background:var(--coral-light)',scheduled:'color:var(--blue);background:var(--blue-light)',completed:'color:#555;background:#eee',mou:'color:#534AB7;background:#F3F0FF'};
   (colleges||[]).forEach(function(c, idx) {
     var mf = filter==='all' || c.status===filter;
-    var ms = !search || (c.name||'').toLowerCase().includes(search) || (c.contact||c.phone||'').toLowerCase().includes(search) || (c.topic||c.programs||'').toLowerCase().includes(search);
+    var ms = !search || (c.name||'').toLowerCase().includes(search) || (c.addr||'').toLowerCase().includes(search) || (c.topic||c.programs||'').toLowerCase().includes(search);
     if(!mf||!ms) return;
     n++;
     var st = c.status || 'scheduled';
     var sc = statusColor[st] || 'color:var(--hint);background:var(--border)';
     var sl = statusLabel[st] || st;
-    var pres = c.presentations || c.presentationCount || 1;
-    var p1 = c.pres1 || c.firstDate || (pres>=1?'✓':'—');
-    var p2 = c.pres2 || (pres>=2?(c.date||'✓'):'—');
-    var p3 = c.pres3 || (pres>=3?'✓':'—');
+    var p1 = c.pres1 || c.firstDate || '—';
+    var p2 = c.pres2 || '—';
+    var p3 = c.pres3 || '—';
     var row = document.createElement('tr');
     row.innerHTML =
       '<td style="color:var(--hint);font-size:11px">'+n+'</td>'+
-      '<td><div style="font-size:13px;font-weight:600;color:var(--text)">'+c.name+'</div>'+(c.addr?'<div style="font-size:11px;color:var(--muted)">'+c.addr+'</div>':'')+'</td>'+
-      '<td style="font-size:12px;white-space:nowrap">'+(c.contact||c.phone||'—')+'</td>'+
-      '<td style="font-size:12px;color:var(--text-2);max-width:140px">'+(c.topic||c.programs||'—')+'</td>'+
+      '<td><div style="font-size:13px;font-weight:600;color:var(--text)">'+c.name+'</div>'+(c.contact||c.phone?'<div style="font-size:11px;color:var(--muted)">'+(c.contact||c.phone)+'</div>':'')+'</td>'+
+      '<td style="font-size:12px;color:var(--text-2)">'+(c.addr||'—')+'</td>'+
+      '<td style="font-size:12px;color:var(--text-2);max-width:150px">'+(c.topic||c.programs||'—')+'</td>'+
       '<td style="text-align:center;font-size:13px;font-weight:700;color:var(--green)">'+(c.participants||'—')+'</td>'+
       '<td style="text-align:center;font-size:11px;color:var(--text-2)">'+p1+'</td>'+
       '<td style="text-align:center;font-size:11px;color:var(--text-2)">'+p2+'</td>'+
       '<td style="text-align:center;font-size:11px;color:var(--text-2)">'+p3+'</td>'+
-      '<td style="text-align:center;font-size:13px;font-weight:700;color:var(--green)">'+pres+'</td>'+
       '<td><span style="font-size:10px;font-weight:600;padding:2px 9px;border-radius:10px;'+sc+'">'+sl+'</span></td>'+
       '<td style="white-space:nowrap">'+
         '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px" data-action="editCollege" data-idx="'+idx+'">Edit</button> '+
@@ -1920,6 +1936,14 @@ function renderColleges(filter, search) {
   });
   var el = document.getElementById('colSubCount');
   if(el) el.textContent = '· '+((colleges||[]).length)+' colleges';
+  // Update stats cards
+  var all=colleges||[];
+  var s=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+  s('colStatTotal',all.length);
+  s('colStatPres',all.reduce(function(a,c){return a+(parseInt(c.presentations||c.presentationCount)||0);},0));
+  s('colStatPart',all.reduce(function(a,c){return a+(parseInt(c.participants)||0);},0));
+  s('colStatSched',all.filter(function(c){return c.status==='scheduled';}).length);
+  s('colStatDone',all.filter(function(c){return c.status==='completed'||c.status==='done';}).length);
 }
 function filterColleges(){renderColleges(window._colTab||'all',(document.getElementById('collegeSearch')||{value:''}).value.toLowerCase());}
 
@@ -1958,6 +1982,15 @@ function renderHospitals(filter='all', search='') {
   });
   const countEl = document.getElementById('hospSubCount');
   if(countEl) countEl.textContent = `· ${hospitals.length} hospitals`;
+
+  // Update stats cards
+  var allH=hospitals||[];
+  var sh=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+  sh('hospStatTotal',allH.length);
+  sh('hospStatVisits',allH.reduce(function(a,h){return a+(parseInt(h.visits||h.visitCount)||1);},0));
+  sh('hospStatActive',allH.filter(function(h){return h.status==='done';}).length);
+  sh('hospStatProgress',allH.filter(function(h){return h.status==='pending';}).length);
+  sh('hospStatMOU',allH.filter(function(h){return h.status==='mou'||h.activity==='MOU';}).length);
 }
 function filterHospitals(){renderHospitals(window._hospTab||'all',(document.getElementById('hospSearch')||{value:''}).value.toLowerCase());}
 
@@ -2071,24 +2104,35 @@ function addNewCollege(){
   var name=(document.getElementById('newColName')||{value:''}).value.trim();
   if(!name){alert('Please enter a college name.');return;}
   var today=new Date().toISOString().split('T')[0];
+  var p1=(document.getElementById('newColFirstDate')||{value:''}).value;
+  var p2=(document.getElementById('newColPres2')||{value:''}).value;
+  var p3=(document.getElementById('newColPres3')||{value:''}).value;
+  var presCount=(p1?1:0)+(p2?1:0)+(p3?1:0)||1;
   var existing=colleges.findIndex(function(c){return c.name.toLowerCase()===name.toLowerCase();});
   if(existing>=0){
     var c=colleges[existing];
-    c.presentations=(c.presentations||0)+1;
+    if(p1)c.pres1=p1;
+    if(p2)c.pres2=p2;
+    if(p3)c.pres3=p3;
+    c.presentations=(c.pres1?1:0)+(c.pres2?1:0)+(c.pres3?1:0)||c.presentations||1;
     c.presentationCount=c.presentations;
-    var newDate=(document.getElementById('newColDate')||{value:''}).value||today;
-    if(c.presentations===2)c.pres2=newDate;
-    else if(c.presentations>=3)c.pres3=newDate;
-    c.date=newDate;c.lastDate=newDate;
     var p=(document.getElementById('newColParticipants')||{value:''}).value;
-    if(p)c.participants=(c.participants||0)+parseInt(p);
+    if(p)c.participants=parseInt(p)||c.participants;
     var t=(document.getElementById('newColPrograms')||{value:''}).value.trim();
     if(t)c.topic=t;
-    saveData();closeModal('addCollege');
-    renderColleges(window._colTab||'all',(document.getElementById('collegeSearch')||{value:''}).value);
-    alert('Updated: '+name+' — Total presentations: '+c.presentations);return;
+    var a=(document.getElementById('newColAddr')||{value:''}).value.trim();
+    if(a)c.addr=a;
+    var ct=(document.getElementById('newColContact')||{value:''}).value.trim();
+    if(ct)c.contact=ct;
+    var st=(document.getElementById('newColStatus')||{value:''}).value;
+    if(st)c.status=st;
+    var rem=(document.getElementById('newColRemarks')||{value:''}).value.trim();
+    if(rem)c.remarks=rem;
+    saveData();saveColleges();closeModal('addCollege');
+    renderColleges();
+    alert('Updated '+name+' — Total presentations: '+c.presentations);
+    return;
   }
-  var p1=(document.getElementById('newColFirstDate')||{value:''}).value||today;
   colleges.push({
     sn:colleges.length+1,name:name,
     addr:(document.getElementById('newColAddr')||{value:''}).value.trim(),
@@ -2097,15 +2141,14 @@ function addNewCollege(){
     topic:(document.getElementById('newColPrograms')||{value:''}).value.trim(),
     programs:(document.getElementById('newColPrograms')||{value:''}).value.trim(),
     participants:parseInt((document.getElementById('newColParticipants')||{value:'0'}).value)||0,
-    firstDate:p1,pres1:p1,
-    pres2:(document.getElementById('newColPres2')||{value:''}).value||'',
-    pres3:(document.getElementById('newColPres3')||{value:''}).value||'',
-    date:p1,lastDate:p1,
-    presentations:1,presentationCount:1,
+    pres1:p1||today,pres2:p2||'',pres3:p3||'',
+    firstDate:p1||today,date:p1||today,lastDate:p3||p2||p1||today,
+    presentations:presCount,presentationCount:presCount,
     status:(document.getElementById('newColStatus')||{value:'scheduled'}).value||'scheduled',
     remarks:(document.getElementById('newColRemarks')||{value:''}).value.trim()
   });
-  saveData();closeModal('addCollege');renderColleges(window._colTab||'all','');
+  saveData();saveColleges();closeModal('addCollege');
+  renderColleges();
 }
 
 function addHospital(){
@@ -2750,7 +2793,7 @@ function restoreTodaysThought(){
 </div>
 <div class="form-row"><label class="form-label">Notes</label><textarea class="form-textarea" id="fuNotes" rows="2" placeholder="Context, what was discussed, next step…"></textarea></div>
 <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('followup')">Cancel</button><button class="btn btn-teal" onclick="saveFU()">Save</button></div>
-</div></div><div class="form-2col"><div class="form-row"><label class="form-label">Category</label><select class="form-select" id="fuCat"><option>Call</option><option>Meeting</option><option>Hospital Visit</option><option>College Visit</option><option>Government Visit</option><option>MOU Follow-up</option><option>Training</option><option>Networking</option><option>Personal</option></select></div><div class="form-row"><label class="form-label">Organization</label><select class="form-select" id="fuOrg"><option value="">Personal</option><option>Heal Home Care</option><option>Naman Care Home</option><option>Aaroh Movement</option></select></div></div><div class="form-row"><label class="form-label">Contact &amp; Phone</label><input class="form-input" id="fuContact" placeholder="Name · 98XXXXXXXX"></div><div class="form-row"><label class="form-label">Notes</label><textarea class="form-textarea" id="fuNotes"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('followup')">Cancel</button><button class="btn btn-teal" onclick="saveFU()">Save</button></div></div></div>
+</div></div>
 
 <div class="modal-overlay" id="modal-addGovt"><div class="modal" style="width:600px"><div class="modal-hdr"><div class="modal-title" id="govtMT">Add Contact</div><button class="close-btn" onclick="closeModal('addGovt')">×</button></div><input type="hidden" id="govtEI" value="-1"><div class="form-2col"><div class="form-row"><label class="form-label">Name</label><input class="form-input" id="govtName"></div><div class="form-row"><label class="form-label">Organization</label><input class="form-input" id="govtOrg"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Type</label><select class="form-select" id="govtType"><option value="government">Government</option><option value="media">Media</option><option value="ngo">NGO / INGO</option><option value="professional">Professional Body</option></select></div><div class="form-row"><label class="form-label">Position</label><input class="form-input" id="govtPos"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Phone</label><input class="form-input" id="govtPhone"></div><div class="form-row"><label class="form-label">Email</label><input class="form-input" id="govtEmail"></div></div><div class="form-row"><label class="form-label">Address</label><input class="form-input" id="govtAddr"></div><div class="form-2col"><div class="form-row"><label class="form-label">Last Contact</label><input type="date" class="form-input" id="govtLC"></div><div class="form-row"><label class="form-label">Status</label><select class="form-select" id="govtSt"><option value="active">Active</option><option value="pending">Pending</option><option value="inactive">Inactive</option></select></div></div><div class="form-row"><label class="form-label">Notes</label><textarea class="form-textarea" id="govtNotes"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('addGovt')">Cancel</button><button class="btn btn-teal" onclick="saveGovt()">Save</button></div></div></div>
 
