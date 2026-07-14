@@ -1757,8 +1757,6 @@ var _sb = {
     var body=JSON.stringify({user_id:AAROH_CONFIG.userId,data_key:k,data_value:typeof v==='string'?v:JSON.stringify(v),updated_at:new Date().toISOString()});
     var h={'Content-Type':'application/json','apikey':this.key,'Authorization':'Bearer '+this.key,'Prefer':'resolution=merge-duplicates,return=minimal'};
     return fetch(url,{method:'POST',headers:h,body:body}).catch(function(e){console.warn('SB write:',e);});
-  })})
-    .catch(function(e){console.warn('Supabase write failed:',e);});
   },
   getAll:function(){
     if(!this.ready)return Promise.resolve({});
