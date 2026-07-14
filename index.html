@@ -1753,10 +1753,22 @@ var _sb = {
   _h:function(){return{'Content-Type':'application/json','apikey':this.key,'Authorization':'Bearer '+this.key,'Prefer':'return=minimal,resolution=merge-duplicates'};},
   set:function(k,v){
     if(!this.ready)return Promise.resolve(null);
-    var url=this.url+'/rest/v1/aaroh_store';
-    var body=JSON.stringify({user_id:AAROH_CONFIG.userId,data_key:k,data_value:typeof v==='string'?v:JSON.stringify(v),updated_at:new Date().toISOString()});
+    var self=this;
+    var val=typeof v==='string'?v:JSON.stringify(v);
+    var body=JSON.stringify({user_id:AAROH_CONFIG.userId,data_key:k,data_value:val,updated_at:new Date().toISOString()});
     var h={'Content-Type':'application/json','apikey':this.key,'Authorization':'Bearer '+this.key,'Prefer':'resolution=merge-duplicates,return=minimal'};
-    return fetch(url,{method:'POST',headers:h,body:body}).catch(function(e){console.warn('SB write:',e);});
+    // Try upsert with on_conflict first
+    return fetch(this.url+'/rest/v1/aaroh_store?on_conflict=user_id,data_key',{method:'POST',headers:h,body:body})
+    .then(function(r){
+      if(r.ok||r.status===201)return r;
+      // Fallback: PATCH existing row
+      var h2={'Content-Type':'application/json','apikey':self.key,'Authorization':'Bearer '+self.key,'Prefer':'return=minimal'};
+      return fetch(self.url+'/rest/v1/aaroh_store?user_id=eq.'+encodeURIComponent(AAROH_CONFIG.userId)+'&data_key=eq.'+encodeURIComponent(k),{
+        method:'PATCH',headers:h2,
+        body:JSON.stringify({data_value:val,updated_at:new Date().toISOString()})
+      });
+    })
+    .catch(function(e){console.warn('SB write:',e);});
   },
   getAll:function(){
     if(!this.ready)return Promise.resolve({});
