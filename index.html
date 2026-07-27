@@ -763,6 +763,46 @@ body{
   .srm-actions{display:flex;gap:6px;align-items:center;opacity:0;transition:opacity 0.15s}
   .srm-card:hover .srm-actions{opacity:1}
   .srm-expand-btn{font-size:11px;color:var(--green);font-weight:600;cursor:pointer;background:none;border:none;padding:0}
+
+  /* ── Learning & Development Centre ─── */
+  .lms-tabs{display:flex;gap:2px;background:var(--content-bg);border-radius:8px;padding:4px;margin-bottom:20px;flex-wrap:wrap}
+  .lms-tab{padding:7px 14px;border-radius:6px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:transparent;white-space:nowrap;transition:all 0.15s}
+  .lms-tab.active{background:#fff;color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,0.1)}
+  .lms-panel{display:none}.lms-panel.active{display:block}
+  .lms-stat{text-align:center;padding:14px 10px;cursor:pointer}
+  .lms-stat:hover{box-shadow:0 2px 12px rgba(0,0,0,0.08)}
+  .lms-stat-num{font-size:22px;font-weight:700;line-height:1;margin-bottom:3px}
+  .lms-stat-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted)}
+  .lms-journey{display:flex;flex-direction:column;gap:0}
+  .lms-step{display:flex;align-items:flex-start;gap:16px;position:relative;padding-bottom:20px}
+  .lms-step:last-child{padding-bottom:0}
+  .lms-step-line{position:absolute;left:15px;top:32px;bottom:0;width:2px;background:var(--border)}
+  .lms-step:last-child .lms-step-line{display:none}
+  .lms-step-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;z-index:1;position:relative}
+  .lms-step-dot.done{background:var(--green);color:#fff}
+  .lms-step-dot.active{background:var(--blue);color:#fff;box-shadow:0 0 0 4px var(--blue-light)}
+  .lms-step-dot.pending{background:var(--border);color:var(--hint)}
+  .lms-curriculum{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  .lms-module{background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px}
+  .lms-module-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .lms-module-title{font-size:13px;font-weight:600;color:var(--text)}
+  .lms-progress-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:8px}
+  .lms-progress-fill{height:100%;border-radius:3px;transition:width 0.3s}
+  .lms-comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+  .lms-comp-item{background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px}
+  .lms-comp-name{font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px}
+  .lms-comp-status{font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;display:inline-block}
+  .lms-comp-status.competent{background:#e8f5e9;color:#3B6D11}
+  .lms-comp-status.inprogress{background:var(--amber-light);color:var(--amber-dark)}
+  .lms-comp-status.notstarted{background:var(--border);color:var(--hint)}
+  .lms-comp-status.expired{background:var(--coral-light);color:var(--coral)}
+  .lms-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-top:8px}
+  .lms-cal-day{text-align:center;padding:6px 4px;border-radius:6px;font-size:11px}
+  .lms-cal-day.has-event{background:var(--green-light);color:var(--green-text);font-weight:600;cursor:pointer}
+  .lms-dept-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:10px}
+  .lms-dept-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .lms-trainer-card{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:8px}
+  .lms-trainer-avatar{width:40px;height:40px;border-radius:50%;background:var(--green-light);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -1221,38 +1261,293 @@ body{
 
     <!-- ═══════════ TRAINING ═══════════ -->
     <section class="page" id="page-training">
-      <div class="page-hdr">
-        <div class="t-label">Organisations · Training</div>
-        <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:4px">
-          <div class="t-section">Training Sessions</div>
-          <button class="btn btn-teal" onclick="openModal('addTraining')">+ New training</button>
+
+  <!-- Header -->
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px">
+    <div>
+      <div class="t-label">Learning &amp; Development</div>
+      <div class="t-section" style="margin-top:4px">L&amp;D Centre</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:2px">Heal Home Care &amp; Naman Care Home — Employee Learning Platform</div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <select class="form-select" id="lmsOrgFilter" onchange="renderLMS()" style="font-size:12px;width:160px">
+        <option value="">Both Organisations</option>
+        <option value="heal">Heal Home Care</option>
+        <option value="naman">Naman Care Home</option>
+      </select>
+      <button class="btn btn-teal" onclick="openLMSAdd()">+ Add Training</button>
+    </div>
+  </div>
+
+  <!-- LMS Tabs -->
+  <div class="lms-tabs">
+    <button class="lms-tab active" onclick="switchLMS('dashboard',this)">📊 Dashboard</button>
+    <button class="lms-tab" onclick="switchLMS('journey',this)">🗺 Learning Journey</button>
+    <button class="lms-tab" onclick="switchLMS('orientation',this)">🎯 Orientation</button>
+    <button class="lms-tab" onclick="switchLMS('departments',this)">🏥 Departments</button>
+    <button class="lms-tab" onclick="switchLMS('competency',this)">⭐ Competencies</button>
+    <button class="lms-tab" onclick="switchLMS('calendar',this)">📅 Calendar</button>
+    <button class="lms-tab" onclick="switchLMS('materials',this)">📚 Materials</button>
+    <button class="lms-tab" onclick="switchLMS('certificates',this)">🎓 Certificates</button>
+    <button class="lms-tab" onclick="switchLMS('trainers',this)">👩‍🏫 Trainers</button>
+    <button class="lms-tab" onclick="switchLMS('reports',this)">📈 Reports</button>
+  </div>
+
+  <!-- PANEL: Dashboard -->
+  <div class="lms-panel active" id="lms-dashboard">
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px">
+      <div class="card lms-stat"><div class="lms-stat-num" style="color:var(--text)" id="lmsStatEnrolled">0</div><div class="lms-stat-label">Enrolled</div></div>
+      <div class="card lms-stat"><div class="lms-stat-num" style="color:var(--amber-dark)" id="lmsStatOriPending">0</div><div class="lms-stat-label">Orientation Pending</div></div>
+      <div class="card lms-stat"><div class="lms-stat-num" style="color:var(--coral)" id="lmsStatTrainingDue">0</div><div class="lms-stat-label">Training Due</div></div>
+      <div class="card lms-stat"><div class="lms-stat-num" style="color:var(--green)" id="lmsStatCompleted">0</div><div class="lms-stat-label">Completed</div></div>
+      <div class="card lms-stat"><div class="lms-stat-num" style="color:var(--blue)" id="lmsStatHours">0</div><div class="lms-stat-label">Hours This Month</div></div>
+    </div>
+
+    <!-- Recent / Upcoming -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="card" style="padding:18px">
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-bottom:12px">Upcoming Sessions</div>
+        <div id="lmsUpcoming"><div style="color:var(--hint);font-size:13px">No upcoming sessions scheduled</div></div>
+        <button class="btn btn-ghost" style="margin-top:10px;font-size:11px;padding:4px 10px" onclick="switchLMS('calendar',document.querySelector('.lms-tab:nth-child(6)'))">View Calendar →</button>
+      </div>
+      <div class="card" style="padding:18px">
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-bottom:12px">Recently Completed</div>
+        <div id="lmsRecent"><div style="color:var(--hint);font-size:13px">No completed training yet</div></div>
+      </div>
+    </div>
+
+    <!-- Department completion rates -->
+    <div class="card" style="padding:18px;margin-top:16px">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-bottom:14px">Department Completion Overview</div>
+      <div id="lmsDeptRates">
+        <div style="margin-bottom:10px" id="lmsDeptHeal">
+          <div style="font-size:12px;font-weight:600;margin-bottom:4px">🏥 Heal Home Care</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px" id="lmsHealDepts"></div>
+        </div>
+        <div id="lmsDeptNaman">
+          <div style="font-size:12px;font-weight:600;margin-bottom:4px">🏡 Naman Care Home</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px" id="lmsNamanDepts"></div>
         </div>
       </div>
-      <div class="stats-grid" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr))">
-        <div class="stat-card"><div class="stat-label">Total</div><div class="stat-val teal" id="trainTotal">0</div></div>
-        <div class="stat-card"><div class="stat-label">Completed</div><div class="stat-val" style="color:var(--s-green)" id="trainDone">0</div></div>
-        <div class="stat-card"><div class="stat-label">Scheduled</div><div class="stat-val blue" id="trainSched">0</div></div>
-        <div class="stat-card"><div class="stat-label">Participants</div><div class="stat-val amber" id="trainPax">0</div></div>
+    </div>
+  </div>
+
+  <!-- PANEL: Learning Journey -->
+  <div class="lms-panel" id="lms-journey">
+    <div style="display:grid;grid-template-columns:280px 1fr;gap:20px">
+      <div class="card" style="padding:18px">
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-bottom:12px">Employee Journey Stages</div>
+        <div class="lms-journey">
+          <div class="lms-step"><div class="lms-step-line"></div><div class="lms-step-dot done">1</div><div><div style="font-size:13px;font-weight:600">Recruitment</div><div style="font-size:11px;color:var(--muted)">Selection &amp; onboarding</div></div></div>
+          <div class="lms-step"><div class="lms-step-line"></div><div class="lms-step-dot done">2</div><div><div style="font-size:13px;font-weight:600">Joining</div><div style="font-size:11px;color:var(--muted)">Documentation &amp; induction</div></div></div>
+          <div class="lms-step"><div class="lms-step-line"></div><div class="lms-step-dot active">3</div><div><div style="font-size:13px;font-weight:600;color:var(--blue)">Orientation</div><div style="font-size:11px;color:var(--muted)">Organisation &amp; culture</div></div></div>
+          <div class="lms-step"><div class="lms-step-line"></div><div class="lms-step-dot pending">4</div><div><div style="font-size:13px;font-weight:600">Department Training</div><div style="font-size:11px;color:var(--muted)">Role-specific skills</div></div></div>
+          <div class="lms-step"><div class="lms-step-line"></div><div class="lms-step-dot pending">5</div><div><div style="font-size:13px;font-weight:600">Competency Assessment</div><div style="font-size:11px;color:var(--muted)">Skills verification</div></div></div>
+          <div class="lms-step"><div class="lms-step-line"></div><div class="lms-step-dot pending">6</div><div><div style="font-size:13px;font-weight:600">Supervised Practice</div><div style="font-size:11px;color:var(--muted)">Hands-on with mentor</div></div></div>
+          <div class="lms-step"><div class="lms-step-line"></div><div class="lms-step-dot pending">7</div><div><div style="font-size:13px;font-weight:600">Independent Practice</div><div style="font-size:11px;color:var(--muted)">Solo practice certified</div></div></div>
+          <div class="lms-step"><div class="lms-step-line"></div><div class="lms-step-dot pending">8</div><div><div style="font-size:13px;font-weight:600">Refresher Training</div><div style="font-size:11px;color:var(--muted)">Annual renewal</div></div></div>
+          <div class="lms-step"><div class="lms-step-line"></div><div class="lms-step-dot pending">9</div><div><div style="font-size:13px;font-weight:600">Advanced Training</div><div style="font-size:11px;color:var(--muted)">Specialisation</div></div></div>
+          <div class="lms-step"><div class="lms-step-line"></div><div class="lms-step-dot pending">10</div><div><div style="font-size:13px;font-weight:600">Leadership Development</div><div style="font-size:11px;color:var(--muted)">Senior pathway</div></div></div>
+          <div class="lms-step"><div class="lms-step-dot pending">11</div><div><div style="font-size:13px;font-weight:600">Exit Interview</div><div style="font-size:11px;color:var(--muted)">Knowledge transfer</div></div></div>
+        </div>
       </div>
-      <div class="search-bar">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
-        <input type="text" placeholder="Search topic, hospital, trainer…" id="trainSearch" oninput="filterTrainings()">
+      <div>
+        <div class="card" style="padding:18px;margin-bottom:12px">
+          <div style="font-size:13px;font-weight:600;margin-bottom:10px">Current Stage: Orientation Programme</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:12px">All new employees complete general orientation before department training begins.</div>
+          <div class="lms-progress-bar"><div class="lms-progress-fill" style="width:35%;background:var(--blue)"></div></div>
+          <div style="font-size:11px;color:var(--hint);margin-top:4px">35% of enrolled staff have completed orientation</div>
+        </div>
+        <div class="card" style="padding:18px">
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-bottom:12px">Training Sessions Log</div>
+          <div id="lmsSessionsList"><div style="color:var(--hint);font-size:13px">No training sessions recorded yet. Add your first session using the + Add Training button.</div></div>
+        </div>
       </div>
-      <div class="page-tabs">
-        <button class="page-tab active" onclick="showSubTab('train','all',this)">All</button>
-        <button class="page-tab" onclick="showSubTab('train','completed',this)">Completed</button>
-        <button class="page-tab" onclick="showSubTab('train','scheduled',this)">Scheduled</button>
-        <button class="page-tab" onclick="showSubTab('train','pending',this)">Pending</button>
+    </div>
+  </div>
+
+  <!-- PANEL: Orientation -->
+  <div class="lms-panel" id="lms-orientation">
+    <div style="font-size:13px;color:var(--muted);margin-bottom:16px">All new staff complete general orientation before department-specific training.</div>
+    <div class="lms-curriculum">
+      <div class="lms-module"><div class="lms-module-hdr"><div class="lms-module-title">🏥 Mission, Vision &amp; Values</div><span class="lms-comp-status competent">Ready</span></div><div style="font-size:12px;color:var(--muted)">Organisation history, culture, purpose and long-term vision of both organisations.</div><div class="lms-progress-bar"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div></div>
+      <div class="lms-module"><div class="lms-module-hdr"><div class="lms-module-title">📋 Policies &amp; Code of Conduct</div><span class="lms-comp-status notstarted">Pending</span></div><div style="font-size:12px;color:var(--muted)">HR policies, attendance, leave, professional behaviour and communication standards.</div><div class="lms-progress-bar"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div></div>
+      <div class="lms-module"><div class="lms-module-hdr"><div class="lms-module-title">🦠 Infection Prevention &amp; Control</div><span class="lms-comp-status notstarted">Pending</span></div><div style="font-size:12px;color:var(--muted)">Hand hygiene, PPE use, isolation procedures and waste management.</div><div class="lms-progress-bar"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div></div>
+      <div class="lms-module"><div class="lms-module-hdr"><div class="lms-module-title">🚨 Safety &amp; Emergency Procedures</div><span class="lms-comp-status notstarted">Pending</span></div><div style="font-size:12px;color:var(--muted)">Fire safety, emergency codes, evacuation, first aid basics and incident reporting.</div><div class="lms-progress-bar"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div></div>
+      <div class="lms-module"><div class="lms-module-hdr"><div class="lms-module-title">🤝 Patient Rights &amp; Dignity</div><span class="lms-comp-status notstarted">Pending</span></div><div style="font-size:12px;color:var(--muted)">Patient-centred care, dignity, consent, confidentiality and safeguarding.</div><div class="lms-progress-bar"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div></div>
+      <div class="lms-module"><div class="lms-module-hdr"><div class="lms-module-title">📝 Documentation &amp; Records</div><span class="lms-comp-status notstarted">Pending</span></div><div style="font-size:12px;color:var(--muted)">Care documentation, shift handover, incident forms and record management.</div><div class="lms-progress-bar"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div></div>
+      <div class="lms-module"><div class="lms-module-hdr"><div class="lms-module-title">💬 Communication Standards</div><span class="lms-comp-status notstarted">Pending</span></div><div style="font-size:12px;color:var(--muted)">Therapeutic communication, family interaction, team handover and SBAR.</div><div class="lms-progress-bar"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div></div>
+      <div class="lms-module"><div class="lms-module-hdr"><div class="lms-module-title">✅ Orientation Assessment</div><span class="lms-comp-status notstarted">Not Started</span></div><div style="font-size:12px;color:var(--muted)">Final assessment and certificate of orientation completion.</div><div class="lms-progress-bar"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div></div>
+    </div>
+  </div>
+
+  <!-- PANEL: Departments -->
+  <div class="lms-panel" id="lms-departments">
+    <div class="lms-dept-card">
+      <div class="lms-dept-hdr"><div style="font-size:14px;font-weight:600">🏥 Heal Home Care — Departments</div></div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
+        <div class="card" style="padding:12px;text-align:center;cursor:pointer" onclick="showDeptCurriculum('heal','Home Care Nurse')"><div style="font-size:18px;margin-bottom:4px">👩‍⚕️</div><div style="font-size:11px;font-weight:600">Home Care Nurse</div></div>
+        <div class="card" style="padding:12px;text-align:center;cursor:pointer" onclick="showDeptCurriculum('heal','Caregiver')"><div style="font-size:18px;margin-bottom:4px">🤲</div><div style="font-size:11px;font-weight:600">Caregiver</div></div>
+        <div class="card" style="padding:12px;text-align:center;cursor:pointer" onclick="showDeptCurriculum('heal','Physiotherapy')"><div style="font-size:18px;margin-bottom:4px">🦿</div><div style="font-size:11px;font-weight:600">Physiotherapy</div></div>
+        <div class="card" style="padding:12px;text-align:center;cursor:pointer" onclick="showDeptCurriculum('heal','Doctor Coordination')"><div style="font-size:18px;margin-bottom:4px">👨‍⚕️</div><div style="font-size:11px;font-weight:600">Doctor Coordination</div></div>
+        <div class="card" style="padding:12px;text-align:center;cursor:pointer" onclick="showDeptCurriculum('heal','Customer Care')"><div style="font-size:18px;margin-bottom:4px">📞</div><div style="font-size:11px;font-weight:600">Customer Care</div></div>
+        <div class="card" style="padding:12px;text-align:center;cursor:pointer" onclick="showDeptCurriculum('heal','Laboratory')"><div style="font-size:18px;margin-bottom:4px">🔬</div><div style="font-size:11px;font-weight:600">Laboratory</div></div>
+        <div class="card" style="padding:12px;text-align:center;cursor:pointer" onclick="showDeptCurriculum('heal','Vaccination')"><div style="font-size:18px;margin-bottom:4px">💉</div><div style="font-size:11px;font-weight:600">Vaccination</div></div>
+        <div class="card" style="padding:12px;text-align:center;cursor:pointer" onclick="showDeptCurriculum('heal','Marketing')"><div style="font-size:18px;margin-bottom:4px">📢</div><div style="font-size:11px;font-weight:600">Marketing</div></div>
+        <div class="card" style="padding:12px;text-align:center;cursor:pointer" onclick="showDeptCurriculum('heal','Operations')"><div style="font-size:18px;margin-bottom:4px">⚙️</div><div style="font-size:11px;font-weight:600">Operations</div></div>
+        <div class="card" style="padding:12px;text-align:center;cursor:pointer" onclick="showDeptCurriculum('heal','Outreach')"><div style="font-size:18px;margin-bottom:4px">🌐</div><div style="font-size:11px;font-weight:600">Outreach</div></div>
       </div>
-      <div class="card" style="padding:0">
-        <table class="tbl"><thead><tr><th>#</th><th>Date</th><th>Hospital</th><th>Topic</th><th>Trainer</th><th>Participants</th><th>Hard Copy</th><th>Soft Copy</th><th>Status</th><th>Actions</th></tr></thead>
-        <tbody id="trainBody"></tbody></table>
+    </div>
+    <div class="lms-dept-card">
+      <div class="lms-dept-hdr"><div style="font-size:14px;font-weight:600">🏡 Naman Care Home — Departments</div></div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
+        <div class="card" style="padding:12px;text-align:center;cursor:pointer" onclick="showDeptCurriculum('naman','Staff Nurse')"><div style="font-size:18px;margin-bottom:4px">👩‍⚕️</div><div style="font-size:11px;font-weight:600">Staff Nurse</div></div>
+        <div class="card" style="padding:12px;text-align:center;cursor:pointer" onclick="showDeptCurriculum('naman','Caregiver')"><div style="font-size:18px;margin-bottom:4px">🤲</div><div style="font-size:11px;font-weight:600">Caregiver</div></div>
+        <div class="card" style="padding:12px;text-align:center;cursor:pointer" onclick="showDeptCurriculum('naman','Physiotherapy')"><div style="font-size:18px;margin-bottom:4px">🦿</div><div style="font-size:11px;font-weight:600">Physiotherapy</div></div>
+        <div class="card" style="padding:12px;text-align:center;cursor:pointer" onclick="showDeptCurriculum('naman','Kitchen')"><div style="font-size:18px;margin-bottom:4px">🍽️</div><div style="font-size:11px;font-weight:600">Kitchen</div></div>
+        <div class="card" style="padding:12px;text-align:center;cursor:pointer" onclick="showDeptCurriculum('naman','Housekeeping')"><div style="font-size:18px;margin-bottom:4px">🧹</div><div style="font-size:11px;font-weight:600">Housekeeping</div></div>
+        <div class="card" style="padding:12px;text-align:center;cursor:pointer" onclick="showDeptCurriculum('naman','Administration')"><div style="font-size:18px;margin-bottom:4px">📁</div><div style="font-size:11px;font-weight:600">Administration</div></div>
+        <div class="card" style="padding:12px;text-align:center;cursor:pointer" onclick="showDeptCurriculum('naman','Reception')"><div style="font-size:18px;margin-bottom:4px">🏨</div><div style="font-size:11px;font-weight:600">Reception</div></div>
+        <div class="card" style="padding:12px;text-align:center;cursor:pointer" onclick="showDeptCurriculum('naman','Security')"><div style="font-size:18px;margin-bottom:4px">🔒</div><div style="font-size:11px;font-weight:600">Security</div></div>
       </div>
-      <div style="margin-top:20px">
-        <div class="t-card-title" style="margin-bottom:12px">Attendance Sheets</div>
-        <div id="trainAttendCards"></div>
+    </div>
+    <div class="card" id="lmsDeptCurriculum" style="padding:18px;display:none"></div>
+  </div>
+
+  <!-- PANEL: Competencies -->
+  <div class="lms-panel" id="lms-competency">
+    <div style="font-size:13px;color:var(--muted);margin-bottom:14px">Core competencies for elder care and home healthcare settings.</div>
+    <div class="lms-comp-grid" id="lmsCompGrid">
+      <div class="lms-comp-item"><div class="lms-comp-name">Patient Transfer &amp; Mobility</div><span class="lms-comp-status notstarted">Not Started</span><div class="lms-progress-bar" style="margin-top:8px"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div></div>
+      <div class="lms-comp-item"><div class="lms-comp-name">Vital Signs Monitoring</div><span class="lms-comp-status notstarted">Not Started</span><div class="lms-progress-bar" style="margin-top:8px"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div></div>
+      <div class="lms-comp-item"><div class="lms-comp-name">Medication Safety</div><span class="lms-comp-status notstarted">Not Started</span><div class="lms-progress-bar" style="margin-top:8px"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div></div>
+      <div class="lms-comp-item"><div class="lms-comp-name">Infection Control</div><span class="lms-comp-status notstarted">Not Started</span><div class="lms-progress-bar" style="margin-top:8px"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div></div>
+      <div class="lms-comp-item"><div class="lms-comp-name">Emergency Response</div><span class="lms-comp-status notstarted">Not Started</span><div class="lms-progress-bar" style="margin-top:8px"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div></div>
+      <div class="lms-comp-item"><div class="lms-comp-name">Dementia Care</div><span class="lms-comp-status notstarted">Not Started</span><div class="lms-progress-bar" style="margin-top:8px"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div></div>
+      <div class="lms-comp-item"><div class="lms-comp-name">Pressure Injury Prevention</div><span class="lms-comp-status notstarted">Not Started</span><div class="lms-progress-bar" style="margin-top:8px"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div></div>
+      <div class="lms-comp-item"><div class="lms-comp-name">Personal Hygiene Care</div><span class="lms-comp-status notstarted">Not Started</span><div class="lms-progress-bar" style="margin-top:8px"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div></div>
+      <div class="lms-comp-item"><div class="lms-comp-name">Feeding Assistance</div><span class="lms-comp-status notstarted">Not Started</span><div class="lms-progress-bar" style="margin-top:8px"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div></div>
+      <div class="lms-comp-item"><div class="lms-comp-name">Documentation</div><span class="lms-comp-status notstarted">Not Started</span><div class="lms-progress-bar" style="margin-top:8px"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div></div>
+      <div class="lms-comp-item"><div class="lms-comp-name">Communication</div><span class="lms-comp-status notstarted">Not Started</span><div class="lms-progress-bar" style="margin-top:8px"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div></div>
+      <div class="lms-comp-item"><div class="lms-comp-name">Professional Behaviour</div><span class="lms-comp-status notstarted">Not Started</span><div class="lms-progress-bar" style="margin-top:8px"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div></div>
+    </div>
+  </div>
+
+  <!-- PANEL: Calendar -->
+  <div class="lms-panel" id="lms-calendar">
+    <div style="display:grid;grid-template-columns:1fr 300px;gap:16px">
+      <div class="card" style="padding:18px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+          <div style="font-size:14px;font-weight:600" id="lmsCalMonth"></div>
+          <div style="display:flex;gap:6px">
+            <button class="btn btn-ghost" style="font-size:12px;padding:4px 10px" onclick="lmsCalNav(-1)">← Prev</button>
+            <button class="btn btn-ghost" style="font-size:12px;padding:4px 10px" onclick="lmsCalNav(1)">Next →</button>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:6px">
+          <div style="text-align:center;font-size:10px;font-weight:700;color:var(--hint);padding:4px">SUN</div>
+          <div style="text-align:center;font-size:10px;font-weight:700;color:var(--hint);padding:4px">MON</div>
+          <div style="text-align:center;font-size:10px;font-weight:700;color:var(--hint);padding:4px">TUE</div>
+          <div style="text-align:center;font-size:10px;font-weight:700;color:var(--hint);padding:4px">WED</div>
+          <div style="text-align:center;font-size:10px;font-weight:700;color:var(--hint);padding:4px">THU</div>
+          <div style="text-align:center;font-size:10px;font-weight:700;color:var(--hint);padding:4px">FRI</div>
+          <div style="text-align:center;font-size:10px;font-weight:700;color:var(--hint);padding:4px">SAT</div>
+        </div>
+        <div class="lms-cal-grid" id="lmsCalGrid"></div>
       </div>
-    </section>
+      <div class="card" style="padding:16px">
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-bottom:10px">Scheduled Sessions</div>
+        <div id="lmsCalEvents"><div style="color:var(--hint);font-size:13px">No sessions this month</div></div>
+        <button class="btn btn-teal" style="margin-top:12px;width:100%;font-size:12px" onclick="openLMSAdd()">+ Schedule Session</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL: Materials -->
+  <div class="lms-panel" id="lms-materials">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+      <div class="card" style="padding:16px;cursor:pointer"><div style="font-size:24px;margin-bottom:8px">📊</div><div style="font-size:13px;font-weight:600">Presentations</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Training slide decks and PowerPoints</div><div style="font-size:11px;color:var(--hint);margin-top:8px">0 files</div></div>
+      <div class="card" style="padding:16px;cursor:pointer"><div style="font-size:24px;margin-bottom:8px">📋</div><div style="font-size:13px;font-weight:600">Policies &amp; SOPs</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Standard operating procedures</div><div style="font-size:11px;color:var(--hint);margin-top:8px">0 files</div></div>
+      <div class="card" style="padding:16px;cursor:pointer"><div style="font-size:24px;margin-bottom:8px">✅</div><div style="font-size:13px;font-weight:600">Checklists</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Assessment and competency checklists</div><div style="font-size:11px;color:var(--hint);margin-top:8px">0 files</div></div>
+      <div class="card" style="padding:16px;cursor:pointer"><div style="font-size:24px;margin-bottom:8px">📖</div><div style="font-size:13px;font-weight:600">Manuals &amp; Guides</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Clinical and operational manuals</div><div style="font-size:11px;color:var(--hint);margin-top:8px">0 files</div></div>
+      <div class="card" style="padding:16px;cursor:pointer"><div style="font-size:24px;margin-bottom:8px">🔬</div><div style="font-size:13px;font-weight:600">Research &amp; Evidence</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Evidence-based practice resources</div><div style="font-size:11px;color:var(--hint);margin-top:8px">0 files</div></div>
+      <div class="card" style="padding:16px;cursor:pointer"><div style="font-size:24px;margin-bottom:8px">🎥</div><div style="font-size:13px;font-weight:600">Videos &amp; Demos</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Demonstration and training videos</div><div style="font-size:11px;color:var(--hint);margin-top:8px">0 files</div></div>
+    </div>
+    <div style="margin-top:14px;text-align:center;color:var(--hint);font-size:12px">Material upload functionality coming soon. Link external resources using Quick Capture.</div>
+  </div>
+
+  <!-- PANEL: Certificates -->
+  <div class="lms-panel" id="lms-certificates">
+    <div style="color:var(--hint);font-size:13px;padding:40px;text-align:center">
+      <div style="font-size:24px;margin-bottom:8px">🎓</div>
+      <div style="font-weight:600;color:var(--text);margin-bottom:4px">Certificate Management</div>
+      <div>Certificates will be generated automatically when training programmes are completed.</div>
+      <div style="margin-top:8px">No certificates issued yet.</div>
+    </div>
+  </div>
+
+  <!-- PANEL: Trainers -->
+  <div class="lms-panel" id="lms-trainers">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <div style="font-size:13px;color:var(--muted)">Manage internal and external trainers for the L&amp;D programme.</div>
+      <button class="btn btn-teal" style="font-size:12px" onclick="openAddTrainer()">+ Add Trainer</button>
+    </div>
+    <div id="lmsTrainerList">
+      <div class="lms-trainer-card">
+        <div class="lms-trainer-avatar">👩‍⚕️</div>
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:600">Pratiksha Adhikari</div>
+          <div style="font-size:11px;color:var(--muted)">Founder · Elder Care, Dignity, Geriatric Care</div>
+        </div>
+        <span class="lms-comp-status competent">Internal</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL: Reports -->
+  <div class="lms-panel" id="lms-reports">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="card" style="padding:18px"><div style="font-size:13px;font-weight:600;margin-bottom:10px">📊 Training Completion Rate</div><div style="color:var(--hint);font-size:12px">No data yet. Add training sessions to see completion reports.</div></div>
+      <div class="card" style="padding:18px"><div style="font-size:13px;font-weight:600;margin-bottom:10px">⭐ Competency Gaps</div><div style="color:var(--hint);font-size:12px">No competency assessments completed yet.</div></div>
+      <div class="card" style="padding:18px"><div style="font-size:13px;font-weight:600;margin-bottom:10px">⏰ Refresher Training Due</div><div style="color:var(--hint);font-size:12px">No refresher schedules set.</div></div>
+      <div class="card" style="padding:18px"><div style="font-size:13px;font-weight:600;margin-bottom:10px">✅ Mandatory Training Compliance</div><div style="color:var(--hint);font-size:12px">Mandatory training modules not yet configured.</div></div>
+    </div>
+    <div class="card" style="padding:18px;margin-top:14px">
+      <div style="font-size:13px;font-weight:600;margin-bottom:10px">Training Sessions Summary</div>
+      <div id="lmsReportSessions"><div style="color:var(--hint);font-size:12px">No training sessions recorded.</div></div>
+    </div>
+  </div>
+
+  <!-- Add Training Modal -->
+  <div class="modal-overlay" id="modal-lmsAdd">
+    <div class="modal" style="width:620px">
+      <div class="modal-hdr"><div class="modal-title">Add Training Session</div><button class="close-btn" onclick="closeModal('lmsAdd')">×</button></div>
+      <div class="form-row"><label class="form-label">Training Title</label><input class="form-input" id="lmsTitle" placeholder="e.g. Infection Control Training"></div>
+      <div class="form-2col">
+        <div class="form-row"><label class="form-label">Organisation</label><select class="form-select" id="lmsOrg"><option value="both">Both Organisations</option><option value="heal">Heal Home Care</option><option value="naman">Naman Care Home</option></select></div>
+        <div class="form-row"><label class="form-label">Department</label><input class="form-input" id="lmsDept" placeholder="e.g. Caregiver, All Staff"></div>
+      </div>
+      <div class="form-2col">
+        <div class="form-row"><label class="form-label">Date</label><input type="date" class="form-input" id="lmsDate"></div>
+        <div class="form-row"><label class="form-label">Duration (hours)</label><input type="number" class="form-input" id="lmsDuration" min="0.5" step="0.5" placeholder="e.g. 2"></div>
+      </div>
+      <div class="form-2col">
+        <div class="form-row"><label class="form-label">Trainer</label><input class="form-input" id="lmsTrainer" placeholder="Name of trainer"></div>
+        <div class="form-row"><label class="form-label">Venue</label><input class="form-input" id="lmsVenue" placeholder="e.g. Conference Room"></div>
+      </div>
+      <div class="form-2col">
+        <div class="form-row"><label class="form-label">No. of Participants</label><input type="number" class="form-input" id="lmsParticipants" min="0" placeholder="e.g. 15"></div>
+        <div class="form-row"><label class="form-label">Status</label><select class="form-select" id="lmsStatus"><option value="scheduled">Scheduled</option><option value="completed">Completed</option><option value="cancelled">Cancelled</option></select></div>
+      </div>
+      <div class="form-row"><label class="form-label">Objectives / Notes</label><textarea class="form-textarea" id="lmsNotes" rows="2" placeholder="What will participants learn?"></textarea></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px">
+        <button class="btn btn-ghost" onclick="closeModal('lmsAdd')">Cancel</button>
+        <button class="btn btn-teal" onclick="saveLMSSession()">Save Session</button>
+      </div>
+    </div>
+  </div>
+
+</section>
 
     <!-- ═══════════ TOURS ═══════════ -->
     <section class="page" id="page-tours">
@@ -2823,10 +3118,214 @@ function filterHosp(status){window._hospTab=status;var el=document.getElementByI
 function logVisit(idx){var h=hospitals[idx];if(!h)return;var today=new Date().toISOString().split('T')[0];h.visits=(h.visits||1)+1;h.lastVisit=today;h.visitCount=h.visits;saveData();renderHospitals();alert('Visit logged for '+h.name+'. Total: '+h.visits);}
 function exportColleges(){var csv='Name,Address,Contact,Topic,Participants,Presentations,Status\n';(colleges||[]).forEach(function(c){csv+='"'+c.name+'","'+(c.addr||'')+'","'+(c.contact||'')+'","'+(c.topic||c.programs||'')+'","'+(c.participants||0)+'","'+(c.presentations||0)+'","'+(c.status||'')+'"\n';});var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='colleges.csv';a.click();}
 function exportHospitals(){var csv='Name,Address,Contact,Phone,Activity,Visits,Status\n';(hospitals||[]).forEach(function(h){csv+='"'+h.name+'","'+(h.addr||'')+'","'+(h.contact||'')+'","'+(h.phone||'')+'","'+(h.activity||'')+'","'+(h.visits||1)+'","'+(h.status||'')+'"\n';});var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='hospitals.csv';a.click();}
+
+// ── LMS — Learning & Development Centre ─────────────────────────────────────
+var _lmsSessions = [];
+var _lmsCalOffset = 0;
+
+function loadLMS(){var r=getLS('aaroh_lms');if(r){try{var d=JSON.parse(r);if(Array.isArray(d))_lmsSessions=d;}catch(e){}}}
+function saveLMS(){saveLS('aaroh_lms',JSON.stringify(_lmsSessions));}
+
+function switchLMS(panel, btn){
+  document.querySelectorAll('.lms-panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.lms-tab').forEach(function(t){t.classList.remove('active');});
+  var el=document.getElementById('lms-'+panel);
+  if(el)el.classList.add('active');
+  if(btn)btn.classList.add('active');
+  if(panel==='dashboard')renderLMS();
+  if(panel==='calendar')renderLMSCal();
+  if(panel==='journey')renderLMSSessions();
+  if(panel==='reports')renderLMSReports();
+}
+
+function renderLMS(){
+  var all=_lmsSessions||[];
+  var s=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+  var total=all.reduce(function(a,x){return a+(parseInt(x.participants)||0);},0);
+  var comp=all.filter(function(x){return x.status==='completed';});
+  var sched=all.filter(function(x){return x.status==='scheduled';});
+  var hrs=all.filter(function(x){return x.status==='completed';}).reduce(function(a,x){return a+(parseFloat(x.duration)||0);},0);
+  s('lmsStatEnrolled',total);
+  s('lmsStatOriPending',0);
+  s('lmsStatTrainingDue',sched.length);
+  s('lmsStatCompleted',comp.length);
+  s('lmsStatHours',hrs);
+  // Upcoming
+  var uc=document.getElementById('lmsUpcoming');
+  if(uc){
+    if(!sched.length){uc.innerHTML='<div style="color:var(--hint);font-size:13px">No upcoming sessions</div>';return;}
+    uc.innerHTML=sched.slice(0,3).map(function(s){
+      return '<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)">'+
+        '<div style="width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0"></div>'+
+        '<div><div style="font-size:12px;font-weight:600">'+s.title+'</div>'+
+        '<div style="font-size:11px;color:var(--muted)">'+s.date+' · '+s.dept+' · '+(s.trainer||'TBC')+'</div></div>'+
+      '</div>';
+    }).join('');
+  }
+  // Recent
+  var rc=document.getElementById('lmsRecent');
+  if(rc){
+    if(!comp.length){rc.innerHTML='<div style="color:var(--hint);font-size:13px">No completed sessions yet</div>';return;}
+    rc.innerHTML=comp.slice(-3).reverse().map(function(s){
+      return '<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)">'+
+        '<div style="width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0"></div>'+
+        '<div><div style="font-size:12px;font-weight:600">'+s.title+'</div>'+
+        '<div style="font-size:11px;color:var(--muted)">'+s.date+' · '+(s.participants||0)+' participants · '+(s.duration||0)+'h</div></div>'+
+      '</div>';
+    }).join('');
+  }
+  // Dept rates
+  var healDepts=['Home Care Nurse','Caregiver','Physiotherapy','Doctor Coordination'];
+  var namanDepts=['Staff Nurse','Caregiver','Kitchen','Housekeeping'];
+  var hEl=document.getElementById('lmsHealDepts');
+  var nEl=document.getElementById('lmsNamanDepts');
+  if(hEl)hEl.innerHTML=healDepts.map(function(d){
+    var n=all.filter(function(x){return x.dept===d&&x.org!=='naman';}).length;
+    return '<div class="card" style="padding:10px;text-align:center"><div style="font-size:10px;font-weight:600">'+d+'</div><div style="font-size:16px;font-weight:700;color:var(--green)">'+n+'</div><div style="font-size:9px;color:var(--hint)">sessions</div></div>';
+  }).join('');
+  if(nEl)nEl.innerHTML=namanDepts.map(function(d){
+    var n=all.filter(function(x){return x.dept===d&&x.org!=='heal';}).length;
+    return '<div class="card" style="padding:10px;text-align:center"><div style="font-size:10px;font-weight:600">'+d+'</div><div style="font-size:16px;font-weight:700;color:var(--blue)">'+n+'</div><div style="font-size:9px;color:var(--hint)">sessions</div></div>';
+  }).join('');
+}
+
+function renderLMSSessions(){
+  var c=document.getElementById('lmsSessionsList');
+  if(!c)return;
+  var all=_lmsSessions||[];
+  if(!all.length){c.innerHTML='<div style="color:var(--hint);font-size:13px">No sessions recorded yet.</div>';return;}
+  var stColor={completed:'color:#3B6D11;background:#e8f5e9',scheduled:'color:var(--blue);background:var(--blue-light)',cancelled:'color:var(--coral);background:var(--coral-light)'};
+  c.innerHTML=all.slice().reverse().map(function(s,i){
+    var idx=all.length-1-i;
+    return '<div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)">'+
+      '<div style="width:36px;height:36px;border-radius:8px;background:var(--green-light);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">📋</div>'+
+      '<div style="flex:1"><div style="font-size:13px;font-weight:600">'+s.title+'</div>'+
+      '<div style="font-size:11px;color:var(--muted);margin-top:2px">'+s.date+' · '+s.org+' · '+s.dept+' · '+(s.participants||0)+' pax · '+(s.duration||0)+'h</div>'+
+      (s.notes?'<div style="font-size:11px;color:var(--hint);margin-top:4px">'+s.notes+'</div>':'')+
+      '</div>'+
+      '<span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;'+(stColor[s.status]||'')+'">'+s.status+'</span>'+
+      '<button class="btn btn-ghost" style="font-size:10px;padding:2px 6px;color:var(--coral)" onclick="delLMSSession('+idx+')">Del</button>'+
+    '</div>';
+  }).join('');
+}
+
+function renderLMSReports(){
+  var c=document.getElementById('lmsReportSessions');
+  if(!c)return;
+  var all=_lmsSessions||[];
+  if(!all.length){c.innerHTML='<div style="color:var(--hint);font-size:12px">No sessions recorded.</div>';return;}
+  var comp=all.filter(function(x){return x.status==='completed';});
+  var totalHrs=comp.reduce(function(a,x){return a+(parseFloat(x.duration)||0);},0);
+  var totalPax=comp.reduce(function(a,x){return a+(parseInt(x.participants)||0);},0);
+  c.innerHTML='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">'+
+    '<div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--green)">'+all.length+'</div><div style="font-size:11px;color:var(--muted)">Total Sessions</div></div>'+
+    '<div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--blue)">'+comp.length+'</div><div style="font-size:11px;color:var(--muted)">Completed</div></div>'+
+    '<div style="text-align:center"><div style="font-size:20px;font-weight:700;color:#534AB7">'+totalHrs+'</div><div style="font-size:11px;color:var(--muted)">Total Hours</div></div>'+
+    '<div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--green)">'+totalPax+'</div><div style="font-size:11px;color:var(--muted)">Total Participants</div></div>'+
+  '</div>';
+}
+
+function renderLMSCal(){
+  var now=new Date();
+  now.setMonth(now.getMonth()+_lmsCalOffset);
+  var yr=now.getFullYear(), mo=now.getMonth();
+  var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var el=document.getElementById('lmsCalMonth');
+  if(el)el.textContent=months[mo]+' '+yr;
+  var grid=document.getElementById('lmsCalGrid');
+  if(!grid)return;
+  var first=new Date(yr,mo,1).getDay();
+  var days=new Date(yr,mo+1,0).getDate();
+  var cells='';
+  for(var i=0;i<first;i++)cells+='<div></div>';
+  var today=new Date().getDate(), todayMo=new Date().getMonth(), todayYr=new Date().getFullYear();
+  for(var d=1;d<=days;d++){
+    var dateStr=yr+'-'+(String(mo+1).padStart(2,'0'))+'-'+(String(d).padStart(2,'0'));
+    var hasEvent=(_lmsSessions||[]).some(function(s){return s.date===dateStr;});
+    var isToday=(d===today&&mo===todayMo&&yr===todayYr);
+    cells+='<div class="lms-cal-day'+(hasEvent?' has-event':'')+'" style="'+(isToday?'font-weight:700;border:2px solid var(--green);border-radius:6px;':'')+'" onclick="lmsCalDayClick(''+dateStr+'')">'+d+'</div>';
+  }
+  grid.innerHTML=cells;
+  // Events list
+  var evEl=document.getElementById('lmsCalEvents');
+  if(evEl){
+    var moSessions=(_lmsSessions||[]).filter(function(s){
+      return s.date&&s.date.startsWith(yr+'-'+(String(mo+1).padStart(2,'0')));
+    });
+    if(!moSessions.length){evEl.innerHTML='<div style="color:var(--hint);font-size:12px">No sessions this month</div>';return;}
+    evEl.innerHTML=moSessions.map(function(s){
+      return '<div style="padding:8px 0;border-bottom:1px solid var(--border)">'+
+        '<div style="font-size:12px;font-weight:600">'+s.title+'</div>'+
+        '<div style="font-size:11px;color:var(--muted)">'+s.date+' · '+s.dept+'</div>'+
+      '</div>';
+    }).join('');
+  }
+}
+
+function lmsCalNav(dir){_lmsCalOffset+=dir;renderLMSCal();}
+function lmsCalDayClick(date){document.getElementById('lmsDate').value=date;openModal('lmsAdd');}
+
+function openLMSAdd(){openModal('lmsAdd');}
+
+function saveLMSSession(){
+  var title=document.getElementById('lmsTitle').value.trim();
+  if(!title){alert('Please enter a training title.');return;}
+  _lmsSessions.push({
+    title:title,
+    org:document.getElementById('lmsOrg').value||'both',
+    dept:document.getElementById('lmsDept').value.trim(),
+    date:document.getElementById('lmsDate').value,
+    duration:parseFloat(document.getElementById('lmsDuration').value)||1,
+    trainer:document.getElementById('lmsTrainer').value.trim(),
+    venue:document.getElementById('lmsVenue').value.trim(),
+    participants:parseInt(document.getElementById('lmsParticipants').value)||0,
+    status:document.getElementById('lmsStatus').value||'scheduled',
+    notes:document.getElementById('lmsNotes').value.trim(),
+    created:new Date().toISOString()
+  });
+  saveLMS();closeModal('lmsAdd');
+  renderLMS();renderLMSSessions();renderLMSCal();
+  ['lmsTitle','lmsDept','lmsDate','lmsDuration','lmsTrainer','lmsVenue','lmsParticipants','lmsNotes'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});
+}
+
+function delLMSSession(idx){
+  if(!confirm('Delete this training session?'))return;
+  _lmsSessions.splice(idx,1);saveLMS();renderLMS();renderLMSSessions();renderLMSReports();
+}
+
+function showDeptCurriculum(org, dept){
+  var c=document.getElementById('lmsDeptCurriculum');
+  if(!c)return;
+  var curricula={
+    'Caregiver':['Basic Care Skills','Personal Hygiene Assistance','Transfer &amp; Mobility','Vital Signs Monitoring','Communication with Elderly','Dementia Awareness','End of Life Care','Documentation Basics'],
+    'Staff Nurse':['Clinical Assessment','Medication Administration','Wound Care','Catheter Care','IV Therapy','Emergency Response','Care Planning','Clinical Documentation'],
+    'Home Care Nurse':['Home Assessment','Safe Home Environment','Family Education','Medication Management','Wound Care at Home','Coordination with Physicians','Emergency Protocols','Care Documentation'],
+    'Physiotherapy':['Mobility Assessment','Exercise Therapy','Falls Prevention','Equipment Use','Pain Management','Post-Surgical Rehab','Neurological Rehab','Patient &amp; Family Education'],
+    'Kitchen':['Nutrition for Elderly','Special Diets','Food Safety &amp; Hygiene','Swallowing Difficulties','Meal Presentation','Waste Management','Allergy Awareness','Kitchen Safety'],
+    'Housekeeping':['Infection Control','Cleaning Protocols','Chemical Safety','Waste Disposal','Linen Management','Privacy Respect','Emergency Response','Equipment Care'],
+    'Administration':['Patient Records Management','Appointment Systems','Billing &amp; Insurance','HR Processes','Communication Protocols','Compliance Documentation','Data Protection','Reporting'],
+    'Reception':['Patient Communication','Telephone Etiquette','Appointment Management','Visitor Management','Privacy &amp; Confidentiality','Emergency Protocols','First Impressions','Customer Service'],
+    'Security':['Access Control','Emergency Response','CCTV Management','Visitor Logging','Patient Safety','Incident Reporting','Fire Safety','Communication'],
+    'Marketing':['Healthcare Marketing Ethics','Social Media Management','Community Outreach','Content Creation','Brand Communication','Event Management','Partnership Development','Digital Marketing'],
+    'Operations':['Process Management','Quality Standards','Compliance Monitoring','Staff Coordination','Resource Management','Reporting','Continuous Improvement','Safety Standards'],
+    'Customer Care':['Therapeutic Communication','Complaint Management','Service Excellence','Family Counselling','Follow-up Protocols','Documentation','Cultural Sensitivity','Stress Management'],
+    'Doctor Coordination':['Clinical Coordination','Referral Management','Medical Records','Appointment Scheduling','Medication Liaison','Emergency Escalation','Report Communication','Relationship Management'],
+    'Laboratory':['Sample Collection','Lab Safety','Equipment Maintenance','Result Reporting','Quality Control','Infection Prevention','Documentation','Emergency Handling'],
+    'Vaccination':['Vaccine Storage','Cold Chain Management','Administration Technique','Adverse Reaction Management','Record Keeping','Patient Education','Scheduling','Compliance']
+  };
+  var modules=curricula[dept]||['Core Skills','Safety','Communication','Documentation','Assessment'];
+  c.style.display='block';
+  c.innerHTML='<div style="font-size:14px;font-weight:600;margin-bottom:12px">'+(org==='heal'?'🏥 Heal Home Care':'🏡 Naman Care Home')+' — '+dept+' Curriculum</div>'+
+    '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">'+
+    modules.map(function(m,i){return '<div class="card" style="padding:10px"><div style="font-size:11px;font-weight:600;color:var(--text);margin-bottom:6px">'+(i+1)+'. '+m+'</div><div class="lms-progress-bar"><div class="lms-progress-fill" style="width:0%;background:var(--green)"></div></div><div style="font-size:10px;color:var(--hint);margin-top:4px">Not started</div></div>';}).join('')+
+  '</div>';
+}
+
+function openAddTrainer(){openModal('lmsAdd');}
 (function(){
     loadNotifs();loadDaily();loadPris();updatePriStats();loadFUs();updateFUStats();
     loadCaps();loadGovt();updateGovtStats();loadOrgT();updateOrgStats('heal');updateOrgStats('naman');
-    loadWis();loadAaroh();loadColleges();
+    loadWis();loadAaroh();loadColleges();loadLMS();
     _notifs=buildLiveNotifs();_updateNotifBadge();
     setTimeout(renderDashTop3,200);
     setTimeout(renderKeyRelationships,250);
