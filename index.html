@@ -3112,7 +3112,11 @@ function loadColleges(){
 }
 function saveColleges(){saveLS('aaroh_colleges',JSON.stringify(colleges));}
 (function(){
-  _cloudLoad().then
+  _cloudLoad().then(function(){
+    console.log('init');
+  });
+})();
+
 function filterEdu(status){window._colTab=status;var el=document.getElementById('eduStatusFilter');if(el)el.value=status;renderColleges();}
 function filterHosp(status){window._hospTab=status;var el=document.getElementById('hospStatusFilter');if(el)el.value=status;renderHospitals();}
 function logVisit(idx){var h=hospitals[idx];if(!h)return;var today=new Date().toISOString().split('T')[0];h.visits=(h.visits||1)+1;h.lastVisit=today;h.visitCount=h.visits;saveData();renderHospitals();alert('Visit logged for '+h.name+'. Total: '+h.visits);}
