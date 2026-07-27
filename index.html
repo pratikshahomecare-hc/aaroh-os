@@ -3323,6 +3323,7 @@ function showDeptCurriculum(org, dept){
 
 function openAddTrainer(){openModal('lmsAdd');}
 (function(){
+  _cloudLoad().then(function(){
     loadNotifs();loadDaily();loadPris();updatePriStats();loadFUs();updateFUStats();
     loadCaps();loadGovt();updateGovtStats();loadOrgT();updateOrgStats('heal');updateOrgStats('naman');
     loadWis();loadAaroh();loadColleges();loadLMS();
