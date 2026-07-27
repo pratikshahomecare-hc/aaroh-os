@@ -3236,17 +3236,20 @@ function renderLMSCal(){
   if(!grid)return;
   var first=new Date(yr,mo,1).getDay();
   var days=new Date(yr,mo+1,0).getDate();
-  var cells='';
-  for(var i=0;i<first;i++)cells+='<div></div>';
   var today=new Date().getDate(), todayMo=new Date().getMonth(), todayYr=new Date().getFullYear();
+  grid.innerHTML='';
+  for(var i=0;i<first;i++){var empty=document.createElement('div');grid.appendChild(empty);}
   for(var d=1;d<=days;d++){
     var dateStr=yr+'-'+(String(mo+1).padStart(2,'0'))+'-'+(String(d).padStart(2,'0'));
     var hasEvent=(_lmsSessions||[]).some(function(s){return s.date===dateStr;});
     var isToday=(d===today&&mo===todayMo&&yr===todayYr);
-    cells+='<div class="lms-cal-day'+(hasEvent?' has-event':'')+'" style="'+(isToday?'font-weight:700;border:2px solid var(--green);border-radius:6px;':'')+'" onclick="lmsCalDayClick(''+dateStr+'')">'+d+'</div>';
+    var cell=document.createElement('div');
+    cell.className='lms-cal-day'+(hasEvent?' has-event':'');
+    if(isToday)cell.style.cssText='font-weight:700;border:2px solid var(--green);border-radius:6px;';
+    cell.textContent=d;
+    cell.addEventListener('click',(function(ds){return function(){lmsCalDayClick(ds);};})(dateStr));
+    grid.appendChild(cell);
   }
-  grid.innerHTML=cells;
-  // Events list
   var evEl=document.getElementById('lmsCalEvents');
   if(evEl){
     var moSessions=(_lmsSessions||[]).filter(function(s){
