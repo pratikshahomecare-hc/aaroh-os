@@ -745,6 +745,24 @@ body{
   .dash-fu-dot { width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px }
   .dash-fu-title { font-size:12px;font-weight:600;color:var(--text);line-height:1.35;margin-bottom:2px }
   .dash-fu-meta { font-size:11px;color:var(--muted) }
+
+  /* ── SRM Pages ─────────────────────── */
+  .srm-stat-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-bottom:4px}
+  .srm-stat-num{font-size:22px;font-weight:700;line-height:1}
+  .srm-stat:hover{box-shadow:0 2px 12px rgba(0,0,0,0.08);transform:translateY(-1px);transition:all 0.15s}
+  .srm-card{background:#fff;border-radius:10px;border:1px solid var(--border);margin-bottom:10px;overflow:hidden;transition:box-shadow 0.15s}
+  .srm-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.08)}
+  .srm-card-hdr{display:flex;align-items:flex-start;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border)}
+  .srm-card-body{padding:14px 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .srm-card-footer{padding:10px 20px;background:var(--content-bg);display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border)}
+  .srm-field-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--hint);margin-bottom:3px}
+  .srm-field-val{font-size:12px;color:var(--text);line-height:1.4}
+  .srm-badge{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:2px 10px;border-radius:10px;white-space:nowrap}
+  .srm-pres-timeline{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .srm-pres-chip{font-size:10px;padding:3px 10px;border-radius:6px;background:var(--blue-light);color:var(--blue);font-weight:500}
+  .srm-actions{display:flex;gap:6px;align-items:center;opacity:0;transition:opacity 0.15s}
+  .srm-card:hover .srm-actions{opacity:1}
+  .srm-expand-btn{font-size:11px;color:var(--green);font-weight:600;cursor:pointer;background:none;border:none;padding:0}
 </style>
 </head>
 <body>
@@ -1055,87 +1073,151 @@ body{
 
     <!-- ═══════════ COLLEGES ═══════════ -->
     <section class="page" id="page-colleges">
-  <div class="page-hdr">
-    <div class="t-label">Network · Education</div>
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:4px">
-      <div class="t-section">Nursing Colleges <span style="font-size:14px;font-weight:400;color:var(--muted)" id="colSubCount"></span></div>
-      <button class="btn btn-teal" onclick="openModal('addCollege')">+ Add / Update</button>
+
+  <!-- Header -->
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px">
+    <div>
+      <div class="t-label">Network · Education</div>
+      <div class="t-section" style="margin-top:4px">Education Ecosystem</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:2px">Strategic relationships with nursing colleges and medical institutions</div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-ghost" onclick="exportColleges()">Export</button>
+      <button class="btn btn-teal" onclick="openModal('addCollege')">+ Add Institution</button>
     </div>
   </div>
 
-  <!-- Analysis cards -->
-  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px">
-    <div class="card" style="padding:14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Total Colleges</div><div style="font-size:24px;font-weight:700;color:var(--green)" id="colStatTotal">0</div></div>
-    <div class="card" style="padding:14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Presentations</div><div style="font-size:24px;font-weight:700;color:var(--blue)" id="colStatPres">0</div></div>
-    <div class="card" style="padding:14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Participants</div><div style="font-size:24px;font-weight:700;color:#534AB7" id="colStatPart">0</div></div>
-    <div class="card" style="padding:14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Scheduled</div><div style="font-size:24px;font-weight:700;color:var(--amber-dark)" id="colStatSched">0</div></div>
-    <div class="card" style="padding:14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Completed</div><div style="font-size:24px;font-weight:700;color:#3B6D11" id="colStatDone">0</div></div>
+  <!-- Summary Cards -->
+  <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:20px">
+    <div class="card srm-stat" onclick="filterEdu('all')" style="padding:14px;text-align:center;cursor:pointer">
+      <div class="srm-stat-label">Total</div>
+      <div class="srm-stat-num" id="colStatTotal" style="color:var(--text)">0</div>
+    </div>
+    <div class="card srm-stat" onclick="filterEdu('done')" style="padding:14px;text-align:center;cursor:pointer">
+      <div class="srm-stat-label">Active</div>
+      <div class="srm-stat-num" id="colStatActive" style="color:var(--green)">0</div>
+    </div>
+    <div class="card srm-stat" onclick="filterEdu('all')" style="padding:14px;text-align:center;cursor:pointer">
+      <div class="srm-stat-label">Presentations</div>
+      <div class="srm-stat-num" id="colStatPres" style="color:var(--blue)">0</div>
+    </div>
+    <div class="card srm-stat" onclick="filterEdu('all')" style="padding:14px;text-align:center;cursor:pointer">
+      <div class="srm-stat-label">Participants</div>
+      <div class="srm-stat-num" id="colStatPart" style="color:#534AB7">0</div>
+    </div>
+    <div class="card srm-stat" onclick="filterEdu('scheduled')" style="padding:14px;text-align:center;cursor:pointer">
+      <div class="srm-stat-label">Upcoming</div>
+      <div class="srm-stat-num" id="colStatSched" style="color:var(--amber-dark)">0</div>
+    </div>
+    <div class="card srm-stat" onclick="filterEdu('followup')" style="padding:14px;text-align:center;cursor:pointer">
+      <div class="srm-stat-label">Follow-ups</div>
+      <div class="srm-stat-num" id="colStatFollowup" style="color:var(--coral)">0</div>
+    </div>
   </div>
 
-  <div class="search-bar">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
-    <input type="text" placeholder="Search colleges…" id="collegeSearch" oninput="filterColleges()">
+  <!-- Search & Filter -->
+  <div style="display:flex;gap:10px;margin-bottom:14px;align-items:center">
+    <div class="search-bar" style="flex:1;margin-bottom:0">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+      <input type="text" placeholder="Search by institution, city, contact, topic…" id="collegeSearch" oninput="renderColleges()">
+    </div>
+    <select class="form-select" id="eduTypeFilter" onchange="renderColleges()" style="width:160px;font-size:12px">
+      <option value="">All Types</option>
+      <option>Nursing College</option>
+      <option>Medical College</option>
+      <option>University</option>
+      <option>Training Institute</option>
+    </select>
+    <select class="form-select" id="eduStatusFilter" onchange="renderColleges()" style="width:150px;font-size:12px">
+      <option value="">All Status</option>
+      <option value="done">Active</option>
+      <option value="scheduled">Upcoming</option>
+      <option value="completed">Completed</option>
+      <option value="followup">Follow-up Due</option>
+      <option value="pending">In Progress</option>
+    </select>
   </div>
-  <div class="page-tabs">
-    <button class="page-tab active" onclick="showSubTab('col','all',this)">All</button>
-    <button class="page-tab" onclick="showSubTab('col','pending',this)">In Progress</button>
-    <button class="page-tab" onclick="showSubTab('col','scheduled',this)">Scheduled</button>
-    <button class="page-tab" onclick="showSubTab('col','completed',this)">Completed</button>
-    <button class="page-tab" onclick="showSubTab('col','done',this)">Continuing</button>
-  </div>
-  <div class="card" style="padding:0;overflow:hidden;overflow-x:auto">
-    <table class="tbl">
-      <thead><tr>
-        <th>#</th>
-        <th>College Name</th>
-        <th>Address</th>
-        <th>Topic</th>
-        <th>Participants</th>
-        <th>Pres 1</th>
-        <th>Pres 2</th>
-        <th>Pres 3</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr></thead>
-      <tbody id="colBody"></tbody>
-    </table>
-  </div>
+
+  <!-- Institution List -->
+  <div id="eduInstitutionList"><div style="padding:40px;text-align:center;color:var(--hint)">Loading institutions…</div></div>
+
 </section>
 
     <!-- ═══════════ HOSPITALS ═══════════ -->
     <section class="page" id="page-hospitals">
-      <div class="page-hdr">
-        <div class="t-label">Network · Hospitals</div>
-        <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:4px">
-          <div class="t-section">Hospitals <span style="font-size:14px;font-weight:400;color:var(--muted);font-family:'DM Sans',sans-serif" id="hospSubCount"></span></div>
-          <button class="btn btn-teal" onclick="openModal('addHosp')">+ Add hospital</button>
-        </div>
-      </div>
-      
-  <!-- Analysis cards -->
-  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px">
-    <div class="card" style="padding:14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Total Hospitals</div><div style="font-size:24px;font-weight:700;color:var(--green)" id="hospStatTotal">0</div></div>
-    <div class="card" style="padding:14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Total Visits</div><div style="font-size:24px;font-weight:700;color:var(--blue)" id="hospStatVisits">0</div></div>
-    <div class="card" style="padding:14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Active</div><div style="font-size:24px;font-weight:700;color:#3B6D11" id="hospStatActive">0</div></div>
-    <div class="card" style="padding:14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">In Progress</div><div style="font-size:24px;font-weight:700;color:var(--amber-dark)" id="hospStatProgress">0</div></div>
-    <div class="card" style="padding:14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">MOU Signed</div><div style="font-size:24px;font-weight:700;color:#534AB7" id="hospStatMOU">0</div></div>
+
+  <!-- Header -->
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px">
+    <div>
+      <div class="t-label">Network · Healthcare</div>
+      <div class="t-section" style="margin-top:4px">Healthcare Ecosystem</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:2px">Strategic partnerships with hospitals, clinics and healthcare institutions</div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-ghost" onclick="exportHospitals()">Export</button>
+      <button class="btn btn-teal" onclick="openModal('addHosp')">+ Add Partner</button>
+    </div>
   </div>
-<div class="search-bar">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
-        <input type="text" placeholder="Search hospital, address…" id="hospSearch" oninput="filterHospitals()">
-      </div>
-      <div class="page-tabs">
-        <button class="page-tab active" onclick="showSubTab('hosp','all',this)">All</button>
-        <button class="page-tab" onclick="showSubTab('hosp','meeting',this)">Meetings</button>
-        <button class="page-tab" onclick="showSubTab('hosp','training',this)">Training</button>
-        <button class="page-tab" onclick="showSubTab('hosp','mou',this)">MOU</button>
-        <button class="page-tab" onclick="showSubTab('hosp','done',this)">Visited</button>
-      </div>
-      <div class="card" style="padding:0">
-        <table class="tbl"><thead><tr><th>#</th><th>Hospital</th><th>Contact</th><th>First Visit</th><th>Last Visit</th><th>Visits</th><th>Status</th><th>Actions</th></tr></thead>
-        <tbody id="hospBody"></tbody></table>
-      </div>
-    </section>
+
+  <!-- Summary Cards -->
+  <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-bottom:20px">
+    <div class="card srm-stat" onclick="filterHosp('all')" style="padding:12px;text-align:center;cursor:pointer">
+      <div class="srm-stat-label">Total</div>
+      <div class="srm-stat-num" id="hospStatTotal" style="color:var(--text)">0</div>
+    </div>
+    <div class="card srm-stat" onclick="filterHosp('done')" style="padding:12px;text-align:center;cursor:pointer">
+      <div class="srm-stat-label">Active</div>
+      <div class="srm-stat-num" id="hospStatActive" style="color:var(--green)">0</div>
+    </div>
+    <div class="card srm-stat" onclick="filterHosp('all')" style="padding:12px;text-align:center;cursor:pointer">
+      <div class="srm-stat-label">Total Visits</div>
+      <div class="srm-stat-num" id="hospStatVisits" style="color:var(--blue)">0</div>
+    </div>
+    <div class="card srm-stat" onclick="filterHosp('pending')" style="padding:12px;text-align:center;cursor:pointer">
+      <div class="srm-stat-label">In Progress</div>
+      <div class="srm-stat-num" id="hospStatProgress" style="color:var(--amber-dark)">0</div>
+    </div>
+    <div class="card srm-stat" onclick="filterHosp('mou')" style="padding:12px;text-align:center;cursor:pointer">
+      <div class="srm-stat-label">MOU Signed</div>
+      <div class="srm-stat-num" id="hospStatMOU" style="color:#534AB7">0</div>
+    </div>
+    <div class="card srm-stat" onclick="filterHosp('training')" style="padding:12px;text-align:center;cursor:pointer">
+      <div class="srm-stat-label">Training</div>
+      <div class="srm-stat-num" id="hospStatTraining" style="color:var(--green)">0</div>
+    </div>
+    <div class="card srm-stat" onclick="filterHosp('all')" style="padding:12px;text-align:center;cursor:pointer">
+      <div class="srm-stat-label">Referral</div>
+      <div class="srm-stat-num" id="hospStatReferral" style="color:var(--coral)">0</div>
+    </div>
+  </div>
+
+  <!-- Search & Filter -->
+  <div style="display:flex;gap:10px;margin-bottom:14px;align-items:center">
+    <div class="search-bar" style="flex:1;margin-bottom:0">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+      <input type="text" placeholder="Search by hospital, city, contact person…" id="hospSearch" oninput="renderHospitals()">
+    </div>
+    <select class="form-select" id="hospTypeFilter" onchange="renderHospitals()" style="width:160px;font-size:12px">
+      <option value="">All Types</option>
+      <option>Hospital</option>
+      <option>Clinic</option>
+      <option>Diagnostic Centre</option>
+      <option>Rehabilitation Centre</option>
+      <option>NGO</option>
+    </select>
+    <select class="form-select" id="hospStatusFilter" onchange="renderHospitals()" style="width:150px;font-size:12px">
+      <option value="">All Status</option>
+      <option value="done">Active</option>
+      <option value="mou">MOU Signed</option>
+      <option value="pending">In Progress</option>
+      <option value="training">Training Partner</option>
+    </select>
+  </div>
+
+  <!-- Partner List -->
+  <div id="hcPartnerList"><div style="padding:40px;text-align:center;color:var(--hint)">Loading partners…</div></div>
+
+</section>
 
     <!-- ═══════════ TRAINING ═══════════ -->
     <section class="page" id="page-training">
@@ -1870,7 +1952,7 @@ function showPage(id, clickedItem) {
   if(id==='colleges'){renderColleges(window._colTab||'pending'); updateStats();}
   if(id==='hospitals'){renderHospitals(window._hospTab||'all'); updateStats();}
 
-    if(id==='colleges'){renderColleges(window._colTab||'all',(document.getElementById('collegeSearch')||{value:''}).value.toLowerCase());}  if(id==='training'){populateHospitalDropdown(); renderTrainings(window._trainTab||'all');}
+    if(id==='colleges'){setTimeout(renderColleges,80);}  if(id==='training'){populateHospitalDropdown(); renderTrainings(window._trainTab||'all');}
   if(id==='tours'){renderTours(window._tourTab||'all');}
   if(id==='meetings'){renderMeetings(window._meetTab||'all');}
   if(id==='dashboard'){updateStats();}
@@ -1898,99 +1980,153 @@ document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click
 // COLLEGES
 // ════════════════════════════════════════
 function renderColleges(filter, search) {
-  filter = filter || window._colTab || 'all';
+  filter = filter || window._colTab || '';
+  var sfEl = document.getElementById('eduStatusFilter');
+  if(!filter && sfEl) filter = sfEl.value || '';
   search = (search || (document.getElementById('collegeSearch')||{value:''}).value || '').toLowerCase();
-  var tbody = document.getElementById('colBody');
-  if(!tbody) return;
-  tbody.innerHTML = '';
-  var n = 0;
-  var statusLabel = {done:'Continuing',pending:'In Progress',followup:'Follow-up',scheduled:'Scheduled',completed:'Completed',mou:'MOU Signed'};
+  var typeF = (document.getElementById('eduTypeFilter')||{value:''}).value;
+  var c = document.getElementById('eduInstitutionList');
+  if(!c) return;
+  var all = colleges || [];
+  // Update stats
+  var s = function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+  s('colStatTotal', all.length);
+  s('colStatActive', all.filter(function(x){return x.status==='done';}).length);
+  s('colStatPres', all.reduce(function(a,x){return a+(parseInt(x.presentations||x.presentationCount)||0);},0));
+  s('colStatPart', all.reduce(function(a,x){return a+(parseInt(x.participants)||0);},0));
+  s('colStatSched', all.filter(function(x){return x.status==='scheduled';}).length);
+  s('colStatFollowup', all.filter(function(x){return x.status==='followup';}).length);
+  s('colSubCount', '· '+all.length+' institutions');
+  var statusLabel = {done:'Active',pending:'In Progress',followup:'Follow-up Due',scheduled:'Upcoming',completed:'Completed',mou:'MOU Signed'};
   var statusColor = {done:'color:#3B6D11;background:#e8f5e9',pending:'color:var(--amber-dark);background:var(--amber-light)',followup:'color:var(--coral);background:var(--coral-light)',scheduled:'color:var(--blue);background:var(--blue-light)',completed:'color:#555;background:#eee',mou:'color:#534AB7;background:#F3F0FF'};
-  (colleges||[]).forEach(function(c, idx) {
-    var mf = filter==='all' || c.status===filter;
-    var ms = !search || (c.name||'').toLowerCase().includes(search) || (c.addr||'').toLowerCase().includes(search) || (c.topic||c.programs||'').toLowerCase().includes(search);
-    if(!mf||!ms) return;
-    n++;
-    var st = c.status || 'scheduled';
-    var sc = statusColor[st] || 'color:var(--hint);background:var(--border)';
-    var sl = statusLabel[st] || st;
-    var p1 = c.pres1 || c.firstDate || '—';
-    var p2 = c.pres2 || '—';
-    var p3 = c.pres3 || '—';
-    var row = document.createElement('tr');
-    row.innerHTML =
-      '<td style="color:var(--hint);font-size:11px">'+n+'</td>'+
-      '<td><div style="font-size:13px;font-weight:600;color:var(--text)">'+c.name+'</div>'+(c.contact||c.phone?'<div style="font-size:11px;color:var(--muted)">'+(c.contact||c.phone)+'</div>':'')+'</td>'+
-      '<td style="font-size:12px;color:var(--text-2)">'+(c.addr||'—')+'</td>'+
-      '<td style="font-size:12px;color:var(--text-2);max-width:150px">'+(c.topic||c.programs||'—')+'</td>'+
-      '<td style="text-align:center;font-size:13px;font-weight:700;color:var(--green)">'+(c.participants||'—')+'</td>'+
-      '<td style="text-align:center;font-size:11px;color:var(--text-2)">'+p1+'</td>'+
-      '<td style="text-align:center;font-size:11px;color:var(--text-2)">'+p2+'</td>'+
-      '<td style="text-align:center;font-size:11px;color:var(--text-2)">'+p3+'</td>'+
-      '<td><span style="font-size:10px;font-weight:600;padding:2px 9px;border-radius:10px;'+sc+'">'+sl+'</span></td>'+
-      '<td style="white-space:nowrap">'+
-        '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px" data-action="editCollege" data-idx="'+idx+'">Edit</button> '+
-        '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px;color:var(--coral);border-color:var(--coral)" data-action="deleteCollege" data-idx="'+idx+'">Del</button>'+
-      '</td>';
-    tbody.appendChild(row);
+  var filtered = all.filter(function(col) {
+    var ms = !search || (col.name||'').toLowerCase().includes(search) || (col.addr||'').toLowerCase().includes(search) || (col.contact||'').toLowerCase().includes(search) || (col.topic||col.programs||'').toLowerCase().includes(search);
+    var mf = !filter || col.status===filter;
+    var mt = !typeF || (col.instType||col.type||'').includes(typeF);
+    return ms && mf && mt;
   });
-  var el = document.getElementById('colSubCount');
-  if(el) el.textContent = '· '+((colleges||[]).length)+' colleges';
-  // Update stats cards
-  var all=colleges||[];
-  var s=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
-  s('colStatTotal',all.length);
-  s('colStatPres',all.reduce(function(a,c){return a+(parseInt(c.presentations||c.presentationCount)||0);},0));
-  s('colStatPart',all.reduce(function(a,c){return a+(parseInt(c.participants)||0);},0));
-  s('colStatSched',all.filter(function(c){return c.status==='scheduled';}).length);
-  s('colStatDone',all.filter(function(c){return c.status==='completed'||c.status==='done';}).length);
+  if(!filtered.length){c.innerHTML='<div style="padding:40px;text-align:center;color:var(--hint)">No institutions found</div>';return;}
+  c.innerHTML = filtered.map(function(col, fi) {
+    var idx = all.indexOf(col);
+    var st = col.status||'scheduled';
+    var sc = statusColor[st]||'color:var(--hint);background:var(--border)';
+    var sl = statusLabel[st]||st;
+    var pres = col.presentations||col.presentationCount||0;
+    var presHtml = '';
+    if(pres > 0) {
+      var chips = [];
+      if(col.pres1||col.firstDate) chips.push('<span class="srm-pres-chip">'+(col.pres1||col.firstDate)+(col.topic?' · '+col.topic:'')+'</span>');
+      if(col.pres2) chips.push('<span class="srm-pres-chip">'+col.pres2+'</span>');
+      if(col.pres3) chips.push('<span class="srm-pres-chip">'+col.pres3+'</span>');
+      presHtml = '<div class="srm-pres-timeline">'+chips.join('')+'</div>';
+    }
+    return '<div class="srm-card">'+
+      '<div class="srm-card-hdr">'+
+        '<div style="display:flex;align-items:flex-start;gap:14px;flex:1">'+
+          '<div style="width:40px;height:40px;border-radius:8px;background:var(--green-light);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🎓</div>'+
+          '<div style="flex:1">'+
+            '<div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px">'+col.name+'</div>'+
+            '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">'+
+              '<span class="srm-badge" style="'+sc+'">'+sl+'</span>'+
+              (col.instType?'<span class="srm-badge" style="color:var(--hint);background:var(--border)">'+col.instType+'</span>':'')+
+              (col.addr?'<span style="font-size:11px;color:var(--muted)">📍 '+col.addr+'</span>':'')+
+            '</div>'+
+          '</div>'+
+        '</div>'+
+        '<div style="display:flex;gap:6px;align-items:center">'+
+          '<div class="srm-actions">'+
+            '<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" data-action="editCollege" data-idx="'+idx+'">Edit</button>'+
+            '<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px;color:var(--coral);border-color:var(--coral)" data-action="deleteCollege" data-idx="'+idx+'">Delete</button>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="srm-card-body">'+
+        '<div><div class="srm-field-label">Contact Person</div><div class="srm-field-val">'+(col.contact||col.phone||'—')+'</div></div>'+
+        '<div><div class="srm-field-label">Topic / Program</div><div class="srm-field-val">'+(col.topic||col.programs||'—')+'</div></div>'+
+        '<div><div class="srm-field-label">Participants</div><div class="srm-field-val" style="font-size:16px;font-weight:700;color:var(--green)">'+(col.participants||'—')+'</div></div>'+
+        '<div><div class="srm-field-label">Presentations</div><div class="srm-field-val" style="font-size:16px;font-weight:700;color:var(--blue)">'+pres+'</div></div>'+
+      '</div>'+
+      (presHtml?'<div style="padding:8px 20px 12px;border-top:1px solid var(--border)"><div class="srm-field-label" style="margin-bottom:6px">Presentation Timeline</div>'+presHtml+'</div>':'')+
+      '<div class="srm-card-footer">'+
+        '<div style="font-size:11px;color:var(--muted)">'+(col.remarks?'📝 '+col.remarks:'No remarks')+'</div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
 }
 function filterColleges(){renderColleges(window._colTab||'all',(document.getElementById('collegeSearch')||{value:''}).value.toLowerCase());}
 
 // ════════════════════════════════════════
 // HOSPITALS
 // ════════════════════════════════════════
-function renderHospitals(filter='all', search='') {
-  const tbody = document.getElementById('hospBody');
-  if(!tbody) return;
-  tbody.innerHTML = '';
-  let n = 0;
-  const statusLabel = {done:'Active Relationship',pending:'In Progress',mou:'MOU Signed',training:'Training Partner'};
-  const statusColor = {done:'#3B6D11;background:#e8f5e9',pending:'var(--amber-dark);background:var(--amber-light)',mou:'var(--blue);background:var(--blue-light)',training:'#534AB7;background:#F3F0FF'};
-  hospitals.forEach((h, idx) => {
-    const mf = filter==='all'||(filter==='done'&&h.status==='done')||(filter==='pending'&&h.status==='pending')||(filter==='meeting'&&h.activity==='Meeting')||(filter==='training'&&(h.activity==='Training'||h.status==='training'))||(filter==='mou'&&(h.activity==='MOU'||h.status==='mou'));
-    const ms = !search || h.name.toLowerCase().includes(search)||(h.addr||'').toLowerCase().includes(search)||(h.contact||'').toLowerCase().includes(search);
-    if(!mf||!ms) return;
-    n++;
-    const visits = h.visits||h.visitCount||1;
-    const firstV = h.firstVisit||h.date||'—';
-    const lastV = h.lastVisit||h.date||'—';
-    const st = h.status||'pending';
-    const sc = statusColor[st]||'var(--hint);background:var(--border)';
-    const sl = statusLabel[st]||st;
-    const contact = h.contact||h.person||'—';
-    tbody.innerHTML += `<tr>
-      <td style="color:var(--hint);font-size:11px">${n}</td>
-      <td><div style="font-size:13px;font-weight:600;color:var(--text)">${h.name}</div><div style="font-size:11px;color:var(--muted)">${h.addr||''}</div></td>
-      <td style="font-size:12px;color:var(--text-2)">${contact}<br><span style="color:var(--hint);font-size:11px">${h.phone||''}</span></td>
-      <td style="font-size:12px;color:var(--text-2)">${firstV}</td>
-      <td style="font-size:12px;color:var(--text-2)">${lastV}</td>
-      <td style="text-align:center"><span style="font-size:14px;font-weight:700;color:var(--green)">${visits}</span></td>
-      <td><span style="font-size:10px;font-weight:600;padding:2px 9px;border-radius:10px;color:${sc}">${sl}</span></td>
-      <td style="white-space:nowrap"><button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" data-action="editHospital" data-idx="${idx}">Edit</button> <button class="btn btn-ghost" style="font-size:11px;padding:4px 10px;color:var(--coral);border-color:var(--coral)" data-action="deleteHospital" data-idx="${idx}">Del</button></td>
-    </tr>`;
+function renderHospitals(filter, search) {
+  filter = filter || window._hospTab || '';
+  var sfEl = document.getElementById('hospStatusFilter');
+  if(!filter && sfEl) filter = sfEl.value || '';
+  search = (search || (document.getElementById('hospSearch')||{value:''}).value || '').toLowerCase();
+  var typeF = (document.getElementById('hospTypeFilter')||{value:''}).value;
+  var c = document.getElementById('hcPartnerList');
+  if(!c) return;
+  var all = hospitals || [];
+  // Update stats
+  var s = function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+  s('hospStatTotal', all.length);
+  s('hospStatActive', all.filter(function(h){return h.status==='done';}).length);
+  s('hospStatVisits', all.reduce(function(a,h){return a+(parseInt(h.visits||h.visitCount)||1);},0));
+  s('hospStatProgress', all.filter(function(h){return h.status==='pending';}).length);
+  s('hospStatMOU', all.filter(function(h){return h.status==='mou'||h.activity==='MOU';}).length);
+  s('hospStatTraining', all.filter(function(h){return h.status==='training'||h.activity==='Training';}).length);
+  s('hospStatReferral', all.filter(function(h){return h.referral;}).length);
+  s('hospSubCount', '· '+all.length+' partners');
+  var statusLabel = {done:'Active Relationship',pending:'In Progress',mou:'MOU Signed',training:'Training Partner',prospect:'Prospect',inactive:'Inactive'};
+  var statusColor = {done:'color:#3B6D11;background:#e8f5e9',pending:'color:var(--amber-dark);background:var(--amber-light)',mou:'color:#534AB7;background:#F3F0FF',training:'color:var(--green);background:var(--green-light)',prospect:'color:var(--hint);background:var(--border)',inactive:'color:#999;background:#f5f5f5'};
+  var actLabel = {Meeting:'🤝',Training:'📋',MOU:'📄',Presentation:'🎤'};
+  var filtered = all.filter(function(h) {
+    var ms = !search || (h.name||'').toLowerCase().includes(search) || (h.addr||'').toLowerCase().includes(search) || (h.contact||'').toLowerCase().includes(search);
+    var mf = !filter || h.status===filter || (filter==='mou'&&h.activity==='MOU') || (filter==='training'&&h.activity==='Training');
+    var mt = !typeF || (h.partnerType||h.type||'Hospital').includes(typeF);
+    return ms && mf && mt;
   });
-  const countEl = document.getElementById('hospSubCount');
-  if(countEl) countEl.textContent = `· ${hospitals.length} hospitals`;
-
-  // Update stats cards
-  var allH=hospitals||[];
-  var sh=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
-  sh('hospStatTotal',allH.length);
-  sh('hospStatVisits',allH.reduce(function(a,h){return a+(parseInt(h.visits||h.visitCount)||1);},0));
-  sh('hospStatActive',allH.filter(function(h){return h.status==='done';}).length);
-  sh('hospStatProgress',allH.filter(function(h){return h.status==='pending';}).length);
-  sh('hospStatMOU',allH.filter(function(h){return h.status==='mou'||h.activity==='MOU';}).length);
+  if(!filtered.length){c.innerHTML='<div style="padding:40px;text-align:center;color:var(--hint)">No partners found</div>';return;}
+  c.innerHTML = filtered.map(function(h) {
+    var idx = all.indexOf(h);
+    var st = h.status||'pending';
+    var sc = statusColor[st]||'color:var(--hint);background:var(--border)';
+    var sl = statusLabel[st]||st;
+    var visits = h.visits||h.visitCount||1;
+    var actIcon = actLabel[h.activity]||'🏥';
+    return '<div class="srm-card">'+
+      '<div class="srm-card-hdr">'+
+        '<div style="display:flex;align-items:flex-start;gap:14px;flex:1">'+
+          '<div style="width:40px;height:40px;border-radius:8px;background:#EEF2FF;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">'+actIcon+'</div>'+
+          '<div style="flex:1">'+
+            '<div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px">'+h.name+'</div>'+
+            '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">'+
+              '<span class="srm-badge" style="'+sc+'">'+sl+'</span>'+
+              (h.activity?'<span class="srm-badge" style="color:var(--blue);background:var(--blue-light)">'+h.activity+'</span>':'')+
+              (h.addr?'<span style="font-size:11px;color:var(--muted)">📍 '+h.addr+'</span>':'')+
+            '</div>'+
+          '</div>'+
+        '</div>'+
+        '<div style="display:flex;gap:6px;align-items:center">'+
+          '<div class="srm-actions">'+
+            '<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" data-action="editHospital" data-idx="'+idx+'">Edit</button>'+
+            '<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px;color:var(--coral);border-color:var(--coral)" data-action="deleteHospital" data-idx="'+idx+'">Delete</button>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="srm-card-body">'+
+        '<div><div class="srm-field-label">Contact Person</div><div class="srm-field-val">'+(h.contact||h.person||'—')+'<br><span style="color:var(--muted);font-size:11px">'+(h.phone||'')+'</span></div></div>'+
+        '<div><div class="srm-field-label">First Visit</div><div class="srm-field-val">'+(h.firstVisit||h.date||'—')+'</div></div>'+
+        '<div><div class="srm-field-label">Last Visit</div><div class="srm-field-val">'+(h.lastVisit||h.date||'—')+'</div></div>'+
+        '<div><div class="srm-field-label">Total Visits</div><div class="srm-field-val" style="font-size:18px;font-weight:700;color:var(--blue)">'+visits+'</div></div>'+
+      '</div>'+
+      (h.desc?'<div style="padding:8px 20px 12px;border-top:1px solid var(--border)"><div class="srm-field-label" style="margin-bottom:4px">Notes</div><div style="font-size:12px;color:var(--muted)">'+h.desc+'</div></div>':'')+
+      '<div class="srm-card-footer">'+
+        '<div style="font-size:11px;color:var(--muted)">Next action: <span style="color:var(--text);font-weight:600">'+(h.nextAction||'Not set')+'</span></div>'+
+        '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px" onclick="logVisit('+idx+')">+ Log Visit</button>'+
+      '</div>'+
+    '</div>';
+  }).join('');
 }
 function filterHospitals(){renderHospitals(window._hospTab||'all',(document.getElementById('hospSearch')||{value:''}).value.toLowerCase());}
 
@@ -2681,7 +2817,13 @@ function loadColleges(){
 }
 function saveColleges(){saveLS('aaroh_colleges',JSON.stringify(colleges));}
 (function(){
-  _cloudLoad().then(function(){
+  _cloudLoad().then
+function filterEdu(status){window._colTab=status;var el=document.getElementById('eduStatusFilter');if(el)el.value=status;renderColleges();}
+function filterHosp(status){window._hospTab=status;var el=document.getElementById('hospStatusFilter');if(el)el.value=status;renderHospitals();}
+function logVisit(idx){var h=hospitals[idx];if(!h)return;var today=new Date().toISOString().split('T')[0];h.visits=(h.visits||1)+1;h.lastVisit=today;h.visitCount=h.visits;saveData();renderHospitals();alert('Visit logged for '+h.name+'. Total: '+h.visits);}
+function exportColleges(){var csv='Name,Address,Contact,Topic,Participants,Presentations,Status\n';(colleges||[]).forEach(function(c){csv+='"'+c.name+'","'+(c.addr||'')+'","'+(c.contact||'')+'","'+(c.topic||c.programs||'')+'","'+(c.participants||0)+'","'+(c.presentations||0)+'","'+(c.status||'')+'"\n';});var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='colleges.csv';a.click();}
+function exportHospitals(){var csv='Name,Address,Contact,Phone,Activity,Visits,Status\n';(hospitals||[]).forEach(function(h){csv+='"'+h.name+'","'+(h.addr||'')+'","'+(h.contact||'')+'","'+(h.phone||'')+'","'+(h.activity||'')+'","'+(h.visits||1)+'","'+(h.status||'')+'"\n';});var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='hospitals.csv';a.click();}
+(function(){
     loadNotifs();loadDaily();loadPris();updatePriStats();loadFUs();updateFUStats();
     loadCaps();loadGovt();updateGovtStats();loadOrgT();updateOrgStats('heal');updateOrgStats('naman');
     loadWis();loadAaroh();loadColleges();
