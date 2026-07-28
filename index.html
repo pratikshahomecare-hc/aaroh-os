@@ -2376,7 +2376,7 @@ function renderColleges(filter, search) {
       (presChips?'<div style="padding:8px 20px 12px;border-top:1px solid var(--border)"><div class="srm-field-label" style="margin-bottom:6px">Presentation Timeline</div><div style="display:flex;flex-wrap:wrap;gap:6px">'+presChips+'</div></div>':'')+
       '<div class="srm-card-footer">'+
         '<div style="font-size:11px;color:var(--muted)">'+(col.remarks||'No remarks')+'</div>'+
-        '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px" onclick="openModal('addCollege')">+ Add Presentation</button>'+
+        '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px" data-action="addPres">+ Add Presentation</button>'+
       '</div>'+
     '</div>';
   }).join('');
