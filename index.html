@@ -1475,14 +1475,14 @@ body{
   <!-- PANEL: Materials -->
   <div class="lms-panel" id="lms-materials">
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
-      <div class="card" style="padding:16px;cursor:pointer"><div style="font-size:24px;margin-bottom:8px">📊</div><div style="font-size:13px;font-weight:600">Presentations</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Training slide decks and PowerPoints</div><div style="font-size:11px;color:var(--hint);margin-top:8px">0 files</div></div>
-      <div class="card" style="padding:16px;cursor:pointer"><div style="font-size:24px;margin-bottom:8px">📋</div><div style="font-size:13px;font-weight:600">Policies &amp; SOPs</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Standard operating procedures</div><div style="font-size:11px;color:var(--hint);margin-top:8px">0 files</div></div>
-      <div class="card" style="padding:16px;cursor:pointer"><div style="font-size:24px;margin-bottom:8px">✅</div><div style="font-size:13px;font-weight:600">Checklists</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Assessment and competency checklists</div><div style="font-size:11px;color:var(--hint);margin-top:8px">0 files</div></div>
-      <div class="card" style="padding:16px;cursor:pointer"><div style="font-size:24px;margin-bottom:8px">📖</div><div style="font-size:13px;font-weight:600">Manuals &amp; Guides</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Clinical and operational manuals</div><div style="font-size:11px;color:var(--hint);margin-top:8px">0 files</div></div>
-      <div class="card" style="padding:16px;cursor:pointer"><div style="font-size:24px;margin-bottom:8px">🔬</div><div style="font-size:13px;font-weight:600">Research &amp; Evidence</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Evidence-based practice resources</div><div style="font-size:11px;color:var(--hint);margin-top:8px">0 files</div></div>
-      <div class="card" style="padding:16px;cursor:pointer"><div style="font-size:24px;margin-bottom:8px">🎥</div><div style="font-size:13px;font-weight:600">Videos &amp; Demos</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Demonstration and training videos</div><div style="font-size:11px;color:var(--hint);margin-top:8px">0 files</div></div>
+      <div class="card" style="padding:16px"><div style="font-size:22px;margin-bottom:6px">📊</div><div style="font-size:13px;font-weight:600">Presentations</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Slide decks &amp; PowerPoints</div><div id="mat-ppt" style="margin:8px 0"></div><div style="display:flex;gap:6px"><input type="url" placeholder="Paste Google Drive link…" style="flex:1;font-size:11px;padding:5px 8px;border:1px solid var(--border);border-radius:6px;outline:none" id="mat-ppt-url"><button class="btn btn-ghost" style="font-size:11px;padding:4px 8px" onclick="addMaterial('ppt')">Add</button></div></div>
+      <div class="card" style="padding:16px"><div style="font-size:22px;margin-bottom:6px">📋</div><div style="font-size:13px;font-weight:600">Policies &amp; SOPs</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Standard operating procedures</div><div id="mat-sop" style="margin:8px 0"></div><div style="display:flex;gap:6px"><input type="url" placeholder="Paste Google Drive link…" style="flex:1;font-size:11px;padding:5px 8px;border:1px solid var(--border);border-radius:6px;outline:none" id="mat-sop-url"><button class="btn btn-ghost" style="font-size:11px;padding:4px 8px" onclick="addMaterial('sop')">Add</button></div></div>
+      <div class="card" style="padding:16px"><div style="font-size:22px;margin-bottom:6px">✅</div><div style="font-size:13px;font-weight:600">Checklists</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Assessment &amp; competency checklists</div><div id="mat-chk" style="margin:8px 0"></div><div style="display:flex;gap:6px"><input type="url" placeholder="Paste Google Drive link…" style="flex:1;font-size:11px;padding:5px 8px;border:1px solid var(--border);border-radius:6px;outline:none" id="mat-chk-url"><button class="btn btn-ghost" style="font-size:11px;padding:4px 8px" onclick="addMaterial('chk')">Add</button></div></div>
+      <div class="card" style="padding:16px"><div style="font-size:22px;margin-bottom:6px">📖</div><div style="font-size:13px;font-weight:600">Manuals &amp; Guides</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Clinical &amp; operational manuals</div><div id="mat-man" style="margin:8px 0"></div><div style="display:flex;gap:6px"><input type="url" placeholder="Paste Google Drive link…" style="flex:1;font-size:11px;padding:5px 8px;border:1px solid var(--border);border-radius:6px;outline:none" id="mat-man-url"><button class="btn btn-ghost" style="font-size:11px;padding:4px 8px" onclick="addMaterial('man')">Add</button></div></div>
+      <div class="card" style="padding:16px"><div style="font-size:22px;margin-bottom:6px">🔬</div><div style="font-size:13px;font-weight:600">Research &amp; Evidence</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Evidence-based practice resources</div><div id="mat-res" style="margin:8px 0"></div><div style="display:flex;gap:6px"><input type="url" placeholder="Paste link…" style="flex:1;font-size:11px;padding:5px 8px;border:1px solid var(--border);border-radius:6px;outline:none" id="mat-res-url"><button class="btn btn-ghost" style="font-size:11px;padding:4px 8px" onclick="addMaterial('res')">Add</button></div></div>
+      <div class="card" style="padding:16px"><div style="font-size:22px;margin-bottom:6px">🎥</div><div style="font-size:13px;font-weight:600">Videos &amp; Demos</div><div style="font-size:11px;color:var(--muted);margin-top:2px">YouTube &amp; training videos</div><div id="mat-vid" style="margin:8px 0"></div><div style="display:flex;gap:6px"><input type="url" placeholder="Paste YouTube link…" style="flex:1;font-size:11px;padding:5px 8px;border:1px solid var(--border);border-radius:6px;outline:none" id="mat-vid-url"><button class="btn btn-ghost" style="font-size:11px;padding:4px 8px" onclick="addMaterial('vid')">Add</button></div></div>
     </div>
-    <div style="margin-top:14px;text-align:center;color:var(--hint);font-size:12px">Material upload functionality coming soon. Link external resources using Quick Capture.</div>
+    <div style="margin-top:14px;text-align:center;color:var(--hint);font-size:12px">Paste Google Drive, OneDrive or YouTube links above to add resources. Links are saved and accessible from any device.</div>
   </div>
 
   <!-- PANEL: Certificates -->
@@ -2081,7 +2081,7 @@ body{
   </div>
 </div>
 
-<div class="modal-overlay" id="modal-addCollege"><div class="modal" style="width:640px"><div class="modal-hdr"><div class="modal-title">Add / Update College Presentation</div><button class="close-btn" onclick="closeModal('addCollege')">×</button></div><div class="form-row"><label class="form-label">College Name <span style="color:var(--hint);font-weight:400">(same name = adds presentation)</span></label><input class="form-input" id="newColName" placeholder="e.g. Nobel College of Nursing"></div><div class="form-2col"><div class="form-row"><label class="form-label">Address</label><input class="form-input" id="newColAddr" placeholder="e.g. Sinamangal, Kathmandu"></div><div class="form-row"><label class="form-label">Contact No</label><input class="form-input" id="newColContact" placeholder="01-XXXXXXX"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Topic</label><input class="form-input" id="newColPrograms" placeholder="e.g. Elder Care Awareness"></div><div class="form-row"><label class="form-label">No. of Participants</label><input type="number" class="form-input" id="newColParticipants" min="0" placeholder="e.g. 120"></div></div><div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--hint);margin:10px 0 6px">Presentation Dates</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px"><div class="form-row"><label class="form-label">Presentation 1</label><input type="date" class="form-input" id="newColFirstDate"></div><div class="form-row"><label class="form-label">Presentation 2</label><input type="date" class="form-input" id="newColPres2"></div><div class="form-row"><label class="form-label">Presentation 3</label><input type="date" class="form-input" id="newColPres3"></div></div><div class="form-row"><label class="form-label">Status</label><select class="form-select" id="newColStatus"><option value="scheduled">Scheduled</option><option value="pending">In Progress</option><option value="completed">Completed</option><option value="done">Continuing Collaboration</option><option value="followup">Follow-up Needed</option></select></div><div class="form-row"><label class="form-label">Remarks</label><textarea class="form-textarea" id="newColRemarks" rows="2"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('addCollege')">Cancel</button><button class="btn btn-teal" onclick="addNewCollege()">Save</button></div></div></div><div class="modal-overlay" id="modal-addCollege"><div class="modal" style="width:620px"><div class="modal-hdr"><div class="modal-title">Add / Update College Presentation</div><button class="close-btn" onclick="closeModal('addCollege')">×</button></div><div class="form-row"><label class="form-label">College Name <span style="color:var(--hint);font-weight:400">(same name = updates count)</span></label><input class="form-input" id="newColName" placeholder="e.g. Nobel College of Nursing"></div><div class="form-2col"><div class="form-row"><label class="form-label">Contact No</label><input class="form-input" id="newColContact" placeholder="01-XXXXXXX"></div><div class="form-row"><label class="form-label">Address</label><input class="form-input" id="newColAddr"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Topic / Program</label><input class="form-input" id="newColPrograms" placeholder="e.g. Elder Care Awareness"></div><div class="form-row"><label class="form-label">No. of Participants</label><input type="number" class="form-input" id="newColParticipants" min="0" placeholder="e.g. 120"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Presentation 1 Date</label><input type="date" class="form-input" id="newColFirstDate"></div><div class="form-row"><label class="form-label">Presentation 2 Date</label><input type="date" class="form-input" id="newColPres2"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Presentation 3 Date</label><input type="date" class="form-input" id="newColPres3"></div><div class="form-row"><label class="form-label">Status</label><select class="form-select" id="newColStatus"><option value="scheduled">Scheduled</option><option value="done">Continuing</option><option value="pending">In Progress</option><option value="followup">Follow-up Needed</option><option value="completed">Completed</option></select></div></div><div class="form-row"><label class="form-label">Remarks</label><textarea class="form-textarea" id="newColRemarks" rows="2"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('addCollege')">Cancel</button><button class="btn btn-teal" onclick="addNewCollege()">Save</button></div></div></div><div class="modal-overlay" id="modal-addCollege"><div class="modal" style="width:600px"><div class="modal-hdr"><div class="modal-title" id="addColTitle">Add College</div><button class="close-btn" onclick="closeModal('addCollege')">×</button></div><div class="form-row"><label class="form-label">College Name</label><input class="form-input" id="newColName"></div><div class="form-row"><label class="form-label">Address</label><input class="form-input" id="newColAddr"></div><div class="form-2col"><div class="form-row"><label class="form-label">Phone / Email</label><input class="form-input" id="newColContact"></div><div class="form-row"><label class="form-label">Contact Person</label><input class="form-input" id="newColPerson"></div></div><div class="form-row"><label class="form-label">Programs</label><input class="form-input" id="newColPrograms" placeholder="e.g. B.Sc Nursing, ANM"></div><div class="form-2col"><div class="form-row"><label class="form-label">First Presentation</label><input type="date" class="form-input" id="newColFirstDate"></div><div class="form-row"><label class="form-label">Last Presentation</label><input type="date" class="form-input" id="newColDate"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Total Presentations</label><input type="number" class="form-input" id="newColPresentations" min="0" value="1"></div><div class="form-row"><label class="form-label">Status</label><select class="form-select" id="newColStatus"><option value="done">Continuing Collaboration</option><option value="pending">In Progress</option><option value="followup">Follow-up Needed</option><option value="mou">MOU Signed</option></select></div></div><div class="form-row"><label class="form-label">Remarks / Notes</label><textarea class="form-textarea" id="newColRemarks"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('addCollege')">Cancel</button><button class="btn btn-teal" onclick="addNewCollege()">Save</button></div></div></div><div class="modal-overlay" id="modal-addCollege">
+<div class="modal-overlay" id="modal-addCollege"><div class="modal" style="width:620px"><div class="modal-hdr"><div class="modal-title">Add / Update College Presentation</div><button class="close-btn" onclick="closeModal('addCollege')">×</button></div><div class="form-row"><label class="form-label">College Name</label><input class="form-input" id="newColName" placeholder="e.g. Nobel College of Nursing"></div><div class="form-row" style="background:var(--green-light);border-radius:8px;padding:12px"><label class="form-label" style="color:var(--green-text)">Topic of Presentation ★</label><input class="form-input" id="newColPrograms" placeholder="e.g. Elder Care Awareness, Aging and Dignity, Career in Geriatrics"></div><div class="form-2col"><div class="form-row"><label class="form-label">Address / City</label><input class="form-input" id="newColAddr"></div><div class="form-row"><label class="form-label">Contact No</label><input class="form-input" id="newColContact" placeholder="01-XXXXXXX"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">No. of Participants</label><input type="number" class="form-input" id="newColParticipants" min="0" placeholder="e.g. 120"></div><div class="form-row"><label class="form-label">Status</label><select class="form-select" id="newColStatus"><option value="scheduled">Scheduled</option><option value="pending">In Progress</option><option value="completed">Completed</option><option value="done">Continuing</option><option value="followup">Follow-up Needed</option></select></div></div><div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--hint);margin:10px 0 6px">Presentation Dates</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px"><div class="form-row"><label class="form-label">Presentation 1</label><input type="date" class="form-input" id="newColFirstDate"></div><div class="form-row"><label class="form-label">Presentation 2</label><input type="date" class="form-input" id="newColPres2"></div><div class="form-row"><label class="form-label">Presentation 3</label><input type="date" class="form-input" id="newColPres3"></div></div><div class="form-row"><label class="form-label">Remarks</label><textarea class="form-textarea" id="newColRemarks" rows="2"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('addCollege')">Cancel</button><button class="btn btn-teal" onclick="addNewCollege()">Save</button></div></div></div><div class="modal-overlay" id="modal-addCollege"><div class="modal" style="width:640px"><div class="modal-hdr"><div class="modal-title">Add / Update College Presentation</div><button class="close-btn" onclick="closeModal('addCollege')">×</button></div><div class="form-row"><label class="form-label">College Name <span style="color:var(--hint);font-weight:400">(same name = adds presentation)</span></label><input class="form-input" id="newColName" placeholder="e.g. Nobel College of Nursing"></div><div class="form-2col"><div class="form-row"><label class="form-label">Address</label><input class="form-input" id="newColAddr" placeholder="e.g. Sinamangal, Kathmandu"></div><div class="form-row"><label class="form-label">Contact No</label><input class="form-input" id="newColContact" placeholder="01-XXXXXXX"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Topic</label><input class="form-input" id="newColPrograms" placeholder="e.g. Elder Care Awareness"></div><div class="form-row"><label class="form-label">No. of Participants</label><input type="number" class="form-input" id="newColParticipants" min="0" placeholder="e.g. 120"></div></div><div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--hint);margin:10px 0 6px">Presentation Dates</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px"><div class="form-row"><label class="form-label">Presentation 1</label><input type="date" class="form-input" id="newColFirstDate"></div><div class="form-row"><label class="form-label">Presentation 2</label><input type="date" class="form-input" id="newColPres2"></div><div class="form-row"><label class="form-label">Presentation 3</label><input type="date" class="form-input" id="newColPres3"></div></div><div class="form-row"><label class="form-label">Status</label><select class="form-select" id="newColStatus"><option value="scheduled">Scheduled</option><option value="pending">In Progress</option><option value="completed">Completed</option><option value="done">Continuing Collaboration</option><option value="followup">Follow-up Needed</option></select></div><div class="form-row"><label class="form-label">Remarks</label><textarea class="form-textarea" id="newColRemarks" rows="2"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('addCollege')">Cancel</button><button class="btn btn-teal" onclick="addNewCollege()">Save</button></div></div></div><div class="modal-overlay" id="modal-addCollege"><div class="modal" style="width:620px"><div class="modal-hdr"><div class="modal-title">Add / Update College Presentation</div><button class="close-btn" onclick="closeModal('addCollege')">×</button></div><div class="form-row"><label class="form-label">College Name <span style="color:var(--hint);font-weight:400">(same name = updates count)</span></label><input class="form-input" id="newColName" placeholder="e.g. Nobel College of Nursing"></div><div class="form-2col"><div class="form-row"><label class="form-label">Contact No</label><input class="form-input" id="newColContact" placeholder="01-XXXXXXX"></div><div class="form-row"><label class="form-label">Address</label><input class="form-input" id="newColAddr"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Topic / Program</label><input class="form-input" id="newColPrograms" placeholder="e.g. Elder Care Awareness"></div><div class="form-row"><label class="form-label">No. of Participants</label><input type="number" class="form-input" id="newColParticipants" min="0" placeholder="e.g. 120"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Presentation 1 Date</label><input type="date" class="form-input" id="newColFirstDate"></div><div class="form-row"><label class="form-label">Presentation 2 Date</label><input type="date" class="form-input" id="newColPres2"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Presentation 3 Date</label><input type="date" class="form-input" id="newColPres3"></div><div class="form-row"><label class="form-label">Status</label><select class="form-select" id="newColStatus"><option value="scheduled">Scheduled</option><option value="done">Continuing</option><option value="pending">In Progress</option><option value="followup">Follow-up Needed</option><option value="completed">Completed</option></select></div></div><div class="form-row"><label class="form-label">Remarks</label><textarea class="form-textarea" id="newColRemarks" rows="2"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('addCollege')">Cancel</button><button class="btn btn-teal" onclick="addNewCollege()">Save</button></div></div></div><div class="modal-overlay" id="modal-addCollege"><div class="modal" style="width:600px"><div class="modal-hdr"><div class="modal-title" id="addColTitle">Add College</div><button class="close-btn" onclick="closeModal('addCollege')">×</button></div><div class="form-row"><label class="form-label">College Name</label><input class="form-input" id="newColName"></div><div class="form-row"><label class="form-label">Address</label><input class="form-input" id="newColAddr"></div><div class="form-2col"><div class="form-row"><label class="form-label">Phone / Email</label><input class="form-input" id="newColContact"></div><div class="form-row"><label class="form-label">Contact Person</label><input class="form-input" id="newColPerson"></div></div><div class="form-row"><label class="form-label">Programs</label><input class="form-input" id="newColPrograms" placeholder="e.g. B.Sc Nursing, ANM"></div><div class="form-2col"><div class="form-row"><label class="form-label">First Presentation</label><input type="date" class="form-input" id="newColFirstDate"></div><div class="form-row"><label class="form-label">Last Presentation</label><input type="date" class="form-input" id="newColDate"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Total Presentations</label><input type="number" class="form-input" id="newColPresentations" min="0" value="1"></div><div class="form-row"><label class="form-label">Status</label><select class="form-select" id="newColStatus"><option value="done">Continuing Collaboration</option><option value="pending">In Progress</option><option value="followup">Follow-up Needed</option><option value="mou">MOU Signed</option></select></div></div><div class="form-row"><label class="form-label">Remarks / Notes</label><textarea class="form-textarea" id="newColRemarks"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('addCollege')">Cancel</button><button class="btn btn-teal" onclick="addNewCollege()">Save</button></div></div></div><div class="modal-overlay" id="modal-addCollege">
   <div class="modal">
     <div class="modal-hdr"><div class="modal-title">Add College</div><button class="close-btn" onclick="closeModal('addCollege')">×</button></div>
     <div class="form-row"><label class="form-label">College Name</label><input class="form-input" id="newColName"></div>
@@ -2288,96 +2288,66 @@ function renderColleges(filter, search) {
   var sfEl = document.getElementById('eduStatusFilter');
   if(!filter && sfEl) filter = sfEl.value || '';
   search = (search || (document.getElementById('collegeSearch')||{value:''}).value || '').toLowerCase();
-  var typeF = (document.getElementById('eduTypeFilter')||{value:''}).value;
   var viewMode = (document.getElementById('eduViewMode')||{value:'card'}).value;
   var c = document.getElementById('eduInstitutionList');
   if(!c) return;
   var all = colleges || [];
   var s = function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
-  s('colStatTotal', all.length);
-  s('colStatActive', all.filter(function(x){return x.status==='done';}).length);
-  s('colStatPres', all.reduce(function(a,x){return a+(parseInt(x.presentations||x.presentationCount)||0);},0));
-  s('colStatPart', all.reduce(function(a,x){return a+(parseInt(x.participants)||0);},0));
-  s('colStatSched', all.filter(function(x){return x.status==='scheduled';}).length);
-  s('colStatFollowup', all.filter(function(x){return x.status==='followup';}).length);
-  s('colSubCount', '· '+all.length+' institutions');
-  var statusLabel = {done:'Active',pending:'In Progress',followup:'Follow-up Due',scheduled:'Scheduled',completed:'Completed',mou:'MOU Signed'};
-  var statusColor = {done:'color:#3B6D11;background:#e8f5e9',pending:'color:var(--amber-dark);background:var(--amber-light)',followup:'color:var(--coral);background:var(--coral-light)',scheduled:'color:var(--blue);background:var(--blue-light)',completed:'color:#555;background:#eee',mou:'color:#534AB7;background:#F3F0FF'};
-  var filtered = all.filter(function(col) {
-    var ms = !search || (col.name||'').toLowerCase().includes(search) || (col.addr||'').toLowerCase().includes(search) || (col.contact||'').toLowerCase().includes(search) || (col.topic||col.programs||'').toLowerCase().includes(search);
-    var mf = !filter || col.status===filter;
-    var mt = !typeF || (col.instType||'').includes(typeF);
-    return ms && mf && mt;
+  s('colStatTotal',all.length);
+  s('colStatActive',all.filter(function(x){return x.status==='done';}).length);
+  s('colStatPres',all.reduce(function(a,x){return a+(parseInt(x.presentations||x.presentationCount)||0);},0));
+  s('colStatPart',all.reduce(function(a,x){return a+(parseInt(x.participants)||0);},0));
+  s('colStatSched',all.filter(function(x){return x.status==='scheduled';}).length);
+  s('colStatFollowup',all.filter(function(x){return x.status==='followup';}).length);
+  s('colSubCount','· '+all.length+' institutions');
+  var stL={done:'Continuing',pending:'In Progress',followup:'Follow-up',scheduled:'Scheduled',completed:'Completed',mou:'MOU'};
+  var stC={done:'color:#3B6D11;background:#e8f5e9',pending:'color:var(--amber-dark);background:var(--amber-light)',followup:'color:var(--coral);background:var(--coral-light)',scheduled:'color:var(--blue);background:var(--blue-light)',completed:'color:#555;background:#eee',mou:'color:#534AB7;background:#F3F0FF'};
+  var filtered=all.filter(function(col){
+    var ms=!search||(col.name||'').toLowerCase().includes(search)||(col.addr||'').toLowerCase().includes(search)||(col.contact||'').toLowerCase().includes(search)||(col.topic||col.programs||'').toLowerCase().includes(search);
+    var mf=!filter||col.status===filter;
+    return ms&&mf;
   });
-  if(!filtered.length){c.innerHTML='<div style="padding:40px;text-align:center;color:var(--hint)">No institutions found</div>';return;}
-
-  if(viewMode==='list') {
-    c.innerHTML='<div class="card" style="padding:0;overflow:hidden;overflow-x:auto"><table class="tbl"><thead><tr><th>#</th><th>College</th><th>Contact</th><th>Topic</th><th>Pres</th><th>Participants</th><th>Pres 1</th><th>Pres 2</th><th>Pres 3</th><th>Status</th><th>Actions</th></tr></thead><tbody>'+
+  if(!filtered.length){c.innerHTML='<div style="padding:40px;text-align:center;color:var(--hint)">No institutions found.</div>';return;}
+  if(viewMode==='list'){
+    c.innerHTML='<div class="card" style="padding:0;overflow:hidden;overflow-x:auto"><table class="tbl"><thead><tr><th>#</th><th>College</th><th>Contact</th><th>Topic</th><th>Pres</th><th>Participants</th><th>Status</th><th>Actions</th></tr></thead><tbody>'+
     filtered.map(function(col,fi){
-      var idx=all.indexOf(col);
-      var st=col.status||'scheduled';
-      var sc=statusColor[st]||'';
-      var sl=statusLabel[st]||st;
-      return '<tr>'+
-        '<td style="color:var(--hint);font-size:11px">'+(fi+1)+'</td>'+
+      var idx=all.indexOf(col);var st=col.status||'scheduled';
+      return '<tr><td style="color:var(--hint);font-size:11px">'+(fi+1)+'</td>'+
         '<td><div style="font-size:13px;font-weight:600">'+col.name+'</div><div style="font-size:11px;color:var(--muted)">'+(col.addr||'')+'</div></td>'+
         '<td style="font-size:12px">'+(col.contact||col.phone||'—')+'</td>'+
-        '<td style="font-size:12px;color:var(--text-2);max-width:130px">'+(col.topic||col.programs||'—')+'</td>'+
+        '<td style="font-size:12px;font-weight:600;color:var(--green);max-width:150px">'+(col.topic||col.programs||'—')+'</td>'+
         '<td style="text-align:center;font-size:15px;font-weight:700;color:var(--blue)">'+(col.presentations||col.presentationCount||0)+'</td>'+
         '<td style="text-align:center;font-size:15px;font-weight:700;color:var(--green)">'+(col.participants||'—')+'</td>'+
-        '<td style="font-size:11px;text-align:center">'+(col.pres1||col.firstDate||'—')+'</td>'+
-        '<td style="font-size:11px;text-align:center">'+(col.pres2||'—')+'</td>'+
-        '<td style="font-size:11px;text-align:center">'+(col.pres3||'—')+'</td>'+
-        '<td><span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;'+sc+'">'+sl+'</span></td>'+
-        '<td style="white-space:nowrap">'+
-          '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px" data-action="editCollege" data-idx="'+idx+'">Edit</button> '+
-          '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px;color:var(--coral);border-color:var(--coral)" data-action="deleteCollege" data-idx="'+idx+'">Del</button>'+
-        '</td>'+
-      '</tr>';
-    }).join('')+
-    '</tbody></table></div>';
+        '<td><span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;'+(stC[st]||'')+'">'+( stL[st]||st)+'</span></td>'+
+        '<td style="white-space:nowrap"><button class="btn btn-ghost" style="font-size:11px;padding:3px 8px" data-action="editCollege" data-idx="'+idx+'">Edit</button> <button class="btn btn-ghost" style="font-size:11px;padding:3px 8px;color:var(--coral);border-color:var(--coral)" data-action="deleteCollege" data-idx="'+idx+'">Del</button></td></tr>';
+    }).join('')+'</tbody></table></div>';
     return;
   }
-
-  // Card view
-  c.innerHTML = filtered.map(function(col) {
-    var idx = all.indexOf(col);
-    var st = col.status||'scheduled';
-    var sc = statusColor[st]||'color:var(--hint);background:var(--border)';
-    var sl = statusLabel[st]||st;
-    var pres = col.presentations||col.presentationCount||0;
-    var presChips = '';
-    if(col.pres1||col.firstDate)presChips+='<span style="font-size:10px;padding:2px 8px;border-radius:6px;background:var(--blue-light);color:var(--blue)">Pres 1: '+(col.pres1||col.firstDate)+'</span> ';
-    if(col.pres2)presChips+='<span style="font-size:10px;padding:2px 8px;border-radius:6px;background:var(--green-light);color:var(--green-text)">Pres 2: '+col.pres2+'</span> ';
-    if(col.pres3)presChips+='<span style="font-size:10px;padding:2px 8px;border-radius:6px;background:#F3F0FF;color:#534AB7">Pres 3: '+col.pres3+'</span>';
+  c.innerHTML=filtered.map(function(col){
+    var idx=all.indexOf(col);var st=col.status||'scheduled';
+    var sc=stC[st]||'color:var(--hint);background:var(--border)';
+    var sl=stL[st]||st;
+    var pres=col.presentations||col.presentationCount||0;
+    var chips='';
+    if(col.pres1||col.firstDate)chips+='<span style="font-size:10px;padding:2px 8px;border-radius:6px;background:var(--blue-light);color:var(--blue)">Pres 1: '+(col.pres1||col.firstDate)+'</span> ';
+    if(col.pres2)chips+='<span style="font-size:10px;padding:2px 8px;border-radius:6px;background:var(--green-light);color:var(--green-text)">Pres 2: '+col.pres2+'</span> ';
+    if(col.pres3)chips+='<span style="font-size:10px;padding:2px 8px;border-radius:6px;background:#F3F0FF;color:#534AB7">Pres 3: '+col.pres3+'</span>';
     return '<div class="srm-card">'+
-      '<div class="srm-card-hdr">'+
-        '<div style="display:flex;align-items:flex-start;gap:14px;flex:1">'+
-          '<div style="width:40px;height:40px;border-radius:8px;background:var(--green-light);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🎓</div>'+
-          '<div style="flex:1">'+
-            '<div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px">'+col.name+'</div>'+
-            '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">'+
-              '<span class="srm-badge" style="'+sc+'">'+sl+'</span>'+
-              (col.addr?'<span style="font-size:11px;color:var(--muted)">📍 '+col.addr+'</span>':'')+
-            '</div>'+
-          '</div>'+
-        '</div>'+
-        '<div class="srm-actions" style="display:flex;gap:6px">'+
-          '<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" data-action="editCollege" data-idx="'+idx+'">Edit</button>'+
-          '<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px;color:var(--coral);border-color:var(--coral)" data-action="deleteCollege" data-idx="'+idx+'">Del</button>'+
-        '</div>'+
-      '</div>'+
+      '<div class="srm-card-hdr"><div style="display:flex;align-items:flex-start;gap:14px;flex:1">'+
+        '<div style="width:40px;height:40px;border-radius:8px;background:var(--green-light);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🎓</div>'+
+        '<div style="flex:1"><div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:2px">'+col.name+'</div>'+
+        '<div style="font-size:12px;font-weight:600;color:var(--green);margin-bottom:4px">'+(col.topic||col.programs||'No topic set')+'</div>'+
+        '<div style="display:flex;gap:8px;flex-wrap:wrap"><span class="srm-badge" style="'+sc+'">'+sl+'</span>'+(col.addr?'<span style="font-size:11px;color:var(--muted)">📍 '+col.addr+'</span>':'')+'</div></div></div>'+
+        '<div class="srm-actions" style="display:flex;gap:6px"><button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" data-action="editCollege" data-idx="'+idx+'">Edit</button>'+
+        '<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px;color:var(--coral);border-color:var(--coral)" data-action="deleteCollege" data-idx="'+idx+'">Del</button></div></div>'+
       '<div class="srm-card-body">'+
         '<div><div class="srm-field-label">Contact</div><div class="srm-field-val">'+(col.contact||col.phone||'—')+'</div></div>'+
-        '<div><div class="srm-field-label">Topic</div><div class="srm-field-val" style="font-weight:600">'+(col.topic||col.programs||'—')+'</div></div>'+
         '<div><div class="srm-field-label">Presentations</div><div style="font-size:24px;font-weight:700;color:var(--blue)">'+pres+'</div></div>'+
         '<div><div class="srm-field-label">Participants</div><div style="font-size:24px;font-weight:700;color:var(--green)">'+(col.participants||'—')+'</div></div>'+
+        '<div><div class="srm-field-label">Last Date</div><div class="srm-field-val">'+(col.pres3||col.pres2||col.pres1||col.firstDate||'—')+'</div></div>'+
       '</div>'+
-      (presChips?'<div style="padding:8px 20px 12px;border-top:1px solid var(--border)"><div class="srm-field-label" style="margin-bottom:6px">Presentation Timeline</div><div style="display:flex;flex-wrap:wrap;gap:6px">'+presChips+'</div></div>':'')+
-      '<div class="srm-card-footer">'+
-        '<div style="font-size:11px;color:var(--muted)">'+(col.remarks||'No remarks')+'</div>'+
-        '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px" data-action="addPres">+ Add Presentation</button>'+
-      '</div>'+
+      (chips?'<div style="padding:8px 20px 12px;border-top:1px solid var(--border)"><div class="srm-field-label" style="margin-bottom:6px">Timeline</div><div style="display:flex;flex-wrap:wrap;gap:6px">'+chips+'</div></div>':'')+
+      '<div class="srm-card-footer"><div style="font-size:11px;color:var(--muted)">'+(col.remarks||'')+'</div></div>'+
     '</div>';
   }).join('');
 }
@@ -3420,7 +3390,35 @@ function showDeptCurriculum(org, dept){
 
 function openAddTrainer(){openModal('lmsAdd');}
 (function(){
-  _cloudLoad().then(function(){
+  _cloudLoad().then
+function addMaterial(type){
+  var urlEl=document.getElementById('mat-'+type+'-url');
+  if(!urlEl)return;
+  var url=urlEl.value.trim();
+  if(!url){alert('Please paste a link.');return;}
+  var saved=JSON.parse(getLS('aaroh_materials')||'{}');
+  if(!saved[type])saved[type]=[];
+  var name=url.replace(/.*\//,'').split('?')[0]||'File '+(saved[type].length+1);
+  saved[type].push({name:name,url:url,added:new Date().toISOString().split('T')[0]});
+  saveLS('aaroh_materials',JSON.stringify(saved));
+  renderMaterials();urlEl.value='';
+}
+function renderMaterials(){
+  var saved=JSON.parse(getLS('aaroh_materials')||'{}');
+  ['ppt','sop','chk','man','res','vid'].forEach(function(t){
+    var el=document.getElementById('mat-'+t);
+    if(!el)return;
+    var files=saved[t]||[];
+    if(!files.length){el.innerHTML='<span style="color:var(--hint);font-size:11px">No files linked</span>';return;}
+    el.innerHTML=files.map(function(f,i){
+      return '<div style="display:flex;align-items:center;gap:6px;padding:3px 0;border-bottom:1px solid var(--border)">'+
+        '<a href="'+f.url+'" target="_blank" style="font-size:11px;color:var(--blue);text-decoration:none;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">🔗 '+f.name+'</a>'+
+        '<span style="font-size:10px;color:var(--hint);flex-shrink:0">'+f.added+'</span>'+
+      '</div>';
+    }).join('');
+  });
+}
+(function(){
     loadNotifs();loadDaily();loadPris();updatePriStats();loadFUs();updateFUStats();
     loadCaps();loadGovt();updateGovtStats();loadOrgT();updateOrgStats('heal');updateOrgStats('naman');
     loadWis();loadAaroh();loadColleges();loadLMS();
