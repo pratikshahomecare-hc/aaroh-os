@@ -1161,20 +1161,24 @@ body{
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
       <input type="text" placeholder="Search by institution, city, contact, topic…" id="collegeSearch" oninput="renderColleges()">
     </div>
-    <select class="form-select" id="eduTypeFilter" onchange="renderColleges()" style="width:160px;font-size:12px">
+    <select class="form-select" id="eduTypeFilter" onchange="renderColleges()" style="width:140px;font-size:12px">
       <option value="">All Types</option>
       <option>Nursing College</option>
       <option>Medical College</option>
       <option>University</option>
       <option>Training Institute</option>
     </select>
-    <select class="form-select" id="eduStatusFilter" onchange="renderColleges()" style="width:150px;font-size:12px">
+    <select class="form-select" id="eduStatusFilter" onchange="renderColleges()" style="width:140px;font-size:12px">
       <option value="">All Status</option>
       <option value="done">Active</option>
-      <option value="scheduled">Upcoming</option>
+      <option value="scheduled">Scheduled</option>
       <option value="completed">Completed</option>
       <option value="followup">Follow-up Due</option>
       <option value="pending">In Progress</option>
+    </select>
+    <select class="form-select" id="eduViewMode" onchange="renderColleges()" style="width:100px;font-size:12px">
+      <option value="card">Cards</option>
+      <option value="list">List</option>
     </select>
   </div>
 
@@ -1237,7 +1241,7 @@ body{
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
       <input type="text" placeholder="Search by hospital, city, contact person…" id="hospSearch" oninput="renderHospitals()">
     </div>
-    <select class="form-select" id="hospTypeFilter" onchange="renderHospitals()" style="width:160px;font-size:12px">
+    <select class="form-select" id="hospTypeFilter" onchange="renderHospitals()" style="width:140px;font-size:12px">
       <option value="">All Types</option>
       <option>Hospital</option>
       <option>Clinic</option>
@@ -1245,12 +1249,17 @@ body{
       <option>Rehabilitation Centre</option>
       <option>NGO</option>
     </select>
-    <select class="form-select" id="hospStatusFilter" onchange="renderHospitals()" style="width:150px;font-size:12px">
+    <select class="form-select" id="hospStatusFilter" onchange="renderHospitals()" style="width:140px;font-size:12px">
       <option value="">All Status</option>
       <option value="done">Active</option>
+      <option value="scheduled">Scheduled</option>
       <option value="mou">MOU Signed</option>
       <option value="pending">In Progress</option>
       <option value="training">Training Partner</option>
+    </select>
+    <select class="form-select" id="hospViewMode" onchange="renderHospitals()" style="width:100px;font-size:12px">
+      <option value="card">Cards</option>
+      <option value="list">List</option>
     </select>
   </div>
 
@@ -2280,10 +2289,10 @@ function renderColleges(filter, search) {
   if(!filter && sfEl) filter = sfEl.value || '';
   search = (search || (document.getElementById('collegeSearch')||{value:''}).value || '').toLowerCase();
   var typeF = (document.getElementById('eduTypeFilter')||{value:''}).value;
+  var viewMode = (document.getElementById('eduViewMode')||{value:'card'}).value;
   var c = document.getElementById('eduInstitutionList');
   if(!c) return;
   var all = colleges || [];
-  // Update stats
   var s = function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
   s('colStatTotal', all.length);
   s('colStatActive', all.filter(function(x){return x.status==='done';}).length);
@@ -2292,29 +2301,55 @@ function renderColleges(filter, search) {
   s('colStatSched', all.filter(function(x){return x.status==='scheduled';}).length);
   s('colStatFollowup', all.filter(function(x){return x.status==='followup';}).length);
   s('colSubCount', '· '+all.length+' institutions');
-  var statusLabel = {done:'Active',pending:'In Progress',followup:'Follow-up Due',scheduled:'Upcoming',completed:'Completed',mou:'MOU Signed'};
+  var statusLabel = {done:'Active',pending:'In Progress',followup:'Follow-up Due',scheduled:'Scheduled',completed:'Completed',mou:'MOU Signed'};
   var statusColor = {done:'color:#3B6D11;background:#e8f5e9',pending:'color:var(--amber-dark);background:var(--amber-light)',followup:'color:var(--coral);background:var(--coral-light)',scheduled:'color:var(--blue);background:var(--blue-light)',completed:'color:#555;background:#eee',mou:'color:#534AB7;background:#F3F0FF'};
   var filtered = all.filter(function(col) {
     var ms = !search || (col.name||'').toLowerCase().includes(search) || (col.addr||'').toLowerCase().includes(search) || (col.contact||'').toLowerCase().includes(search) || (col.topic||col.programs||'').toLowerCase().includes(search);
     var mf = !filter || col.status===filter;
-    var mt = !typeF || (col.instType||col.type||'').includes(typeF);
+    var mt = !typeF || (col.instType||'').includes(typeF);
     return ms && mf && mt;
   });
   if(!filtered.length){c.innerHTML='<div style="padding:40px;text-align:center;color:var(--hint)">No institutions found</div>';return;}
-  c.innerHTML = filtered.map(function(col, fi) {
+
+  if(viewMode==='list') {
+    c.innerHTML='<div class="card" style="padding:0;overflow:hidden;overflow-x:auto"><table class="tbl"><thead><tr><th>#</th><th>College</th><th>Contact</th><th>Topic</th><th>Pres</th><th>Participants</th><th>Pres 1</th><th>Pres 2</th><th>Pres 3</th><th>Status</th><th>Actions</th></tr></thead><tbody>'+
+    filtered.map(function(col,fi){
+      var idx=all.indexOf(col);
+      var st=col.status||'scheduled';
+      var sc=statusColor[st]||'';
+      var sl=statusLabel[st]||st;
+      return '<tr>'+
+        '<td style="color:var(--hint);font-size:11px">'+(fi+1)+'</td>'+
+        '<td><div style="font-size:13px;font-weight:600">'+col.name+'</div><div style="font-size:11px;color:var(--muted)">'+(col.addr||'')+'</div></td>'+
+        '<td style="font-size:12px">'+(col.contact||col.phone||'—')+'</td>'+
+        '<td style="font-size:12px;color:var(--text-2);max-width:130px">'+(col.topic||col.programs||'—')+'</td>'+
+        '<td style="text-align:center;font-size:15px;font-weight:700;color:var(--blue)">'+(col.presentations||col.presentationCount||0)+'</td>'+
+        '<td style="text-align:center;font-size:15px;font-weight:700;color:var(--green)">'+(col.participants||'—')+'</td>'+
+        '<td style="font-size:11px;text-align:center">'+(col.pres1||col.firstDate||'—')+'</td>'+
+        '<td style="font-size:11px;text-align:center">'+(col.pres2||'—')+'</td>'+
+        '<td style="font-size:11px;text-align:center">'+(col.pres3||'—')+'</td>'+
+        '<td><span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;'+sc+'">'+sl+'</span></td>'+
+        '<td style="white-space:nowrap">'+
+          '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px" data-action="editCollege" data-idx="'+idx+'">Edit</button> '+
+          '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px;color:var(--coral);border-color:var(--coral)" data-action="deleteCollege" data-idx="'+idx+'">Del</button>'+
+        '</td>'+
+      '</tr>';
+    }).join('')+
+    '</tbody></table></div>';
+    return;
+  }
+
+  // Card view
+  c.innerHTML = filtered.map(function(col) {
     var idx = all.indexOf(col);
     var st = col.status||'scheduled';
     var sc = statusColor[st]||'color:var(--hint);background:var(--border)';
     var sl = statusLabel[st]||st;
     var pres = col.presentations||col.presentationCount||0;
-    var presHtml = '';
-    if(pres > 0) {
-      var chips = [];
-      if(col.pres1||col.firstDate) chips.push('<span class="srm-pres-chip">'+(col.pres1||col.firstDate)+(col.topic?' · '+col.topic:'')+'</span>');
-      if(col.pres2) chips.push('<span class="srm-pres-chip">'+col.pres2+'</span>');
-      if(col.pres3) chips.push('<span class="srm-pres-chip">'+col.pres3+'</span>');
-      presHtml = '<div class="srm-pres-timeline">'+chips.join('')+'</div>';
-    }
+    var presChips = '';
+    if(col.pres1||col.firstDate)presChips+='<span style="font-size:10px;padding:2px 8px;border-radius:6px;background:var(--blue-light);color:var(--blue)">Pres 1: '+(col.pres1||col.firstDate)+'</span> ';
+    if(col.pres2)presChips+='<span style="font-size:10px;padding:2px 8px;border-radius:6px;background:var(--green-light);color:var(--green-text)">Pres 2: '+col.pres2+'</span> ';
+    if(col.pres3)presChips+='<span style="font-size:10px;padding:2px 8px;border-radius:6px;background:#F3F0FF;color:#534AB7">Pres 3: '+col.pres3+'</span>';
     return '<div class="srm-card">'+
       '<div class="srm-card-hdr">'+
         '<div style="display:flex;align-items:flex-start;gap:14px;flex:1">'+
@@ -2323,27 +2358,25 @@ function renderColleges(filter, search) {
             '<div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px">'+col.name+'</div>'+
             '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">'+
               '<span class="srm-badge" style="'+sc+'">'+sl+'</span>'+
-              (col.instType?'<span class="srm-badge" style="color:var(--hint);background:var(--border)">'+col.instType+'</span>':'')+
               (col.addr?'<span style="font-size:11px;color:var(--muted)">📍 '+col.addr+'</span>':'')+
             '</div>'+
           '</div>'+
         '</div>'+
-        '<div style="display:flex;gap:6px;align-items:center">'+
-          '<div class="srm-actions">'+
-            '<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" data-action="editCollege" data-idx="'+idx+'">Edit</button>'+
-            '<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px;color:var(--coral);border-color:var(--coral)" data-action="deleteCollege" data-idx="'+idx+'">Delete</button>'+
-          '</div>'+
+        '<div class="srm-actions" style="display:flex;gap:6px">'+
+          '<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" data-action="editCollege" data-idx="'+idx+'">Edit</button>'+
+          '<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px;color:var(--coral);border-color:var(--coral)" data-action="deleteCollege" data-idx="'+idx+'">Del</button>'+
         '</div>'+
       '</div>'+
       '<div class="srm-card-body">'+
-        '<div><div class="srm-field-label">Contact Person</div><div class="srm-field-val">'+(col.contact||col.phone||'—')+'</div></div>'+
-        '<div><div class="srm-field-label">Topic / Program</div><div class="srm-field-val">'+(col.topic||col.programs||'—')+'</div></div>'+
-        '<div><div class="srm-field-label">Participants</div><div class="srm-field-val" style="font-size:16px;font-weight:700;color:var(--green)">'+(col.participants||'—')+'</div></div>'+
-        '<div><div class="srm-field-label">Presentations</div><div class="srm-field-val" style="font-size:16px;font-weight:700;color:var(--blue)">'+pres+'</div></div>'+
+        '<div><div class="srm-field-label">Contact</div><div class="srm-field-val">'+(col.contact||col.phone||'—')+'</div></div>'+
+        '<div><div class="srm-field-label">Topic</div><div class="srm-field-val" style="font-weight:600">'+(col.topic||col.programs||'—')+'</div></div>'+
+        '<div><div class="srm-field-label">Presentations</div><div style="font-size:24px;font-weight:700;color:var(--blue)">'+pres+'</div></div>'+
+        '<div><div class="srm-field-label">Participants</div><div style="font-size:24px;font-weight:700;color:var(--green)">'+(col.participants||'—')+'</div></div>'+
       '</div>'+
-      (presHtml?'<div style="padding:8px 20px 12px;border-top:1px solid var(--border)"><div class="srm-field-label" style="margin-bottom:6px">Presentation Timeline</div>'+presHtml+'</div>':'')+
+      (presChips?'<div style="padding:8px 20px 12px;border-top:1px solid var(--border)"><div class="srm-field-label" style="margin-bottom:6px">Presentation Timeline</div><div style="display:flex;flex-wrap:wrap;gap:6px">'+presChips+'</div></div>':'')+
       '<div class="srm-card-footer">'+
-        '<div style="font-size:11px;color:var(--muted)">'+(col.remarks?'📝 '+col.remarks:'No remarks')+'</div>'+
+        '<div style="font-size:11px;color:var(--muted)">'+(col.remarks||'No remarks')+'</div>'+
+        '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px" onclick="openModal('addCollege')">+ Add Presentation</button>'+
       '</div>'+
     '</div>';
   }).join('');
@@ -2359,29 +2392,60 @@ function renderHospitals(filter, search) {
   if(!filter && sfEl) filter = sfEl.value || '';
   search = (search || (document.getElementById('hospSearch')||{value:''}).value || '').toLowerCase();
   var typeF = (document.getElementById('hospTypeFilter')||{value:''}).value;
+  var viewMode = (document.getElementById('hospViewMode')||{value:'card'}).value;
   var c = document.getElementById('hcPartnerList');
   if(!c) return;
   var all = hospitals || [];
-  // Update stats
-  var s = function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+  // Correct stats
+  var s = function(id,v){var el=document.getElementById(id);if(el)el.textContent=v;};
+  var totalVisits = all.reduce(function(a,h){return a+(parseInt(h.visits||h.visitCount)||1);},0);
+  var activeCount = all.filter(function(h){return h.status==='done';}).length;
   s('hospStatTotal', all.length);
-  s('hospStatActive', all.filter(function(h){return h.status==='done';}).length);
-  s('hospStatVisits', all.reduce(function(a,h){return a+(parseInt(h.visits||h.visitCount)||1);},0));
+  s('hospStatActive', activeCount);
+  s('hospStatVisits', totalVisits);
   s('hospStatProgress', all.filter(function(h){return h.status==='pending';}).length);
-  s('hospStatMOU', all.filter(function(h){return h.status==='mou'||h.activity==='MOU';}).length);
+  s('hospStatMOU', all.filter(function(h){return h.status==='mou';}).length);
   s('hospStatTraining', all.filter(function(h){return h.status==='training'||h.activity==='Training';}).length);
   s('hospStatReferral', all.filter(function(h){return h.referral;}).length);
   s('hospSubCount', '· '+all.length+' partners');
-  var statusLabel = {done:'Active Relationship',pending:'In Progress',mou:'MOU Signed',training:'Training Partner',prospect:'Prospect',inactive:'Inactive'};
-  var statusColor = {done:'color:#3B6D11;background:#e8f5e9',pending:'color:var(--amber-dark);background:var(--amber-light)',mou:'color:#534AB7;background:#F3F0FF',training:'color:var(--green);background:var(--green-light)',prospect:'color:var(--hint);background:var(--border)',inactive:'color:#999;background:#f5f5f5'};
-  var actLabel = {Meeting:'🤝',Training:'📋',MOU:'📄',Presentation:'🎤'};
+  var statusLabel = {done:'Active',pending:'In Progress',mou:'MOU Signed',training:'Training Partner',prospect:'Prospect',scheduled:'Scheduled',inactive:'Inactive'};
+  var statusColor = {done:'color:#3B6D11;background:#e8f5e9',pending:'color:var(--amber-dark);background:var(--amber-light)',mou:'color:#534AB7;background:#F3F0FF',training:'color:var(--green);background:var(--green-light)',prospect:'color:var(--hint);background:var(--border)',scheduled:'color:var(--blue);background:var(--blue-light)',inactive:'color:#999;background:#f5f5f5'};
+  var actLabel = {Meeting:'🤝',Training:'📋',MOU:'📄',Presentation:'🎤',Referral:'↗'};
   var filtered = all.filter(function(h) {
     var ms = !search || (h.name||'').toLowerCase().includes(search) || (h.addr||'').toLowerCase().includes(search) || (h.contact||'').toLowerCase().includes(search);
     var mf = !filter || h.status===filter || (filter==='mou'&&h.activity==='MOU') || (filter==='training'&&h.activity==='Training');
-    var mt = !typeF || (h.partnerType||h.type||'Hospital').includes(typeF);
-    return ms && mf && mt;
+    return ms && mf;
   });
   if(!filtered.length){c.innerHTML='<div style="padding:40px;text-align:center;color:var(--hint)">No partners found</div>';return;}
+  
+  if(viewMode==='list') {
+    // Compact list view
+    c.innerHTML='<div class="card" style="padding:0;overflow:hidden"><table class="tbl"><thead><tr><th>#</th><th>Hospital / Partner</th><th>Contact</th><th>Activity</th><th>Visits</th><th>Last Visit</th><th>Status</th><th>Actions</th></tr></thead><tbody>'+
+    filtered.map(function(h,fi){
+      var idx=all.indexOf(h);
+      var st=h.status||'pending';
+      var sc=statusColor[st]||'color:var(--hint);background:var(--border)';
+      var sl=statusLabel[st]||st;
+      var visits=h.visits||h.visitCount||1;
+      return '<tr>'+
+        '<td style="color:var(--hint);font-size:11px">'+(fi+1)+'</td>'+
+        '<td><div style="font-size:13px;font-weight:600">'+h.name+'</div><div style="font-size:11px;color:var(--muted)">'+(h.addr||'')+'</div></td>'+
+        '<td style="font-size:12px">'+(h.contact||h.person||'—')+'<br><span style="color:var(--hint);font-size:11px">'+(h.phone||'')+'</span></td>'+
+        '<td style="font-size:12px">'+(h.activity||'—')+'</td>'+
+        '<td style="text-align:center;font-size:15px;font-weight:700;color:var(--blue)">'+visits+'</td>'+
+        '<td style="font-size:12px;color:var(--text-2)">'+(h.lastVisit||h.date||'—')+'</td>'+
+        '<td><span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;'+sc+'">'+sl+'</span></td>'+
+        '<td style="white-space:nowrap">'+
+          '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px" onclick="logVisit('+idx+')">+Visit</button> '+
+          '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px" data-action="editHospital" data-idx="'+idx+'">Edit</button>'+
+        '</td>'+
+      '</tr>';
+    }).join('')+
+    '</tbody></table></div>';
+    return;
+  }
+  
+  // Card view
   c.innerHTML = filtered.map(function(h) {
     var idx = all.indexOf(h);
     var st = h.status||'pending';
@@ -2389,6 +2453,12 @@ function renderHospitals(filter, search) {
     var sl = statusLabel[st]||st;
     var visits = h.visits||h.visitCount||1;
     var actIcon = actLabel[h.activity]||'🏥';
+    var visitChips = '';
+    if(h.visitDates&&h.visitDates.length){
+      visitChips='<div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px">'+
+        h.visitDates.map(function(d,i){return '<span style="font-size:10px;padding:2px 8px;border-radius:6px;background:var(--blue-light);color:var(--blue)">Visit '+(i+1)+': '+d+'</span>';}).join('')+
+      '</div>';
+    }
     return '<div class="srm-card">'+
       '<div class="srm-card-hdr">'+
         '<div style="display:flex;align-items:flex-start;gap:14px;flex:1">'+
@@ -2402,22 +2472,21 @@ function renderHospitals(filter, search) {
             '</div>'+
           '</div>'+
         '</div>'+
-        '<div style="display:flex;gap:6px;align-items:center">'+
-          '<div class="srm-actions">'+
-            '<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" data-action="editHospital" data-idx="'+idx+'">Edit</button>'+
-            '<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px;color:var(--coral);border-color:var(--coral)" data-action="deleteHospital" data-idx="'+idx+'">Delete</button>'+
-          '</div>'+
+        '<div class="srm-actions" style="display:flex;gap:6px">'+
+          '<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" data-action="editHospital" data-idx="'+idx+'">Edit</button>'+
+          '<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px;color:var(--coral);border-color:var(--coral)" data-action="deleteHospital" data-idx="'+idx+'">Delete</button>'+
         '</div>'+
       '</div>'+
       '<div class="srm-card-body">'+
-        '<div><div class="srm-field-label">Contact Person</div><div class="srm-field-val">'+(h.contact||h.person||'—')+'<br><span style="color:var(--muted);font-size:11px">'+(h.phone||'')+'</span></div></div>'+
-        '<div><div class="srm-field-label">First Visit</div><div class="srm-field-val">'+(h.firstVisit||h.date||'—')+'</div></div>'+
+        '<div><div class="srm-field-label">Contact</div><div class="srm-field-val">'+(h.contact||h.person||'—')+'<br><span style="color:var(--muted);font-size:11px">'+(h.phone||'')+'</span></div></div>'+
+        '<div><div class="srm-field-label">Total Visits</div><div style="font-size:24px;font-weight:700;color:var(--blue)">'+visits+'</div></div>'+
+        '<div><div class="srm-field-label">Next Action</div><div class="srm-field-val" style="color:var(--green);font-weight:600">'+(h.nextAction||'Plan visit')+'</div></div>'+
         '<div><div class="srm-field-label">Last Visit</div><div class="srm-field-val">'+(h.lastVisit||h.date||'—')+'</div></div>'+
-        '<div><div class="srm-field-label">Total Visits</div><div class="srm-field-val" style="font-size:18px;font-weight:700;color:var(--blue)">'+visits+'</div></div>'+
       '</div>'+
+      visitChips+
       (h.desc?'<div style="padding:8px 20px 12px;border-top:1px solid var(--border)"><div class="srm-field-label" style="margin-bottom:4px">Notes</div><div style="font-size:12px;color:var(--muted)">'+h.desc+'</div></div>':'')+
       '<div class="srm-card-footer">'+
-        '<div style="font-size:11px;color:var(--muted)">Next action: <span style="color:var(--text);font-weight:600">'+(h.nextAction||'Not set')+'</span></div>'+
+        '<div style="font-size:11px;color:var(--muted)">'+(h.nextAction?'🎯 '+h.nextAction:'No next action set')+'</div>'+
         '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px" onclick="logVisit('+idx+')">+ Log Visit</button>'+
       '</div>'+
     '</div>';
@@ -2585,20 +2654,29 @@ function addNewCollege(){
 function addHospital(){
   var name=(document.getElementById('newHospName')||{value:''}).value.trim();
   if(!name){alert('Please enter a hospital name.');return;}
+  var today=new Date().toISOString().split('T')[0];
   var existing=hospitals.findIndex(function(h){return h.name.toLowerCase()===name.toLowerCase();});
   if(existing>=0){
     var h=hospitals[existing];
-    var lastV=(document.getElementById('newHospLastVisit')||{value:''}).value||new Date().toISOString().split('T')[0];
-    h.visits=(h.visits||h.visitCount||1)+1;h.visitCount=h.visits;h.date=lastV;h.lastVisit=lastV;
+    var lastV=(document.getElementById('newHospLastVisit')||{value:''}).value||today;
+    h.visits=(parseInt(h.visits||h.visitCount)||0)+1;
+    h.visitCount=h.visits;
+    h.lastVisit=lastV;
+    if(!h.visitDates)h.visitDates=[];
+    h.visitDates.push(lastV);
     if((document.getElementById('newHospContact')||{value:''}).value)h.contact=document.getElementById('newHospContact').value.trim();
     if((document.getElementById('newHospDesc')||{value:''}).value)h.desc=document.getElementById('newHospDesc').value.trim();
-    saveData();closeModal('addHosp');
-    renderHospitals(window._hospTab||'all',(document.getElementById('hospSearch')||{value:''}).value.toLowerCase());
-    alert(name+' already exists. Visit count updated to '+h.visits+'.');
+    if((document.getElementById('newHospActivity')||{value:''}).value)h.activity=document.getElementById('newHospActivity').value;
+    if((document.getElementById('newHospStatus')||{value:''}).value)h.status=document.getElementById('newHospStatus').value;
+    saveData();closeModal('addHosp');renderHospitals();
+    alert(h.name+' updated. Total visits: '+h.visits);
     return;
   }
-  var firstV=(document.getElementById('newHospFirstVisit')||{value:''}).value||new Date().toISOString().split('T')[0];
+  var firstV=(document.getElementById('newHospFirstVisit')||{value:''}).value||today;
   var lastV=(document.getElementById('newHospLastVisit')||{value:''}).value||firstV;
+  var numVisits=parseInt((document.getElementById('newHospVisits')||{value:'1'}).value)||1;
+  var visitDates=[firstV];
+  if(lastV&&lastV!==firstV)visitDates.push(lastV);
   hospitals.push({
     sn:hospitals.length+1,name:name,
     addr:(document.getElementById('newHospAddr')||{value:''}).value.trim(),
@@ -2606,13 +2684,13 @@ function addHospital(){
     contact:(document.getElementById('newHospContact')||{value:''}).value.trim(),
     desc:(document.getElementById('newHospDesc')||{value:''}).value.trim(),
     activity:(document.getElementById('newHospActivity')||{value:''}).value,
-    firstVisit:firstV,date:lastV,lastVisit:lastV,
-    visits:parseInt((document.getElementById('newHospVisits')||{value:'1'}).value)||1,
-    visitCount:parseInt((document.getElementById('newHospVisits')||{value:'1'}).value)||1,
-    status:(document.getElementById('newHospStatus')||{value:'done'}).value||'done'
+    firstVisit:firstV,lastVisit:lastV,date:lastV,
+    visits:numVisits,visitCount:numVisits,
+    visitDates:visitDates,
+    status:(document.getElementById('newHospStatus')||{value:'pending'}).value||'pending',
+    nextAction:'Follow up'
   });
-  saveData();closeModal('addHosp');
-  renderHospitals(window._hospTab||'all',(document.getElementById('hospSearch')||{value:''}).value.toLowerCase());
+  saveData();closeModal('addHosp');renderHospitals();
 }
 function addNewHospital(){const name=(document.getElementById('newHospName')||{value:''}).value.trim();if(!name){alert('Please enter a hospital name.');return;}hospitals.push({sn:hospitals.length+1,name,addr:document.getElementById('newHospAddr').value.trim(),phone:document.getElementById('newHospPhone').value.trim(),desc:document.getElementById('newHospDesc').value.trim(),activity:document.getElementById('newHospActivity').value||'',date:document.getElementById('newHospDate').value.trim(),contact:document.getElementById('newHospContact').value.trim(),status:document.getElementById('newHospStatus').value||'pending'});['newHospName','newHospAddr','newHospPhone','newHospDate','newHospContact'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});closeModal('addHosp');renderHospitals(window._hospTab||'all');updateStats();saveAndNotify();}
 
@@ -3119,7 +3197,19 @@ function saveColleges(){saveLS('aaroh_colleges',JSON.stringify(colleges));}
 
 function filterEdu(status){window._colTab=status;var el=document.getElementById('eduStatusFilter');if(el)el.value=status;renderColleges();}
 function filterHosp(status){window._hospTab=status;var el=document.getElementById('hospStatusFilter');if(el)el.value=status;renderHospitals();}
-function logVisit(idx){var h=hospitals[idx];if(!h)return;var today=new Date().toISOString().split('T')[0];h.visits=(h.visits||1)+1;h.lastVisit=today;h.visitCount=h.visits;saveData();renderHospitals();alert('Visit logged for '+h.name+'. Total: '+h.visits);}
+function logVisit(idx){
+  var h=hospitals[idx];if(!h)return;
+  var today=new Date().toISOString().split('T')[0];
+  h.visits=(parseInt(h.visits||h.visitCount)||0)+1;
+  h.visitCount=h.visits;
+  h.lastVisit=today;
+  if(!h.firstVisit)h.firstVisit=today;
+  if(!h.visitDates)h.visitDates=[];
+  h.visitDates.push(today);
+  if(!h.date)h.date=today;
+  saveData();renderHospitals();
+  alert('Visit logged for '+h.name+'. Total visits: '+h.visits);
+}
 function exportColleges(){var csv='Name,Address,Contact,Topic,Participants,Presentations,Status\n';(colleges||[]).forEach(function(c){csv+='"'+c.name+'","'+(c.addr||'')+'","'+(c.contact||'')+'","'+(c.topic||c.programs||'')+'","'+(c.participants||0)+'","'+(c.presentations||0)+'","'+(c.status||'')+'"\n';});var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='colleges.csv';a.click();}
 function exportHospitals(){var csv='Name,Address,Contact,Phone,Activity,Visits,Status\n';(hospitals||[]).forEach(function(h){csv+='"'+h.name+'","'+(h.addr||'')+'","'+(h.contact||'')+'","'+(h.phone||'')+'","'+(h.activity||'')+'","'+(h.visits||1)+'","'+(h.status||'')+'"\n';});var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='hospitals.csv';a.click();}
 
