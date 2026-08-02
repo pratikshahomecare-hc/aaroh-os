@@ -2300,7 +2300,7 @@ function showPage(id, clickedItem) {
   if(id==='colleges'){renderColleges(window._colTab||'pending'); updateStats();}
   if(id==='hospitals'){renderHospitals(window._hospTab||'all'); updateStats();}
 
-    if(id==='colleges'){setTimeout(renderColleges,80);}  if(id==='training'){populateHospitalDropdown(); renderTrainings(window._trainTab||'all');}
+    if(id==='backup'){setTimeout(renderBackupPage,80);}if(id==='colleges'){setTimeout(renderColleges,80);}  if(id==='training'){populateHospitalDropdown(); renderTrainings(window._trainTab||'all');}
   if(id==='tours'){renderTours(window._tourTab||'all');}
   if(id==='meetings'){renderMeetings(window._meetTab||'all');}
   if(id==='dashboard'){updateStats();}
@@ -3620,6 +3620,52 @@ function autoSyncToCloud(){
   }
   next();
 }
+
+function renderBackupPage(){
+  // Data summary
+  var s=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+  s('bkPris',(_pris||[]).length);
+  s('bkFUs',(_fus||[]).length);
+  s('bkStories',((_wis&&_wis.story)||[]).length);
+  s('bkHospitals',(hospitals||[]).length);
+  s('bkColleges',(colleges||[]).length);
+  s('bkHealTasks',((_orgT&&_orgT.heal)||[]).length);
+  s('bkNamanTasks',((_orgT&&_orgT.naman)||[]).length);
+  s('bkTraining',(_lmsSessions||[]).length);
+  renderBackupSnapshots();
+}
+function renderBackupSnapshots(){
+  var c=document.getElementById('backupSnapshotList');
+  if(!c)return;
+  // Show the auto-backup snapshot
+  var snap=getLS('aaroh_auto_backup');
+  if(!snap){c.innerHTML='<div style="color:var(--hint);font-size:12px">No snapshots yet. Snapshots are created automatically every 5 minutes.</div>';return;}
+  try{
+    var data=JSON.parse(snap);
+    var keys=Object.keys(data.data||{}).length;
+    var ts=new Date(data.ts).toLocaleString();
+    c.innerHTML='<div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--content-bg);border-radius:8px">'+
+      '<div style="font-size:20px">💾</div>'+
+      '<div style="flex:1"><div style="font-size:13px;font-weight:600">Auto-snapshot</div><div style="font-size:11px;color:var(--muted)">Saved: '+ts+'</div><div style="font-size:11px;color:var(--muted)">'+keys+' data keys</div></div>'+
+      '<button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="restoreFromSnapshot()">Restore This</button>'+
+    '</div>';
+  }catch(e){c.innerHTML='<div style="color:var(--hint);font-size:12px">Snapshot data error.</div>';}
+}
+function restoreFromSnapshot(){
+  var snap=getLS('aaroh_auto_backup');
+  if(!snap){alert('No snapshot found.');return;}
+  if(!confirm('Restore from auto-snapshot? This will replace current data.'))return;
+  try{
+    var data=JSON.parse(snap);
+    var count=0;
+    Object.keys(data.data||{}).forEach(function(k){
+      var v=data.data[k];
+      if(v&&v!=='null'){localStorage.setItem(k,v);count++;}
+    });
+    alert('Restored '+count+' keys. Refreshing...');
+    setTimeout(function(){location.reload();},500);
+  }catch(e){alert('Restore error: '+e.message);}
+}
 (function(){if(typeof autoLocalBackup==='function')autoLocalBackup();},300000);
   console.log('Aaroh OS — live');
 })();
@@ -3762,5 +3808,78 @@ function restoreTodaysThought(){
     <div class="sr-tags" id="srTags"></div>
   </div>
 </div>
+
+<section class="page" id="page-backup">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px">
+    <div>
+      <div class="t-label">System · Data</div>
+      <div class="t-section" style="margin-top:4px">Backup &amp; Restore Centre</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:2px">All your data, always safe. Download anytime, restore anytime.</div>
+    </div>
+    <button class="btn btn-teal" onclick="exportBackup()">💾 Download Backup Now</button>
+  </div>
+
+  <!-- How it works -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px">
+    <div class="card" style="padding:16px;text-align:center">
+      <div style="font-size:24px;margin-bottom:8px">🔄</div>
+      <div style="font-size:12px;font-weight:600;margin-bottom:4px">Auto-saved every 5 min</div>
+      <div style="font-size:11px;color:var(--muted)">Snapshot stored in browser automatically</div>
+    </div>
+    <div class="card" style="padding:16px;text-align:center">
+      <div style="font-size:24px;margin-bottom:8px">☁</div>
+      <div style="font-size:12px;font-weight:600;margin-bottom:4px">Syncs to Supabase</div>
+      <div style="font-size:11px;color:var(--muted)">Cloud backup when internet available</div>
+    </div>
+    <div class="card" style="padding:16px;text-align:center">
+      <div style="font-size:24px;margin-bottom:8px">💾</div>
+      <div style="font-size:12px;font-weight:600;margin-bottom:4px">Download anytime</div>
+      <div style="font-size:11px;color:var(--muted)">JSON file saved to your computer</div>
+    </div>
+    <div class="card" style="padding:16px;text-align:center">
+      <div style="font-size:24px;margin-bottom:8px">📂</div>
+      <div style="font-size:12px;font-weight:600;margin-bottom:4px">Restore instantly</div>
+      <div style="font-size:11px;color:var(--muted)">Upload backup file to restore all data</div>
+    </div>
+  </div>
+
+  <!-- Backup actions -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+    <div class="card" style="padding:20px">
+      <div style="font-size:13px;font-weight:600;margin-bottom:6px">💾 Download Backup</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:14px">Downloads all your data as a JSON file. Save to Google Drive, email to yourself, or keep on your Mac.</div>
+      <button class="btn btn-teal" style="width:100%" onclick="exportBackup()">Download Full Backup</button>
+    </div>
+    <div class="card" style="padding:20px">
+      <div style="font-size:13px;font-weight:600;margin-bottom:6px">📂 Restore from File</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:14px">Upload a previously downloaded backup file. All your data will be restored instantly.</div>
+      <button class="btn btn-ghost" style="width:100%" onclick="triggerRestore()">Choose Backup File</button>
+    </div>
+  </div>
+
+  <!-- Current data summary -->
+  <div class="card" style="padding:20px;margin-bottom:16px">
+    <div style="font-size:13px;font-weight:600;margin-bottom:14px">📊 Current Data Summary</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px" id="backupDataSummary">
+      <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--green)" id="bkPris">0</div><div style="font-size:11px;color:var(--muted)">Priorities</div></div>
+      <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--blue)" id="bkFUs">0</div><div style="font-size:11px;color:var(--muted)">Follow-ups</div></div>
+      <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:#534AB7" id="bkStories">0</div><div style="font-size:11px;color:var(--muted)">Stories</div></div>
+      <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--amber-dark)" id="bkHospitals">0</div><div style="font-size:11px;color:var(--muted)">Hospitals</div></div>
+      <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--green)" id="bkColleges">0</div><div style="font-size:11px;color:var(--muted)">Colleges</div></div>
+      <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--coral)" id="bkHealTasks">0</div><div style="font-size:11px;color:var(--muted)">Heal Tasks</div></div>
+      <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--blue)" id="bkNamanTasks">0</div><div style="font-size:11px;color:var(--muted)">Naman Tasks</div></div>
+      <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:#3B6D11" id="bkTraining">0</div><div style="font-size:11px;color:var(--muted)">Training Sessions</div></div>
+    </div>
+  </div>
+
+  <!-- Local snapshots -->
+  <div class="card" style="padding:20px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <div style="font-size:13px;font-weight:600">🕐 Local Snapshots (auto-saved)</div>
+      <button class="btn btn-ghost" style="font-size:11px" onclick="renderBackupSnapshots()">Refresh</button>
+    </div>
+    <div id="backupSnapshotList"><div style="color:var(--hint);font-size:12px">Loading snapshots...</div></div>
+  </div>
+</section>
 </body>
 </html>
