@@ -3571,17 +3571,36 @@ function pushAllToCloud(){
   alert('Syncing '+keys.length+' keys to cloud. This takes a few seconds...');
 }
 (function(){
-    loadNotifs();loadDaily();loadPris();updatePriStats();loadFUs();updateFUStats();
-    loadCaps();loadGovt();updateGovtStats();loadOrgT();updateOrgStats('heal');updateOrgStats('naman');
-    loadWis();loadAaroh();loadColleges();loadLMS();
-    _notifs=buildLiveNotifs();_updateNotifBadge();
-    setTimeout(renderDashTop3,200);
-    setTimeout(renderKeyRelationships,250);
-    setTimeout(renderDashFollowUps,280);
-    setTimeout(renderDashLibrary,320);
-    setTimeout(restoreTodaysThought,360);
-    console.log('Aaroh OS — live');
-  });
+  // Load localStorage immediately
+  loadNotifs();loadDaily();loadPris();updatePriStats();loadFUs();updateFUStats();
+  loadCaps();loadGovt();updateGovtStats();loadOrgT();updateOrgStats('heal');updateOrgStats('naman');
+  loadWis();loadAaroh();loadColleges();loadLMS();
+  _notifs=buildLiveNotifs();_updateNotifBadge();
+  setTimeout(renderDashTop3,100);
+  setTimeout(renderKeyRelationships,150);
+  setTimeout(renderDashFollowUps,180);
+  setTimeout(renderDashLibrary,220);
+  setTimeout(restoreTodaysThought,260);
+  // Background Supabase sync
+  setTimeout(function(){if(_sb&&_sb.ready&&typeof autoSyncToCloud==='function')autoSyncToCloud();},3000);
+  setInterval(function(){if(_sb&&_sb.ready&&typeof autoSyncToCloud==='function')autoSyncToCloud();},120000);
+  setInterval
+function autoLocalBackup(){
+  try{
+    var snap={ts:new Date().toISOString(),data:{}};
+    for(var i=0;i<localStorage.length;i++){
+      var k=localStorage.key(i);
+      if(k&&(k.startsWith('aaroh_')||k.startsWith('ace_'))&&k!=='aaroh_auto_backup'){
+        var v=localStorage.getItem(k);
+        if(v&&v!=='null')snap.data[k]=v;
+      }
+    }
+    localStorage.setItem('aaroh_auto_backup',JSON.stringify(snap));
+  }catch(e){}
+}
+
+(function(){if(typeof autoLocalBackup==='function')autoLocalBackup();},300000);
+  console.log('Aaroh OS — live');
 })();
 
 function renderDashLibrary(){
