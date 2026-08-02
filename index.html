@@ -3485,29 +3485,30 @@ function renderMaterials(){
 
 // ── BACKUP & RESTORE ─────────────────────────────────────────────────────────
 function exportBackup(){
-  var keys=['aaroh_priorities','aaroh_followups','aaroh_wis_story','aaroh_wis_book',
-    'aaroh_wis_insight','aaroh_wis_studio','aaroh_heal_tasks','aaroh_naman_tasks',
-    'aaroh_captures','aaroh_govt','aaroh_colleges','aaroh_lms','aaroh_materials',
-    'aarohOS_v2'];
-  var backup={exported:new Date().toISOString(),user:'pratiksha',data:{}};
-  // Also include ace_ keys
-  for(var i=0;i<localStorage.length;i++){
-    var k=localStorage.key(i);
-    if(k&&(keys.indexOf(k)>=0||k.startsWith('ace_')||k.startsWith('aaroh_'))){
-      var v=localStorage.getItem(k);
-      if(v&&v!=='null'&&v!=='[]'&&v!=='{}')backup.data[k]=v;
+  try{
+    var backup={exported:new Date().toISOString(),user:'pratiksha',data:{}};
+    for(var i=0;i<localStorage.length;i++){
+      var k=localStorage.key(i);
+      if(k&&(k.startsWith('aaroh_')||k.startsWith('ace_'))){
+        var v=localStorage.getItem(k);
+        if(v&&v!=='null'&&v.length>2)backup.data[k]=v;
+      }
     }
+    var total=Object.keys(backup.data).length;
+    var str=JSON.stringify(backup,null,2);
+    var blob=new Blob([str],{type:'application/json'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');
+    a.href=url;
+    a.download='aaroh-backup-'+new Date().toISOString().split('T')[0]+'.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+    alert('✅ Backup saved! '+total+' keys.\nFile: aaroh-backup-'+new Date().toISOString().split('T')[0]+'.json');
+  }catch(err){
+    alert('Backup error: '+err.message);
   }
-  var total=Object.keys(backup.data).length;
-  var json=JSON.stringify(backup,null,2);
-  var blob=new Blob([json],{type:'application/json'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');
-  a.href=url;
-  a.download='aaroh-backup-'+new Date().toISOString().split('T')[0]+'.json';
-  a.click();
-  URL.revokeObjectURL(url);
-  alert('Backup downloaded! '+total+' data keys saved.\nStore this file safely — you can restore from it anytime.');
 }
 
 function importBackup(file){
