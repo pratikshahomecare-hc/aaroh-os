@@ -3597,6 +3597,29 @@ function autoLocalBackup(){
   }catch(e){}
 }
 
+
+function autoSyncToCloud(){
+  if(!_sb||!_sb.ready)return;
+  var keys=[];
+  for(var i=0;i<localStorage.length;i++){
+    var k=localStorage.key(i);
+    if(k&&(k.startsWith('aaroh_')||k.startsWith('ace_'))){
+      var v=localStorage.getItem(k);
+      if(v&&v!=='null'&&v.length>2)keys.push({k:k,v:v});
+    }
+  }
+  var idx=0;
+  function next(){
+    if(idx>=keys.length){
+      var el=document.getElementById('syncStatus');
+      if(el){el.textContent='☁ Synced';el.style.opacity='1';clearTimeout(el._t);el._t=setTimeout(function(){el.style.opacity='0';},2000);}
+      return;
+    }
+    var item=keys[idx++];
+    _sb.set(item.k,item.v).then(next).catch(next);
+  }
+  next();
+}
 (function(){if(typeof autoLocalBackup==='function')autoLocalBackup();},300000);
   console.log('Aaroh OS — live');
 })();
