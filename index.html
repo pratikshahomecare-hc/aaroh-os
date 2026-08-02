@@ -2195,39 +2195,44 @@ var _sb = {
 
 
 function _cloudLoad(){
-  if(!_sb.ready){console.log('Aaroh OS: running offline (localStorage only)');return Promise.resolve();}
-  return _sb.getAll().then(function(cloudData){
-    var count=Object.keys(cloudData).length;
-    console.log('Supabase returned',count,'keys');
-    if(count===0){
-      console.log('Aaroh OS: no cloud data — using localStorage');
-      return;
-    }
-    // SAFE merge: only overwrite if cloud value is non-empty and has real content
-    var updated=0;
+  // ALWAYS load from localStorage immediately - no waiting
+  console.log('Aaroh OS: loading from localStorage...');
+  if(!_sb.ready){
+    console.log('Aaroh OS: offline mode');
+    return Promise.resolve();
+  }
+  // Try Supabase in background with 5-second timeout
+  var timeout = new Promise(function(resolve){setTimeout(resolve, 5000);});
+  var supaFetch = _sb.getAll().then(function(cloudData){
+    var count = Object.keys(cloudData).length;
+    console.log('Supabase returned', count, 'keys');
+    if(count === 0) return;
     Object.keys(cloudData).forEach(function(k){
       try{
-        var cv=cloudData[k];
-        if(!cv||cv==='null'||cv==='[]'||cv==='{}')return; // skip empty cloud values
-        var lv=localStorage.getItem(k);
-        // For arrays: use whichever has MORE items
+        var cv = cloudData[k];
+        if(!cv || cv==='null' || cv==='[]' || cv==='{}') return;
+        var lv = localStorage.getItem(k);
         try{
-          var cp=JSON.parse(cv);
-          var lp=lv?JSON.parse(lv):null;
-          if(Array.isArray(cp)&&Array.isArray(lp)&&lp.length>cp.length){
-            // Local has more data - push local to cloud instead
-            _sb.set(k,lv);
-            return;
+          var cp = JSON.parse(cv);
+          var lp = lv ? JSON.parse(lv) : null;
+          if(Array.isArray(cp) && Array.isArray(lp) && lp.length > cp.length){
+            _sb.set(k, lv); return; // local has more - push to cloud
           }
         }catch(e){}
-        localStorage.setItem(k,cv);
-        updated++;
+        localStorage.setItem(k, cv);
       }catch(e){}
     });
-    console.log('Aaroh OS: synced',updated,'keys from Supabase');
+    console.log('Supabase sync complete:', count, 'keys');
+    // Re-render with fresh cloud data
+    loadPris(); loadFUs(); loadWis(); loadOrgT(); loadColleges();
+    setTimeout(renderDashTop3, 100);
+    setTimeout(renderDashFollowUps, 150);
+    setTimeout(renderDashLibrary, 200);
   }).catch(function(e){
-    console.warn('Supabase load failed - using localStorage:',e.message||e);
+    console.warn('Supabase unreachable - using localStorage only:', e.message||e);
   });
+  // Return immediately - don't wait for Supabase
+  return Promise.race([supaFetch, timeout]).then(function(){});
 }
 
 // Init Supabase
@@ -3186,9 +3191,29 @@ function loadColleges(){
 }
 function saveColleges(){saveLS('aaroh_colleges',JSON.stringify(colleges));}
 (function(){
-  _cloudLoad().then(function(){
-    console.log('init');
-  });
+  // Load localStorage data IMMEDIATELY - no waiting for cloud
+  loadNotifs();loadDaily();loadPris();updatePriStats();loadFUs();updateFUStats();
+  loadCaps();loadGovt();updateGovtStats();loadOrgT();updateOrgStats('heal');updateOrgStats('naman');
+  loadWis();loadAaroh();loadColleges();loadLMS();
+  _notifs=buildLiveNotifs();_updateNotifBadge();
+  setTimeout(renderDashTop3,100);
+  setTimeout(renderKeyRelationships,150);
+  setTimeout(renderDashFollowUps,180);
+  setTimeout(renderDashLibrary,220);
+  setTimeout(restoreTodaysThought,260);
+  // Then try Supabase in background - updates UI if newer data found
+  setTimeout(function(){
+    _cloudLoad().then(function(){
+      setTimeout(renderDashTop3,100);
+      setTimeout(renderDashFollowUps,150);
+      setTimeout(renderDashLibrary,200);
+      setTimeout(restoreTodaysThought,250);
+    });
+  }, 500);
+  // Auto-sync every 2 minutes
+  setInterval(function(){if(_sb.ready)autoSyncToCloud();},120000);
+  setInterval(autoLocalBackup,300000);
+  console.log('Aaroh OS — live');
 })();
 
 function filterEdu(status){window._colTab=status;var el=document.getElementById('eduStatusFilter');if(el)el.value=status;renderColleges();}
