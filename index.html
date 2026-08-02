@@ -2153,7 +2153,20 @@ var AAROH_CONFIG = {
 
 var _sb = {
   url:'', key:'', ready:false,
-  init:function(url,key){this.url=url;this.key=key;this.ready=!!(url&&key);console.log('Supabase init: URL set Key set ready:',this.ready);},
+  init:function(url,key){
+    this.url=url;this.key=key;this.ready=!!(url&&key);
+    console.log('Supabase init: URL set Key set ready:',this.ready);
+    // Test connectivity silently - disable if unreachable
+    if(this.ready){
+      var self=this;
+      fetch(url+'/rest/v1/',{method:'HEAD',headers:{'apikey':key},signal:AbortSignal.timeout(3000)})
+      .then(function(){console.log('Supabase: connected');})
+      .catch(function(){
+        console.log('Supabase: unreachable - using localStorage only (no errors)');
+        self.ready=false; // disable to stop error flooding
+      });
+    }
+  },
   _h:function(){return{'Content-Type':'application/json','apikey':this.key,'Authorization':'Bearer '+this.key,'Prefer':'return=minimal,resolution=merge-duplicates'};},
   set:function(k,v){
     if(!this.ready)return Promise.resolve(null);
