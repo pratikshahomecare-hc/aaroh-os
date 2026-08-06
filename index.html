@@ -839,6 +839,10 @@ body{
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
         Quick Capture
       </button>
+      <button class="sidebar-item" onclick="showPage('thought',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+        Today's Thought
+      </button>
     </div>
 
     <div class="sidebar-divider"></div>
@@ -1731,32 +1735,38 @@ body{
 
     <!-- ══ PRIORITIES ══ -->
     <section class="page" id="page-priorities">
-      <div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Today · Priorities</div><div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600">Priorities</div></div>
-      <div style="margin-bottom:28px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><div style="font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted)">Today's top 3</div><div style="font-size:11px;color:var(--hint)" id="priDailyDate"></div></div>
-        <div id="dailyPrioritiesContainer"></div>
-        <button class="btn btn-ghost btn-sm" style="margin-top:8px" onclick="addDailyPriority()">+ Add priority for today</button>
-      </div>
-      <div style="height:1px;background:var(--border);margin-bottom:24px"></div>
-      <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:14px"><div style="font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted)">All priorities</div><button class="btn btn-teal" onclick="openPriorityModal()">+ New priority</button></div>
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px">
-        <div class="card" style="padding:12px 14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Total</div><div style="font-size:22px;font-weight:700;color:var(--green)" id="priTotal">0</div></div>
-        <div class="card" style="padding:12px 14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Critical</div><div style="font-size:22px;font-weight:700;color:var(--coral)" id="priCritical">0</div></div>
-        <div class="card" style="padding:12px 14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">In Progress</div><div style="font-size:22px;font-weight:700;color:var(--amber-dark)" id="priInProgress">0</div></div>
-        <div class="card" style="padding:12px 14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Completed</div><div style="font-size:22px;font-weight:700;color:#3B6D11" id="priCompleted">0</div></div>
-        <div class="card" style="padding:12px 14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">On Hold</div><div style="font-size:22px;font-weight:700;color:var(--blue)" id="priOnHold">0</div></div>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Search priorities…" id="prioritySearch" oninput="renderPriorities()" style="flex:1;border:none;outline:none;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);background:transparent"></div>
-      <div style="display:flex;gap:0;margin-bottom:14px;border-bottom:1px solid var(--border)" id="priTabsRow">
-        <button class="page-tab active" onclick="setPriTab('all',this)">All</button>
-        <button class="page-tab" onclick="setPriTab('in_progress',this)">In Progress</button>
-        <button class="page-tab" onclick="setPriTab('not_started',this)">Not Started</button>
-        <button class="page-tab" onclick="setPriTab('completed',this)">Completed</button>
-        <button class="page-tab" onclick="setPriTab('on_hold',this)">On Hold</button>
-        <button class="page-tab" onclick="setPriTab('critical',this)">Critical</button>
-      </div>
-      <div id="prioritiesContainer"><div class="pri-empty">No priorities yet</div></div>
-    </section>
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px">
+    <div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Today · Priorities</div>
+      <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:600">Priorities</div>
+    </div>
+    <button class="btn btn-teal" onclick="openPriorityModal()">+ New priority</button>
+  </div>
+  <!-- Stats -->
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px">
+    <div class="card" style="padding:12px 14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Total</div><div style="font-size:22px;font-weight:700;color:var(--green)" id="priTotal">0</div></div>
+    <div class="card" style="padding:12px 14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Critical</div><div style="font-size:22px;font-weight:700;color:var(--coral)" id="priCritical">0</div></div>
+    <div class="card" style="padding:12px 14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">In Progress</div><div style="font-size:22px;font-weight:700;color:var(--blue)" id="priInProgress">0</div></div>
+    <div class="card" style="padding:12px 14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Completed</div><div style="font-size:22px;font-weight:700;color:#3B6D11" id="priCompleted">0</div></div>
+    <div class="card" style="padding:12px 14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">On Hold</div><div style="font-size:22px;font-weight:700;color:var(--hint)" id="priOnHold">0</div></div>
+  </div>
+  <!-- Search -->
+  <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:14px">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+    <input type="text" placeholder="Search priorities..." id="prioritySearch" style="border:none;outline:none;font-size:13px;color:var(--text);background:transparent;width:100%" oninput="renderPris()">
+  </div>
+  <!-- Tabs -->
+  <div class="page-tabs" style="margin-bottom:16px">
+    <button class="page-tab active" onclick="filterPri('all',this)">All</button>
+    <button class="page-tab" onclick="filterPri('in_progress',this)">In Progress</button>
+    <button class="page-tab" onclick="filterPri('not_started',this)">Not Started</button>
+    <button class="page-tab" onclick="filterPri('completed',this)">Completed</button>
+    <button class="page-tab" onclick="filterPri('on_hold',this)">On Hold</button>
+    <button class="page-tab" onclick="filterPri('critical',this)">Critical</button>
+  </div>
+  <!-- Priorities list -->
+  <div id="prioritiesContainer"></div>
+</section>
 
     <!-- ══ FOLLOW-UPS ══ -->
     <section class="page" id="page-followups">
@@ -1900,7 +1910,20 @@ body{
       <div id="namanTasksContainer"><div class="pri-empty">No tasks yet</div></div>
     </section>
 
-<section class="page" id="page-stories"><div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Wisdom · Stories</div><div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600">❤️ Stories</div><button class="btn btn-teal" onclick="openWisdomModal('story')">+ New story</button></div></div><div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Search stories…" id="storiesSearch" oninput="renderWisdom('story')" style="flex:1;border:none;outline:none;font-size:13px;font-family:'DM Sans',sans-serif;background:transparent"></div><div style="display:flex;gap:0;margin-bottom:16px;border-bottom:1px solid var(--border)" id="storiesTabsRow"><button class="page-tab active" onclick="setWisdomTab('story','all',this)">All</button><button class="page-tab" onclick="setWisdomTab('story','aging',this)">Aging</button><button class="page-tab" onclick="setWisdomTab('story','dignity',this)">Dignity</button><button class="page-tab" onclick="setWisdomTab('story','care',this)">Care</button></div><div id="storiesContainer"><div style="padding:40px;text-align:center;color:var(--hint);font-size:13px">No stories yet</div></div></section>
+<section class="page" id="page-stories">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px">
+    <div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Wisdom · Stories</div>
+      <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:600">❤️ Human Library</div>
+    </div>
+    <button class="btn btn-teal" onclick="openWisdomModal('story')">+ New story</button>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:16px">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+    <input type="text" placeholder="Search stories..." id="storySearch" style="border:none;outline:none;font-size:13px;width:100%;background:transparent" oninput="renderStories()">
+  </div>
+  <div id="storiesGrid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px"></div>
+</section>
 <section class="page" id="page-bookshelf"><div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Wisdom · Bookshelf</div><div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600">📚 Bookshelf</div><button class="btn btn-teal" onclick="openWisdomModal('book')">+ Add book</button></div></div><div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Search books…" id="bookshelfSearch" oninput="renderWisdom('book')" style="flex:1;border:none;outline:none;font-size:13px;font-family:'DM Sans',sans-serif;background:transparent"></div><div style="display:flex;gap:0;margin-bottom:16px;border-bottom:1px solid var(--border)" id="bookshelfTabsRow"><button class="page-tab active" onclick="setWisdomTab('book','all',this)">All</button><button class="page-tab" onclick="setWisdomTab('book','reading',this)">Reading</button><button class="page-tab" onclick="setWisdomTab('book','completed',this)">Completed</button><button class="page-tab" onclick="setWisdomTab('book','Book',this)">Books</button><button class="page-tab" onclick="setWisdomTab('book','Article',this)">Articles</button></div><div id="bookshelfContainer"><div style="padding:40px;text-align:center;color:var(--hint);font-size:13px">No books yet</div></div></section>
 <section class="page" id="page-insights"><div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Wisdom · Insights</div><div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600">🔍 Insights</div><button class="btn btn-teal" onclick="openWisdomModal('insight')">+ New insight</button></div></div><div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Search insights…" id="insightsSearch" oninput="renderWisdom('insight')" style="flex:1;border:none;outline:none;font-size:13px;font-family:'DM Sans',sans-serif;background:transparent"></div><div style="display:flex;gap:0;margin-bottom:16px;border-bottom:1px solid var(--border)" id="insightsTabsRow"><button class="page-tab active" onclick="setWisdomTab('insight','all',this)">All</button><button class="page-tab" onclick="setWisdomTab('insight','Aging',this)">Aging</button><button class="page-tab" onclick="setWisdomTab('insight','Policy',this)">Policy</button><button class="page-tab" onclick="setWisdomTab('insight','Research',this)">Research</button></div><div id="insightsContainer"><div style="padding:40px;text-align:center;color:var(--hint);font-size:13px">No insights yet</div></div></section>
 <section class="page" id="page-studio"><div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Wisdom · Studio</div><div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600">✍️ Studio</div><button class="btn btn-teal" onclick="openWisdomModal('studio')">+ New piece</button></div></div><div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Search pieces…" id="studioSearch" oninput="renderWisdom('studio')" style="flex:1;border:none;outline:none;font-size:13px;font-family:'DM Sans',sans-serif;background:transparent"></div><div style="display:flex;gap:0;margin-bottom:16px;border-bottom:1px solid var(--border)" id="studioTabsRow"><button class="page-tab active" onclick="setWisdomTab('studio','all',this)">All</button><button class="page-tab" onclick="setWisdomTab('studio','Draft',this)">Drafts</button><button class="page-tab" onclick="setWisdomTab('studio','In Progress',this)">In Progress</button><button class="page-tab" onclick="setWisdomTab('studio','Published',this)">Published</button><button class="page-tab" onclick="setWisdomTab('studio','Article',this)">Articles</button><button class="page-tab" onclick="setWisdomTab('studio','Book Chapter',this)">Book</button></div><div id="studioContainer"><div style="padding:40px;text-align:center;color:var(--hint);font-size:13px">No pieces yet</div></div></section>
@@ -2304,7 +2327,7 @@ function showPage(id, clickedItem) {
   if(id==='colleges'){renderColleges(window._colTab||'pending'); updateStats();}
   if(id==='hospitals'){renderHospitals(window._hospTab||'all'); updateStats();}
 
-    if(id==='backup'){setTimeout(renderBackupPage,80);}if(id==='colleges'){setTimeout(renderColleges,80);}  if(id==='training'){populateHospitalDropdown(); renderTrainings(window._trainTab||'all');}
+    if(id==='backup'){setTimeout(renderBackupPage,80);}if(id==='thought'){setTimeout(renderThoughtPage,80);}if(id==='stories'){setTimeout(renderStories,80);}if(id==='colleges'){setTimeout(renderColleges,80);}  if(id==='training'){populateHospitalDropdown(); renderTrainings(window._trainTab||'all');}
   if(id==='tours'){renderTours(window._tourTab||'all');}
   if(id==='meetings'){renderMeetings(window._meetTab||'all');}
   if(id==='dashboard'){updateStats();}
@@ -3670,6 +3693,56 @@ function restoreFromSnapshot(){
     setTimeout(function(){location.reload();},500);
   }catch(e){alert('Restore error: '+e.message);}
 }
+
+function filterPri(status,btn){
+  window._priFilter=status;
+  document.querySelectorAll('.page-tab').forEach(function(t){t.classList.remove('active');});
+  if(btn)btn.classList.add('active');
+  renderPris();
+}
+
+function renderThoughtPage(){
+  var today=new Date();
+  var dateStr=today.toISOString().split('T')[0];
+  var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var label=months[today.getMonth()]+' '+today.getDate()+', '+today.getFullYear();
+  var el=document.getElementById('thoughtTodayDate');
+  if(el)el.textContent='Today — '+label;
+  // Load today's thought into input
+  var saved=JSON.parse(getLS('aaroh_thoughts')||'[]');
+  var todayEntry=saved.find(function(t){return t.date===dateStr;});
+  var inp=document.getElementById('thoughtInput');
+  if(inp)inp.textContent=todayEntry?todayEntry.thought:'';
+  // Render all thoughts
+  var list=document.getElementById('thoughtsList');
+  if(!list)return;
+  if(!saved.length){list.innerHTML='<div style="color:var(--hint);font-size:13px;padding:20px 0">No thoughts saved yet. Write your first one above.</div>';return;}
+  list.innerHTML=saved.slice().reverse().map(function(t){
+    var d=new Date(t.date);
+    var dl=months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();
+    var isToday=t.date===dateStr;
+    return '<div class="card" style="padding:20px;margin-bottom:12px'+(isToday?';border-left:3px solid var(--green)':'')+'">'+(isToday?'<div style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--green);margin-bottom:6px">Today</div>':'')+
+      '<div style="font-size:11px;color:var(--hint);margin-bottom:8px">'+dl+'</div>'+
+      '<div style="font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:var(--text);line-height:1.8">'+t.thought+'</div>'+
+    '</div>';
+  }).join('');
+}
+function saveThought(){
+  var inp=document.getElementById('thoughtInput');
+  if(!inp)return;
+  var text=inp.textContent.trim();
+  if(!text){alert('Please write a thought first.');return;}
+  var dateStr=new Date().toISOString().split('T')[0];
+  var saved=JSON.parse(getLS('aaroh_thoughts')||'[]');
+  var idx=saved.findIndex(function(t){return t.date===dateStr;});
+  if(idx>=0)saved[idx].thought=text;
+  else saved.push({date:dateStr,thought:text,created:new Date().toISOString()});
+  saveLS('aaroh_thoughts',JSON.stringify(saved));
+  // Also save to ace_todaysThought for dashboard
+  saveLS('ace_todaysThought',text);
+  renderThoughtPage();
+  alert('Thought saved! ✓');
+}
 (function(){if(typeof autoLocalBackup==='function')autoLocalBackup();},300000);
   console.log('Aaroh OS — live');
 })();
@@ -3884,6 +3957,26 @@ function restoreTodaysThought(){
     </div>
     <div id="backupSnapshotList"><div style="color:var(--hint);font-size:12px">Loading snapshots...</div></div>
   </div>
+</section>
+
+<section class="page" id="page-thought">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px">
+    <div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Daily · Reflection</div>
+      <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:600">Thought of the Day</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:4px">Every thought you write is saved here permanently.</div>
+    </div>
+    <button class="btn btn-teal" onclick="saveThought()">Save Today's Thought</button>
+  </div>
+  <!-- Today's input -->
+  <div class="card" style="padding:24px;margin-bottom:20px">
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--green);margin-bottom:10px" id="thoughtTodayDate"></div>
+    <div id="thoughtInput" contenteditable="true" style="font-family:'Playfair Display',serif;font-size:17px;font-style:italic;color:var(--text);line-height:1.8;outline:none;min-height:60px;border-bottom:1px dashed var(--border);padding-bottom:12px;margin-bottom:10px" placeholder="Write your thought for today..."></div>
+    <div style="font-size:11px;color:var(--hint)">Click to write · Auto-saves when you click Save</div>
+  </div>
+  <!-- All saved thoughts -->
+  <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:12px">All Saved Thoughts</div>
+  <div id="thoughtsList"></div>
 </section>
 </body>
 </html>
