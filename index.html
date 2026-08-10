@@ -2936,7 +2936,62 @@ function openPriorityModal(idx){var ie=typeof idx==='number'&&_pris[idx];documen
 function savePri(){var t=document.getElementById('priTitle').value.trim();if(!t){alert('Please enter a title.');return;}var ei=parseInt(document.getElementById('priEI').value);var item={title:t,org:document.getElementById('priOrg').value,cat:document.getElementById('priCat').value.trim(),level:document.getElementById('priLevel').value,goal:document.getElementById('priGoal').value.trim(),desc:document.getElementById('priDesc').value.trim(),dl:document.getElementById('priDL').value,prog:Math.max(0,Math.min(100,parseInt(document.getElementById('priProg').value)||0)),status:document.getElementById('priStatus').value,notes:document.getElementById('priNotes').value.trim()};if(ei>=0&&_pris[ei])_pris[ei]=item;else _pris.unshift(item);savePris();closeModal('priority');renderPris();updatePriStats();}
 function delPri(i){if(!confirm('Delete?'))return;_pris.splice(i,1);savePris();renderPris();updatePriStats();}
 function setPriTab(tab,btn){_priTab=tab;document.querySelectorAll('#priTabsRow .page-tab').forEach(function(b){b.classList.remove('active');});if(btn)btn.classList.add('active');renderPris();}
-function renderPris(){var c=document.getElementById('prioritiesContainer');if(!c)return;var q=(document.getElementById('prioritySearch')||{value:''}).value.toLowerCase();var lc={critical:'lcrit',high:'lhigh',medium:'lmed',low:'llow'};var sl={not_started:'Not started',in_progress:'In progress',completed:'Completed',on_hold:'On hold'};var sc={not_started:'var(--hint)',in_progress:'var(--amber-dark)',completed:'#3B6D11',on_hold:'var(--blue)'};var list=_pris.filter(function(p){var tab=_priTab==='all'||(_priTab==='critical'&&p.level==='critical')||p.status===_priTab;var s=!q||(p.title||'').toLowerCase().includes(q)||(p.goal||'').toLowerCase().includes(q);return tab&&s;});if(!list.length){c.innerHTML='<div style="padding:40px;text-align:center;color:var(--hint);font-size:13px">No priorities found</div>';return;}c.innerHTML=list.map(function(p){var i=_pris.indexOf(p);return'<div class="pcard"><div class="pcard-hdr"><div class="pcard-title">'+p.title+'</div><div style="display:flex;gap:4px;align-items:center;flex-shrink:0"><span class="pill '+(lc[p.level]||'lmed')+'" style="font-size:10px;padding:1px 8px">'+(p.level||'medium')+'</span><button class="btn btn-ghost btn-sm" onclick="openPriorityModal('+i+')">Edit</button><button class="btn btn-ghost btn-sm" style="color:var(--coral);border-color:var(--coral)" onclick="delPri('+i+')">Del</button></div></div><div class="pmeta">'+(p.org?'<div><div class="pml">Org</div><div class="pmv">'+p.org+'</div></div>':'')+(p.cat?'<div><div class="pml">Cat</div><div class="pmv">'+p.cat+'</div></div>':'')+'<div><div class="pml">Status</div><div class="pmv" style="color:'+(sc[p.status]||'var(--hint)')+';font-weight:600">'+(sl[p.status]||p.status)+'</div></div>'+(p.dl?'<div><div class="pml">Deadline</div><div class="pmv">'+p.dl+'</div></div>':'')+'</div>'+(p.goal?'<div class="pgoal">'+p.goal+'</div>':'')+'<div style="display:flex;align-items:center;gap:12px"><div style="flex:1"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:10px;color:var(--muted)">Progress</span><span style="font-size:11px;font-weight:600;color:var(--green)">'+(p.prog||0)+'%</span></div><div style="height:4px;background:var(--border);border-radius:2px;overflow:hidden"><div style="height:100%;border-radius:2px;background:var(--green);width:'+(p.prog||0)+'%"></div></div></div><input type="range" min="0" max="100" value="'+(p.prog||0)+'" style="width:80px;accent-color:var(--green)" onchange="_priSlide('+i+',this.value)"></div></div>';}).join('');}
+function renderPris(){
+  var c=document.getElementById('prioritiesContainer');
+  if(!c)return;
+  var q=(document.getElementById('prioritySearch')||{value:''}).value.toLowerCase();
+  var filter=window._priFilter||'all';
+  var priList=_pris||[];
+  // Show newest first
+  var sorted=priList.slice().reverse();
+  var priColor={critical:'color:var(--coral);background:var(--coral-light)',high:'color:var(--amber-dark);background:var(--amber-light)',medium:'color:var(--blue);background:var(--blue-light)',low:'color:var(--hint);background:var(--border)'};
+  var stColor={not_started:'color:var(--hint);background:var(--border)',in_progress:'color:var(--blue);background:var(--blue-light)',completed:'color:#3B6D11;background:#e8f5e9',on_hold:'color:var(--amber-dark);background:var(--amber-light)'};
+  var stLabel={not_started:'Not started',in_progress:'In progress',completed:'Completed',on_hold:'On hold'};
+  // Update stats
+  var s=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+  s('priTotal',priList.length);
+  s('priCritical',priList.filter(function(p){return p.priority==='critical';}).length);
+  s('priInProgress',priList.filter(function(p){return p.status==='in_progress';}).length);
+  s('priCompleted',priList.filter(function(p){return p.status==='completed';}).length);
+  s('priOnHold',priList.filter(function(p){return p.status==='on_hold';}).length);
+  var filtered=sorted.filter(function(p){
+    var mq=!q||(p.title||p.text||'').toLowerCase().includes(q)||(p.goal||'').toLowerCase().includes(q)||(p.org||'').toLowerCase().includes(q);
+    var mf=filter==='all'||(filter==='critical'&&p.priority==='critical')||p.status===filter;
+    return mq&&mf;
+  });
+  if(!filtered.length){
+    c.innerHTML='<div style="padding:40px;text-align:center;color:var(--hint)">No priorities found. Click + New priority to add one.</div>';
+    return;
+  }
+  c.innerHTML=filtered.map(function(p,fi){
+    var idx=priList.indexOf(p);
+    var pri=p.priority||'high';
+    var st=p.status||'not_started';
+    var pc=priColor[pri]||priColor.high;
+    var sc=stColor[st]||stColor.not_started;
+    var sl=stLabel[st]||st;
+    return '<div class="card" style="padding:20px 24px;margin-bottom:12px">'+
+      '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">'+
+        '<div style="flex:1">'+
+          '<div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px">'+(p.title||p.text||'')+'</div>'+
+          '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">'+
+            '<span style="font-size:10px;font-weight:600;padding:2px 10px;border-radius:10px;'+pc+'">'+pri+'</span>'+
+            '<span style="font-size:10px;font-weight:600;padding:2px 10px;border-radius:10px;'+sc+'">'+sl+'</span>'+
+            (p.org?'<span style="font-size:11px;color:var(--muted)">'+p.org+'</span>':'')+
+            (p.cat?'<span style="font-size:11px;color:var(--hint)">· '+p.cat+'</span>':'')+
+            (p.deadline?'<span style="font-size:11px;color:var(--hint)">Due: '+p.deadline+'</span>':'')+
+          '</div>'+
+        '</div>'+
+        '<div style="display:flex;gap:6px;flex-shrink:0;margin-left:12px">'+
+          '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px" onclick="editPriority('+idx+')">Edit</button>'+
+          '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px;color:var(--coral);border-color:var(--coral)" onclick="deletePriority('+idx+')">Del</button>'+
+        '</div>'+
+      '</div>'+
+      (p.goal?'<div style="font-size:13px;color:var(--text-2);line-height:1.6;padding:10px 14px;background:var(--content-bg);border-radius:8px;border-left:3px solid var(--green)">'+p.goal+'</div>':'')+
+      (p.progress!==undefined?'<div style="margin-top:10px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--hint);margin-bottom:4px"><span>Progress</span><span>'+p.progress+'%</span></div><div style="height:5px;background:var(--border);border-radius:3px"><div style="height:100%;width:'+p.progress+'%;background:var(--green);border-radius:3px"></div></div></div>':'')+
+    '</div>';
+  }).join('');
+}
 function _priSlide(i,v){_pris[i].prog=parseInt(v);savePris();renderPris();updatePriStats();}
 function updatePriStats(){var s=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};s('priTotal',_pris.length);s('priCritical',_pris.filter(function(p){return p.level==='critical';}).length);s('priInProgress',_pris.filter(function(p){return p.status==='in_progress';}).length);s('priCompleted',_pris.filter(function(p){return p.status==='completed';}).length);s('priOnHold',_pris.filter(function(p){return p.status==='on_hold';}).length);}
 
@@ -3426,24 +3481,33 @@ function lmsCalDayClick(date){document.getElementById('lmsDate').value=date;open
 function openLMSAdd(){openModal('lmsAdd');}
 
 function saveLMSSession(){
-  var title=document.getElementById('lmsTitle').value.trim();
+  var titleEl=document.getElementById('lmsTitle');
+  var title=titleEl?titleEl.value.trim():'';
   if(!title){alert('Please enter a training title.');return;}
-  _lmsSessions.push({
+  var session={
     title:title,
-    org:document.getElementById('lmsOrg').value||'both',
-    dept:document.getElementById('lmsDept').value.trim(),
-    date:document.getElementById('lmsDate').value,
-    duration:parseFloat(document.getElementById('lmsDuration').value)||1,
-    trainer:document.getElementById('lmsTrainer').value.trim(),
-    venue:document.getElementById('lmsVenue').value.trim(),
-    participants:parseInt(document.getElementById('lmsParticipants').value)||0,
-    status:document.getElementById('lmsStatus').value||'scheduled',
-    notes:document.getElementById('lmsNotes').value.trim(),
+    org:(document.getElementById('lmsOrg')||{value:'both'}).value||'both',
+    dept:(document.getElementById('lmsDept')||{value:''}).value.trim(),
+    date:(document.getElementById('lmsDate')||{value:''}).value,
+    duration:parseFloat((document.getElementById('lmsDuration')||{value:'1'}).value)||1,
+    trainer:(document.getElementById('lmsTrainer')||{value:''}).value.trim(),
+    venue:(document.getElementById('lmsVenue')||{value:''}).value.trim(),
+    participants:parseInt((document.getElementById('lmsParticipants')||{value:'0'}).value)||0,
+    status:(document.getElementById('lmsStatus')||{value:'scheduled'}).value||'scheduled',
+    notes:(document.getElementById('lmsNotes')||{value:''}).value.trim(),
     created:new Date().toISOString()
+  };
+  _lmsSessions.push(session);
+  saveLMS();
+  closeModal('lmsAdd');
+  renderLMS();
+  renderLMSSessions();
+  renderLMSCal();
+  // Clear form
+  ['lmsTitle','lmsDept','lmsDate','lmsDuration','lmsTrainer','lmsVenue','lmsParticipants','lmsNotes'].forEach(function(id){
+    var e=document.getElementById(id);if(e)e.value='';
   });
-  saveLMS();closeModal('lmsAdd');
-  renderLMS();renderLMSSessions();renderLMSCal();
-  ['lmsTitle','lmsDept','lmsDate','lmsDuration','lmsTrainer','lmsVenue','lmsParticipants','lmsNotes'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});
+  alert('Training session saved: '+title);
 }
 
 function delLMSSession(idx){
@@ -3708,22 +3772,24 @@ function renderThoughtPage(){
   var label=months[today.getMonth()]+' '+today.getDate()+', '+today.getFullYear();
   var el=document.getElementById('thoughtTodayDate');
   if(el)el.textContent='Today — '+label;
-  // Load today's thought into input
   var saved=JSON.parse(getLS('aaroh_thoughts')||'[]');
   var todayEntry=saved.find(function(t){return t.date===dateStr;});
   var inp=document.getElementById('thoughtInput');
-  if(inp)inp.textContent=todayEntry?todayEntry.thought:'';
-  // Render all thoughts
+  if(inp&&todayEntry)inp.textContent=todayEntry.thought;
   var list=document.getElementById('thoughtsList');
   if(!list)return;
-  if(!saved.length){list.innerHTML='<div style="color:var(--hint);font-size:13px;padding:20px 0">No thoughts saved yet. Write your first one above.</div>';return;}
+  if(!saved.length){
+    list.innerHTML='<div style="color:var(--hint);font-size:13px;padding:20px 0">No thoughts saved yet. Write your first one above and click Save.</div>';
+    return;
+  }
   list.innerHTML=saved.slice().reverse().map(function(t){
     var d=new Date(t.date);
     var dl=months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();
     var isToday=t.date===dateStr;
-    return '<div class="card" style="padding:20px;margin-bottom:12px'+(isToday?';border-left:3px solid var(--green)':'')+'">'+(isToday?'<div style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--green);margin-bottom:6px">Today</div>':'')+
-      '<div style="font-size:11px;color:var(--hint);margin-bottom:8px">'+dl+'</div>'+
-      '<div style="font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:var(--text);line-height:1.8">'+t.thought+'</div>'+
+    return '<div class="card" style="padding:20px;margin-bottom:12px'+(isToday?';border-left:3px solid var(--green)':'')+'">'+
+      (isToday?'<div style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--green);margin-bottom:4px">TODAY</div>':'')+
+      '<div style="font-size:11px;color:var(--hint);margin-bottom:10px">'+dl+'</div>'+
+      '<div style="font-family:'Playfair Display',serif;font-size:16px;font-style:italic;color:var(--text);line-height:1.8">'+t.thought+'</div>'+
     '</div>';
   }).join('');
 }
@@ -3887,75 +3953,77 @@ function restoreTodaysThought(){
 </div>
 
 <section class="page" id="page-backup">
-  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px">
-    <div>
-      <div class="t-label">System · Data</div>
-      <div class="t-section" style="margin-top:4px">Backup &amp; Restore Centre</div>
-      <div style="font-size:13px;color:var(--muted);margin-top:2px">All your data, always safe. Download anytime, restore anytime.</div>
-    </div>
-    <button class="btn btn-teal" onclick="exportBackup()">💾 Download Backup Now</button>
+  <div style="margin-bottom:24px">
+    <div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">System · Data Safety</div>
+    <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:600">Backup &amp; Restore</div>
+    <div style="font-size:13px;color:var(--muted);margin-top:4px">Your data is always safe. Download, sync, or restore anytime.</div>
   </div>
 
-  <!-- How it works -->
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px">
-    <div class="card" style="padding:16px;text-align:center">
-      <div style="font-size:24px;margin-bottom:8px">🔄</div>
-      <div style="font-size:12px;font-weight:600;margin-bottom:4px">Auto-saved every 5 min</div>
-      <div style="font-size:11px;color:var(--muted)">Snapshot stored in browser automatically</div>
+  <!-- Action cards -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px">
+    <div class="card" style="padding:22px;text-align:center">
+      <div style="font-size:32px;margin-bottom:10px">💾</div>
+      <div style="font-size:14px;font-weight:600;margin-bottom:6px">Download Backup</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:14px">Saves all your data as a file to your computer. Do this weekly.</div>
+      <button class="btn btn-teal" style="width:100%" onclick="exportBackup()">Download Now</button>
     </div>
-    <div class="card" style="padding:16px;text-align:center">
-      <div style="font-size:24px;margin-bottom:8px">☁</div>
-      <div style="font-size:12px;font-weight:600;margin-bottom:4px">Syncs to Supabase</div>
-      <div style="font-size:11px;color:var(--muted)">Cloud backup when internet available</div>
+    <div class="card" style="padding:22px;text-align:center">
+      <div style="font-size:32px;margin-bottom:10px">☁</div>
+      <div style="font-size:14px;font-weight:600;margin-bottom:6px">Sync to Cloud</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:14px">Pushes all your data to Supabase cloud storage right now.</div>
+      <button class="btn btn-ghost" style="width:100%" onclick="autoSyncToCloud&&autoSyncToCloud()">Sync Now</button>
     </div>
-    <div class="card" style="padding:16px;text-align:center">
-      <div style="font-size:24px;margin-bottom:8px">💾</div>
-      <div style="font-size:12px;font-weight:600;margin-bottom:4px">Download anytime</div>
-      <div style="font-size:11px;color:var(--muted)">JSON file saved to your computer</div>
-    </div>
-    <div class="card" style="padding:16px;text-align:center">
-      <div style="font-size:24px;margin-bottom:8px">📂</div>
-      <div style="font-size:12px;font-weight:600;margin-bottom:4px">Restore instantly</div>
-      <div style="font-size:11px;color:var(--muted)">Upload backup file to restore all data</div>
+    <div class="card" style="padding:22px;text-align:center">
+      <div style="font-size:32px;margin-bottom:10px">📂</div>
+      <div style="font-size:14px;font-weight:600;margin-bottom:6px">Restore from File</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:14px">Upload a backup file to restore all your data instantly.</div>
+      <button class="btn btn-ghost" style="width:100%" onclick="triggerRestore()">Choose File</button>
     </div>
   </div>
 
-  <!-- Backup actions -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
-    <div class="card" style="padding:20px">
-      <div style="font-size:13px;font-weight:600;margin-bottom:6px">💾 Download Backup</div>
-      <div style="font-size:12px;color:var(--muted);margin-bottom:14px">Downloads all your data as a JSON file. Save to Google Drive, email to yourself, or keep on your Mac.</div>
-      <button class="btn btn-teal" style="width:100%" onclick="exportBackup()">Download Full Backup</button>
-    </div>
-    <div class="card" style="padding:20px">
-      <div style="font-size:13px;font-weight:600;margin-bottom:6px">📂 Restore from File</div>
-      <div style="font-size:12px;color:var(--muted);margin-bottom:14px">Upload a previously downloaded backup file. All your data will be restored instantly.</div>
-      <button class="btn btn-ghost" style="width:100%" onclick="triggerRestore()">Choose Backup File</button>
+  <!-- Data summary -->
+  <div class="card" style="padding:22px;margin-bottom:20px">
+    <div style="font-size:13px;font-weight:600;margin-bottom:16px">Your Data Summary</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px" id="backupDataSummary">
+      <div style="text-align:center;padding:12px;background:var(--content-bg);border-radius:8px">
+        <div style="font-size:24px;font-weight:700;color:var(--green)" id="bkPris">-</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">Priorities</div>
+      </div>
+      <div style="text-align:center;padding:12px;background:var(--content-bg);border-radius:8px">
+        <div style="font-size:24px;font-weight:700;color:var(--blue)" id="bkFUs">-</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">Follow-ups</div>
+      </div>
+      <div style="text-align:center;padding:12px;background:var(--content-bg);border-radius:8px">
+        <div style="font-size:24px;font-weight:700;color:#534AB7" id="bkStories">-</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">Stories</div>
+      </div>
+      <div style="text-align:center;padding:12px;background:var(--content-bg);border-radius:8px">
+        <div style="font-size:24px;font-weight:700;color:var(--amber-dark)" id="bkHospitals">-</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">Hospitals</div>
+      </div>
+      <div style="text-align:center;padding:12px;background:var(--content-bg);border-radius:8px">
+        <div style="font-size:24px;font-weight:700;color:var(--green)" id="bkColleges">-</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">Colleges</div>
+      </div>
+      <div style="text-align:center;padding:12px;background:var(--content-bg);border-radius:8px">
+        <div style="font-size:24px;font-weight:700;color:var(--coral)" id="bkHealTasks">-</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">Heal Tasks</div>
+      </div>
+      <div style="text-align:center;padding:12px;background:var(--content-bg);border-radius:8px">
+        <div style="font-size:24px;font-weight:700;color:var(--blue)" id="bkNamanTasks">-</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">Naman Tasks</div>
+      </div>
+      <div style="text-align:center;padding:12px;background:var(--content-bg);border-radius:8px">
+        <div style="font-size:24px;font-weight:700;color:#3B6D11" id="bkTraining">-</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">Training Sessions</div>
+      </div>
     </div>
   </div>
 
-  <!-- Current data summary -->
-  <div class="card" style="padding:20px;margin-bottom:16px">
-    <div style="font-size:13px;font-weight:600;margin-bottom:14px">📊 Current Data Summary</div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px" id="backupDataSummary">
-      <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--green)" id="bkPris">0</div><div style="font-size:11px;color:var(--muted)">Priorities</div></div>
-      <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--blue)" id="bkFUs">0</div><div style="font-size:11px;color:var(--muted)">Follow-ups</div></div>
-      <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:#534AB7" id="bkStories">0</div><div style="font-size:11px;color:var(--muted)">Stories</div></div>
-      <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--amber-dark)" id="bkHospitals">0</div><div style="font-size:11px;color:var(--muted)">Hospitals</div></div>
-      <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--green)" id="bkColleges">0</div><div style="font-size:11px;color:var(--muted)">Colleges</div></div>
-      <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--coral)" id="bkHealTasks">0</div><div style="font-size:11px;color:var(--muted)">Heal Tasks</div></div>
-      <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--blue)" id="bkNamanTasks">0</div><div style="font-size:11px;color:var(--muted)">Naman Tasks</div></div>
-      <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:#3B6D11" id="bkTraining">0</div><div style="font-size:11px;color:var(--muted)">Training Sessions</div></div>
-    </div>
-  </div>
-
-  <!-- Local snapshots -->
-  <div class="card" style="padding:20px">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-      <div style="font-size:13px;font-weight:600">🕐 Local Snapshots (auto-saved)</div>
-      <button class="btn btn-ghost" style="font-size:11px" onclick="renderBackupSnapshots()">Refresh</button>
-    </div>
-    <div id="backupSnapshotList"><div style="color:var(--hint);font-size:12px">Loading snapshots...</div></div>
+  <!-- Auto snapshot -->
+  <div class="card" style="padding:22px">
+    <div style="font-size:13px;font-weight:600;margin-bottom:14px">Auto-Snapshot (saved every 5 min)</div>
+    <div id="backupSnapshotList"><div style="color:var(--hint);font-size:13px">Loading...</div></div>
   </div>
 </section>
 
@@ -3964,18 +4032,16 @@ function restoreTodaysThought(){
     <div>
       <div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Daily · Reflection</div>
       <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:600">Thought of the Day</div>
-      <div style="font-size:13px;color:var(--muted);margin-top:4px">Every thought you write is saved here permanently.</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:4px">Every thought is saved permanently with its date.</div>
     </div>
     <button class="btn btn-teal" onclick="saveThought()">Save Today's Thought</button>
   </div>
-  <!-- Today's input -->
-  <div class="card" style="padding:24px;margin-bottom:20px">
-    <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--green);margin-bottom:10px" id="thoughtTodayDate"></div>
-    <div id="thoughtInput" contenteditable="true" style="font-family:'Playfair Display',serif;font-size:17px;font-style:italic;color:var(--text);line-height:1.8;outline:none;min-height:60px;border-bottom:1px dashed var(--border);padding-bottom:12px;margin-bottom:10px" placeholder="Write your thought for today..."></div>
-    <div style="font-size:11px;color:var(--hint)">Click to write · Auto-saves when you click Save</div>
+  <div class="card" style="padding:24px;margin-bottom:24px">
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--green);margin-bottom:10px" id="thoughtTodayDate">Today</div>
+    <div id="thoughtInput" contenteditable="true" style="font-family:'Playfair Display',serif;font-size:17px;font-style:italic;color:var(--text);line-height:1.8;outline:none;min-height:60px;border-bottom:1px dashed var(--border);padding-bottom:12px;margin-bottom:8px"></div>
+    <div style="font-size:11px;color:var(--hint)">Click above to write · Press Save when done</div>
   </div>
-  <!-- All saved thoughts -->
-  <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:12px">All Saved Thoughts</div>
+  <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:12px;letter-spacing:0.06em">All Saved Thoughts</div>
   <div id="thoughtsList"></div>
 </section>
 </body>
