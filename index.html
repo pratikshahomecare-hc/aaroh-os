@@ -3792,16 +3792,30 @@ function renderThoughtPage(){
     list.innerHTML='<div style="color:var(--hint);font-size:13px;padding:20px 0">No thoughts saved yet. Write your first one above and click Save.</div>';
     return;
   }
-  list.innerHTML=saved.slice().reverse().map(function(t){
+  var html2='';
+  saved.slice().reverse().forEach(function(t){
     var d=new Date(t.date);
     var dl=months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();
     var isToday=t.date===dateStr;
-    return '<div class="card" style="padding:20px;margin-bottom:12px'+(isToday?';border-left:3px solid var(--green)':'')+'">'+
-      (isToday?'<div style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--green);margin-bottom:4px">TODAY</div>':'')+
-      '<div style="font-size:11px;color:var(--hint);margin-bottom:10px">'+dl+'</div>'+
-      '<div style="font-family:'Playfair Display',serif;font-size:16px;font-style:italic;color:var(--text);line-height:1.8">'+t.thought+'</div>'+
-    '</div>';
-  }).join('');
+    var card=document.createElement('div');
+    card.className='card';
+    card.style.cssText='padding:20px;margin-bottom:12px'+(isToday?';border-left:3px solid var(--green)':'');
+    if(isToday){
+      var lbl=document.createElement('div');
+      lbl.style.cssText='font-size:9px;font-weight:700;text-transform:uppercase;color:var(--green);margin-bottom:4px';
+      lbl.textContent='TODAY';
+      card.appendChild(lbl);
+    }
+    var dt=document.createElement('div');
+    dt.style.cssText='font-size:11px;color:var(--hint);margin-bottom:10px';
+    dt.textContent=dl;
+    card.appendChild(dt);
+    var txt=document.createElement('div');
+    txt.style.cssText='font-size:16px;font-style:italic;color:var(--text);line-height:1.8';
+    txt.textContent=t.thought;
+    card.appendChild(txt);
+    list.appendChild(card);
+  });
 }
 function saveThought(){
   var inp=document.getElementById('thoughtInput');
