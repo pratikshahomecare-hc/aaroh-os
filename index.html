@@ -3660,7 +3660,6 @@ function pushAllToCloud(){
   alert('Syncing '+keys.length+' keys to cloud. This takes a few seconds...');
 }
 (function(){
-  // Load localStorage immediately
   loadNotifs();loadDaily();loadPris();updatePriStats();loadFUs();updateFUStats();
   loadCaps();loadGovt();updateGovtStats();loadOrgT();updateOrgStats('heal');updateOrgStats('naman');
   loadWis();loadAaroh();loadColleges();loadLMS();
@@ -3670,10 +3669,20 @@ function pushAllToCloud(){
   setTimeout(renderDashFollowUps,180);
   setTimeout(renderDashLibrary,220);
   setTimeout(restoreTodaysThought,260);
-  // Background Supabase sync
-  setTimeout(function(){if(_sb&&_sb.ready&&typeof autoSyncToCloud==='function')autoSyncToCloud();},3000);
-  setInterval(function(){if(_sb&&_sb.ready&&typeof autoSyncToCloud==='function')autoSyncToCloud();},120000);
-  setInterval
+  setTimeout(function(){
+    _cloudLoad().then(function(){
+      loadPris();loadFUs();loadWis();loadOrgT();loadColleges();
+      setTimeout(renderDashTop3,100);
+      setTimeout(renderDashFollowUps,150);
+      setTimeout(renderDashLibrary,200);
+      if(typeof autoSyncToCloud==='function')autoSyncToCloud();
+    });
+  },1000);
+  setInterval(function(){if(typeof autoSyncToCloud==='function'&&_sb&&_sb.ready)autoSyncToCloud();},120000);
+  setInterval(function(){if(typeof autoLocalBackup==='function')autoLocalBackup();},300000);
+  console.log('Aaroh OS — live');
+})();
+
 function autoLocalBackup(){
   try{
     var snap={ts:new Date().toISOString(),data:{}};
@@ -3687,6 +3696,7 @@ function autoLocalBackup(){
     localStorage.setItem('aaroh_auto_backup',JSON.stringify(snap));
   }catch(e){}
 }
+
 
 
 function autoSyncToCloud(){
@@ -3809,9 +3819,6 @@ function saveThought(){
   renderThoughtPage();
   alert('Thought saved! ✓');
 }
-(function(){if(typeof autoLocalBackup==='function')autoLocalBackup();},300000);
-  console.log('Aaroh OS — live');
-})();
 
 function renderDashLibrary(){
   var c=document.getElementById('dashLibraryContainer');
