@@ -4069,28 +4069,27 @@ function restoreTodaysThought(){
 </section>
 
 <section class="page" id="page-thought">
-  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px">
-    <div>
+  <div style="max-width:680px;margin:0 auto">
+
+    <!-- Header -->
+    <div style="margin-bottom:24px">
       <div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Daily · Reflection</div>
-      <div style="font-size:26px;font-weight:600;color:var(--text)">Thought of the Day</div>
-      <div style="font-size:13px;color:var(--muted);margin-top:4px">Every thought saved here permanently with its date.</div>
+      <div style="font-size:22px;font-weight:600;color:var(--text)">Thought of the Day</div>
     </div>
-    <button class="btn btn-teal" onclick="saveThought()">Save Thought</button>
-  </div>
 
-  <!-- Today entry box -->
-  <div class="card" style="padding:24px;margin-bottom:24px;border-left:4px solid var(--green)">
-    <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--green);margin-bottom:12px;letter-spacing:0.06em" id="thoughtTodayDate">Today</div>
-    <textarea id="thoughtInput" rows="4" placeholder="Write your thought for today... What are you thinking about? What is your reflection?" style="width:100%;border:none;outline:none;font-size:15px;color:var(--text);line-height:1.8;resize:vertical;background:transparent;font-family:inherit"></textarea>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">
-      <div style="font-size:11px;color:var(--hint)">Write freely. Your thought is private and saved permanently.</div>
-      <button class="btn btn-teal" onclick="saveThought()">Save</button>
+    <!-- Entry card -->
+    <div class="card" style="padding:20px;margin-bottom:20px">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--green);letter-spacing:0.06em;margin-bottom:10px" id="thoughtTodayDate">Today</div>
+      <textarea id="thoughtInput" rows="3" placeholder="What is on your mind today?" style="width:100%;border:none;outline:none;font-size:14px;color:var(--text);line-height:1.7;resize:none;background:transparent;font-family:inherit"></textarea>
+      <div style="display:flex;justify-content:flex-end;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
+        <button class="btn btn-teal" style="font-size:12px;padding:5px 16px" onclick="saveThought()">Save</button>
+      </div>
     </div>
-  </div>
 
-  <!-- All saved thoughts -->
-  <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:14px;letter-spacing:0.06em">All Saved Thoughts</div>
-  <div id="thoughtsList"></div>
+    <!-- Past thoughts -->
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--muted);letter-spacing:0.06em;margin-bottom:12px">Previous Thoughts</div>
+    <div id="thoughtsList"></div>
+  </div>
 </section>
 </body>
 </html>
