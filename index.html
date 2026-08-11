@@ -3791,14 +3791,12 @@ function renderResults(){
   var pris=_pris||[];
   var fus=_fus||[];
   var lms=_lmsSessions||[];
-  var today=new Date();
 
-  // ── KPIs ──────────────────────────────────────────────────────────────────
   var totalVisits=h.reduce(function(a,x){return a+(parseInt(x.visits||x.visitCount)||1);},0);
   var totalPres=c.reduce(function(a,x){return a+(parseInt(x.presentations||x.presentationCount)||0);},0);
   var totalPart=c.reduce(function(a,x){return a+(parseInt(x.participants)||0);},0);
   var fuPending=fus.filter(function(f){return f.status!=='completed';}).length;
-  var fuOverdue=fus.filter(function(f){return f.overdue||f.status==='overdue';}).length;
+  var fuOverdue=fus.filter(function(f){return f.overdue;}).length;
 
   var s=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
   s('kpiHospVisits',totalVisits);
@@ -3807,7 +3805,7 @@ function renderResults(){
   s('kpiFuPending',fuPending);
   s('kpiFuOverdue',fuOverdue);
 
-  // ── Hospital report ────────────────────────────────────────────────────────
+  // Hospital
   var hEl=document.getElementById('resultsHospitals');
   if(hEl){
     if(!h.length){hEl.innerHTML='<div style="color:var(--hint);font-size:13px">No hospitals added yet.</div>';}
@@ -3821,29 +3819,27 @@ function renderResults(){
         renderBar('MOU Signed',mou,h.length,'#534AB7')+
         renderBar('In Progress',pending,h.length,'var(--amber-dark)')+
         '<div style="margin-top:12px;font-size:12px;color:var(--muted)">Total visits logged: <strong>'+totalVisits+'</strong></div>'+
-        renderTopList('Most visited',h.slice().sort(function(a,b){return (parseInt(b.visits||1))-(parseInt(a.visits||1));}).slice(0,3).map(function(x){return x.name+' ('+( parseInt(x.visits||1))+' visits)';}));
+        renderTopList('Most visited',h.slice().sort(function(a,b){return (parseInt(b.visits||1))-(parseInt(a.visits||1));}).slice(0,3).map(function(x){return x.name+' ('+(parseInt(x.visits||1))+' visits)';}));
     }
   }
 
-  // ── College report ─────────────────────────────────────────────────────────
+  // Colleges
   var cEl=document.getElementById('resultsColleges');
   if(cEl){
     if(!c.length){cEl.innerHTML='<div style="color:var(--hint);font-size:13px">No colleges added yet.</div>';}
     else{
       var cActive=c.filter(function(x){return x.status==='done';}).length;
       var cSched=c.filter(function(x){return x.status==='scheduled';}).length;
-      var cComp=c.filter(function(x){return x.status==='completed';}).length;
       cEl.innerHTML=
         renderBar('Total Institutions',c.length,c.length,'var(--text)')+
         renderBar('Active Collaboration',cActive,c.length,'var(--green)')+
         renderBar('Scheduled',cSched,c.length,'var(--blue)')+
-        renderBar('Completed',cComp,c.length,'#534AB7')+
         '<div style="margin-top:12px;font-size:12px;color:var(--muted)">Total participants reached: <strong>'+totalPart+'</strong></div>'+
-        renderTopList('Top colleges by presentations',c.slice().sort(function(a,b){return (parseInt(b.presentations||0))-(parseInt(a.presentations||0));}).slice(0,3).map(function(x){return x.name+' ('+( parseInt(x.presentations||0))+' pres, '+(parseInt(x.participants)||0)+' participants)';}));
+        renderTopList('Top colleges',c.slice().sort(function(a,b){return (parseInt(b.presentations||0))-(parseInt(a.presentations||0));}).slice(0,3).map(function(x){return x.name+' ('+(parseInt(x.presentations||0))+' pres)';}));
     }
   }
 
-  // ── Priorities achievement ─────────────────────────────────────────────────
+  // Priorities
   var pEl=document.getElementById('resultsPriorities');
   if(pEl){
     if(!pris.length){pEl.innerHTML='<div style="color:var(--hint);font-size:13px">No priorities added yet.</div>';}
@@ -3851,35 +3847,27 @@ function renderResults(){
       var pComp=pris.filter(function(p){return p.status==='completed';}).length;
       var pProg=pris.filter(function(p){return p.status==='in_progress';}).length;
       var pNot=pris.filter(function(p){return p.status==='not_started';}).length;
-      var pHold=pris.filter(function(p){return p.status==='on_hold';}).length;
       var pct=pris.length?Math.round(pComp/pris.length*100):0;
       pEl.innerHTML=
-        '<div style="margin-bottom:14px">'+
-          '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px"><span style="font-weight:600">Overall completion</span><span style="font-weight:700;color:var(--green)">'+pct+'%</span></div>'+
-          '<div style="height:8px;background:var(--border);border-radius:4px"><div style="height:100%;width:'+pct+'%;background:var(--green);border-radius:4px;transition:width 0.5s"></div></div>'+
-        '</div>'+
+        '<div style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px"><span style="font-weight:600">Overall completion</span><span style="font-weight:700;color:var(--green)">'+pct+'%</span></div><div style="height:8px;background:var(--border);border-radius:4px"><div style="height:100%;width:'+pct+'%;background:var(--green);border-radius:4px"></div></div></div>'+
         '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+
           renderMini('Completed',pComp,'var(--green)')+
           renderMini('In Progress',pProg,'var(--blue)')+
           renderMini('Not Started',pNot,'var(--hint)')+
-          renderMini('On Hold',pHold,'var(--amber-dark)')+
-        '</div>'+
-        (pris.length?'<div style="margin-top:12px">'+renderTopList('Latest priorities',pris.slice().reverse().slice(0,3).map(function(p){return (p.title||p.text||'');}))+'</div>':'');
+          renderMini('Total',pris.length,'var(--text)')+
+        '</div>';
     }
   }
 
-  // ── Follow-up performance ──────────────────────────────────────────────────
+  // Follow-ups
   var fuEl=document.getElementById('resultsFU');
   if(fuEl){
-    if(!fus.length){fuEl.innerHTML='<div style="color:var(--hint);font-size:13px">No follow-ups added yet.</div>';}
+    if(!fus.length){fuEl.innerHTML='<div style="color:var(--hint);font-size:13px">No follow-ups yet.</div>';}
     else{
       var fuComp=fus.filter(function(f){return f.status==='completed';}).length;
       var fuPct=fus.length?Math.round(fuComp/fus.length*100):0;
       fuEl.innerHTML=
-        '<div style="margin-bottom:12px">'+
-          '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px"><span style="font-weight:600">Completion rate</span><span style="font-weight:700;color:var(--green)">'+fuPct+'%</span></div>'+
-          '<div style="height:8px;background:var(--border);border-radius:4px"><div style="height:100%;width:'+fuPct+'%;background:var(--green);border-radius:4px"></div></div>'+
-        '</div>'+
+        '<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px"><span style="font-weight:600">Completion rate</span><span style="font-weight:700;color:var(--green)">'+fuPct+'%</span></div><div style="height:8px;background:var(--border);border-radius:4px"><div style="height:100%;width:'+fuPct+'%;background:var(--green);border-radius:4px"></div></div></div>'+
         '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+
           renderMini('Completed',fuComp,'var(--green)')+
           renderMini('Pending',fuPending,'var(--amber-dark)')+
@@ -3889,66 +3877,79 @@ function renderResults(){
     }
   }
 
-  // ── Training ───────────────────────────────────────────────────────────────
+  // Training
   var tEl=document.getElementById('resultsTraining');
   if(tEl){
-    if(!lms.length){tEl.innerHTML='<div style="color:var(--hint);font-size:13px">No training sessions recorded yet.</div>';}
+    if(!lms.length){tEl.innerHTML='<div style="color:var(--hint);font-size:13px">No training sessions yet.</div>';}
     else{
       var tComp=lms.filter(function(x){return x.status==='completed';}).length;
       var tHours=lms.filter(function(x){return x.status==='completed';}).reduce(function(a,x){return a+(parseFloat(x.duration)||0);},0);
       var tPax=lms.reduce(function(a,x){return a+(parseInt(x.participants)||0);},0);
-      tEl.innerHTML=
-        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+
-          renderMini('Total Sessions',lms.length,'var(--text)')+
-          renderMini('Completed',tComp,'var(--green)')+
-          renderMini('Hours Delivered',tHours,'var(--blue)')+
-          renderMini('Participants',tPax,'#534AB7')+
-        '</div>';
+      tEl.innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+
+        renderMini('Sessions',lms.length,'var(--text)')+
+        renderMini('Completed',tComp,'var(--green)')+
+        renderMini('Hours',tHours,'var(--blue)')+
+        renderMini('Participants',tPax,'#534AB7')+'</div>';
     }
   }
 
-  // ── Alerts — what needs attention ─────────────────────────────────────────
-  var alerts=[];
-  if(fuOverdue>0)alerts.push({icon:'🔴',text:fuOverdue+' follow-up'+(fuOverdue>1?'s are':' is')+' overdue — action needed now',page:'followups'});
-  var noVisit=h.filter(function(x){return !x.visits||x.visits<1;});
-  if(noVisit.length)alerts.push({icon:'🟡',text:noVisit.length+' hospital'+(noVisit.length>1?'s have':'  has')+' no visits logged yet',page:'hospitals'});
-  var noTopic=c.filter(function(x){return !x.topic&&!x.programs;});
-  if(noTopic.length)alerts.push({icon:'🟡',text:noTopic.length+' college'+(noTopic.length>1?'s have':' has')+' no presentation topic set',page:'colleges'});
-  var pNotStart=pris.filter(function(p){return p.status==='not_started';});
-  if(pNotStart.length>3)alerts.push({icon:'🟠',text:pNotStart.length+' priorities not started yet — review and prioritise',page:'priorities'});
-  if(!lms.length)alerts.push({icon:'🟡',text:'No training sessions recorded — add your L&D activities',page:'training'});
-
+  // Alerts - use DOM to avoid quote issues
   var aEl=document.getElementById('resultsAlerts');
   if(aEl){
-    if(!alerts.length){aEl.innerHTML='<div style="color:var(--green);font-size:13px;font-weight:600">✅ Everything is on track. No urgent issues.</div>';}
-    else{
-      aEl.innerHTML=alerts.map(function(a){
-        return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)">'+
-          '<span style="font-size:16px">'+a.icon+'</span>'+
-          '<div style="flex:1;font-size:13px;color:var(--text)">'+a.text+'</div>'+
-          '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px;flex-shrink:0" onclick="showPage(''+a.page+'',null)">View →</button>'+
-        '</div>';
-      }).join('');
+    aEl.innerHTML='';
+    var alerts=[];
+    if(fuOverdue>0)alerts.push({icon:'🔴',text:fuOverdue+' follow-up'+(fuOverdue>1?'s':'')+' overdue',page:'followups'});
+    var noVisit=h.filter(function(x){return !x.visits||x.visits<1;});
+    if(noVisit.length)alerts.push({icon:'🟡',text:noVisit.length+' hospital'+(noVisit.length>1?'s':'')+' not visited yet',page:'hospitals'});
+    if(pris.filter(function(p){return p.status==='not_started';}).length>3)alerts.push({icon:'🟠',text:'Several priorities not started yet',page:'priorities'});
+    if(!lms.length)alerts.push({icon:'🟡',text:'No training sessions recorded yet',page:'training'});
+
+    if(!alerts.length){
+      aEl.innerHTML='<div style="color:var(--green);font-size:13px;font-weight:600">Everything is on track. No urgent issues.</div>';
+    } else {
+      alerts.forEach(function(a){
+        var row=document.createElement('div');
+        row.style.cssText='display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)';
+        var icon=document.createElement('span');
+        icon.style.fontSize='16px';
+        icon.textContent=a.icon;
+        var txt=document.createElement('div');
+        txt.style.cssText='flex:1;font-size:13px;color:var(--text)';
+        txt.textContent=a.text;
+        var btn=document.createElement('button');
+        btn.className='btn btn-ghost';
+        btn.style.cssText='font-size:11px;padding:3px 8px;flex-shrink:0';
+        btn.textContent='View';
+        btn.onclick=function(){showPage(a.page,null);};
+        row.appendChild(icon);row.appendChild(txt);row.appendChild(btn);
+        aEl.appendChild(row);
+      });
     }
   }
 
-  // ── Recommended next moves ─────────────────────────────────────────────────
-  var moves=[];
-  if(fuOverdue>0)moves.push('Clear '+fuOverdue+' overdue follow-up'+(fuOverdue>1?'s':'')+' this week');
-  if(h.length<10)moves.push('Add more hospital partners — target 10 active relationships');
-  if(c.length>0&&totalPres<c.length)moves.push('Schedule next college presentation — '+(c.length-totalPres)+' colleges have no presentations yet');
-  if(pris.filter(function(p){return p.status==='in_progress';}).length)moves.push('Update progress on in-progress priorities — keep momentum');
-  if(!lms.length)moves.push('Log your first training session in L&D Centre');
-  if(moves.length===0)moves.push('Great work! Keep visiting hospitals and presenting at colleges.');
-
+  // Next moves
   var nmEl=document.getElementById('resultsNextMoves');
   if(nmEl){
-    nmEl.innerHTML=moves.map(function(m,i){
-      return '<div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)">'+
-        '<div style="width:22px;height:22px;border-radius:50%;background:var(--green-light);color:var(--green-text);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">'+(i+1)+'</div>'+
-        '<div style="font-size:13px;color:var(--text);line-height:1.5;padding-top:2px">'+m+'</div>'+
-      '</div>';
-    }).join('');
+    var moves=[];
+    if(fuOverdue>0)moves.push('Clear overdue follow-ups this week');
+    if(h.length<10)moves.push('Add more hospital partners — target 10 active relationships');
+    if(c.length>0&&totalPres<c.length)moves.push('Schedule presentations at colleges not yet visited');
+    if(pris.filter(function(p){return p.status==='in_progress';}).length)moves.push('Update progress on in-progress priorities');
+    if(!lms.length)moves.push('Log your first training session in L&D Centre');
+    if(!moves.length)moves.push('Great work. Keep visiting hospitals and presenting at colleges.');
+    nmEl.innerHTML='';
+    moves.forEach(function(m,i){
+      var row=document.createElement('div');
+      row.style.cssText='display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)';
+      var num=document.createElement('div');
+      num.style.cssText='width:22px;height:22px;border-radius:50%;background:var(--green-light);color:var(--green-text);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0';
+      num.textContent=i+1;
+      var txt=document.createElement('div');
+      txt.style.cssText='font-size:13px;color:var(--text);line-height:1.5;padding-top:2px';
+      txt.textContent=m;
+      row.appendChild(num);row.appendChild(txt);
+      nmEl.appendChild(row);
+    });
   }
 }
 
