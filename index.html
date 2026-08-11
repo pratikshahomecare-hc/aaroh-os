@@ -3300,32 +3300,7 @@ function loadColleges(){
   if(saved){try{var d=JSON.parse(saved);if(Array.isArray(d)&&d.length)colleges=d;}catch(e){}}
 }
 function saveColleges(){saveLS('aaroh_colleges',JSON.stringify(colleges));}
-(function(){
-  // Load localStorage data IMMEDIATELY - no waiting for cloud
-  loadNotifs();loadDaily();loadPris();updatePriStats();loadFUs();updateFUStats();
-  loadCaps();loadGovt();updateGovtStats();loadOrgT();updateOrgStats('heal');updateOrgStats('naman');
-  loadWis();loadAaroh();loadColleges();loadLMS();
-  _notifs=buildLiveNotifs();_updateNotifBadge();
-  setTimeout(renderDashTop3,100);
-  setTimeout(renderDashDate,100);
-  setTimeout(renderKeyRelationships,150);
-  setTimeout(renderDashFollowUps,180);
-  setTimeout(renderDashLibrary,220);
-  setTimeout(restoreTodaysThought,260);
-  // Then try Supabase in background - updates UI if newer data found
-  setTimeout(function(){
-    _cloudLoad().then(function(){
-      setTimeout(renderDashTop3,100);
-      setTimeout(renderDashFollowUps,150);
-      setTimeout(renderDashLibrary,200);
-      setTimeout(restoreTodaysThought,250);
-    });
-  }, 500);
-  // Auto-sync every 2 minutes
-  setInterval(function(){if(_sb.ready)autoSyncToCloud();},120000);
-  setInterval(autoLocalBackup,300000);
-  console.log('Aaroh OS — live');
-})();
+
 
 function filterEdu(status){window._colTab=status;var el=document.getElementById('eduStatusFilter');if(el)el.value=status;renderColleges();}
 function filterHosp(status){window._hospTab=status;var el=document.getElementById('hospStatusFilter');if(el)el.value=status;renderHospitals();}
@@ -3681,6 +3656,7 @@ function pushAllToCloud(){
   loadWis();loadAaroh();loadColleges();loadLMS();
   _notifs=buildLiveNotifs();_updateNotifBadge();
   setTimeout(renderDashTop3,100);
+  setTimeout(renderDashDate,100);
   setTimeout(renderKeyRelationships,150);
   setTimeout(renderDashFollowUps,180);
   setTimeout(renderDashLibrary,220);
