@@ -4031,8 +4031,8 @@ function renderDashDate(){
   var g=document.getElementById('dashGreeting');
   if(g){
     var h=d.getHours();
-    var greet=h<12?'Good morning':'h<17?'Good afternoon':'Good evening';
-    g.textContent=(h<12?'Good morning':h<17?'Good afternoon':'Good evening')+', Pratiksha 🌿';
+    var greet=h<12?'Good morning':(h<17?'Good afternoon':'Good evening');
+    g.textContent=greet+', Pratiksha 🌿';
   }
 }
 (function(){btn.textContent='Save Thought';},2000);}
