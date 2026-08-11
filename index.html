@@ -976,7 +976,7 @@ body{
       <input type="text" placeholder="Search anything…" id="globalSearch">
     </div>
     <div class="header-actions">
-      <button onclick="exportBackup()" style="font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;background:var(--green-light);color:var(--green-text);border:none;cursor:pointer;margin-right:4px" title="Download backup">💾 Backup</button><button onclick="pushAllToCloud()" style="font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;background:var(--blue-light);color:var(--blue);border:none;cursor:pointer;margin-right:4px" title="Force sync to cloud">☁ Sync</button><button onclick="triggerRestore()" style="font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;background:var(--border);color:var(--text);border:none;cursor:pointer;margin-right:8px" title="Restore from backup file">📂 Restore</button><span id="syncStatus" style="font-size:11px;font-weight:600;color:var(--green);opacity:0;transition:opacity 0.3s;white-space:nowrap;margin-right:8px"></span>
+      <span id="syncStatus" style="font-size:11px;font-weight:600;color:var(--green);opacity:0;transition:opacity 0.3s;white-space:nowrap;margin-right:8px"></span>
       <button class="header-btn" onclick="toggleNotifPanel()" title="Notifications">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 01-3.46 0"></path></svg>
         <span class="notif-dot-hdr" id="notifDotHdr"></span>
