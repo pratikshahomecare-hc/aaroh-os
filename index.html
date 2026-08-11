@@ -4064,32 +4064,69 @@ function renderStories(){
   if(q)stories=stories.filter(function(s){
     return (s.name||'').toLowerCase().includes(q)||(s.quote||s.text||'').toLowerCase().includes(q)||(s.tags||'').toLowerCase().includes(q);
   });
+  c.innerHTML='';
   if(!stories.length){
-    c.innerHTML='<div style="grid-column:1/-1;padding:40px;text-align:center;color:var(--hint)">No stories yet. Click + New story to begin your Human Library.</div>';
+    var empty=document.createElement('div');
+    empty.style.cssText='grid-column:1/-1;padding:40px;text-align:center;color:var(--hint)';
+    empty.textContent='No stories yet. Click + New story to begin your Human Library.';
+    c.appendChild(empty);
     return;
   }
-  c.innerHTML='';
-  stories.forEach(function(s,i){
+  stories.forEach(function(s,idx){
     var card=document.createElement('div');
     card.className='card';
     card.style.cssText='padding:22px;display:flex;flex-direction:column;min-height:240px';
-    card.innerHTML=
-      '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">'+
-        '<div>'+
-          '<div style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--green);margin-bottom:4px">Story #'+(i+1)+'</div>'+
-          '<div style="font-size:15px;font-weight:600;color:var(--text)">'+(s.name||'Anonymous')+'</div>'+
-          '<div style="font-size:11px;color:var(--muted)">'+(s.age?s.age+' yrs · ':'')+( s.prof||'')+( s.org?' · '+s.org:'')+'</div>'+
-        '</div>'+
-        '<div style="display:flex;gap:6px">'+
-          '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px" onclick="openSR('+i+')">Read</button>'+
-          '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px;color:var(--coral);border-color:var(--coral)" onclick="deleteWis('story','+i+')">Del</button>'+
-        '</div>'+
-      '</div>'+
-      '<div style="flex:1;font-size:13px;font-style:italic;color:var(--text);border-left:3px solid var(--green);padding-left:12px;line-height:1.7;margin-bottom:12px">"'+(s.quote||s.text||'')+'"</div>'+
-      '<div style="margin-top:auto">'+
-        (s.less?'<div style="font-size:11px;color:var(--muted);margin-bottom:4px">💡 '+s.less+'</div>':'')+
-        '<div style="font-size:10px;color:var(--hint)">'+(s.tags||'')+( s.date?' · '+s.date:'')+'</div>'+
-      '</div>';
+
+    var top=document.createElement('div');
+    top.style.cssText='display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px';
+
+    var info=document.createElement('div');
+    var num=document.createElement('div');
+    num.style.cssText='font-size:9px;font-weight:700;text-transform:uppercase;color:var(--green);margin-bottom:4px';
+    num.textContent='Story #'+(idx+1);
+    var name=document.createElement('div');
+    name.style.cssText='font-size:15px;font-weight:600;color:var(--text)';
+    name.textContent=s.name||'Anonymous';
+    var meta=document.createElement('div');
+    meta.style.cssText='font-size:11px;color:var(--muted)';
+    meta.textContent=(s.age?s.age+' yrs · ':'')+( s.prof||'')+( s.org?' · '+s.org:'');
+    info.appendChild(num);info.appendChild(name);info.appendChild(meta);
+
+    var btns=document.createElement('div');
+    btns.style.cssText='display:flex;gap:6px';
+    var readBtn=document.createElement('button');
+    readBtn.className='btn btn-ghost';
+    readBtn.style.cssText='font-size:11px;padding:3px 8px';
+    readBtn.textContent='Read';
+    readBtn.onclick=(function(i){return function(){openSR(i);};})(idx);
+    var delBtn=document.createElement('button');
+    delBtn.className='btn btn-ghost';
+    delBtn.style.cssText='font-size:11px;padding:3px 8px;color:var(--coral);border-color:var(--coral)';
+    delBtn.textContent='Del';
+    delBtn.onclick=(function(i){return function(){deleteWis('story',i);};})(idx);
+    btns.appendChild(readBtn);btns.appendChild(delBtn);
+
+    top.appendChild(info);top.appendChild(btns);
+    card.appendChild(top);
+
+    var quote=document.createElement('div');
+    quote.style.cssText='flex:1;font-size:13px;font-style:italic;color:var(--text);border-left:3px solid var(--green);padding-left:12px;line-height:1.7;margin-bottom:12px';
+    quote.textContent='"'+(s.quote||s.text||'')+'"';
+    card.appendChild(quote);
+
+    var foot=document.createElement('div');
+    foot.style.cssText='margin-top:auto';
+    if(s.less){
+      var less=document.createElement('div');
+      less.style.cssText='font-size:11px;color:var(--muted);margin-bottom:4px';
+      less.textContent='💡 '+s.less;
+      foot.appendChild(less);
+    }
+    var tags=document.createElement('div');
+    tags.style.cssText='font-size:10px;color:var(--hint)';
+    tags.textContent=(s.tags||'')+(s.date?' · '+s.date:'');
+    foot.appendChild(tags);
+    card.appendChild(foot);
     c.appendChild(card);
   });
 }
@@ -4098,32 +4135,63 @@ function renderBookshelf(){
   var c=document.getElementById('bookshelfPages');
   if(!c)return;
   var books=(_wis&&_wis.book)||[];
+  c.innerHTML='';
   if(!books.length){
-    c.innerHTML='<div style="grid-column:1/-1;padding:40px;text-align:center;color:var(--hint)">No books yet. Click + Add book to begin.</div>';
+    var empty=document.createElement('div');
+    empty.style.cssText='grid-column:1/-1;padding:40px;text-align:center;color:var(--hint)';
+    empty.textContent='No books yet. Click + Add book to begin.';
+    c.appendChild(empty);
     return;
   }
-  c.innerHTML='';
   var stColor={completed:'color:#3B6D11;background:#e8f5e9',reading:'color:var(--blue);background:var(--blue-light)',want:'color:var(--amber-dark);background:var(--amber-light)'};
   var stLabel={completed:'Finished',reading:'Reading',want:'Want to read'};
-  books.forEach(function(b,i){
-    var st=b.status||'reading';
-    var rating=parseInt(b.rating)||0;
-    var stars='';
-    for(var s=1;s<=5;s++)stars+='<span style="color:'+(s<=rating?'#C4902A':'#ddd')+'">'+( s<=rating?'★':'☆')+'</span>';
+  books.forEach(function(b,idx){
     var card=document.createElement('div');
     card.className='card';
     card.style.cssText='padding:20px';
-    card.innerHTML=
-      '<div style="display:flex;justify-content:space-between;margin-bottom:8px">'+
-        '<span style="font-size:10px;font-weight:700;text-transform:uppercase;padding:2px 10px;border-radius:10px;'+( stColor[st]||'')+'">'+( stLabel[st]||st)+'</span>'+
-        '<button onclick="deleteWis('book','+i+')" style="font-size:12px;color:var(--hint);background:none;border:none;cursor:pointer">×</button>'+
-      '</div>'+
-      '<div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:3px">'+(b.title||'Untitled')+'</div>'+
-      '<div style="font-size:12px;color:var(--muted);margin-bottom:10px">'+(b.author||'')+(b.year?' · '+b.year:'')+'</div>'+
-      '<div style="font-size:13px;margin-bottom:2px">'+stars+'</div>'+
-      (b.notes||b.takeaway?'<div style="font-size:12px;color:var(--text-2);margin-top:10px;line-height:1.6;border-left:2px solid var(--green);padding-left:10px">'+(b.notes||b.takeaway)+'</div>':'')+
-      (b.quote?'<div style="font-size:12px;font-style:italic;color:var(--muted);margin-top:8px;padding:8px 12px;background:var(--content-bg);border-radius:6px">"'+b.quote+'"</div>':'')+
-      '<div style="font-size:10px;color:var(--hint);margin-top:10px;text-align:right">'+(b.date||'')+'</div>';
+
+    var header=document.createElement('div');
+    header.style.cssText='display:flex;justify-content:space-between;margin-bottom:8px';
+    var badge=document.createElement('span');
+    var st=b.status||'reading';
+    badge.style.cssText='font-size:10px;font-weight:700;text-transform:uppercase;padding:2px 10px;border-radius:10px;'+(stColor[st]||'');
+    badge.textContent=stLabel[st]||st;
+    var delBtn=document.createElement('button');
+    delBtn.style.cssText='font-size:12px;color:var(--hint);background:none;border:none;cursor:pointer';
+    delBtn.textContent='×';
+    delBtn.onclick=(function(i){return function(){deleteWis('book',i);};})(idx);
+    header.appendChild(badge);header.appendChild(delBtn);
+    card.appendChild(header);
+
+    var title=document.createElement('div');
+    title.style.cssText='font-size:15px;font-weight:600;color:var(--text);margin-bottom:3px';
+    title.textContent=b.title||'Untitled';
+    card.appendChild(title);
+
+    var author=document.createElement('div');
+    author.style.cssText='font-size:12px;color:var(--muted);margin-bottom:10px';
+    author.textContent=(b.author||'')+(b.year?' · '+b.year:'');
+    card.appendChild(author);
+
+    var rating=parseInt(b.rating)||0;
+    var stars=document.createElement('div');
+    stars.style.cssText='font-size:14px;margin-bottom:8px;color:#C4902A';
+    stars.textContent='';
+    for(var s=1;s<=5;s++)stars.textContent+=(s<=rating?'★':'☆');
+    card.appendChild(stars);
+
+    if(b.notes||b.takeaway){
+      var notes=document.createElement('div');
+      notes.style.cssText='font-size:12px;color:var(--text-2);margin-top:10px;line-height:1.6;border-left:2px solid var(--green);padding-left:10px';
+      notes.textContent=b.notes||b.takeaway;
+      card.appendChild(notes);
+    }
+    if(b.quote){
+      var qt=document.createElement('div');
+      qt.style.cssText='font-size:12px;font-style:italic;color:var(--muted);margin-top:8px;padding:8px 12px;background:var(--content-bg);border-radius:6px';
+      qt.textContent='"'+b.quote+'"';
+      card.appendChild(qt);
+    }
     c.appendChild(card);
   });
 }
