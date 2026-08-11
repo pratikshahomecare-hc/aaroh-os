@@ -4017,7 +4017,8 @@ function saveThought(){
   inp.value='';
   renderThoughtPage();
   var btn=document.querySelector('[onclick="saveThought()"]');
-  if(btn){btn.textContent='Saved ✓';setTimeout
+  if(btn){btn.textContent='Saved ✓';}
+}
 function renderDashDate(){
   var d=new Date();
   var days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -4170,8 +4171,6 @@ function renderBookshelf(){
     }
     c.appendChild(card);
   });
-}
-(function(){btn.textContent='Save Thought';},2000);}
 }
 
 function renderDashLibrary(){
