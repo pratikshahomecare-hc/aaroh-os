@@ -3216,20 +3216,36 @@ function buildLiveNotifs(){
 
 // ── SPRINT 4: renderDashTop3 — sync dashboard with priorities ─────────────────
 function renderDashTop3(){
-  var c=document.getElementById('dashTop3Container');if(!c)return;
-  var cols=['var(--coral)','var(--amber-dark)','var(--blue)'];
-  var bgs=['var(--coral-light)','var(--amber-light)','var(--blue-light)'];
+  var c=document.getElementById('dashTop3Container');
+  if(!c)return;
+  var cols=['color:var(--coral)','color:var(--amber-dark)','color:var(--blue)'];
+  var nums=['1','2','3'];
+  // First try today's daily priorities
   var items=(_daily||[]).filter(function(p){return p.text&&p.text.trim();}).slice(0,3);
+  // If no daily, use ALL priorities (newest first, not completed)
   if(!items.length&&_pris&&_pris.length){
-    var order={critical:0,high:1,medium:2,low:3};
-    var sorted=_pris.filter(function(p){return p.status!=='completed';}).slice().sort(function(a,b){return(order[a.level]||2)-(order[b.level]||2);});
-    items=sorted.slice(0,3).map(function(p){return{text:p.title,done:false};});
+    items=_pris.slice().reverse().filter(function(p){
+      return (p.title||p.text||'').trim()&&p.status!=='completed';
+    }).slice(0,3).map(function(p){
+      return {text:p.title||p.text,org:p.org,cat:p.cat,goal:p.goal};
+    });
   }
-  if(!items.length){c.innerHTML='<div style="padding:6px 0;color:var(--hint);font-size:13px">No priorities yet.</div>';return;}
+  if(!items.length){
+    c.innerHTML='<div style="color:var(--hint);font-size:13px;padding:8px 0">No priorities set. Go to Priorities to add your top 3.</div>';
+    return;
+  }
   c.innerHTML=items.map(function(p,i){
-    var done=p.done||false;
-    var num=i+1;
-    return '<div class="dash-priority-item" style="opacity:'+(done?0.5:1)+';text-decoration:'+(done?'line-through':'none')+'"><div class="dash-priority-num" style="background:'+(done?'var(--border)':bgs[i])+';color:'+(done?'var(--hint)':cols[i])+'">'+num+'</div>'+(p.text||p.title||'')+'</div>';
+    return '<div style="display:flex;align-items:flex-start;gap:14px;padding:10px 0;border-bottom:1px solid var(--border)">'+
+      '<div style="width:28px;height:28px;border-radius:50%;background:var(--content-bg);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;'+cols[i]+'">'+nums[i]+'</div>'+
+      '<div style="flex:1">'+
+        '<div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:3px">'+(p.text||p.title||'')+'</div>'+
+        '<div style="display:flex;gap:8px">'+
+          (p.org?'<span style="font-size:11px;color:var(--muted)">'+p.org+'</span>':'')+ 
+          (p.cat?'<span style="font-size:11px;color:var(--hint)">'+p.cat+'</span>':'')+
+        '</div>'+
+        (p.goal?'<div style="font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5">'+p.goal+'</div>':'')+
+      '</div>'+
+    '</div>';
   }).join('');
 }
 
@@ -3785,14 +3801,17 @@ function renderThoughtPage(){
   var saved=JSON.parse(getLS('aaroh_thoughts')||'[]');
   var todayEntry=saved.find(function(t){return t.date===dateStr;});
   var inp=document.getElementById('thoughtInput');
-  if(inp&&todayEntry)inp.textContent=todayEntry.thought;
+  if(inp&&todayEntry)inp.value=todayEntry.thought;
   var list=document.getElementById('thoughtsList');
   if(!list)return;
+  list.innerHTML='';
   if(!saved.length){
-    list.innerHTML='<div style="color:var(--hint);font-size:13px;padding:20px 0">No thoughts saved yet. Write your first one above and click Save.</div>';
+    var empty=document.createElement('div');
+    empty.style.cssText='color:var(--hint);font-size:13px;padding:20px 0';
+    empty.textContent='No thoughts saved yet. Write your first one above.';
+    list.appendChild(empty);
     return;
   }
-  var html2='';
   saved.slice().reverse().forEach(function(t){
     var d=new Date(t.date);
     var dl=months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();
@@ -3802,7 +3821,7 @@ function renderThoughtPage(){
     card.style.cssText='padding:20px;margin-bottom:12px'+(isToday?';border-left:3px solid var(--green)':'');
     if(isToday){
       var lbl=document.createElement('div');
-      lbl.style.cssText='font-size:9px;font-weight:700;text-transform:uppercase;color:var(--green);margin-bottom:4px';
+      lbl.style.cssText='font-size:9px;font-weight:700;text-transform:uppercase;color:var(--green);margin-bottom:6px';
       lbl.textContent='TODAY';
       card.appendChild(lbl);
     }
@@ -3811,7 +3830,7 @@ function renderThoughtPage(){
     dt.textContent=dl;
     card.appendChild(dt);
     var txt=document.createElement('div');
-    txt.style.cssText='font-size:16px;font-style:italic;color:var(--text);line-height:1.8';
+    txt.style.cssText='font-size:15px;color:var(--text);line-height:1.8';
     txt.textContent=t.thought;
     card.appendChild(txt);
     list.appendChild(card);
@@ -3820,7 +3839,7 @@ function renderThoughtPage(){
 function saveThought(){
   var inp=document.getElementById('thoughtInput');
   if(!inp)return;
-  var text=inp.textContent.trim();
+  var text=(inp.value||inp.textContent||'').trim();
   if(!text){alert('Please write a thought first.');return;}
   var dateStr=new Date().toISOString().split('T')[0];
   var saved=JSON.parse(getLS('aaroh_thoughts')||'[]');
@@ -3828,10 +3847,11 @@ function saveThought(){
   if(idx>=0)saved[idx].thought=text;
   else saved.push({date:dateStr,thought:text,created:new Date().toISOString()});
   saveLS('aaroh_thoughts',JSON.stringify(saved));
-  // Also save to ace_todaysThought for dashboard
   saveLS('ace_todaysThought',text);
+  var el=document.getElementById('todaysThought');
+  if(el)el.textContent=text;
   renderThoughtPage();
-  alert('Thought saved! ✓');
+  alert('Thought saved!');
 }
 
 function renderDashLibrary(){
@@ -4052,17 +4072,24 @@ function restoreTodaysThought(){
   <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px">
     <div>
       <div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Daily · Reflection</div>
-      <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:600">Thought of the Day</div>
-      <div style="font-size:13px;color:var(--muted);margin-top:4px">Every thought is saved permanently with its date.</div>
+      <div style="font-size:26px;font-weight:600;color:var(--text)">Thought of the Day</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:4px">Every thought saved here permanently with its date.</div>
     </div>
-    <button class="btn btn-teal" onclick="saveThought()">Save Today's Thought</button>
+    <button class="btn btn-teal" onclick="saveThought()">Save Thought</button>
   </div>
-  <div class="card" style="padding:24px;margin-bottom:24px">
-    <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--green);margin-bottom:10px" id="thoughtTodayDate">Today</div>
-    <div id="thoughtInput" contenteditable="true" style="font-family:'Playfair Display',serif;font-size:17px;font-style:italic;color:var(--text);line-height:1.8;outline:none;min-height:60px;border-bottom:1px dashed var(--border);padding-bottom:12px;margin-bottom:8px"></div>
-    <div style="font-size:11px;color:var(--hint)">Click above to write · Press Save when done</div>
+
+  <!-- Today entry box -->
+  <div class="card" style="padding:24px;margin-bottom:24px;border-left:4px solid var(--green)">
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--green);margin-bottom:12px;letter-spacing:0.06em" id="thoughtTodayDate">Today</div>
+    <textarea id="thoughtInput" rows="4" placeholder="Write your thought for today... What are you thinking about? What is your reflection?" style="width:100%;border:none;outline:none;font-size:15px;color:var(--text);line-height:1.8;resize:vertical;background:transparent;font-family:inherit"></textarea>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">
+      <div style="font-size:11px;color:var(--hint)">Write freely. Your thought is private and saved permanently.</div>
+      <button class="btn btn-teal" onclick="saveThought()">Save</button>
+    </div>
   </div>
-  <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:12px;letter-spacing:0.06em">All Saved Thoughts</div>
+
+  <!-- All saved thoughts -->
+  <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:14px;letter-spacing:0.06em">All Saved Thoughts</div>
   <div id="thoughtsList"></div>
 </section>
 </body>
