@@ -803,6 +803,91 @@ body{
   .lms-dept-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
   .lms-trainer-card{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:8px}
   .lms-trainer-avatar{width:40px;height:40px;border-radius:50%;background:var(--green-light);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+
+  /* ── Reading Journal ─────────────────────── */
+  .journal-page {
+    background: #FDFBF5;
+    border: 1px solid #E8E0CC;
+    border-radius: 4px;
+    padding: 28px 28px 28px 48px;
+    position: relative;
+    font-family: 'Georgia', serif;
+    line-height: 1.8;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.04);
+  }
+  .journal-page::before {
+    content: '';
+    position: absolute;
+    left: 36px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(210,150,150,0.4);
+  }
+  .journal-page::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background: rgba(210,150,150,0.15);
+    border-radius: 4px 0 0 4px;
+  }
+  .journal-lines {
+    background-image: repeating-linear-gradient(
+      transparent,
+      transparent 27px,
+      rgba(180,200,220,0.25) 27px,
+      rgba(180,200,220,0.25) 28px
+    );
+    background-size: 100% 28px;
+    min-height: 140px;
+  }
+  .journal-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #2C3E2D;
+    margin-bottom: 2px;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+  }
+  .journal-author {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 14px;
+    font-family: sans-serif;
+    letter-spacing: 0.04em;
+  }
+  .journal-notes {
+    font-size: 13px;
+    color: #3a3530;
+    line-height: 1.9;
+    font-style: italic;
+    min-height: 60px;
+    outline: none;
+    width: 100%;
+    background: transparent;
+    border: none;
+    resize: none;
+    font-family: 'Georgia', serif;
+  }
+  .journal-rating { display: flex; gap: 2px; margin-bottom: 10px; }
+  .journal-star { font-size: 14px; cursor: pointer; color: #C4902A; }
+  .journal-star.empty { color: #ddd; }
+  .journal-status {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 2px 10px;
+    border-radius: 10px;
+    display: inline-block;
+    font-family: sans-serif;
+  }
+  .js-reading { background: #E8F4EC; color: #2E7D4F; }
+  .js-completed { background: #EEF0F8; color: #3D4A8A; }
+  .js-want { background: #FDF3E3; color: #A0632A; }
 </style>
 </head>
 <body>
@@ -1927,7 +2012,22 @@ body{
     <div style="grid-column:1/-1;padding:40px;text-align:center;color:var(--hint)">Loading stories...</div>
   </div>
 </section>
-<section class="page" id="page-bookshelf"><div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Wisdom · Bookshelf</div><div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600">📚 Bookshelf</div><button class="btn btn-teal" onclick="openWisdomModal('book')">+ Add book</button></div></div><div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Search books…" id="bookshelfSearch" oninput="renderWisdom('book')" style="flex:1;border:none;outline:none;font-size:13px;font-family:'DM Sans',sans-serif;background:transparent"></div><div style="display:flex;gap:0;margin-bottom:16px;border-bottom:1px solid var(--border)" id="bookshelfTabsRow"><button class="page-tab active" onclick="setWisdomTab('book','all',this)">All</button><button class="page-tab" onclick="setWisdomTab('book','reading',this)">Reading</button><button class="page-tab" onclick="setWisdomTab('book','completed',this)">Completed</button><button class="page-tab" onclick="setWisdomTab('book','Book',this)">Books</button><button class="page-tab" onclick="setWisdomTab('book','Article',this)">Articles</button></div><div id="bookshelfContainer"><div style="padding:40px;text-align:center;color:var(--hint);font-size:13px">No books yet</div></div></section>
+<section class="page" id="page-bookshelf">
+
+  <!-- Header -->
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px">
+    <div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Wisdom · Reading</div>
+      <div style="font-size:24px;font-weight:600;color:var(--text)">Bookshelf</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:2px">Every book you read shapes how you see aging and care</div>
+    </div>
+    <button class="btn btn-teal" onclick="openWisdomModal('book')">+ Add book</button>
+  </div>
+
+  <!-- Reading journal pages container -->
+  <div id="bookshelfPages" style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px"></div>
+
+</section>
 <section class="page" id="page-insights"><div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Wisdom · Insights</div><div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600">🔍 Insights</div><button class="btn btn-teal" onclick="openWisdomModal('insight')">+ New insight</button></div></div><div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Search insights…" id="insightsSearch" oninput="renderWisdom('insight')" style="flex:1;border:none;outline:none;font-size:13px;font-family:'DM Sans',sans-serif;background:transparent"></div><div style="display:flex;gap:0;margin-bottom:16px;border-bottom:1px solid var(--border)" id="insightsTabsRow"><button class="page-tab active" onclick="setWisdomTab('insight','all',this)">All</button><button class="page-tab" onclick="setWisdomTab('insight','Aging',this)">Aging</button><button class="page-tab" onclick="setWisdomTab('insight','Policy',this)">Policy</button><button class="page-tab" onclick="setWisdomTab('insight','Research',this)">Research</button></div><div id="insightsContainer"><div style="padding:40px;text-align:center;color:var(--hint);font-size:13px">No insights yet</div></div></section>
 <section class="page" id="page-studio"><div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Wisdom · Studio</div><div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600">✍️ Studio</div><button class="btn btn-teal" onclick="openWisdomModal('studio')">+ New piece</button></div></div><div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Search pieces…" id="studioSearch" oninput="renderWisdom('studio')" style="flex:1;border:none;outline:none;font-size:13px;font-family:'DM Sans',sans-serif;background:transparent"></div><div style="display:flex;gap:0;margin-bottom:16px;border-bottom:1px solid var(--border)" id="studioTabsRow"><button class="page-tab active" onclick="setWisdomTab('studio','all',this)">All</button><button class="page-tab" onclick="setWisdomTab('studio','Draft',this)">Drafts</button><button class="page-tab" onclick="setWisdomTab('studio','In Progress',this)">In Progress</button><button class="page-tab" onclick="setWisdomTab('studio','Published',this)">Published</button><button class="page-tab" onclick="setWisdomTab('studio','Article',this)">Articles</button><button class="page-tab" onclick="setWisdomTab('studio','Book Chapter',this)">Book</button></div><div id="studioContainer"><div style="padding:40px;text-align:center;color:var(--hint);font-size:13px">No pieces yet</div></div></section>
 <section class="page" id="page-archive"><div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Wisdom · Archive</div><div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600">🗂 Archive</div><button class="btn btn-teal" onclick="document.getElementById('archiveUpload').click()">+ Upload file</button></div></div><input type="file" id="archiveUpload" multiple style="display:none" onchange="handleArchiveUpload(event)"><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px"><button class="arch-btn active" onclick="setArchiveFolder('all',this)">All files</button><button class="arch-btn" onclick="setArchiveFolder('Presentations',this)">📊 Presentations</button><button class="arch-btn" onclick="setArchiveFolder('PDFs',this)">📄 PDFs</button><button class="arch-btn" onclick="setArchiveFolder('Research Papers',this)">🔬 Research</button><button class="arch-btn" onclick="setArchiveFolder('SOPs',this)">📋 SOPs</button><button class="arch-btn" onclick="setArchiveFolder('Reports',this)">📈 Reports</button><button class="arch-btn" onclick="setArchiveFolder('MoUs',this)">🤝 MoUs</button><button class="arch-btn" onclick="setArchiveFolder('Training Materials',this)">🎓 Training</button><button class="arch-btn" onclick="setArchiveFolder('Images',this)">🖼 Images</button><button class="arch-btn" onclick="setArchiveFolder('Government Documents',this)">🏛 Government</button><button class="arch-btn" onclick="setArchiveFolder('Certificates',this)">🏆 Certificates</button><button class="arch-btn" onclick="setArchiveFolder('Miscellaneous',this)">📦 Misc</button></div><div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:14px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Search files…" id="archiveSearch" oninput="renderArchive()" style="flex:1;border:none;outline:none;font-size:13px;font-family:'DM Sans',sans-serif;background:transparent"></div><div id="archiveContainer"><div style="padding:40px;text-align:center;color:var(--hint);font-size:13px">No files yet — upload your first document</div></div></section>
@@ -2330,7 +2430,7 @@ function showPage(id, clickedItem) {
   if(id==='colleges'){renderColleges(window._colTab||'pending'); updateStats();}
   if(id==='hospitals'){renderHospitals(window._hospTab||'all'); updateStats();}
 
-    if(id==='results'){setTimeout(renderResults,80);}if(id==='backup'){setTimeout(renderBackupPage,80);}if(id==='thought'){setTimeout(renderThoughtPage,80);}if(id==='stories'){setTimeout(renderStories,80);}if(id==='colleges'){setTimeout(renderColleges,80);}  if(id==='training'){populateHospitalDropdown(); renderTrainings(window._trainTab||'all');}
+    if(id==='results'){setTimeout(renderResults,80);}if(id==='backup'){setTimeout(renderBackupPage,80);}if(id==='thought'){setTimeout(renderThoughtPage,80);}if(id==='stories'){setTimeout(renderStories,80);}if(id==='bookshelf'){setTimeout(renderBookshelf,80);}if(id==='colleges'){setTimeout(renderColleges,80);}  if(id==='training'){populateHospitalDropdown(); renderTrainings(window._trainTab||'all');}
   if(id==='tours'){renderTours(window._tourTab||'all');}
   if(id==='meetings'){renderMeetings(window._meetTab||'all');}
   if(id==='dashboard'){updateStats();}
@@ -4082,6 +4182,46 @@ function renderStories(){
         '<div style="font-size:10px;color:var(--hint)">'+(s.tags||'')+( s.date?' · '+s.date:'')+'</div>'+
       '</div>';
     c.appendChild(card);
+  });
+}
+
+function renderBookshelf(){
+  var c=document.getElementById('bookshelfPages');
+  if(!c)return;
+  var books=(_wis&&_wis.book)||[];
+  if(!books.length){
+    c.innerHTML='<div style="grid-column:1/-1;padding:40px;text-align:center;color:var(--hint)">No books yet. Click + Add book to start your reading journal.</div>';
+    return;
+  }
+  c.innerHTML='';
+  books.forEach(function(b,i){
+    var rating=parseInt(b.rating)||0;
+    var stars='';
+    for(var s=1;s<=5;s++){
+      stars+='<span class="journal-star'+(s<=rating?'':' empty')+'">'+( s<=rating?'★':'☆')+'</span>';
+    }
+    var stClass=b.status==='completed'?'js-completed':b.status==='want'?'js-want':'js-reading';
+    var stLabel=b.status==='completed'?'Finished':b.status==='want'?'Want to read':'Reading';
+
+    var page=document.createElement('div');
+    page.className='journal-page journal-lines';
+    page.innerHTML=
+      '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px">'+
+        '<div>'+
+          '<div class="journal-title">'+(b.title||'Untitled')+'</div>'+
+          '<div class="journal-author">'+(b.author||'')+(b.year?' · '+b.year:'')+'</div>'+
+        '</div>'+
+        '<button onclick="deleteWis('book','+i+')" style="font-size:11px;color:var(--hint);background:none;border:none;cursor:pointer;padding:2px">×</button>'+
+      '</div>'+
+      '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">'+
+        '<span class="journal-status '+stClass+'">'+stLabel+'</span>'+
+        '<div class="journal-rating">'+stars+'</div>'+
+      '</div>'+
+      '<div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--hint);margin-bottom:6px;font-family:sans-serif">My notes</div>'+
+      '<div style="font-size:13px;font-style:italic;color:#3a3530;line-height:1.9;font-family:Georgia,serif;min-height:60px">'+(b.notes||b.takeaway||'<span style="color:var(--hint)">No notes yet...</span>')+'</div>'+
+      (b.quote?'<div style="margin-top:12px;padding:10px 14px;border-left:3px solid #C4902A;font-size:12px;font-style:italic;color:#5a4a2a;background:rgba(196,144,42,0.06)">'+b.quote+'</div>':'')+
+      '<div style="margin-top:12px;font-size:10px;color:var(--hint);font-family:sans-serif;text-align:right">'+(b.date||'')+'</div>';
+    c.appendChild(page);
   });
 }
 (function(){btn.textContent='Save Thought';},2000);}
