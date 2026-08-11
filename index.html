@@ -1914,15 +1914,18 @@ body{
   <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px">
     <div>
       <div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Wisdom · Stories</div>
-      <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:600">❤️ Human Library</div>
+      <div style="font-size:24px;font-weight:600;color:var(--text)">Human Library</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:2px">Stories from 16 years of elder care</div>
     </div>
     <button class="btn btn-teal" onclick="openWisdomModal('story')">+ New story</button>
   </div>
-  <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:16px">
+  <div style="display:flex;align-items:center;gap:8px;background:var(--content-bg);border:1px solid var(--border);border-radius:8px;padding:7px 12px;margin-bottom:16px">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
-    <input type="text" placeholder="Search stories..." id="storySearch" style="border:none;outline:none;font-size:13px;width:100%;background:transparent" oninput="renderStories()">
+    <input type="text" placeholder="Search stories..." id="storySearch" style="border:none;outline:none;font-size:13px;color:var(--text);background:transparent;width:100%" oninput="renderStories()">
   </div>
-  <div id="storiesGrid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px"></div>
+  <div id="storiesGrid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px">
+    <div style="grid-column:1/-1;padding:40px;text-align:center;color:var(--hint)">Loading stories...</div>
+  </div>
 </section>
 <section class="page" id="page-bookshelf"><div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Wisdom · Bookshelf</div><div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600">📚 Bookshelf</div><button class="btn btn-teal" onclick="openWisdomModal('book')">+ Add book</button></div></div><div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Search books…" id="bookshelfSearch" oninput="renderWisdom('book')" style="flex:1;border:none;outline:none;font-size:13px;font-family:'DM Sans',sans-serif;background:transparent"></div><div style="display:flex;gap:0;margin-bottom:16px;border-bottom:1px solid var(--border)" id="bookshelfTabsRow"><button class="page-tab active" onclick="setWisdomTab('book','all',this)">All</button><button class="page-tab" onclick="setWisdomTab('book','reading',this)">Reading</button><button class="page-tab" onclick="setWisdomTab('book','completed',this)">Completed</button><button class="page-tab" onclick="setWisdomTab('book','Book',this)">Books</button><button class="page-tab" onclick="setWisdomTab('book','Article',this)">Articles</button></div><div id="bookshelfContainer"><div style="padding:40px;text-align:center;color:var(--hint);font-size:13px">No books yet</div></div></section>
 <section class="page" id="page-insights"><div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Wisdom · Insights</div><div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600">🔍 Insights</div><button class="btn btn-teal" onclick="openWisdomModal('insight')">+ New insight</button></div></div><div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Search insights…" id="insightsSearch" oninput="renderWisdom('insight')" style="flex:1;border:none;outline:none;font-size:13px;font-family:'DM Sans',sans-serif;background:transparent"></div><div style="display:flex;gap:0;margin-bottom:16px;border-bottom:1px solid var(--border)" id="insightsTabsRow"><button class="page-tab active" onclick="setWisdomTab('insight','all',this)">All</button><button class="page-tab" onclick="setWisdomTab('insight','Aging',this)">Aging</button><button class="page-tab" onclick="setWisdomTab('insight','Policy',this)">Policy</button><button class="page-tab" onclick="setWisdomTab('insight','Research',this)">Research</button></div><div id="insightsContainer"><div style="padding:40px;text-align:center;color:var(--hint);font-size:13px">No insights yet</div></div></section>
@@ -4043,6 +4046,44 @@ function renderDashDate(){
     g.textContent=greet+', Pratiksha 🌿';
   }
 }
+
+function renderStories(){
+  var c=document.getElementById('storiesGrid');
+  if(!c)return;
+  var stories=(_wis&&_wis.story)||[];
+  var q=(document.getElementById('storySearch')||{value:''}).value.toLowerCase();
+  if(q)stories=stories.filter(function(s){
+    return (s.name||'').toLowerCase().includes(q)||(s.quote||s.text||'').toLowerCase().includes(q)||(s.tags||'').toLowerCase().includes(q);
+  });
+  if(!stories.length){
+    c.innerHTML='<div style="grid-column:1/-1;padding:40px;text-align:center;color:var(--hint)">No stories yet. Click + New story to begin your Human Library.</div>';
+    return;
+  }
+  c.innerHTML='';
+  stories.forEach(function(s,i){
+    var card=document.createElement('div');
+    card.className='card';
+    card.style.cssText='padding:22px;display:flex;flex-direction:column;min-height:240px';
+    card.innerHTML=
+      '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">'+
+        '<div>'+
+          '<div style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--green);margin-bottom:4px">Story #'+(i+1)+'</div>'+
+          '<div style="font-size:15px;font-weight:600;color:var(--text)">'+(s.name||'Anonymous')+'</div>'+
+          '<div style="font-size:11px;color:var(--muted)">'+(s.age?s.age+' yrs · ':'')+( s.prof||'')+( s.org?' · '+s.org:'')+'</div>'+
+        '</div>'+
+        '<div style="display:flex;gap:6px">'+
+          '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px" onclick="openSR('+i+')">Read</button>'+
+          '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px;color:var(--coral);border-color:var(--coral)" onclick="deleteWis('story','+i+')">Del</button>'+
+        '</div>'+
+      '</div>'+
+      '<div style="flex:1;font-size:13px;font-style:italic;color:var(--text);border-left:3px solid var(--green);padding-left:12px;line-height:1.7;margin-bottom:12px">"'+(s.quote||s.text||'')+'"</div>'+
+      '<div style="margin-top:auto">'+
+        (s.less?'<div style="font-size:11px;color:var(--muted);margin-bottom:4px">💡 '+s.less+'</div>':'')+
+        '<div style="font-size:10px;color:var(--hint)">'+(s.tags||'')+( s.date?' · '+s.date:'')+'</div>'+
+      '</div>';
+    c.appendChild(card);
+  });
+}
 (function(){btn.textContent='Save Thought';},2000);}
 }
 
@@ -4263,21 +4304,24 @@ function restoreTodaysThought(){
 </section>
 
 <section class="page" id="page-thought">
-  <div style="max-width:640px;margin:0 auto;padding:0">
+  <div style="max-width:640px;margin:0 auto">
     <div style="margin-bottom:20px">
       <div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Daily · Reflection</div>
       <div style="font-size:22px;font-weight:600;color:var(--text)">Thought of the Day</div>
     </div>
-    <!-- Write today -->
-    <div class="card" style="padding:20px;margin-bottom:20px;border-left:3px solid var(--green)">
+
+    <!-- TODAY'S ENTRY — always at top -->
+    <div class="card" style="padding:20px;margin-bottom:24px;border-left:3px solid var(--green)">
       <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--green);letter-spacing:0.06em;margin-bottom:10px" id="thoughtTodayDate">Today</div>
-      <textarea id="thoughtInput" rows="3" placeholder="What is on your mind today?" style="width:100%;border:none;outline:none;font-size:14px;color:var(--text);line-height:1.7;resize:none;background:transparent;font-family:inherit;box-sizing:border-box"></textarea>
-      <div style="display:flex;justify-content:flex-end;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-        <button class="btn btn-teal" style="font-size:12px" onclick="saveThought()">Save Thought</button>
+      <textarea id="thoughtInput" rows="4" placeholder="What is on your mind today? Write freely..." style="width:100%;border:none;outline:none;font-size:14px;color:var(--text);line-height:1.7;resize:none;background:transparent;font-family:inherit;box-sizing:border-box"></textarea>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">
+        <div style="font-size:11px;color:var(--hint)">Saved permanently with today's date</div>
+        <button class="btn btn-teal" style="font-size:12px;padding:5px 16px" onclick="saveThought()">Save</button>
       </div>
     </div>
-    <!-- All saved — newest first -->
-    <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--muted);letter-spacing:0.06em;margin-bottom:12px">All Saved Thoughts</div>
+
+    <!-- PAST THOUGHTS — newest first -->
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--muted);letter-spacing:0.06em;margin-bottom:14px">Previous Thoughts</div>
     <div id="thoughtsList"></div>
   </div>
 </section>
