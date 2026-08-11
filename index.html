@@ -929,6 +929,10 @@ body{
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>
         Movement
       </button>
+      <button class="sidebar-item" onclick="showPage('results',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+        Results & Analytics
+      </button>
       <button class="sidebar-item" onclick="showPage('book',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"></path></svg>
         Book
@@ -2327,7 +2331,7 @@ function showPage(id, clickedItem) {
   if(id==='colleges'){renderColleges(window._colTab||'pending'); updateStats();}
   if(id==='hospitals'){renderHospitals(window._hospTab||'all'); updateStats();}
 
-    if(id==='backup'){setTimeout(renderBackupPage,80);}if(id==='thought'){setTimeout(renderThoughtPage,80);}if(id==='stories'){setTimeout(renderStories,80);}if(id==='colleges'){setTimeout(renderColleges,80);}  if(id==='training'){populateHospitalDropdown(); renderTrainings(window._trainTab||'all');}
+    if(id==='results'){setTimeout(renderResults,80);}if(id==='backup'){setTimeout(renderBackupPage,80);}if(id==='thought'){setTimeout(renderThoughtPage,80);}if(id==='stories'){setTimeout(renderStories,80);}if(id==='colleges'){setTimeout(renderColleges,80);}  if(id==='training'){populateHospitalDropdown(); renderTrainings(window._trainTab||'all');}
   if(id==='tours'){renderTours(window._tourTab||'all');}
   if(id==='meetings'){renderMeetings(window._meetTab||'all');}
   if(id==='dashboard'){updateStats();}
@@ -3780,7 +3784,204 @@ function restoreFromSnapshot(){
       if(v&&v!=='null'){localStorage.setItem(k,v);count++;}
     });
     alert('Restored '+count+' keys. Refreshing...');
-    setTimeout(function(){location.reload();},500);
+    setTimeout
+function renderResults(){
+  var h=hospitals||[];
+  var c=colleges||[];
+  var pris=_pris||[];
+  var fus=_fus||[];
+  var lms=_lmsSessions||[];
+  var today=new Date();
+
+  // ── KPIs ──────────────────────────────────────────────────────────────────
+  var totalVisits=h.reduce(function(a,x){return a+(parseInt(x.visits||x.visitCount)||1);},0);
+  var totalPres=c.reduce(function(a,x){return a+(parseInt(x.presentations||x.presentationCount)||0);},0);
+  var totalPart=c.reduce(function(a,x){return a+(parseInt(x.participants)||0);},0);
+  var fuPending=fus.filter(function(f){return f.status!=='completed';}).length;
+  var fuOverdue=fus.filter(function(f){return f.overdue||f.status==='overdue';}).length;
+
+  var s=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+  s('kpiHospVisits',totalVisits);
+  s('kpiColPres',totalPres);
+  s('kpiParticipants',totalPart);
+  s('kpiFuPending',fuPending);
+  s('kpiFuOverdue',fuOverdue);
+
+  // ── Hospital report ────────────────────────────────────────────────────────
+  var hEl=document.getElementById('resultsHospitals');
+  if(hEl){
+    if(!h.length){hEl.innerHTML='<div style="color:var(--hint);font-size:13px">No hospitals added yet.</div>';}
+    else{
+      var active=h.filter(function(x){return x.status==='done';}).length;
+      var mou=h.filter(function(x){return x.status==='mou';}).length;
+      var pending=h.filter(function(x){return x.status==='pending';}).length;
+      hEl.innerHTML=
+        renderBar('Total Partners',h.length,h.length,'var(--text)')+
+        renderBar('Active Relationships',active,h.length,'var(--green)')+
+        renderBar('MOU Signed',mou,h.length,'#534AB7')+
+        renderBar('In Progress',pending,h.length,'var(--amber-dark)')+
+        '<div style="margin-top:12px;font-size:12px;color:var(--muted)">Total visits logged: <strong>'+totalVisits+'</strong></div>'+
+        renderTopList('Most visited',h.slice().sort(function(a,b){return (parseInt(b.visits||1))-(parseInt(a.visits||1));}).slice(0,3).map(function(x){return x.name+' ('+( parseInt(x.visits||1))+' visits)';}));
+    }
+  }
+
+  // ── College report ─────────────────────────────────────────────────────────
+  var cEl=document.getElementById('resultsColleges');
+  if(cEl){
+    if(!c.length){cEl.innerHTML='<div style="color:var(--hint);font-size:13px">No colleges added yet.</div>';}
+    else{
+      var cActive=c.filter(function(x){return x.status==='done';}).length;
+      var cSched=c.filter(function(x){return x.status==='scheduled';}).length;
+      var cComp=c.filter(function(x){return x.status==='completed';}).length;
+      cEl.innerHTML=
+        renderBar('Total Institutions',c.length,c.length,'var(--text)')+
+        renderBar('Active Collaboration',cActive,c.length,'var(--green)')+
+        renderBar('Scheduled',cSched,c.length,'var(--blue)')+
+        renderBar('Completed',cComp,c.length,'#534AB7')+
+        '<div style="margin-top:12px;font-size:12px;color:var(--muted)">Total participants reached: <strong>'+totalPart+'</strong></div>'+
+        renderTopList('Top colleges by presentations',c.slice().sort(function(a,b){return (parseInt(b.presentations||0))-(parseInt(a.presentations||0));}).slice(0,3).map(function(x){return x.name+' ('+( parseInt(x.presentations||0))+' pres, '+(parseInt(x.participants)||0)+' participants)';}));
+    }
+  }
+
+  // ── Priorities achievement ─────────────────────────────────────────────────
+  var pEl=document.getElementById('resultsPriorities');
+  if(pEl){
+    if(!pris.length){pEl.innerHTML='<div style="color:var(--hint);font-size:13px">No priorities added yet.</div>';}
+    else{
+      var pComp=pris.filter(function(p){return p.status==='completed';}).length;
+      var pProg=pris.filter(function(p){return p.status==='in_progress';}).length;
+      var pNot=pris.filter(function(p){return p.status==='not_started';}).length;
+      var pHold=pris.filter(function(p){return p.status==='on_hold';}).length;
+      var pct=pris.length?Math.round(pComp/pris.length*100):0;
+      pEl.innerHTML=
+        '<div style="margin-bottom:14px">'+
+          '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px"><span style="font-weight:600">Overall completion</span><span style="font-weight:700;color:var(--green)">'+pct+'%</span></div>'+
+          '<div style="height:8px;background:var(--border);border-radius:4px"><div style="height:100%;width:'+pct+'%;background:var(--green);border-radius:4px;transition:width 0.5s"></div></div>'+
+        '</div>'+
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+
+          renderMini('Completed',pComp,'var(--green)')+
+          renderMini('In Progress',pProg,'var(--blue)')+
+          renderMini('Not Started',pNot,'var(--hint)')+
+          renderMini('On Hold',pHold,'var(--amber-dark)')+
+        '</div>'+
+        (pris.length?'<div style="margin-top:12px">'+renderTopList('Latest priorities',pris.slice().reverse().slice(0,3).map(function(p){return (p.title||p.text||'');}))+'</div>':'');
+    }
+  }
+
+  // ── Follow-up performance ──────────────────────────────────────────────────
+  var fuEl=document.getElementById('resultsFU');
+  if(fuEl){
+    if(!fus.length){fuEl.innerHTML='<div style="color:var(--hint);font-size:13px">No follow-ups added yet.</div>';}
+    else{
+      var fuComp=fus.filter(function(f){return f.status==='completed';}).length;
+      var fuPct=fus.length?Math.round(fuComp/fus.length*100):0;
+      fuEl.innerHTML=
+        '<div style="margin-bottom:12px">'+
+          '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px"><span style="font-weight:600">Completion rate</span><span style="font-weight:700;color:var(--green)">'+fuPct+'%</span></div>'+
+          '<div style="height:8px;background:var(--border);border-radius:4px"><div style="height:100%;width:'+fuPct+'%;background:var(--green);border-radius:4px"></div></div>'+
+        '</div>'+
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+
+          renderMini('Completed',fuComp,'var(--green)')+
+          renderMini('Pending',fuPending,'var(--amber-dark)')+
+          renderMini('Overdue',fuOverdue,'var(--coral)')+
+          renderMini('Total',fus.length,'var(--text)')+
+        '</div>';
+    }
+  }
+
+  // ── Training ───────────────────────────────────────────────────────────────
+  var tEl=document.getElementById('resultsTraining');
+  if(tEl){
+    if(!lms.length){tEl.innerHTML='<div style="color:var(--hint);font-size:13px">No training sessions recorded yet.</div>';}
+    else{
+      var tComp=lms.filter(function(x){return x.status==='completed';}).length;
+      var tHours=lms.filter(function(x){return x.status==='completed';}).reduce(function(a,x){return a+(parseFloat(x.duration)||0);},0);
+      var tPax=lms.reduce(function(a,x){return a+(parseInt(x.participants)||0);},0);
+      tEl.innerHTML=
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+
+          renderMini('Total Sessions',lms.length,'var(--text)')+
+          renderMini('Completed',tComp,'var(--green)')+
+          renderMini('Hours Delivered',tHours,'var(--blue)')+
+          renderMini('Participants',tPax,'#534AB7')+
+        '</div>';
+    }
+  }
+
+  // ── Alerts — what needs attention ─────────────────────────────────────────
+  var alerts=[];
+  if(fuOverdue>0)alerts.push({icon:'🔴',text:fuOverdue+' follow-up'+(fuOverdue>1?'s are':' is')+' overdue — action needed now',page:'followups'});
+  var noVisit=h.filter(function(x){return !x.visits||x.visits<1;});
+  if(noVisit.length)alerts.push({icon:'🟡',text:noVisit.length+' hospital'+(noVisit.length>1?'s have':'  has')+' no visits logged yet',page:'hospitals'});
+  var noTopic=c.filter(function(x){return !x.topic&&!x.programs;});
+  if(noTopic.length)alerts.push({icon:'🟡',text:noTopic.length+' college'+(noTopic.length>1?'s have':' has')+' no presentation topic set',page:'colleges'});
+  var pNotStart=pris.filter(function(p){return p.status==='not_started';});
+  if(pNotStart.length>3)alerts.push({icon:'🟠',text:pNotStart.length+' priorities not started yet — review and prioritise',page:'priorities'});
+  if(!lms.length)alerts.push({icon:'🟡',text:'No training sessions recorded — add your L&D activities',page:'training'});
+
+  var aEl=document.getElementById('resultsAlerts');
+  if(aEl){
+    if(!alerts.length){aEl.innerHTML='<div style="color:var(--green);font-size:13px;font-weight:600">✅ Everything is on track. No urgent issues.</div>';}
+    else{
+      aEl.innerHTML=alerts.map(function(a){
+        return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)">'+
+          '<span style="font-size:16px">'+a.icon+'</span>'+
+          '<div style="flex:1;font-size:13px;color:var(--text)">'+a.text+'</div>'+
+          '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px;flex-shrink:0" onclick="showPage(''+a.page+'',null)">View →</button>'+
+        '</div>';
+      }).join('');
+    }
+  }
+
+  // ── Recommended next moves ─────────────────────────────────────────────────
+  var moves=[];
+  if(fuOverdue>0)moves.push('Clear '+fuOverdue+' overdue follow-up'+(fuOverdue>1?'s':'')+' this week');
+  if(h.length<10)moves.push('Add more hospital partners — target 10 active relationships');
+  if(c.length>0&&totalPres<c.length)moves.push('Schedule next college presentation — '+(c.length-totalPres)+' colleges have no presentations yet');
+  if(pris.filter(function(p){return p.status==='in_progress';}).length)moves.push('Update progress on in-progress priorities — keep momentum');
+  if(!lms.length)moves.push('Log your first training session in L&D Centre');
+  if(moves.length===0)moves.push('Great work! Keep visiting hospitals and presenting at colleges.');
+
+  var nmEl=document.getElementById('resultsNextMoves');
+  if(nmEl){
+    nmEl.innerHTML=moves.map(function(m,i){
+      return '<div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)">'+
+        '<div style="width:22px;height:22px;border-radius:50%;background:var(--green-light);color:var(--green-text);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">'+(i+1)+'</div>'+
+        '<div style="font-size:13px;color:var(--text);line-height:1.5;padding-top:2px">'+m+'</div>'+
+      '</div>';
+    }).join('');
+  }
+}
+
+function renderBar(label,val,total,color){
+  var pct=total>0?Math.round(val/total*100):0;
+  return '<div style="margin-bottom:10px">'+
+    '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">'+
+      '<span style="color:var(--text-2)">'+label+'</span>'+
+      '<span style="font-weight:700;color:'+color+'">'+val+'</span>'+
+    '</div>'+
+    '<div style="height:5px;background:var(--border);border-radius:3px">'+
+      '<div style="height:100%;width:'+pct+'%;background:'+color+';border-radius:3px"></div>'+
+    '</div>'+
+  '</div>';
+}
+
+function renderMini(label,val,color){
+  return '<div style="background:var(--content-bg);border-radius:8px;padding:10px;text-align:center">'+
+    '<div style="font-size:20px;font-weight:700;color:'+color+'">'+val+'</div>'+
+    '<div style="font-size:10px;color:var(--muted);margin-top:2px">'+label+'</div>'+
+  '</div>';
+}
+
+function renderTopList(title,items){
+  if(!items.length)return '';
+  return '<div style="margin-top:10px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--hint);margin-bottom:6px">'+title+'</div>'+
+    items.map(function(item,i){
+      return '<div style="font-size:12px;color:var(--text-2);padding:4px 0;border-bottom:1px solid var(--border)">'+
+        '<span style="color:var(--hint);margin-right:6px">'+(i+1)+'.</span>'+item+'</div>';
+    }).join('')+
+  '</div>';
+}
+(function(){location.reload();},500);
   }catch(e){alert('Restore error: '+e.message);}
 }
 
@@ -4089,6 +4290,84 @@ function restoreTodaysThought(){
     <!-- Past thoughts -->
     <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--muted);letter-spacing:0.06em;margin-bottom:12px">Previous Thoughts</div>
     <div id="thoughtsList"></div>
+  </div>
+</section>
+
+<section class="page" id="page-results">
+  <div style="margin-bottom:24px">
+    <div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Phase 3 · Analytics</div>
+    <div style="font-size:24px;font-weight:700;color:var(--text)">Results & Performance</div>
+    <div style="font-size:13px;color:var(--muted);margin-top:4px">What you have achieved, what is delayed, where to improve.</div>
+  </div>
+
+  <!-- Top KPI strip -->
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:24px">
+    <div class="card" style="padding:14px;text-align:center;border-top:3px solid var(--green)">
+      <div style="font-size:26px;font-weight:700;color:var(--green)" id="kpiHospVisits">0</div>
+      <div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--muted);margin-top:4px">Hospital Visits</div>
+    </div>
+    <div class="card" style="padding:14px;text-align:center;border-top:3px solid var(--blue)">
+      <div style="font-size:26px;font-weight:700;color:var(--blue)" id="kpiColPres">0</div>
+      <div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--muted);margin-top:4px">Presentations</div>
+    </div>
+    <div class="card" style="padding:14px;text-align:center;border-top:3px solid #534AB7">
+      <div style="font-size:26px;font-weight:700;color:#534AB7" id="kpiParticipants">0</div>
+      <div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--muted);margin-top:4px">Participants Reached</div>
+    </div>
+    <div class="card" style="padding:14px;text-align:center;border-top:3px solid var(--amber-dark)">
+      <div style="font-size:26px;font-weight:700;color:var(--amber-dark)" id="kpiFuPending">0</div>
+      <div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--muted);margin-top:4px">Pending Follow-ups</div>
+    </div>
+    <div class="card" style="padding:14px;text-align:center;border-top:3px solid var(--coral)">
+      <div style="font-size:26px;font-weight:700;color:var(--coral)" id="kpiFuOverdue">0</div>
+      <div style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--muted);margin-top:4px">Overdue Follow-ups</div>
+    </div>
+  </div>
+
+  <!-- Two column layout -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+
+    <!-- Hospital performance -->
+    <div class="card" style="padding:20px">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:14px;letter-spacing:0.06em">🏥 Healthcare Network</div>
+      <div id="resultsHospitals"><div style="color:var(--hint);font-size:13px">Loading...</div></div>
+    </div>
+
+    <!-- College performance -->
+    <div class="card" style="padding:20px">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:14px;letter-spacing:0.06em">🎓 Education Network</div>
+      <div id="resultsColleges"><div style="color:var(--hint);font-size:13px">Loading...</div></div>
+    </div>
+  </div>
+
+  <!-- Priorities achievement -->
+  <div class="card" style="padding:20px;margin-bottom:16px">
+    <div style="font-size:12px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:14px;letter-spacing:0.06em">🎯 Priorities Achievement</div>
+    <div id="resultsPriorities"><div style="color:var(--hint);font-size:13px">Loading...</div></div>
+  </div>
+
+  <!-- Two column: Follow-ups + Training -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+    <div class="card" style="padding:20px">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:14px;letter-spacing:0.06em">📋 Follow-up Performance</div>
+      <div id="resultsFU"><div style="color:var(--hint);font-size:13px">Loading...</div></div>
+    </div>
+    <div class="card" style="padding:20px">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:14px;letter-spacing:0.06em">📚 Training & L&D</div>
+      <div id="resultsTraining"><div style="color:var(--hint);font-size:13px">Loading...</div></div>
+    </div>
+  </div>
+
+  <!-- What to improve -->
+  <div class="card" style="padding:20px;margin-bottom:16px;border-left:4px solid var(--coral)">
+    <div style="font-size:12px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:14px;letter-spacing:0.06em">⚠ Needs Attention</div>
+    <div id="resultsAlerts"><div style="color:var(--hint);font-size:13px">Loading...</div></div>
+  </div>
+
+  <!-- Next moves -->
+  <div class="card" style="padding:20px;border-left:4px solid var(--green)">
+    <div style="font-size:12px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:14px;letter-spacing:0.06em">🚀 Recommended Next Moves</div>
+    <div id="resultsNextMoves"><div style="color:var(--hint);font-size:13px">Loading...</div></div>
   </div>
 </section>
 </body>
