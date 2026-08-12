@@ -4080,7 +4080,7 @@ function renderStories(){
     delBtn.className='btn btn-ghost';
     delBtn.style.cssText='font-size:11px;padding:3px 8px;color:var(--coral);border-color:var(--coral)';
     delBtn.textContent='Del';
-    delBtn.onclick=(function(i){return function(){deleteWis('story',i);};})(idx);
+    delBtn.onclick=(function(i){return function(){delWis('story',i);};})(idx);
     btns.appendChild(readBtn);btns.appendChild(delBtn);
 
     top.appendChild(info);top.appendChild(btns);
@@ -4136,7 +4136,7 @@ function renderBookshelf(){
     var delBtn=document.createElement('button');
     delBtn.style.cssText='font-size:12px;color:var(--hint);background:none;border:none;cursor:pointer';
     delBtn.textContent='×';
-    delBtn.onclick=(function(i){return function(){deleteWis('book',i);};})(idx);
+    delBtn.onclick=(function(i){return function(){delWis('book',i);};})(idx);
     header.appendChild(badge);header.appendChild(delBtn);
     card.appendChild(header);
 
