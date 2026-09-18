@@ -844,10 +844,6 @@ body{
         Follow-ups
         <span class="sidebar-badge" id="sideNotifBadge">4</span>
       </button>
-      <button class="sidebar-item" onclick="showPage('capture',this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-        Quick Capture
-      </button>
       <button class="sidebar-item" onclick="showPage('thought',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
         Today's Thought
@@ -1811,47 +1807,6 @@ body{
 
   <div id="followUpsContainer"><div style="padding:40px;text-align:center;color:var(--hint);font-size:13px">No follow-ups yet</div></div>
 </section>
-
-    <!-- ══ QUICK CAPTURE ══ -->
-    <section class="page" id="page-capture">
-      <div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Knowledge · Capture</div><div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600">Quick Capture</div><div style="font-size:13px;color:var(--muted);margin-top:4px">Nothing important should ever be forgotten.</div></div>
-      <div class="card" style="margin-bottom:24px">
-        <div style="font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);margin-bottom:14px">New capture</div>
-        <div style="margin-bottom:14px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:8px">Capture type</div><div class="cap-type-grid" id="capTypeGrid"></div></div>
-        <div class="form-2col">
-          <div class="form-row"><label class="form-label">Title</label><input class="form-input" id="capTitle" placeholder="Give it a name…"></div>
-          <div class="form-row"><label class="form-label">Organization</label><select class="form-select" id="capOrg"><option value="">Personal</option><option>Heal Home Care</option><option>Naman Care Home</option><option>Aaroh Movement</option></select></div>
-        </div>
-        <div class="form-row"><label class="form-label">Write your thoughts…</label><textarea class="form-textarea" id="capNotes" rows="5" placeholder="Write freely — ideas, observations, stories, anything…" style="font-size:14px;line-height:1.65"></textarea></div>
-        <div class="form-2col">
-          <div class="form-row"><label class="form-label">Category</label><input class="form-input" id="capCategory" placeholder="Networking, Book, Research…" list="capCatList"><datalist id="capCatList"><option>Networking</option><option>Training</option><option>Marketing</option><option>Writing</option><option>Book</option><option>Research</option><option>Learning</option><option>Operations</option><option>Personal</option></datalist></div>
-          <div class="form-row"><label class="form-label">Priority</label><select class="form-select" id="capPriority"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option><option value="critical">Critical</option></select></div>
-        </div>
-        <div class="form-2col">
-          <div class="form-row"><label class="form-label">Tags</label><input class="form-input" id="capTags" placeholder="#aging #networking #book…"></div>
-          <div class="form-row"><label class="form-label">Date</label><input type="date" class="form-input" id="capDate"></div>
-        </div>
-        <div class="form-row"><label class="form-label">After saving — move to</label><select class="form-select" id="capDestination"><option value="inbox">Keep in Inbox</option><option value="priorities">Move to Priorities</option><option value="reminders">Move to Reminders</option><option value="writing">Move to Writing</option><option value="research">Move to Research</option><option value="archive">Archive</option></select></div>
-        <div style="display:flex;gap:8px;align-items:center;margin-top:4px">
-          <button class="btn btn-teal" onclick="saveCapture()" style="padding:9px 20px" id="capSaveBtn">Save capture</button>
-          <button class="btn btn-ghost" onclick="clearCaptureForm()">Clear</button>
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-        <div style="font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted)">Recent captures</div>
-        <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:5px 10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;color:var(--hint)"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Search captures…" id="capSearch" oninput="renderCaptures()" style="border:none;outline:none;font-size:12px;font-family:'DM Sans',sans-serif;color:var(--text);background:transparent;width:160px"></div>
-      </div>
-      <div style="display:flex;gap:0;margin-bottom:12px;border-bottom:1px solid var(--border)" id="capTabsRow">
-        <button class="page-tab active" onclick="setCapTab('all',this)">All</button>
-        <button class="page-tab" onclick="setCapTab('Idea',this)">Ideas</button>
-        <button class="page-tab" onclick="setCapTab('Story',this)">Stories</button>
-        <button class="page-tab" onclick="setCapTab('Task',this)">Tasks</button>
-        <button class="page-tab" onclick="setCapTab('Observation',this)">Observations</button>
-        <button class="page-tab" onclick="setCapTab('Book Idea',this)">Book</button>
-        <button class="page-tab" onclick="setCapTab('Research Idea',this)">Research</button>
-      </div>
-      <div id="captureContainer"><div class="pri-empty">No captures yet</div></div>
-    </section>
 
     <!-- ══ GOVERNMENT & MEDIA ══ -->
     <section class="page" id="page-govt">
@@ -2946,8 +2901,8 @@ var _pris=[],_priTab='all';
 function loadPris(){var r=getLS('aaroh_priorities');if(r)_pris=JSON.parse(r);}
 function savePris(){saveLS('aaroh_priorities',_pris);showToast();}
 function openPriorityModal(idx){var ie=typeof idx==='number'&&_pris[idx];document.getElementById('priModalTitle').textContent=ie?'Edit Priority':'New Priority';document.getElementById('priEI').value=ie?idx:-1;var p=ie?_pris[idx]:{};['priTitle','priCat','priGoal','priDesc','priDL','priNotes'].forEach(function(id){var k=id.replace('pri','').toLowerCase();document.getElementById(id).value=p[k]||'';});document.getElementById('priOrg').value=p.org||'';document.getElementById('priLevel').value=p.level||'medium';document.getElementById('priProg').value=p.prog||0;document.getElementById('priStatus').value=p.status||'not_started';openModal('priority');}
-function savePri(){var t=document.getElementById('priTitle').value.trim();if(!t){alert('Please enter a title.');return;}var ei=parseInt(document.getElementById('priEI').value);var item={title:t,org:document.getElementById('priOrg').value,cat:document.getElementById('priCat').value.trim(),level:document.getElementById('priLevel').value,goal:document.getElementById('priGoal').value.trim(),desc:document.getElementById('priDesc').value.trim(),dl:document.getElementById('priDL').value,prog:Math.max(0,Math.min(100,parseInt(document.getElementById('priProg').value)||0)),status:document.getElementById('priStatus').value,notes:document.getElementById('priNotes').value.trim()};if(ei>=0&&_pris[ei])_pris[ei]=item;else _pris.unshift(item);savePris();closeModal('priority');renderPris();updatePriStats();}
-function delPri(i){if(!confirm('Delete?'))return;_pris.splice(i,1);savePris();renderPris();updatePriStats();}
+function savePri(){var t=document.getElementById('priTitle').value.trim();if(!t){alert('Please enter a title.');return;}var ei=parseInt(document.getElementById('priEI').value);var item={title:t,org:document.getElementById('priOrg').value,cat:document.getElementById('priCat').value.trim(),level:document.getElementById('priLevel').value,goal:document.getElementById('priGoal').value.trim(),desc:document.getElementById('priDesc').value.trim(),dl:document.getElementById('priDL').value,prog:Math.max(0,Math.min(100,parseInt(document.getElementById('priProg').value)||0)),status:document.getElementById('priStatus').value,notes:document.getElementById('priNotes').value.trim()};if(ei>=0&&_pris[ei])_pris[ei]=item;else _pris.unshift(item);savePris();closeModal('priority');renderPris();updatePriStats();if(typeof renderDashTop3==='function')renderDashTop3();}
+function delPri(i){if(!confirm('Delete?'))return;_pris.splice(i,1);savePris();renderPris();updatePriStats();if(typeof renderDashTop3==='function')renderDashTop3();}
 function setPriTab(tab,btn){_priTab=tab;document.querySelectorAll('#priTabsRow .page-tab').forEach(function(b){b.classList.remove('active');});if(btn)btn.classList.add('active');renderPris();}
 function renderPris(){
   var c=document.getElementById('prioritiesContainer');
@@ -2963,13 +2918,13 @@ function renderPris(){
   // Update stats
   var s=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
   s('priTotal',priList.length);
-  s('priCritical',priList.filter(function(p){return p.priority==='critical';}).length);
+  s('priCritical',priList.filter(function(p){return p.level==='critical';}).length);
   s('priInProgress',priList.filter(function(p){return p.status==='in_progress';}).length);
   s('priCompleted',priList.filter(function(p){return p.status==='completed';}).length);
   s('priOnHold',priList.filter(function(p){return p.status==='on_hold';}).length);
   var filtered=sorted.filter(function(p){
     var mq=!q||(p.title||p.text||'').toLowerCase().includes(q)||(p.goal||'').toLowerCase().includes(q)||(p.org||'').toLowerCase().includes(q);
-    var mf=filter==='all'||(filter==='critical'&&p.priority==='critical')||p.status===filter;
+    var mf=filter==='all'||(filter==='critical'&&p.level==='critical')||p.status===filter;
     return mq&&mf;
   });
   if(!filtered.length){
@@ -2978,7 +2933,7 @@ function renderPris(){
   }
   c.innerHTML=filtered.map(function(p,fi){
     var idx=priList.indexOf(p);
-    var pri=p.priority||'high';
+    var pri=p.level||'high';
     var st=p.status||'not_started';
     var pc=priColor[pri]||priColor.high;
     var sc=stColor[st]||stColor.not_started;
@@ -2992,16 +2947,16 @@ function renderPris(){
             '<span style="font-size:10px;font-weight:600;padding:2px 10px;border-radius:10px;'+sc+'">'+sl+'</span>'+
             (p.org?'<span style="font-size:11px;color:var(--muted)">'+p.org+'</span>':'')+
             (p.cat?'<span style="font-size:11px;color:var(--hint)">· '+p.cat+'</span>':'')+
-            (p.deadline?'<span style="font-size:11px;color:var(--hint)">Due: '+p.deadline+'</span>':'')+
+            (p.dl?'<span style="font-size:11px;color:var(--hint)">Due: '+p.dl+'</span>':'')+
           '</div>'+
         '</div>'+
         '<div style="display:flex;gap:6px;flex-shrink:0;margin-left:12px">'+
-          '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px" onclick="editPriority('+idx+')">Edit</button>'+
-          '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px;color:var(--coral);border-color:var(--coral)" onclick="deletePriority('+idx+')">Del</button>'+
+          '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px" onclick="openPriorityModal('+idx+')">Edit</button>'+
+          '<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px;color:var(--coral);border-color:var(--coral)" onclick="delPri('+idx+')">Del</button>'+
         '</div>'+
       '</div>'+
       (p.goal?'<div style="font-size:13px;color:var(--text-2);line-height:1.6;padding:10px 14px;background:var(--content-bg);border-radius:8px;border-left:3px solid var(--green)">'+p.goal+'</div>':'')+
-      (p.progress!==undefined?'<div style="margin-top:10px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--hint);margin-bottom:4px"><span>Progress</span><span>'+p.progress+'%</span></div><div style="height:5px;background:var(--border);border-radius:3px"><div style="height:100%;width:'+p.progress+'%;background:var(--green);border-radius:3px"></div></div></div>':'')+
+      (p.prog!==undefined?'<div style="margin-top:10px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--hint);margin-bottom:4px"><span>Progress</span><span>'+p.prog+'%</span></div><div style="height:5px;background:var(--border);border-radius:3px"><div style="height:100%;width:'+p.prog+'%;background:var(--green);border-radius:3px"></div></div></div>':'')+
     '</div>';
   }).join('');
 }
@@ -3200,7 +3155,7 @@ function delSpk(i){if(!confirm('Delete?'))return;_spkEngs.splice(i,1);saveLS('aa
 function renderSpk(){var c=document.getElementById('spkEngList');if(!c)return;var q=((document.getElementById('spkSearch')||{}).value||'').toLowerCase();var sC={Upcoming:'var(--amber-dark)',Completed:'#3B6D11',Cancelled:'var(--coral)'};var sB={Upcoming:'var(--amber-light)',Completed:'#e8f5e9',Cancelled:'var(--coral-light)'};var list=_spkEngs.filter(function(e){return !q||JSON.stringify(e).toLowerCase().includes(q);});if(!list.length){c.innerHTML='<div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No engagements yet</div>';return;}c.innerHTML=list.map(function(e,i){var st=e.status||'Upcoming';var tags=(e.tags||'').split(',').filter(Boolean).map(function(t){return'<span class="wtag">'+t.trim()+'</span>';}).join('');return'<div class="spkcard"><div class="spkcard-hdr"><div><div class="spkcard-event">'+e.event+'</div>'+(e.org?'<div style="font-size:12px;color:var(--muted);margin-top:2px">'+e.org+'</div>':'')+'</div><div style="display:flex;gap:4px;align-items:center;flex-shrink:0"><span style="font-size:10px;font-weight:600;padding:2px 9px;border-radius:10px;background:'+(sB[st]||'var(--border)')+';color:'+(sC[st]||'var(--muted)')+'">'+st+'</span><button class="btn btn-ghost btn-sm" onclick="openSpkModal('+i+')">Edit</button><button class="btn btn-ghost btn-sm" style="color:var(--coral);border-color:var(--coral)" onclick="delSpk('+i+')">Del</button></div></div><div class="spkmeta">'+(e.date?'<div><div class="spkml">Date</div><div class="spkmv">'+e.date+'</div></div>':'')+(e.topic?'<div><div class="spkml">Topic</div><div class="spkmv">'+e.topic+'</div></div>':'')+(e.aud?'<div><div class="spkml">Audience</div><div class="spkmv">'+e.aud+(e.audSz?' ('+e.audSz+')':'')+'</div></div>':'')+(e.loc?'<div><div class="spkml">Location</div><div class="spkmv">'+e.loc+'</div></div>':'')+'</div>'+(e.msg?'<div style="font-size:12px;color:var(--text-2);font-style:italic;padding:6px 10px;background:var(--green-light);border-radius:4px;border-left:2px solid var(--green);margin-bottom:6px">'+e.msg+'</div>':'')+(e.notes?'<div style="font-size:12px;color:var(--muted);margin-bottom:6px">'+e.notes+'</div>':'')+(e.fu?'<div style="font-size:11px;font-weight:600;color:var(--amber-dark)">→ Follow-up: '+e.fu+'</div>':'')+(tags?'<div class="wtags" style="margin-top:6px">'+tags+'</div>':'')+'</div>';}).join('');}
 
 // EXTEND showPage
-var _origSP=showPage;showPage=function(id,clickedItem){document.querySelectorAll('[contenteditable="true"][id]').forEach(function(el){if(el.id)saveLS('ace_'+el.id,el.textContent);});_origSP(id,clickedItem);if(id==='priorities'){loadDaily();renderDaily();renderPris();updatePriStats();}if(id==='followups'){renderFUs();updateFUStats();}if(id==='capture'){renderCapGrid();renderCaps();}if(id==='govt'){renderGovt();updateGovtStats();}if(id==='heal'){renderOrgT('heal');updateOrgStats('heal');}if(id==='naman'){renderOrgT('naman');updateOrgStats('naman');}if(id==='stories'){renderWis('story');}if(id==='bookshelf'){renderWis('book');}if(id==='insights'){renderWis('insight');}if(id==='studio'){renderWis('studio');}if(id==='archive'){renderArchive();}if(id==='movement'){renderASection('mvGoals');renderASection('mvInits');renderASection('mvMiles');renderAList('mvPrinciples','Write a core principle…');}if(id==='book'){renderASection('bookChapters');}if(id==='speaking'){renderSpk();renderASection('spkSpeeches');renderASection('spkMedia');renderASection('spkOpps');renderAList('spkTopics','Add a speaking topic…');}if(id==='dashboard'){setTimeout(renderDashTop3,80);setTimeout(renderKeyRelationships,120);setTimeout(renderDashFollowUps,140);setTimeout(renderDashLibrary,160);setTimeout(restoreTodaysThought,180);setTimeout(renderDashFollowUps,120);setTimeout(renderKeyRelationships,150);setTimeout(renderDashLibrary,180);setTimeout(restoreTodaysThought,200);}setTimeout(function(){_notifs=buildLiveNotifs();_updateNotifBadge();},120);};
+var _origSP=showPage;showPage=function(id,clickedItem){document.querySelectorAll('[contenteditable="true"][id]').forEach(function(el){if(el.id)saveLS('ace_'+el.id,el.textContent);});_origSP(id,clickedItem);if(id==='priorities'){loadDaily();renderDaily();renderPris();updatePriStats();}if(id==='followups'){renderFUs();updateFUStats();}if(id==='govt'){renderGovt();updateGovtStats();}if(id==='heal'){renderOrgT('heal');updateOrgStats('heal');}if(id==='naman'){renderOrgT('naman');updateOrgStats('naman');}if(id==='stories'){renderWis('story');}if(id==='bookshelf'){renderWis('book');}if(id==='insights'){renderWis('insight');}if(id==='studio'){renderWis('studio');}if(id==='archive'){renderArchive();}if(id==='movement'){renderASection('mvGoals');renderASection('mvInits');renderASection('mvMiles');renderAList('mvPrinciples','Write a core principle…');}if(id==='book'){renderASection('bookChapters');}if(id==='speaking'){renderSpk();renderASection('spkSpeeches');renderASection('spkMedia');renderASection('spkOpps');renderAList('spkTopics','Add a speaking topic…');}if(id==='dashboard'){setTimeout(renderDashTop3,80);setTimeout(renderKeyRelationships,120);setTimeout(renderDashFollowUps,140);setTimeout(renderDashLibrary,160);setTimeout(restoreTodaysThought,180);setTimeout(renderDashFollowUps,120);setTimeout(renderKeyRelationships,150);setTimeout(renderDashLibrary,180);setTimeout(restoreTodaysThought,200);}setTimeout(function(){_notifs=buildLiveNotifs();_updateNotifBadge();},120);};
 
 // EXPORT
 function exportSnapshot(){var a=document.createElement('a');a.href='data:text/html;charset=utf-8,'+encodeURIComponent(document.documentElement.outerHTML);a.download='AarohOS-'+new Date().toISOString().split('T')[0]+'.html';document.body.appendChild(a);a.click();document.body.removeChild(a);}
