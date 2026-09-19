@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aaroh OS · Pratiksha</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -2 40 42'%3E%3Ccircle cx='12' cy='28' r='9' stroke='%230F6E56' stroke-width='2' fill='none'/%3E%3Cline x1='12' y1='28' x2='12' y2='4' stroke='%230F6E56' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M12 10 Q19 6 17 0 Q8 4 12 10Z' fill='%231D9E75'/%3E%3Ccircle cx='12' cy='37' r='1.8' fill='%230F6E56' opacity='0.35'/%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 <style>
 /* ─── RESET ─────────────────────────────────────────── */
@@ -1044,10 +1045,88 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
 .db-org .st{font-size:11px;font-weight:600;color:var(--s-green);background:#EAF3DE;padding:2px 8px;border-radius:8px}
 #dashTop3Container>div{border-bottom-color:var(--border-light)!important}
 @media(max-width:900px){.db-stats{grid-template-columns:repeat(2,1fr)}.db-2,.db-learn{grid-template-columns:1fr}.content{padding:22px 16px}}
+
+/* ─── LOGIN / SIGN-UP GATE ───────────────────────────── */
+#authScreen{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;
+  background:var(--content-bg);padding:24px;font-family:var(--font)}
+#authScreen.show{display:flex}
+.auth-card{width:100%;max-width:380px;background:var(--card-bg);border:1px solid var(--border);
+  border-radius:var(--radius);padding:38px 32px 28px;text-align:center}
+.auth-logo{display:flex;justify-content:center;margin-bottom:14px}
+.auth-title{font-family:var(--font);font-size:26px;font-weight:600;letter-spacing:-0.4px;color:var(--text)}
+.auth-sub{font-size:13px;color:var(--muted);margin-top:4px;margin-bottom:24px}
+.auth-tabs{display:flex;gap:4px;padding:3px;background:var(--content-bg);border-radius:var(--radius-sm);margin-bottom:22px}
+.auth-tab{flex:1;padding:8px 10px;border:none;background:transparent;border-radius:calc(var(--radius-sm) - 2px);
+  font-family:var(--font);font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;transition:.15s}
+.auth-tab.active{background:var(--card-bg);color:var(--text);box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.auth-form{text-align:left}
+.auth-label{display:block;font-size:12px;font-weight:500;color:var(--text-2);margin-bottom:6px}
+.auth-input{width:100%;padding:11px 13px;margin-bottom:16px;border:1px solid var(--border);
+  border-radius:var(--radius-sm);font-family:var(--font);font-size:14px;color:var(--text);
+  background:var(--card-bg);outline:none;transition:border-color .15s}
+.auth-input:focus{border-color:var(--green)}
+.auth-btn{width:100%;padding:12px;border:none;border-radius:var(--radius-sm);background:var(--green);
+  color:#fff;font-family:var(--font);font-size:14px;font-weight:600;cursor:pointer;transition:opacity .15s}
+.auth-btn:hover{opacity:.9}
+.auth-btn:disabled{opacity:.55;cursor:default}
+.auth-msg{font-size:12.5px;line-height:1.45;margin:-4px 0 14px;display:none}
+.auth-msg.show{display:block}
+.auth-msg.err{color:#C0392B}
+.auth-msg.ok{color:var(--green)}
+.auth-foot{font-size:11.5px;color:var(--hint);margin-top:18px;line-height:1.5}
+/* signed-in chip in header */
+.hdr-user{position:relative}
+.hdr-menu{position:absolute;right:0;top:calc(100% + 8px);min-width:210px;background:var(--card-bg);
+  border:1px solid var(--border);border-radius:var(--radius-sm);box-shadow:var(--shadow-md);
+  padding:6px;display:none;z-index:500;text-align:left}
+.hdr-menu.open{display:block}
+.hdr-menu-email{padding:8px 10px 10px;font-size:12px;color:var(--muted);word-break:break-all;
+  border-bottom:1px solid var(--border-light);margin-bottom:4px}
+.hdr-menu button{width:100%;padding:8px 10px;border:none;background:transparent;text-align:left;
+  font-family:var(--font);font-size:13px;color:var(--text);border-radius:6px;cursor:pointer}
+.hdr-menu button:hover{background:var(--content-bg)}
 </style>
 </head>
 <body>
-<div class="shell">
+
+<!-- ═══════════════════════════════════════════════════════
+     LOGIN / SIGN-UP GATE
+═══════════════════════════════════════════════════════ -->
+<div id="authScreen">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <svg width="34" height="54" viewBox="0 0 24 38" fill="none">
+        <circle cx="12" cy="28" r="9" stroke="#0F6E56" stroke-width="2"/>
+        <line x1="12" y1="28" x2="12" y2="4" stroke="#0F6E56" stroke-width="2" stroke-linecap="round"/>
+        <path d="M12 10 Q19 6 17 0 Q8 4 12 10Z" fill="#1D9E75"/>
+        <circle cx="12" cy="37" r="1.8" fill="#0F6E56" opacity="0.35"/>
+      </svg>
+    </div>
+    <div class="auth-title">Aaroh</div>
+    <div class="auth-sub" id="authSub">Sign in to your workspace</div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="authTabIn" onclick="authMode('in')">Sign in</button>
+      <button class="auth-tab" id="authTabUp" onclick="authMode('up')">Create account</button>
+    </div>
+
+    <form class="auth-form" id="authForm" onsubmit="return authSubmit(event)">
+      <label class="auth-label" for="authEmail">Email</label>
+      <input class="auth-input" type="email" id="authEmail" autocomplete="email" placeholder="you@example.com" required>
+
+      <label class="auth-label" for="authPass">Password</label>
+      <input class="auth-input" type="password" id="authPass" autocomplete="current-password" placeholder="••••••••" required minlength="6">
+
+      <div class="auth-msg" id="authMsg"></div>
+
+      <button class="auth-btn" type="submit" id="authBtn">Sign in</button>
+    </form>
+
+    <div class="auth-foot" id="authFoot">Your data is private to your account.</div>
+  </div>
+</div>
+
+<div class="shell" id="appShell" style="display:none">
 
 <!-- ═══════════════════════════════════════════════════════
      SIDEBAR
@@ -1214,7 +1293,14 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
         <span class="notif-dot-hdr" id="notifDotHdr"></span>
       </button>
       
-      <div class="header-avatar" title="Pratiksha">P</div>
+      <div class="hdr-user">
+        <div class="header-avatar" id="hdrAvatar" title="Account" onclick="toggleUserMenu()" style="cursor:pointer">P</div>
+        <div class="hdr-menu" id="hdrMenu">
+          <div class="hdr-menu-email" id="hdrMenuEmail">—</div>
+          <button onclick="showPage('backup',null);toggleUserMenu()">Backup &amp; restore</button>
+          <button onclick="_auth.signOut()">Sign out</button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -2384,8 +2470,77 @@ var AAROH_CONFIG = {
   configured: true
 };
 
+// ═══ AUTH (Supabase email + password) ══════════════════════════════════════
+// Each account gets its own private data bucket: rows in aaroh_store are
+// stamped with the signed-in user's UID and the RLS policy only lets that
+// user read or write them. Hand the app to someone else and they simply
+// create their own account — their data never mixes with yours.
+var _auth = {
+  session:null,
+  SKEY:'aaroh_session',
+  _api:function(path,body){
+    return fetch(AAROH_CONFIG.supabaseUrl+'/auth/v1/'+path,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':AAROH_CONFIG.supabaseKey},
+      body:JSON.stringify(body)
+    }).then(function(r){
+      return r.json().catch(function(){return{};}).then(function(d){
+        if(!r.ok)throw new Error(d.msg||d.error_description||d.error||d.message||('Request failed ('+r.status+')'));
+        return d;
+      });
+    });
+  },
+  load:function(){
+    try{var s=localStorage.getItem(this.SKEY);if(s)this.session=JSON.parse(s);}catch(e){}
+    return this.session;
+  },
+  save:function(s){
+    this.session=s;
+    try{localStorage.setItem(this.SKEY,JSON.stringify(s));}catch(e){}
+  },
+  clear:function(){
+    this.session=null;
+    try{localStorage.removeItem(this.SKEY);}catch(e){}
+  },
+  signUp:function(email,pass){return this._api('signup',{email:email,password:pass});},
+  signIn:function(email,pass){
+    var self=this;
+    return this._api('token?grant_type=password',{email:email,password:pass}).then(function(d){
+      if(!d.access_token)throw new Error('No session returned. Check your email and password.');
+      self.save({access_token:d.access_token,refresh_token:d.refresh_token,user:d.user});
+      return d;
+    });
+  },
+  refresh:function(){
+    var self=this;
+    if(!this.session||!this.session.refresh_token)return Promise.reject(new Error('no session'));
+    return this._api('token?grant_type=refresh_token',{refresh_token:this.session.refresh_token})
+    .then(function(d){
+      if(!d.access_token)throw new Error('refresh failed');
+      self.save({access_token:d.access_token,refresh_token:d.refresh_token,user:d.user||self.session.user});
+      if(typeof _sb!=='undefined')_sb.token=d.access_token;
+      return d;
+    });
+  },
+  signOut:function(){
+    // Local caches are per-account; clear them so the next person who signs in
+    // on this browser starts from their own cloud data, not yours.
+    var keep={};
+    try{
+      Object.keys(localStorage).forEach(function(k){
+        if(k.indexOf('aaroh_')===0||k.indexOf('ace_')===0)keep[k]=1;
+      });
+      Object.keys(keep).forEach(function(k){localStorage.removeItem(k);});
+    }catch(e){}
+    this.clear();
+    location.reload();
+  },
+  email:function(){return(this.session&&this.session.user&&this.session.user.email)||'';},
+  uid:function(){return(this.session&&this.session.user&&this.session.user.id)||'';}
+};
+
 var _sb = {
-  url:'', key:'', ready:false,
+  url:'', key:'', token:'', ready:false,
   init:function(url,key){
     this.url=url;this.key=key;this.ready=!!(url&&key);
     console.log('Supabase init: URL set Key set ready:',this.ready);
@@ -2400,19 +2555,23 @@ var _sb = {
       });
     }
   },
-  _h:function(){return{'Content-Type':'application/json','apikey':this.key,'Authorization':'Bearer '+this.key,'Prefer':'return=minimal,resolution=merge-duplicates'};},
+  // Always send the publishable key as apikey, but authorise as the signed-in
+  // user when we have their token — that is what makes the per-account
+  // row-level-security policy apply.
+  _auth_tok:function(){return this.token||this.key;},
+  _h:function(){return{'Content-Type':'application/json','apikey':this.key,'Authorization':'Bearer '+this._auth_tok(),'Prefer':'return=minimal,resolution=merge-duplicates'};},
   set:function(k,v){
     if(!this.ready)return Promise.resolve(null);
     var self=this;
     var val=typeof v==='string'?v:JSON.stringify(v);
     var body=JSON.stringify({user_id:AAROH_CONFIG.userId,data_key:k,data_value:val,updated_at:new Date().toISOString()});
-    var h={'Content-Type':'application/json','apikey':this.key,'Authorization':'Bearer '+this.key,'Prefer':'resolution=merge-duplicates,return=minimal'};
+    var h={'Content-Type':'application/json','apikey':this.key,'Authorization':'Bearer '+this._auth_tok(),'Prefer':'resolution=merge-duplicates,return=minimal'};
     // Try upsert with on_conflict first
     return fetch(this.url+'/rest/v1/aaroh_store?on_conflict=user_id,data_key',{method:'POST',headers:h,body:body})
     .then(function(r){
       if(r.ok||r.status===201)return r;
       // Fallback: PATCH existing row
-      var h2={'Content-Type':'application/json','apikey':self.key,'Authorization':'Bearer '+self.key,'Prefer':'return=minimal'};
+      var h2={'Content-Type':'application/json','apikey':self.key,'Authorization':'Bearer '+self._auth_tok(),'Prefer':'return=minimal'};
       return fetch(self.url+'/rest/v1/aaroh_store?user_id=eq.'+encodeURIComponent(AAROH_CONFIG.userId)+'&data_key=eq.'+encodeURIComponent(k),{
         method:'PATCH',headers:h2,
         body:JSON.stringify({data_value:val,updated_at:new Date().toISOString()})
@@ -2490,6 +2649,138 @@ function _cloudLoad(){
 // Init Supabase
 _sb.init(AAROH_CONFIG.supabaseUrl, AAROH_CONFIG.supabaseKey);
 console.log('Aaroh OS — cloud ready');
+
+// ═══ AUTH GATE ═════════════════════════════════════════════════════════════
+var _authBusy=false;
+
+function authMode(m){
+  var isUp = m==='up';
+  document.getElementById('authTabIn').classList.toggle('active',!isUp);
+  document.getElementById('authTabUp').classList.toggle('active',isUp);
+  document.getElementById('authBtn').textContent = isUp?'Create account':'Sign in';
+  document.getElementById('authSub').textContent = isUp?'Set up your own private workspace':'Sign in to your workspace';
+  document.getElementById('authPass').setAttribute('autocomplete',isUp?'new-password':'current-password');
+  document.getElementById('authFoot').textContent = isUp
+    ? 'Your workspace starts empty and stays private to this account.'
+    : 'Your data is private to your account.';
+  _authMsg('');
+}
+
+function _authMsg(txt,kind){
+  var el=document.getElementById('authMsg');
+  if(!el)return;
+  el.textContent=txt||'';
+  el.className='auth-msg'+(txt?' show ':' ')+(kind||'err');
+}
+
+function authSubmit(ev){
+  if(ev&&ev.preventDefault)ev.preventDefault();
+  if(_authBusy)return false;
+  var email=(document.getElementById('authEmail').value||'').trim();
+  var pass=document.getElementById('authPass').value||'';
+  var isUp=document.getElementById('authTabUp').classList.contains('active');
+  if(!email||!pass){_authMsg('Please enter your email and password.');return false;}
+  if(pass.length<6){_authMsg('Password must be at least 6 characters.');return false;}
+
+  var btn=document.getElementById('authBtn');
+  _authBusy=true;btn.disabled=true;
+  btn.textContent=isUp?'Creating account…':'Signing in…';
+  _authMsg('');
+
+  var done=function(){
+    _authBusy=false;btn.disabled=false;
+    btn.textContent=isUp?'Create account':'Sign in';
+  };
+
+  if(isUp){
+    _auth.signUp(email,pass).then(function(d){
+      // If the project requires email confirmation there is no session yet.
+      if(d&&d.access_token){
+        _auth.save({access_token:d.access_token,refresh_token:d.refresh_token,user:d.user});
+        _authStart();
+        return;
+      }
+      return _auth.signIn(email,pass).then(function(){_authStart();})
+      .catch(function(){
+        done();
+        authMode('in');
+        _authMsg('Account created. Please check your email to confirm it, then sign in.','ok');
+      });
+    }).catch(function(e){
+      done();
+      _authMsg(_authErr(e));
+    });
+  }else{
+    _auth.signIn(email,pass).then(function(){_authStart();})
+    .catch(function(e){done();_authMsg(_authErr(e));});
+  }
+  return false;
+}
+
+function _authErr(e){
+  var m=(e&&e.message)||'Something went wrong.';
+  if(/invalid login credentials/i.test(m))return 'That email and password do not match an account.';
+  if(/email not confirmed/i.test(m))return 'Please confirm your email address first, then sign in.';
+  if(/already registered|already been registered/i.test(m))return 'That email already has an account — try signing in instead.';
+  if(/failed to fetch|networkerror|load failed/i.test(m))return 'Cannot reach the server. Check your internet connection.';
+  return m;
+}
+
+// Show the app for the signed-in account and run the normal start-up.
+function _authStart(){
+  AAROH_CONFIG.userId = _auth.uid() || AAROH_CONFIG.userId;
+  _sb.token = (_auth.session&&_auth.session.access_token)||'';
+  var gate=document.getElementById('authScreen');
+  var shell=document.getElementById('appShell');
+  if(gate)gate.classList.remove('show');
+  if(shell)shell.style.display='';
+  var em=_auth.email();
+  var me=document.getElementById('hdrMenuEmail');if(me)me.textContent=em;
+  var av=document.getElementById('hdrAvatar');
+  if(av&&em)av.textContent=em.charAt(0).toUpperCase();
+  if(av)av.setAttribute('title',em);
+  if(typeof initApp==='function'&&!window._appStarted){
+    window._appStarted=true;
+    try{initApp();}catch(e){console.error('initApp:',e);}
+  }
+}
+
+function _authShowGate(){
+  var gate=document.getElementById('authScreen');
+  var shell=document.getElementById('appShell');
+  if(shell)shell.style.display='none';
+  if(gate)gate.classList.add('show');
+  var em=document.getElementById('authEmail');if(em)setTimeout(function(){em.focus();},80);
+}
+
+function toggleUserMenu(){
+  var m=document.getElementById('hdrMenu');
+  if(m)m.classList.toggle('open');
+}
+document.addEventListener('click',function(e){
+  var m=document.getElementById('hdrMenu');
+  if(m&&m.classList.contains('open')&&!e.target.closest('.hdr-user'))m.classList.remove('open');
+});
+
+// Decide on load: signed in → straight to the app; otherwise → login screen.
+function _authBoot(){
+  var s=_auth.load();
+  if(s&&s.access_token&&s.user&&s.user.id){
+    _authStart();
+    // Quietly renew the token in the background; only bounce to the login
+    // screen if the session is genuinely dead (not merely offline).
+    _auth.refresh().catch(function(e){
+      var m=(e&&e.message)||'';
+      if(/refresh|invalid|expired|not found|token/i.test(m)&&!/failed to fetch|networkerror|load failed/i.test(m)){
+        _auth.clear();_authShowGate();
+      }
+    });
+  }else{
+    _authShowGate();
+  }
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',_authBoot);
+else _authBoot();
 </script>
 
 <script>
@@ -3071,7 +3362,8 @@ document.addEventListener('blur',function(e){
 // ════════════════════════════════════════
 // INIT
 // ════════════════════════════════════════
-(function init(){
+// Runs only once the user is signed in — see _authStart().
+function initApp(){
   loadAll();
   updateStats();
   renderColleges('pending');
@@ -3099,7 +3391,11 @@ document.addEventListener('blur',function(e){
   var g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
   var el=document.getElementById('dashGreeting');
   if(el)el.textContent=g+', Pratiksha';
-})();
+  if(typeof startLive==='function'&&!window._liveStarted){
+    window._liveStarted=true;
+    try{startLive();}catch(e){console.error('startLive:',e);}
+  }
+}
 
 // ═══════════════════════════════════════ AAROH OS SPRINT 3 ═══════════════════
 function showToast(){var t=document.getElementById('autoSaveToast');if(!t)return;t.style.opacity='1';clearTimeout(t._t);t._t=setTimeout(function(){t.style.opacity='0';},1400);}
@@ -3859,7 +4155,8 @@ function pushAllToCloud(){
   pushNext();
   alert('Syncing '+keys.length+' keys to cloud. This takes a few seconds...');
 }
-(function(){
+// Runs only once the user is signed in — called at the end of initApp().
+function startLive(){
   loadNotifs();loadDaily();loadPris();updatePriStats();loadFUs();updateFUStats();
   loadCaps();loadGovt();updateGovtStats();loadOrgT();updateOrgStats('heal');updateOrgStats('naman');
   loadWis();loadAaroh();loadColleges();loadLMS();
@@ -3882,7 +4179,7 @@ function pushAllToCloud(){
   setInterval(function(){if(typeof autoSyncToCloud==='function'&&_sb&&_sb.ready)autoSyncToCloud();},120000);
   setInterval(function(){if(typeof autoLocalBackup==='function')autoLocalBackup();},300000);
   console.log('Aaroh OS — live');
-})();
+}
 
 function autoLocalBackup(){
   try{
