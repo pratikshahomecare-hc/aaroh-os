@@ -60,7 +60,7 @@
 
 /* ─── REDESIGNED PAGES (stories / thought / backup / results) ─── */
 .pg-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-.pg-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:600;color:var(--text);line-height:1.2}
+.pg-title{font-family:var(--font);font-size:26px;font-weight:600;color:var(--text);line-height:1.2}
 .pg-sub{font-size:13px;color:var(--muted);margin-top:4px}
 .pg-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:22px}
 .chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
@@ -71,9 +71,9 @@
 .search-pill input{border:none;outline:none;font-size:13px;color:var(--text);background:transparent;width:100%;font-family:inherit}
 /* stories */
 .hl-hero{background:linear-gradient(135deg,#0F6E56 0%,#085041 100%);color:#fff;border-radius:14px;padding:32px 36px;margin-bottom:24px;position:relative;overflow:hidden;cursor:pointer}
-.hl-hero:before{content:'\201C';position:absolute;right:28px;top:-28px;font-family:'Playfair Display',serif;font-size:220px;color:rgba(255,255,255,0.08);line-height:1}
+.hl-hero:before{content:'\201C';position:absolute;right:28px;top:-28px;font-family:var(--font);font-size:220px;color:rgba(255,255,255,0.08);line-height:1}
 .hl-hero-lbl{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:12px}
-.hl-hero-q{font-family:'Playfair Display',serif;font-size:22px;line-height:1.45;font-weight:400;max-width:640px;margin-bottom:18px}
+.hl-hero-q{font-family:var(--font);font-size:22px;line-height:1.45;font-weight:400;max-width:640px;margin-bottom:18px}
 .hl-hero-meta{display:flex;align-items:center;gap:14px;font-size:12px;color:rgba(255,255,255,0.8)}
 .hl-hero-meta strong{color:#fff;font-weight:600}
 .hl-hero .btn{background:#fff;color:var(--green);border-color:#fff}
@@ -84,7 +84,7 @@
 .hl-av{width:40px;height:40px;border-radius:50%;background:var(--green-light);color:var(--green-text);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex-shrink:0}
 .hl-name{font-size:15px;font-weight:600;color:var(--text)}
 .hl-meta{font-size:11px;color:var(--muted);margin-top:2px}
-.hl-quote{font-family:'Playfair Display',serif;font-size:15px;line-height:1.55;color:var(--text);margin:4px 0 12px}
+.hl-quote{font-family:var(--font);font-size:15px;line-height:1.55;color:var(--text);margin:4px 0 12px}
 .hl-lesson{font-size:12px;color:var(--text-2);background:var(--content-bg);border-left:3px solid var(--green);padding:8px 12px;border-radius:0 6px 6px 0;margin-bottom:12px;line-height:1.5}
 .hl-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:10px;border-top:1px solid var(--border-light)}
 .hl-tags{display:flex;flex-wrap:wrap;gap:4px}
@@ -99,7 +99,7 @@
 .tj-wrap{display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start}
 .tj-today{background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px;box-shadow:var(--shadow)}
 .tj-date{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--green);margin-bottom:6px}
-.tj-prompt{font-family:'Playfair Display',serif;font-size:17px;color:var(--text);line-height:1.4;margin-bottom:14px}
+.tj-prompt{font-family:var(--font);font-size:17px;color:var(--text);line-height:1.4;margin-bottom:14px}
 .tj-prompt button{font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;font-family:inherit;margin-left:8px;text-decoration:underline}
 .tj-ta{width:100%;border:none;outline:none;font-size:15px;color:var(--text);line-height:1.75;resize:vertical;min-height:150px;background:transparent;font-family:inherit;box-sizing:border-box}
 .tj-bar{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
@@ -208,7 +208,7 @@ body{
   flex-shrink:0;
 }
 .sidebar-logo-name{
-  font-family:'Playfair Display',serif;
+  font-family:var(--font);
   font-size:18px;
   font-weight:600;
   color:#FFFFFF;
@@ -406,7 +406,7 @@ body{
   color:var(--green);
 }
 .t-section{
-  font-family:'Playfair Display',serif;
+  font-family:var(--font);
   font-size:22px;font-weight:600;
   color:var(--text);
   line-height:1.2;
@@ -487,7 +487,7 @@ body{
   box-shadow:var(--shadow-md);
 }
 .modal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.modal-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:600}
+.modal-title{font-family:var(--font);font-size:18px;font-weight:600}
 .close-btn{background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted);line-height:1;padding:4px}
 
 /* ─── SECTION HEADER ────────────────────────────────────── */
@@ -598,7 +598,7 @@ body{
 /* Greeting block */
 .dash-greeting-block{margin-bottom:36px;padding-bottom:28px;border-bottom:1px solid var(--border-light)}
 .dash-greeting-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
-.dash-greeting-text{font-family:'Playfair Display',serif;font-size:32px;font-weight:400;color:var(--text);line-height:1.2;margin-bottom:16px}
+.dash-greeting-text{font-family:var(--font);font-size:32px;font-weight:400;color:var(--text);line-height:1.2;margin-bottom:16px}
 .dash-mission-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--hint);margin-bottom:6px}
 .dash-mission{
   font-size:15px;color:var(--text-2);line-height:1.6;
@@ -628,7 +628,7 @@ body{
 /* Strategic pillars */
 .dash-pillars-block{margin-bottom:36px;padding-bottom:28px;border-bottom:1px solid var(--border-light)}
 .dash-section-title{
-  font-family:'Playfair Display',serif;
+  font-family:var(--font);
   font-size:18px;font-weight:600;
   color:var(--text);margin-bottom:16px;
 }
@@ -680,7 +680,7 @@ body{
 .dash-library-avatar{width:64px;height:64px;border-radius:50%;background:var(--green-light);display:flex;align-items:center;justify-content:center;font-size:26px;border:1px solid var(--border)}
 .dash-library-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);margin-bottom:8px}
 .dash-library-quote{
-  font-family:'Playfair Display',serif;
+  font-family:var(--font);
   font-size:17px;color:var(--text);
   line-height:1.6;margin-bottom:12px;
   border-left:2px solid var(--green);padding-left:14px;
@@ -697,7 +697,7 @@ body{
 .dash-reflection-block{margin-bottom:24px}
 .dash-reflection-card{background:var(--green-light);border:1px solid rgba(15,110,86,0.15);border-radius:var(--radius);padding:20px 24px}
 .dash-reflection-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
-.dash-reflection-text{font-family:'Playfair Display',serif;font-size:16px;color:var(--green-dark);line-height:1.6;font-style:italic;outline:none;cursor:text;min-height:22px}
+.dash-reflection-text{font-family:var(--font);font-size:16px;color:var(--green-dark);line-height:1.6;font-style:italic;outline:none;cursor:text;min-height:22px}
 .dash-reflection-text:focus{background:transparent}
 
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
@@ -768,7 +768,7 @@ body{
   .wcrd-title{font-size:15px;font-weight:600;color:var(--text);flex:1;line-height:1.3}
   .wcrd-meta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
   .wbody{font-size:13px;color:var(--text-2);line-height:1.6;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-  .wquote{font-family:'Playfair Display',serif;font-size:14px;color:var(--text);font-style:italic;border-left:2px solid var(--green);padding-left:12px;margin-bottom:10px;line-height:1.6}
+  .wquote{font-family:var(--font);font-size:14px;color:var(--text);font-style:italic;border-left:2px solid var(--green);padding-left:12px;margin-bottom:10px;line-height:1.6}
   .wlesson{background:var(--green-light);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--green-dark);line-height:1.55;margin-bottom:8px}
   .wtags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
   .wtag{font-size:10px;padding:2px 8px;border-radius:10px;background:var(--green-light);color:var(--green-text);font-weight:500}
@@ -794,7 +794,7 @@ body{
   .afield:focus{background:#fff;border-color:var(--green)}
   .afield:empty::before{content:attr(placeholder);color:var(--hint);font-style:italic}
   .aicard{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;text-align:center;box-shadow:var(--shadow)}
-  .ainum{font-family:'Playfair Display',serif;font-size:32px;font-weight:600;color:var(--green);line-height:1;margin-bottom:6px;outline:none;cursor:text}
+  .ainum{font-family:var(--font);font-size:32px;font-weight:600;color:var(--green);line-height:1;margin-bottom:6px;outline:none;cursor:text}
   .ainum:empty::before{content:'0';color:var(--hint)}
   .ailabel{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted)}
   .alist-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
@@ -822,10 +822,10 @@ body{
   .sr-edit{position:absolute;top:20px;right:64px;background:none;border:1px solid var(--border);cursor:pointer;font-size:11px;font-weight:600;color:var(--muted);padding:4px 12px;border-radius:4px;font-family:'DM Sans',sans-serif}
   .sr-edit:hover{border-color:var(--green);color:var(--green)}
   .sr-eyebrow{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:20px}
-  .sr-name{font-family:'Playfair Display',serif;font-size:32px;font-weight:400;color:var(--text);line-height:1.2;margin-bottom:10px}
+  .sr-name{font-family:var(--font);font-size:32px;font-weight:400;color:var(--text);line-height:1.2;margin-bottom:10px}
   .sr-meta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--border)}
   .sr-meta span{font-size:12px;color:var(--muted)}
-  .sr-quote{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;font-style:italic;color:var(--text);line-height:1.55;border-left:3px solid var(--green);padding-left:24px;margin:0 0 32px}
+  .sr-quote{font-family:var(--font);font-size:20px;font-weight:400;font-style:italic;color:var(--text);line-height:1.55;border-left:3px solid var(--green);padding-left:24px;margin:0 0 32px}
   .sr-body{font-size:15px;color:var(--text);line-height:1.85;margin-bottom:36px;white-space:pre-wrap}
   .sr-slabel{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--hint);margin-bottom:10px}
   .sr-lesson{background:var(--green-light);border-radius:8px;padding:16px 20px;margin-bottom:24px;font-size:14px;color:var(--green-dark);line-height:1.6}
@@ -920,6 +920,130 @@ body{
   .lms-trainer-card{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:8px}
   .lms-trainer-avatar{width:40px;height:40px;border-radius:50%;background:var(--green-light);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
 
+
+/* ═══════════════════════════════════════════════════════════════
+   SYSTEM PASS — calm, classic, one typeface, hairlines, soft radii
+   (loaded last so it wins over earlier rules)
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Inter,"Helvetica Neue",Arial,sans-serif;
+  --content-bg:#F5F5F7;
+  --card-bg:#FFFFFF;
+  --sidebar-bg:#F9F9FB;
+  --sidebar-hover:#EFEFF3;
+  --sidebar-active:#E6E6EB;
+  --header-bg:rgba(255,255,255,0.82);
+  --border:#E5E5EA;
+  --border-light:#F0F0F3;
+  --text:#1D1D1F;
+  --text-2:#3A3A3C;
+  --muted:#6E6E73;
+  --hint:#AEAEB2;
+  --radius:14px;
+  --radius-sm:9px;
+  --shadow:0 0 0 0 transparent;
+  --shadow-md:0 8px 24px rgba(0,0,0,0.08);
+}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body,button,input,select,textarea{font-family:var(--font)}
+body{font-size:14px;letter-spacing:-0.005em}
+h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
+.pg-title{font-size:28px;font-weight:700}
+.pg-eyebrow{font-weight:600;color:var(--muted)}
+.pg-sub{color:var(--muted)}
+/* sidebar: light, quiet, rounded selection */
+.sidebar{background:var(--sidebar-bg);border-right:1px solid var(--border)}
+.sidebar-logo{border-bottom:none;padding:22px 18px 10px}
+.sidebar-logo-name{color:var(--text);font-size:17px;font-weight:700}
+.sidebar-logo-phase{color:var(--hint)}
+.sidebar-group-label{color:var(--hint);padding:14px 18px 4px;letter-spacing:0.06em}
+.sidebar-item{color:var(--text-2);margin:1px 10px;width:calc(100% - 20px);padding:7px 10px;border-radius:8px;font-size:13px}
+.sidebar-item:hover{background:var(--sidebar-hover);color:var(--text)}
+.sidebar-item.active{background:var(--sidebar-active);color:var(--text);font-weight:600}
+.sidebar-item.active::before{display:none}
+.sidebar-item svg{opacity:.7;color:var(--muted)}
+.sidebar-item.active svg{color:var(--green);opacity:1}
+.sidebar-badge{background:var(--border);color:var(--muted)}
+.sidebar-divider{background:var(--border);margin:8px 18px}
+/* header: translucent, hairline */
+.header{background:var(--header-bg);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--border);padding:0 28px}
+.header-page-title{font-weight:600}
+.header-search{background:#EFEFF2;border:none;border-radius:9px}
+.header-btn{border:none;background:transparent}
+.header-avatar{background:var(--green);color:#fff;font-weight:600}
+/* content */
+.content{padding:36px 40px;max-width:1040px}
+/* cards & surfaces: white, hairline, no shadow */
+.card,.rs-card,.tj-card,.tj-today,.tj-entry,.bk-act,.bk-status,.hl-card,.hl-stat,.rs-kpi,.wcrd,.spkcard,.acard,.dpcard{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:none}
+.hl-card:hover,.bk-act:hover{box-shadow:var(--shadow-md);border-color:var(--border)}
+.bk-tile,.rs-row,.tj-streak div{border-radius:10px}
+.tbl th{color:var(--muted);border-bottom:1px solid var(--border)}
+.tbl tr:hover td{background:#FAFAFC}
+/* buttons */
+.btn{border-radius:var(--radius-sm);border:1px solid transparent;font-weight:600;padding:8px 16px;font-size:13px}
+.btn-teal,.btn-green{background:var(--green);color:#fff}
+.btn-teal:hover,.btn-green:hover{background:var(--green-dark)}
+.btn-ghost{background:#F2F2F7;color:var(--text);border-color:transparent}
+.btn-ghost:hover{background:#E8E8ED;border-color:transparent;color:var(--text)}
+.btn-sm{padding:5px 11px!important;font-size:12px!important;border-radius:8px!important}
+.chip{border-radius:9px;background:#F2F2F7;border-color:transparent;color:var(--text-2)}
+.chip:hover{background:#E8E8ED;color:var(--text);border-color:transparent}
+.chip.on{background:var(--text);color:#fff}
+.search-pill{background:#EFEFF2;border:none;border-radius:9px}
+.page-tab{font-weight:500}
+/* forms */
+.form-input,.form-select,.form-textarea{border-radius:9px;border:1px solid var(--border);background:#fff;font-size:13px;padding:9px 12px}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(15,110,86,0.12)}
+.form-label{color:var(--muted);font-weight:500}
+.modal{border-radius:16px;box-shadow:0 24px 80px rgba(0,0,0,0.18)}
+.modal-title{font-weight:700;letter-spacing:-0.01em}
+.fab{background:var(--green);box-shadow:0 8px 24px rgba(15,110,86,0.3)}
+/* results period control */
+.rs-period{background:#EFEFF2;border:none;border-radius:12px;padding:3px}
+.rs-period .seg button{border-radius:9px;color:var(--muted)}
+.rs-period .seg button.on{background:#fff;color:var(--text);box-shadow:0 1px 2px rgba(0,0,0,0.08)}
+.rs-period .nav{border:none;background:#fff;border-radius:8px}
+/* section labels used across pages */
+.sec-lbl{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:0;text-transform:none;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.sec-lbl a,.sec-lbl button{font-size:12px;font-weight:500;color:var(--green);background:none;border:none;cursor:pointer;padding:0;font-family:inherit}
+/* stories: like bookshelf — plain, no hero */
+.hl-grid{gap:14px}
+.hl-quote{font-family:var(--font);font-size:14px;color:var(--text);line-height:1.6}
+.hl-av{background:#F2F2F7;color:var(--text-2)}
+.hl-tag{background:#F2F2F7;color:var(--muted)}
+.hl-lesson{background:#F7F7F8;border-left:2px solid var(--green)}
+/* thought */
+.tj-prompt{font-family:var(--font);font-size:16px;font-weight:500}
+.cal-d.has{background:#E8F3EF}
+.cal-d.today{outline-color:var(--green)}
+/* dashboard */
+.db-wrap{max-width:860px}
+.db-greet{font-size:30px;font-weight:700;letter-spacing:-0.02em;color:var(--text);margin-bottom:2px}
+.db-date{font-size:14px;color:var(--muted);margin-bottom:26px}
+.db-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+.db-stat{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px 16px;cursor:pointer;transition:background .15s}
+.db-stat:hover{background:#FAFAFC}
+.db-stat b{display:block;font-size:24px;font-weight:700;letter-spacing:-0.02em;color:var(--text);line-height:1.1}
+.db-stat span{font-size:12px;color:var(--muted)}
+.db-sec{margin-bottom:28px}
+.db-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.db-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px 20px}
+.db-list>div{padding:10px 0;border-bottom:1px solid var(--border-light)}
+.db-list>div:last-child{border-bottom:none;padding-bottom:0}
+.db-list>div:first-child{padding-top:0}
+.db-thought{font-size:16px;line-height:1.7;color:var(--text);min-height:26px}
+.db-thought:empty:before{content:'Nothing written yet today — a few honest lines is enough.';color:var(--hint);font-size:13px}
+.db-learn{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.db-learn .db-card{padding:14px 16px}
+.db-learn .k{font-size:11px;font-weight:600;color:var(--muted);margin-bottom:6px}
+.db-learn .v{font-size:13px;color:var(--text);outline:none;line-height:1.5}
+.db-org{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)}
+.db-org:last-child{border-bottom:none;padding-bottom:0}
+.db-org b{font-size:13px;font-weight:600;display:block}
+.db-org small{font-size:12px;color:var(--muted);outline:none}
+.db-org .st{font-size:11px;font-weight:600;color:var(--s-green);background:#EAF3DE;padding:2px 8px;border-radius:8px}
+#dashTop3Container>div{border-bottom-color:var(--border-light)!important}
+@media(max-width:900px){.db-stats{grid-template-columns:repeat(2,1fr)}.db-2,.db-learn{grid-template-columns:1fr}.content{padding:22px 16px}}
 </style>
 </head>
 <body>
@@ -1099,131 +1223,58 @@ body{
 
     <!-- ═══════════ DASHBOARD / TODAY ═══════════ -->
     <section class="page" id="page-dashboard">
-  <div style="display:grid;grid-template-columns:1fr 280px;gap:24px;align-items:start">
+  <div class="db-wrap">
+    <div class="db-greet" id="dashGreeting">Good morning, Pratiksha</div>
+    <div class="db-date" id="dashDate"></div>
 
-    <!-- LEFT -->
-    <div>
-
-      <!-- Greeting -->
-      <div style="margin-bottom:24px">
-        <h1 style="font-size:28px;font-weight:600;color:var(--text);margin-bottom:4px" id="dashGreeting">Good morning, Pratiksha 🌿</h1>
-        <div style="font-size:13px;color:var(--muted)" id="dashDate"></div>
-      </div>
-
-      <!-- Today's Top 3 -->
-      <div style="margin-bottom:24px">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:12px">Today's focus</div>
-        <div id="dashTop3Container"><div style="color:var(--hint);font-size:13px">Add priorities to see your focus here.</div></div>
-        <button onclick="showPage('priorities',null)" style="margin-top:10px;font-size:11px;color:var(--green);background:none;border:none;cursor:pointer;padding:0;font-weight:600">+ Add priority →</button>
-      </div>
-
-      <!-- Today's Thought -->
-      <div style="margin-bottom:24px">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:10px">Today's thought</div>
-        <div class="card" style="padding:18px 20px">
-          <div id="todaysThought" style="font-size:15px;font-style:italic;color:var(--text);line-height:1.8;min-height:28px"></div>
-          <div style="font-size:11px;color:var(--hint);margin-top:8px">
-            <button onclick="showPage('thought',null)" style="font-size:11px;color:var(--green);background:none;border:none;cursor:pointer;padding:0;font-weight:600">Write today's thought →</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Human Library -->
-      <div style="margin-bottom:24px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted)">Human library</div>
-          <button onclick="showPage('stories',null)" style="font-size:11px;color:var(--green);background:none;border:none;cursor:pointer;padding:0;font-weight:600">View all →</button>
-        </div>
-        <div id="dashLibraryContainer"></div>
-      </div>
-
-      <!-- Learning -->
-      <div style="margin-bottom:24px">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:10px">Learning</div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
-          <div class="card" style="padding:14px">
-            <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Current book</div>
-            <div id="learnBook" contenteditable="true" style="font-size:13px;color:var(--text);outline:none" onblur="saveLS('ace_learnBook',this.textContent)">Being Mortal — Atul Gawande</div>
-          </div>
-          <div class="card" style="padding:14px">
-            <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Research</div>
-            <div id="learnResearch" contenteditable="true" style="font-size:13px;color:var(--text);outline:none" onblur="saveLS('ace_learnResearch',this.textContent)">Compound frailty and care</div>
-          </div>
-          <div class="card" style="padding:14px;border-left:3px solid var(--green)">
-            <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--green);margin-bottom:6px">Today's insight</div>
-            <div id="learnInsight" contenteditable="true" style="font-size:13px;color:var(--text);outline:none" onblur="saveLS('ace_learnInsight',this.textContent)">Dignity is a whole-life issue.</div>
-          </div>
-        </div>
-      </div>
-
+    <div class="db-sec">
+      <div class="sec-lbl"><span>Today's thought</span><button onclick="showPage('thought',null)">Write →</button></div>
+      <div class="db-card"><div id="todaysThought" class="db-thought"></div></div>
     </div>
 
-    <!-- RIGHT -->
-    <div style="display:flex;flex-direction:column;gap:14px;position:sticky;top:20px">
+    <div class="db-stats">
+      <div class="db-stat" onclick="showPage('hospitals',null)"><b id="snapHosp">0</b><span>Hospital visits</span></div>
+      <div class="db-stat" onclick="showPage('colleges',null)"><b id="snapPres">0</b><span>Presentations</span></div>
+      <div class="db-stat" onclick="showPage('colleges',null)"><b id="snapPart">0</b><span>Participants</span></div>
+      <div class="db-stat" onclick="showPage('followups',null)"><b id="snapFU">0</b><span>Pending follow-ups</span></div>
+    </div>
 
-      <!-- Results snapshot -->
-      <div class="card" style="padding:16px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted)">Results snapshot</div>
-          <button onclick="showPage('results',null)" style="font-size:11px;color:var(--green);background:none;border:none;cursor:pointer;padding:0;font-weight:600">Full report →</button>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="text-align:center;padding:8px;background:var(--content-bg);border-radius:8px">
-            <div style="font-size:18px;font-weight:700;color:var(--green)" id="snapHosp">0</div>
-            <div style="font-size:10px;color:var(--muted)">Hospital visits</div>
-          </div>
-          <div style="text-align:center;padding:8px;background:var(--content-bg);border-radius:8px">
-            <div style="font-size:18px;font-weight:700;color:var(--blue)" id="snapPres">0</div>
-            <div style="font-size:10px;color:var(--muted)">Presentations</div>
-          </div>
-          <div style="text-align:center;padding:8px;background:var(--content-bg);border-radius:8px">
-            <div style="font-size:18px;font-weight:700;color:#534AB7" id="snapPart">0</div>
-            <div style="font-size:10px;color:var(--muted)">Participants</div>
-          </div>
-          <div style="text-align:center;padding:8px;background:var(--content-bg);border-radius:8px">
-            <div style="font-size:18px;font-weight:700;color:var(--amber-dark)" id="snapFU">0</div>
-            <div style="font-size:10px;color:var(--muted)">Pending follow-ups</div>
-          </div>
-        </div>
+    <div class="db-sec">
+      <div class="sec-lbl"><span>Today's focus</span><button onclick="showPage('priorities',null)">All priorities →</button></div>
+      <div class="db-card"><div id="dashTop3Container"><div style="color:var(--hint);font-size:13px">Add priorities to see your focus here.</div></div></div>
+    </div>
+
+    <div class="db-sec db-2">
+      <div>
+        <div class="sec-lbl"><span>Follow-ups</span><button onclick="showPage('followups',null)">See all →</button></div>
+        <div class="db-card"><div id="dashFollowUps" class="db-list"><div style="color:var(--hint);font-size:12px">Loading…</div></div></div>
       </div>
-
-      <!-- Key Relationships -->
-      <div class="card" style="padding:16px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted)">Key relationships</div>
-          <button onclick="showPage('followups',null)" style="font-size:11px;color:var(--green);background:none;border:none;cursor:pointer;padding:0;font-weight:600">See all →</button>
-        </div>
-        <div id="dashKeyRelContainer"><div style="color:var(--hint);font-size:12px">Loading...</div></div>
+      <div>
+        <div class="sec-lbl"><span>Key relationships</span><button onclick="showPage('followups',null)">See all →</button></div>
+        <div class="db-card"><div id="dashKeyRelContainer" class="db-list"><div style="color:var(--hint);font-size:12px">Loading…</div></div></div>
       </div>
+    </div>
 
-      <!-- Follow-ups -->
-      <div class="card" style="padding:16px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted)">Follow-ups</div>
-          <button onclick="showPage('followups',null)" style="font-size:11px;color:var(--green);background:none;border:none;cursor:pointer;padding:0;font-weight:600">See all →</button>
-        </div>
-        <div id="dashFollowUps"><div style="color:var(--hint);font-size:12px">Loading...</div></div>
+    <div class="db-sec">
+      <div class="sec-lbl"><span>Human library</span><button onclick="showPage('stories',null)">View all →</button></div>
+      <div id="dashLibraryContainer"></div>
+    </div>
+
+    <div class="db-sec">
+      <div class="sec-lbl"><span>Learning</span><button onclick="showPage('bookshelf',null)">Bookshelf →</button></div>
+      <div class="db-learn">
+        <div class="db-card"><div class="k">Current book</div><div class="v" id="learnBook" contenteditable="true" onblur="saveLS('ace_learnBook',this.textContent)">Being Mortal — Atul Gawande</div></div>
+        <div class="db-card"><div class="k">Research</div><div class="v" id="learnResearch" contenteditable="true" onblur="saveLS('ace_learnResearch',this.textContent)">Compound frailty and care</div></div>
+        <div class="db-card"><div class="k" style="color:var(--green)">Today's insight</div><div class="v" id="learnInsight" contenteditable="true" onblur="saveLS('ace_learnInsight',this.textContent)">Dignity is a whole-life issue.</div></div>
       </div>
+    </div>
 
-      <!-- Organisations -->
-      <div class="card" style="padding:16px">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-bottom:12px">Organisations</div>
-        <div style="margin-bottom:10px">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
-            <div style="font-size:12px;font-weight:600">🏥 Heal Home Care</div>
-            <span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;background:#e8f5e9;color:#3B6D11">Active</span>
-          </div>
-          <div id="healFocus" contenteditable="true" style="font-size:11px;color:var(--muted);outline:none" onblur="saveLS('ace_healFocus',this.textContent)">Hospital network · MOU pipeline</div>
-        </div>
-        <div>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
-            <div style="font-size:12px;font-weight:600">🏡 Naman Care Home</div>
-            <span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;background:#e8f5e9;color:#3B6D11">Active</span>
-          </div>
-          <div id="namanFocus" contenteditable="true" style="font-size:11px;color:var(--muted);outline:none" onblur="saveLS('ace_namanFocus',this.textContent)">Quality care · Staff training</div>
-        </div>
+    <div class="db-sec">
+      <div class="sec-lbl"><span>Organisations</span></div>
+      <div class="db-card">
+        <div class="db-org" style="padding-top:0"><div><b>Heal Home Care</b><small id="healFocus" contenteditable="true" onblur="saveLS('ace_healFocus',this.textContent)">Hospital network · MOU pipeline</small></div><span class="st">Active</span></div>
+        <div class="db-org"><div><b>Naman Care Home</b><small id="namanFocus" contenteditable="true" onblur="saveLS('ace_namanFocus',this.textContent)">Quality care · Staff training</small></div><span class="st">Active</span></div>
       </div>
-
     </div>
   </div>
 </section>
@@ -1847,7 +1898,7 @@ body{
   <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px">
     <div>
       <div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Today · Priorities</div>
-      <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:600">Priorities</div>
+      <div style="font-family:var(--font);font-size:26px;font-weight:600">Priorities</div>
     </div>
     <button class="btn btn-teal" onclick="openPriorityModal()">+ New priority</button>
   </div>
@@ -1882,7 +1933,7 @@ body{
   <div style="margin-bottom:20px">
     <div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Today · Actions</div>
     <div style="display:flex;align-items:flex-end;justify-content:space-between">
-      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600">Follow-ups &amp; Reminders</div>
+      <div style="font-family:var(--font);font-size:22px;font-weight:600">Follow-ups &amp; Reminders</div>
       <div style="display:flex;gap:8px;align-items:center">
         <select id="fuSort" onchange="renderFUs()" style="font-size:12px;padding:5px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:#fff;color:var(--text);font-family:'DM Sans',sans-serif;cursor:pointer">
           <option value="date">Sort by date</option>
@@ -1923,7 +1974,7 @@ body{
 
     <!-- ══ HEAL HOME CARE ══ -->
     <section class="page" id="page-heal">
-      <div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Organisations · Heal Home Care</div><div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600">🏥 Heal Home Care</div><button class="btn btn-teal" onclick="openOrgTaskModal('heal')">+ Add task</button></div></div>
+      <div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Organisations · Heal Home Care</div><div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="font-family:var(--font);font-size:22px;font-weight:600">🏥 Heal Home Care</div><button class="btn btn-teal" onclick="openOrgTaskModal('heal')">+ Add task</button></div></div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px">
         <div class="card" style="padding:12px 14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Open</div><div style="font-size:22px;font-weight:700;color:var(--green)" id="healOpen">0</div></div>
         <div class="card" style="padding:12px 14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">In Progress</div><div style="font-size:22px;font-weight:700;color:var(--amber-dark)" id="healInProgress">0</div></div>
@@ -1942,7 +1993,7 @@ body{
 
     <!-- ══ NAMAN CARE HOME ══ -->
     <section class="page" id="page-naman">
-      <div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Organisations · Naman Care Home</div><div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600">🏡 Naman Care Home</div><button class="btn btn-teal" onclick="openOrgTaskModal('naman')">+ Add task</button></div></div>
+      <div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Organisations · Naman Care Home</div><div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="font-family:var(--font);font-size:22px;font-weight:600">🏡 Naman Care Home</div><button class="btn btn-teal" onclick="openOrgTaskModal('naman')">+ Add task</button></div></div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px">
         <div class="card" style="padding:12px 14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Open</div><div style="font-size:22px;font-weight:700;color:var(--green)" id="namanOpen">0</div></div>
         <div class="card" style="padding:12px 14px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">In Progress</div><div style="font-size:22px;font-weight:700;color:var(--amber-dark)" id="namanInProgress">0</div></div>
@@ -1971,8 +2022,6 @@ body{
       <button class="btn btn-teal" onclick="openWisdomModal('story')">+ New story</button>
     </div>
   </div>
-  <div class="hl-stats" id="hlStats"></div>
-  <div id="hlHero"></div>
   <div class="chip-row" id="hlChips"></div>
   <div class="hl-grid" id="storiesGrid"></div>
 </section>
@@ -1986,36 +2035,36 @@ body{
   </div>
   <div id="bookshelfPages" style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px"></div>
 </section>
-<section class="page" id="page-insights"><div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Wisdom · Insights</div><div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600">🔍 Insights</div><button class="btn btn-teal" onclick="openWisdomModal('insight')">+ New insight</button></div></div><div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Search insights…" id="insightsSearch" oninput="renderWisdom('insight')" style="flex:1;border:none;outline:none;font-size:13px;font-family:'DM Sans',sans-serif;background:transparent"></div><div style="display:flex;gap:0;margin-bottom:16px;border-bottom:1px solid var(--border)" id="insightsTabsRow"><button class="page-tab active" onclick="setWisdomTab('insight','all',this)">All</button><button class="page-tab" onclick="setWisdomTab('insight','Aging',this)">Aging</button><button class="page-tab" onclick="setWisdomTab('insight','Policy',this)">Policy</button><button class="page-tab" onclick="setWisdomTab('insight','Research',this)">Research</button></div><div id="insightsContainer"><div style="padding:40px;text-align:center;color:var(--hint);font-size:13px">No insights yet</div></div></section>
-<section class="page" id="page-studio"><div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Wisdom · Studio</div><div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600">✍️ Studio</div><button class="btn btn-teal" onclick="openWisdomModal('studio')">+ New piece</button></div></div><div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Search pieces…" id="studioSearch" oninput="renderWisdom('studio')" style="flex:1;border:none;outline:none;font-size:13px;font-family:'DM Sans',sans-serif;background:transparent"></div><div style="display:flex;gap:0;margin-bottom:16px;border-bottom:1px solid var(--border)" id="studioTabsRow"><button class="page-tab active" onclick="setWisdomTab('studio','all',this)">All</button><button class="page-tab" onclick="setWisdomTab('studio','Draft',this)">Drafts</button><button class="page-tab" onclick="setWisdomTab('studio','In Progress',this)">In Progress</button><button class="page-tab" onclick="setWisdomTab('studio','Published',this)">Published</button><button class="page-tab" onclick="setWisdomTab('studio','Article',this)">Articles</button><button class="page-tab" onclick="setWisdomTab('studio','Book Chapter',this)">Book</button></div><div id="studioContainer"><div style="padding:40px;text-align:center;color:var(--hint);font-size:13px">No pieces yet</div></div></section>
-<section class="page" id="page-archive"><div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Wisdom · Archive</div><div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600">🗂 Archive</div><button class="btn btn-teal" onclick="document.getElementById('archiveUpload').click()">+ Upload file</button></div></div><input type="file" id="archiveUpload" multiple style="display:none" onchange="handleArchiveUpload(event)"><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px"><button class="arch-btn active" onclick="setArchiveFolder('all',this)">All files</button><button class="arch-btn" onclick="setArchiveFolder('Presentations',this)">📊 Presentations</button><button class="arch-btn" onclick="setArchiveFolder('PDFs',this)">📄 PDFs</button><button class="arch-btn" onclick="setArchiveFolder('Research Papers',this)">🔬 Research</button><button class="arch-btn" onclick="setArchiveFolder('SOPs',this)">📋 SOPs</button><button class="arch-btn" onclick="setArchiveFolder('Reports',this)">📈 Reports</button><button class="arch-btn" onclick="setArchiveFolder('MoUs',this)">🤝 MoUs</button><button class="arch-btn" onclick="setArchiveFolder('Training Materials',this)">🎓 Training</button><button class="arch-btn" onclick="setArchiveFolder('Images',this)">🖼 Images</button><button class="arch-btn" onclick="setArchiveFolder('Government Documents',this)">🏛 Government</button><button class="arch-btn" onclick="setArchiveFolder('Certificates',this)">🏆 Certificates</button><button class="arch-btn" onclick="setArchiveFolder('Miscellaneous',this)">📦 Misc</button></div><div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:14px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Search files…" id="archiveSearch" oninput="renderArchive()" style="flex:1;border:none;outline:none;font-size:13px;font-family:'DM Sans',sans-serif;background:transparent"></div><div id="archiveContainer"><div style="padding:40px;text-align:center;color:var(--hint);font-size:13px">No files yet — upload your first document</div></div></section>
+<section class="page" id="page-insights"><div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Wisdom · Insights</div><div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="font-family:var(--font);font-size:22px;font-weight:600">🔍 Insights</div><button class="btn btn-teal" onclick="openWisdomModal('insight')">+ New insight</button></div></div><div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Search insights…" id="insightsSearch" oninput="renderWisdom('insight')" style="flex:1;border:none;outline:none;font-size:13px;font-family:'DM Sans',sans-serif;background:transparent"></div><div style="display:flex;gap:0;margin-bottom:16px;border-bottom:1px solid var(--border)" id="insightsTabsRow"><button class="page-tab active" onclick="setWisdomTab('insight','all',this)">All</button><button class="page-tab" onclick="setWisdomTab('insight','Aging',this)">Aging</button><button class="page-tab" onclick="setWisdomTab('insight','Policy',this)">Policy</button><button class="page-tab" onclick="setWisdomTab('insight','Research',this)">Research</button></div><div id="insightsContainer"><div style="padding:40px;text-align:center;color:var(--hint);font-size:13px">No insights yet</div></div></section>
+<section class="page" id="page-studio"><div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Wisdom · Studio</div><div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="font-family:var(--font);font-size:22px;font-weight:600">✍️ Studio</div><button class="btn btn-teal" onclick="openWisdomModal('studio')">+ New piece</button></div></div><div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Search pieces…" id="studioSearch" oninput="renderWisdom('studio')" style="flex:1;border:none;outline:none;font-size:13px;font-family:'DM Sans',sans-serif;background:transparent"></div><div style="display:flex;gap:0;margin-bottom:16px;border-bottom:1px solid var(--border)" id="studioTabsRow"><button class="page-tab active" onclick="setWisdomTab('studio','all',this)">All</button><button class="page-tab" onclick="setWisdomTab('studio','Draft',this)">Drafts</button><button class="page-tab" onclick="setWisdomTab('studio','In Progress',this)">In Progress</button><button class="page-tab" onclick="setWisdomTab('studio','Published',this)">Published</button><button class="page-tab" onclick="setWisdomTab('studio','Article',this)">Articles</button><button class="page-tab" onclick="setWisdomTab('studio','Book Chapter',this)">Book</button></div><div id="studioContainer"><div style="padding:40px;text-align:center;color:var(--hint);font-size:13px">No pieces yet</div></div></section>
+<section class="page" id="page-archive"><div style="margin-bottom:24px"><div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Wisdom · Archive</div><div style="display:flex;align-items:flex-end;justify-content:space-between"><div style="font-family:var(--font);font-size:22px;font-weight:600">🗂 Archive</div><button class="btn btn-teal" onclick="document.getElementById('archiveUpload').click()">+ Upload file</button></div></div><input type="file" id="archiveUpload" multiple style="display:none" onchange="handleArchiveUpload(event)"><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px"><button class="arch-btn active" onclick="setArchiveFolder('all',this)">All files</button><button class="arch-btn" onclick="setArchiveFolder('Presentations',this)">📊 Presentations</button><button class="arch-btn" onclick="setArchiveFolder('PDFs',this)">📄 PDFs</button><button class="arch-btn" onclick="setArchiveFolder('Research Papers',this)">🔬 Research</button><button class="arch-btn" onclick="setArchiveFolder('SOPs',this)">📋 SOPs</button><button class="arch-btn" onclick="setArchiveFolder('Reports',this)">📈 Reports</button><button class="arch-btn" onclick="setArchiveFolder('MoUs',this)">🤝 MoUs</button><button class="arch-btn" onclick="setArchiveFolder('Training Materials',this)">🎓 Training</button><button class="arch-btn" onclick="setArchiveFolder('Images',this)">🖼 Images</button><button class="arch-btn" onclick="setArchiveFolder('Government Documents',this)">🏛 Government</button><button class="arch-btn" onclick="setArchiveFolder('Certificates',this)">🏆 Certificates</button><button class="arch-btn" onclick="setArchiveFolder('Miscellaneous',this)">📦 Misc</button></div><div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:14px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Search files…" id="archiveSearch" oninput="renderArchive()" style="flex:1;border:none;outline:none;font-size:13px;font-family:'DM Sans',sans-serif;background:transparent"></div><div id="archiveContainer"><div style="padding:40px;text-align:center;color:var(--hint);font-size:13px">No files yet — upload your first document</div></div></section>
 
-<section class="page" id="page-movement"><div style="padding:36px 0 28px;border-bottom:1px solid var(--border);margin-bottom:32px"><div style="font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:12px">Aaroh · Movement</div><div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:400;color:var(--text);line-height:1.25;margin-bottom:12px">Living with purpose. Serving with compassion.<br>Growing through every experience.</div><div id="mvMission" contenteditable="true" style="font-size:15px;color:var(--muted);line-height:1.7;max-width:640px;outline:none;border-bottom:1px dashed transparent" placeholder="Write your movement mission statement…" onblur="saveAF('mvMission')"></div></div><div style="display:flex;gap:0;margin-bottom:28px;border-bottom:1.5px solid var(--border);overflow-x:auto" id="mvTabsRow"><button class="atab active" onclick="setATab('mv','vision',this)">Vision</button><button class="atab" onclick="setATab('mv','goals',this)">Strategic Goals</button><button class="atab" onclick="setATab('mv','initiatives',this)">Initiatives</button><button class="atab" onclick="setATab('mv','principles',this)">Principles</button><button class="atab" onclick="setATab('mv','milestones',this)">Milestones</button><button class="atab" onclick="setATab('mv','impact',this)">Impact</button><button class="atab" onclick="setATab('mv','notes',this)">Notes</button></div>
-<div class="asec active" id="mv-vision"><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:4px">Vision</div><div style="font-size:12px;color:var(--muted);margin-bottom:20px">The world you are working to create</div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Long-term vision</div><div id="mvVision" contenteditable="true" class="afield" placeholder="In 20 years, aging in Nepal will be…" onblur="saveAF('mvVision')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Why this matters</div><div id="mvWhy" contenteditable="true" class="afield" placeholder="The personal reason you are doing this…" onblur="saveAF('mvWhy')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">The change I want to see</div><div id="mvChange" contenteditable="true" class="afield" placeholder="Specific shifts in attitude, policy, practice…" onblur="saveAF('mvChange')"></div></div></div>
-<div class="asec" id="mv-goals"><div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px"><div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:4px">Strategic Goals</div><div style="font-size:12px;color:var(--muted)">The most important things to achieve</div></div><button class="btn btn-teal" onclick="openAM('mvGoal')">+ Add goal</button></div><div id="mvGoalsList"><div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No goals yet</div></div></div>
-<div class="asec" id="mv-initiatives"><div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px"><div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:4px">Current Initiatives</div><div style="font-size:12px;color:var(--muted)">Active programmes advancing the movement</div></div><button class="btn btn-teal" onclick="openAM('mvInit')">+ Add initiative</button></div><div id="mvInitList"><div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No initiatives yet</div></div></div>
-<div class="asec" id="mv-principles"><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:4px">Core Principles</div><div style="font-size:12px;color:var(--muted);margin-bottom:20px">The non-negotiable beliefs that guide everything</div><div id="mvPrinciplesList"></div><button onclick="addAList('mvPrinciples','Write a core principle…')" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:6px;border:1.5px dashed var(--border);background:transparent;color:var(--muted);cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;margin-top:8px">+ Add principle</button></div>
-<div class="asec" id="mv-milestones"><div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px"><div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:4px">Milestones</div><div style="font-size:12px;color:var(--muted)">Moments that mark the journey</div></div><button class="btn btn-teal" onclick="openAM('mvMile')">+ Add milestone</button></div><div id="mvMileList"><div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No milestones yet</div></div></div>
-<div class="asec" id="mv-impact"><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:4px">Impact Dashboard</div><div style="font-size:12px;color:var(--muted);margin-bottom:20px">Your movement, measured in moments that matter</div><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px"><div class="aicard"><div id="imp-stories" contenteditable="true" class="ainum" onblur="saveAF('imp-stories')"></div><div class="ailabel">Stories Collected</div></div><div class="aicard"><div id="imp-presentations" contenteditable="true" class="ainum" onblur="saveAF('imp-presentations')"></div><div class="ailabel">Presentations Delivered</div></div><div class="aicard"><div id="imp-people" contenteditable="true" class="ainum" onblur="saveAF('imp-people')"></div><div class="ailabel">People Reached</div></div><div class="aicard"><div id="imp-partnerships" contenteditable="true" class="ainum" onblur="saveAF('imp-partnerships')"></div><div class="ailabel">Partnerships Built</div></div><div class="aicard"><div id="imp-articles" contenteditable="true" class="ainum" onblur="saveAF('imp-articles')"></div><div class="ailabel">Articles Published</div></div><div class="aicard"><div id="imp-research" contenteditable="true" class="ainum" onblur="saveAF('imp-research')"></div><div class="ailabel">Research Projects</div></div><div class="aicard"><div id="imp-programs" contenteditable="true" class="ainum" onblur="saveAF('imp-programs')"></div><div class="ailabel">Community Programs</div></div><div class="aicard"><div id="imp-years" contenteditable="true" class="ainum" onblur="saveAF('imp-years')">16</div><div class="ailabel">Years of Practice</div></div></div></div>
-<div class="asec" id="mv-notes"><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:20px">Notes</div><div id="mvNotes" contenteditable="true" class="afield" placeholder="Write freely…" style="min-height:300px" onblur="saveAF('mvNotes')"></div></div>
+<section class="page" id="page-movement"><div style="padding:36px 0 28px;border-bottom:1px solid var(--border);margin-bottom:32px"><div style="font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:12px">Aaroh · Movement</div><div style="font-family:var(--font);font-size:28px;font-weight:400;color:var(--text);line-height:1.25;margin-bottom:12px">Living with purpose. Serving with compassion.<br>Growing through every experience.</div><div id="mvMission" contenteditable="true" style="font-size:15px;color:var(--muted);line-height:1.7;max-width:640px;outline:none;border-bottom:1px dashed transparent" placeholder="Write your movement mission statement…" onblur="saveAF('mvMission')"></div></div><div style="display:flex;gap:0;margin-bottom:28px;border-bottom:1.5px solid var(--border);overflow-x:auto" id="mvTabsRow"><button class="atab active" onclick="setATab('mv','vision',this)">Vision</button><button class="atab" onclick="setATab('mv','goals',this)">Strategic Goals</button><button class="atab" onclick="setATab('mv','initiatives',this)">Initiatives</button><button class="atab" onclick="setATab('mv','principles',this)">Principles</button><button class="atab" onclick="setATab('mv','milestones',this)">Milestones</button><button class="atab" onclick="setATab('mv','impact',this)">Impact</button><button class="atab" onclick="setATab('mv','notes',this)">Notes</button></div>
+<div class="asec active" id="mv-vision"><div style="font-family:var(--font);font-size:18px;font-weight:600;margin-bottom:4px">Vision</div><div style="font-size:12px;color:var(--muted);margin-bottom:20px">The world you are working to create</div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Long-term vision</div><div id="mvVision" contenteditable="true" class="afield" placeholder="In 20 years, aging in Nepal will be…" onblur="saveAF('mvVision')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Why this matters</div><div id="mvWhy" contenteditable="true" class="afield" placeholder="The personal reason you are doing this…" onblur="saveAF('mvWhy')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">The change I want to see</div><div id="mvChange" contenteditable="true" class="afield" placeholder="Specific shifts in attitude, policy, practice…" onblur="saveAF('mvChange')"></div></div></div>
+<div class="asec" id="mv-goals"><div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px"><div><div style="font-family:var(--font);font-size:18px;font-weight:600;margin-bottom:4px">Strategic Goals</div><div style="font-size:12px;color:var(--muted)">The most important things to achieve</div></div><button class="btn btn-teal" onclick="openAM('mvGoal')">+ Add goal</button></div><div id="mvGoalsList"><div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No goals yet</div></div></div>
+<div class="asec" id="mv-initiatives"><div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px"><div><div style="font-family:var(--font);font-size:18px;font-weight:600;margin-bottom:4px">Current Initiatives</div><div style="font-size:12px;color:var(--muted)">Active programmes advancing the movement</div></div><button class="btn btn-teal" onclick="openAM('mvInit')">+ Add initiative</button></div><div id="mvInitList"><div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No initiatives yet</div></div></div>
+<div class="asec" id="mv-principles"><div style="font-family:var(--font);font-size:18px;font-weight:600;margin-bottom:4px">Core Principles</div><div style="font-size:12px;color:var(--muted);margin-bottom:20px">The non-negotiable beliefs that guide everything</div><div id="mvPrinciplesList"></div><button onclick="addAList('mvPrinciples','Write a core principle…')" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:6px;border:1.5px dashed var(--border);background:transparent;color:var(--muted);cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;margin-top:8px">+ Add principle</button></div>
+<div class="asec" id="mv-milestones"><div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px"><div><div style="font-family:var(--font);font-size:18px;font-weight:600;margin-bottom:4px">Milestones</div><div style="font-size:12px;color:var(--muted)">Moments that mark the journey</div></div><button class="btn btn-teal" onclick="openAM('mvMile')">+ Add milestone</button></div><div id="mvMileList"><div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No milestones yet</div></div></div>
+<div class="asec" id="mv-impact"><div style="font-family:var(--font);font-size:18px;font-weight:600;margin-bottom:4px">Impact Dashboard</div><div style="font-size:12px;color:var(--muted);margin-bottom:20px">Your movement, measured in moments that matter</div><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px"><div class="aicard"><div id="imp-stories" contenteditable="true" class="ainum" onblur="saveAF('imp-stories')"></div><div class="ailabel">Stories Collected</div></div><div class="aicard"><div id="imp-presentations" contenteditable="true" class="ainum" onblur="saveAF('imp-presentations')"></div><div class="ailabel">Presentations Delivered</div></div><div class="aicard"><div id="imp-people" contenteditable="true" class="ainum" onblur="saveAF('imp-people')"></div><div class="ailabel">People Reached</div></div><div class="aicard"><div id="imp-partnerships" contenteditable="true" class="ainum" onblur="saveAF('imp-partnerships')"></div><div class="ailabel">Partnerships Built</div></div><div class="aicard"><div id="imp-articles" contenteditable="true" class="ainum" onblur="saveAF('imp-articles')"></div><div class="ailabel">Articles Published</div></div><div class="aicard"><div id="imp-research" contenteditable="true" class="ainum" onblur="saveAF('imp-research')"></div><div class="ailabel">Research Projects</div></div><div class="aicard"><div id="imp-programs" contenteditable="true" class="ainum" onblur="saveAF('imp-programs')"></div><div class="ailabel">Community Programs</div></div><div class="aicard"><div id="imp-years" contenteditable="true" class="ainum" onblur="saveAF('imp-years')">16</div><div class="ailabel">Years of Practice</div></div></div></div>
+<div class="asec" id="mv-notes"><div style="font-family:var(--font);font-size:18px;font-weight:600;margin-bottom:20px">Notes</div><div id="mvNotes" contenteditable="true" class="afield" placeholder="Write freely…" style="min-height:300px" onblur="saveAF('mvNotes')"></div></div>
 </section>
 
-<section class="page" id="page-book"><div style="padding:36px 0 28px;border-bottom:1px solid var(--border);margin-bottom:32px"><div style="font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:12px">Aaroh · Book</div><div id="bookHeroTitle" contenteditable="true" style="font-family:'Playfair Display',serif;font-size:28px;font-weight:400;color:var(--text);line-height:1.25;margin-bottom:12px;outline:none" onblur="saveAF('bookHeroTitle')">Today's notes become tomorrow's legacy.</div><div id="bookTagline" contenteditable="true" style="font-size:15px;color:var(--muted);line-height:1.7;max-width:640px;outline:none;border-bottom:1px dashed transparent" placeholder="Today's notes become tomorrow's legacy." onblur="saveAF('bookTagline')"></div></div><div style="display:flex;gap:0;margin-bottom:28px;border-bottom:1.5px solid var(--border);overflow-x:auto" id="bookTabsRow"><button class="atab active" onclick="setATab('book','vision',this)">Vision</button><button class="atab" onclick="setATab('book','chapters',this)">Chapters</button><button class="atab" onclick="setATab('book','progress',this)">Progress</button><button class="atab" onclick="setATab('book','audience',this)">Audience</button><button class="atab" onclick="setATab('book','publisher',this)">Publisher</button><button class="atab" onclick="setATab('book','notes',this)">Notes</button></div>
-<div class="asec active" id="book-vision"><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:4px">Book Vision</div><div style="font-size:12px;color:var(--muted);margin-bottom:20px">What this book is, why it must exist, who it will change</div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Book Summary</div><div id="bookSummaryF" contenteditable="true" class="afield" placeholder="What is this book about in 3–5 sentences?" onblur="saveAF('bookSummaryF')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Why I am the person to write this</div><div id="bookWhy" contenteditable="true" class="afield" placeholder="16 years, hundreds of stories, a practitioner's truth…" onblur="saveAF('bookWhy')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">The one idea this book must leave in the reader</div><div id="bookCoreIdea" contenteditable="true" class="afield" placeholder="The single most important thought…" onblur="saveAF('bookCoreIdea')"></div></div></div>
-<div class="asec" id="book-chapters"><div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px"><div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:4px">Chapters</div><div style="font-size:12px;color:var(--muted)">The architecture of the book</div></div><button class="btn btn-teal" onclick="openAM('bookChapter')">+ Add chapter</button></div><div id="bookChaptersList"><div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No chapters yet</div></div></div>
-<div class="asec" id="book-progress"><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:4px">Writing Progress</div><div style="font-size:12px;color:var(--muted);margin-bottom:20px">Track your journey from blank page to finished manuscript</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px"><div class="aicard"><div id="bk-ch-total" contenteditable="true" class="ainum" onblur="saveAF('bk-ch-total')">0</div><div class="ailabel">Total Chapters</div></div><div class="aicard"><div id="bk-ch-done" contenteditable="true" class="ainum" style="color:#3B6D11" onblur="saveAF('bk-ch-done')">0</div><div class="ailabel">Completed</div></div><div class="aicard"><div id="bk-words" contenteditable="true" class="ainum" onblur="saveAF('bk-words')">0</div><div class="ailabel">Words Written</div></div><div class="aicard"><div id="bk-stories" contenteditable="true" class="ainum" onblur="saveAF('bk-stories')">0</div><div class="ailabel">Stories Included</div></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Current writing focus</div><div id="bkFocus" contenteditable="true" class="afield" placeholder="What are you working on right now?" onblur="saveAF('bkFocus')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Next milestone</div><div id="bkNextMile" contenteditable="true" class="afield" placeholder="What does the next milestone look like?" onblur="saveAF('bkNextMile')"></div></div></div>
-<div class="asec" id="book-audience"><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:4px">Target Audience</div><div style="font-size:12px;color:var(--muted);margin-bottom:20px">Who reads this, and what changes for them</div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Primary reader</div><div id="bkReader" contenteditable="true" class="afield" placeholder="Describe the primary reader…" onblur="saveAF('bkReader')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">What they believe before reading</div><div id="bkBefore" contenteditable="true" class="afield" placeholder="Their current assumptions about aging…" onblur="saveAF('bkBefore')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">What they believe after reading</div><div id="bkAfter" contenteditable="true" class="afield" placeholder="The shift this book creates…" onblur="saveAF('bkAfter')"></div></div></div>
-<div class="asec" id="book-publisher"><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:4px">Publisher Notes</div><div style="font-size:12px;color:var(--muted);margin-bottom:20px">Publishing journey, agents, contacts, timeline</div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Publishing goal</div><div id="bkPubGoal" contenteditable="true" class="afield" placeholder="Traditional, self-published, hybrid…" onblur="saveAF('bkPubGoal')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Timeline</div><div id="bkTimeline" contenteditable="true" class="afield" placeholder="First draft by… Published by…" onblur="saveAF('bkTimeline')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Notes</div><div id="bkPubNotes" contenteditable="true" class="afield" placeholder="Conversations, feedback…" onblur="saveAF('bkPubNotes')"></div></div></div>
-<div class="asec" id="book-notes"><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:20px">Notes</div><div id="bkNotes" contenteditable="true" class="afield" placeholder="Write freely…" style="min-height:300px" onblur="saveAF('bkNotes')"></div></div>
+<section class="page" id="page-book"><div style="padding:36px 0 28px;border-bottom:1px solid var(--border);margin-bottom:32px"><div style="font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:12px">Aaroh · Book</div><div id="bookHeroTitle" contenteditable="true" style="font-family:var(--font);font-size:28px;font-weight:400;color:var(--text);line-height:1.25;margin-bottom:12px;outline:none" onblur="saveAF('bookHeroTitle')">Today's notes become tomorrow's legacy.</div><div id="bookTagline" contenteditable="true" style="font-size:15px;color:var(--muted);line-height:1.7;max-width:640px;outline:none;border-bottom:1px dashed transparent" placeholder="Today's notes become tomorrow's legacy." onblur="saveAF('bookTagline')"></div></div><div style="display:flex;gap:0;margin-bottom:28px;border-bottom:1.5px solid var(--border);overflow-x:auto" id="bookTabsRow"><button class="atab active" onclick="setATab('book','vision',this)">Vision</button><button class="atab" onclick="setATab('book','chapters',this)">Chapters</button><button class="atab" onclick="setATab('book','progress',this)">Progress</button><button class="atab" onclick="setATab('book','audience',this)">Audience</button><button class="atab" onclick="setATab('book','publisher',this)">Publisher</button><button class="atab" onclick="setATab('book','notes',this)">Notes</button></div>
+<div class="asec active" id="book-vision"><div style="font-family:var(--font);font-size:18px;font-weight:600;margin-bottom:4px">Book Vision</div><div style="font-size:12px;color:var(--muted);margin-bottom:20px">What this book is, why it must exist, who it will change</div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Book Summary</div><div id="bookSummaryF" contenteditable="true" class="afield" placeholder="What is this book about in 3–5 sentences?" onblur="saveAF('bookSummaryF')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Why I am the person to write this</div><div id="bookWhy" contenteditable="true" class="afield" placeholder="16 years, hundreds of stories, a practitioner's truth…" onblur="saveAF('bookWhy')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">The one idea this book must leave in the reader</div><div id="bookCoreIdea" contenteditable="true" class="afield" placeholder="The single most important thought…" onblur="saveAF('bookCoreIdea')"></div></div></div>
+<div class="asec" id="book-chapters"><div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px"><div><div style="font-family:var(--font);font-size:18px;font-weight:600;margin-bottom:4px">Chapters</div><div style="font-size:12px;color:var(--muted)">The architecture of the book</div></div><button class="btn btn-teal" onclick="openAM('bookChapter')">+ Add chapter</button></div><div id="bookChaptersList"><div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No chapters yet</div></div></div>
+<div class="asec" id="book-progress"><div style="font-family:var(--font);font-size:18px;font-weight:600;margin-bottom:4px">Writing Progress</div><div style="font-size:12px;color:var(--muted);margin-bottom:20px">Track your journey from blank page to finished manuscript</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px"><div class="aicard"><div id="bk-ch-total" contenteditable="true" class="ainum" onblur="saveAF('bk-ch-total')">0</div><div class="ailabel">Total Chapters</div></div><div class="aicard"><div id="bk-ch-done" contenteditable="true" class="ainum" style="color:#3B6D11" onblur="saveAF('bk-ch-done')">0</div><div class="ailabel">Completed</div></div><div class="aicard"><div id="bk-words" contenteditable="true" class="ainum" onblur="saveAF('bk-words')">0</div><div class="ailabel">Words Written</div></div><div class="aicard"><div id="bk-stories" contenteditable="true" class="ainum" onblur="saveAF('bk-stories')">0</div><div class="ailabel">Stories Included</div></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Current writing focus</div><div id="bkFocus" contenteditable="true" class="afield" placeholder="What are you working on right now?" onblur="saveAF('bkFocus')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Next milestone</div><div id="bkNextMile" contenteditable="true" class="afield" placeholder="What does the next milestone look like?" onblur="saveAF('bkNextMile')"></div></div></div>
+<div class="asec" id="book-audience"><div style="font-family:var(--font);font-size:18px;font-weight:600;margin-bottom:4px">Target Audience</div><div style="font-size:12px;color:var(--muted);margin-bottom:20px">Who reads this, and what changes for them</div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Primary reader</div><div id="bkReader" contenteditable="true" class="afield" placeholder="Describe the primary reader…" onblur="saveAF('bkReader')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">What they believe before reading</div><div id="bkBefore" contenteditable="true" class="afield" placeholder="Their current assumptions about aging…" onblur="saveAF('bkBefore')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">What they believe after reading</div><div id="bkAfter" contenteditable="true" class="afield" placeholder="The shift this book creates…" onblur="saveAF('bkAfter')"></div></div></div>
+<div class="asec" id="book-publisher"><div style="font-family:var(--font);font-size:18px;font-weight:600;margin-bottom:4px">Publisher Notes</div><div style="font-size:12px;color:var(--muted);margin-bottom:20px">Publishing journey, agents, contacts, timeline</div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Publishing goal</div><div id="bkPubGoal" contenteditable="true" class="afield" placeholder="Traditional, self-published, hybrid…" onblur="saveAF('bkPubGoal')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Timeline</div><div id="bkTimeline" contenteditable="true" class="afield" placeholder="First draft by… Published by…" onblur="saveAF('bkTimeline')"></div></div><div style="margin-bottom:20px"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--hint);margin-bottom:6px">Notes</div><div id="bkPubNotes" contenteditable="true" class="afield" placeholder="Conversations, feedback…" onblur="saveAF('bkPubNotes')"></div></div></div>
+<div class="asec" id="book-notes"><div style="font-family:var(--font);font-size:18px;font-weight:600;margin-bottom:20px">Notes</div><div id="bkNotes" contenteditable="true" class="afield" placeholder="Write freely…" style="min-height:300px" onblur="saveAF('bkNotes')"></div></div>
 </section>
 
-<section class="page" id="page-speaking"><div style="padding:36px 0 28px;border-bottom:1px solid var(--border);margin-bottom:32px"><div style="font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:12px">Aaroh · Speaking</div><div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:400;color:var(--text);line-height:1.25;margin-bottom:12px">Becoming the leading voice<br>on aging, dignity, and long-term care.</div><div id="spkMission" contenteditable="true" style="font-size:15px;color:var(--muted);line-height:1.7;max-width:640px;outline:none;border-bottom:1px dashed transparent" placeholder="Write your speaking mission…" onblur="saveAF('spkMission')"></div></div><div style="display:flex;gap:0;margin-bottom:28px;border-bottom:1.5px solid var(--border);overflow-x:auto" id="spkTabsRow"><button class="atab active" onclick="setATab('spk','engagements',this)">Engagements</button><button class="atab" onclick="setATab('spk','topics',this)">Topics</button><button class="atab" onclick="setATab('spk','library',this)">Speech Library</button><button class="atab" onclick="setATab('spk','media',this)">Media</button><button class="atab" onclick="setATab('spk','opportunities',this)">Opportunities</button><button class="atab" onclick="setATab('spk','notes',this)">Notes</button></div>
-<div class="asec active" id="spk-engagements"><div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px"><div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:4px">Speaking Engagements</div><div style="font-size:12px;color:var(--muted)">Every talk, panel, workshop and event</div></div><button class="btn btn-teal" onclick="openSpkModal()">+ Add engagement</button></div><div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Search engagements…" id="spkSearch" oninput="renderSpk()" style="flex:1;border:none;outline:none;font-size:13px;font-family:'DM Sans',sans-serif;background:transparent"></div><div id="spkEngList"><div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No engagements yet</div></div></div>
-<div class="asec" id="spk-topics"><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:4px">Speaking Topics</div><div style="font-size:12px;color:var(--muted);margin-bottom:20px">The subjects you are known for, and want to be known for</div><div id="spkTopicsList"></div><button onclick="addAList('spkTopics','Add a speaking topic…')" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:6px;border:1.5px dashed var(--border);background:transparent;color:var(--muted);cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;margin-top:8px">+ Add topic</button></div>
-<div class="asec" id="spk-library"><div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px"><div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:4px">Speech Library</div></div><button class="btn btn-teal" onclick="openAM('spkSpeech')">+ Add speech</button></div><div id="spkSpeechList"><div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No speeches saved yet</div></div></div>
-<div class="asec" id="spk-media"><div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px"><div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:4px">Media &amp; Interviews</div></div><button class="btn btn-teal" onclick="openAM('spkMedia')">+ Add media</button></div><div id="spkMediaList"><div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No media appearances yet</div></div></div>
-<div class="asec" id="spk-opportunities"><div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px"><div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:4px">Future Opportunities</div></div><button class="btn btn-teal" onclick="openAM('spkOpp')">+ Add opportunity</button></div><div id="spkOppList"><div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No opportunities yet</div></div></div>
-<div class="asec" id="spk-notes"><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:20px">Notes</div><div id="spkNotes" contenteditable="true" class="afield" placeholder="Feedback, reflections, things to improve…" style="min-height:300px" onblur="saveAF('spkNotes')"></div></div>
+<section class="page" id="page-speaking"><div style="padding:36px 0 28px;border-bottom:1px solid var(--border);margin-bottom:32px"><div style="font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:12px">Aaroh · Speaking</div><div style="font-family:var(--font);font-size:28px;font-weight:400;color:var(--text);line-height:1.25;margin-bottom:12px">Becoming the leading voice<br>on aging, dignity, and long-term care.</div><div id="spkMission" contenteditable="true" style="font-size:15px;color:var(--muted);line-height:1.7;max-width:640px;outline:none;border-bottom:1px dashed transparent" placeholder="Write your speaking mission…" onblur="saveAF('spkMission')"></div></div><div style="display:flex;gap:0;margin-bottom:28px;border-bottom:1.5px solid var(--border);overflow-x:auto" id="spkTabsRow"><button class="atab active" onclick="setATab('spk','engagements',this)">Engagements</button><button class="atab" onclick="setATab('spk','topics',this)">Topics</button><button class="atab" onclick="setATab('spk','library',this)">Speech Library</button><button class="atab" onclick="setATab('spk','media',this)">Media</button><button class="atab" onclick="setATab('spk','opportunities',this)">Opportunities</button><button class="atab" onclick="setATab('spk','notes',this)">Notes</button></div>
+<div class="asec active" id="spk-engagements"><div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px"><div><div style="font-family:var(--font);font-size:18px;font-weight:600;margin-bottom:4px">Speaking Engagements</div><div style="font-size:12px;color:var(--muted)">Every talk, panel, workshop and event</div></div><button class="btn btn-teal" onclick="openSpkModal()">+ Add engagement</button></div><div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;color:var(--hint);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Search engagements…" id="spkSearch" oninput="renderSpk()" style="flex:1;border:none;outline:none;font-size:13px;font-family:'DM Sans',sans-serif;background:transparent"></div><div id="spkEngList"><div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No engagements yet</div></div></div>
+<div class="asec" id="spk-topics"><div style="font-family:var(--font);font-size:18px;font-weight:600;margin-bottom:4px">Speaking Topics</div><div style="font-size:12px;color:var(--muted);margin-bottom:20px">The subjects you are known for, and want to be known for</div><div id="spkTopicsList"></div><button onclick="addAList('spkTopics','Add a speaking topic…')" style="display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:6px;border:1.5px dashed var(--border);background:transparent;color:var(--muted);cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;margin-top:8px">+ Add topic</button></div>
+<div class="asec" id="spk-library"><div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px"><div><div style="font-family:var(--font);font-size:18px;font-weight:600;margin-bottom:4px">Speech Library</div></div><button class="btn btn-teal" onclick="openAM('spkSpeech')">+ Add speech</button></div><div id="spkSpeechList"><div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No speeches saved yet</div></div></div>
+<div class="asec" id="spk-media"><div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px"><div><div style="font-family:var(--font);font-size:18px;font-weight:600;margin-bottom:4px">Media &amp; Interviews</div></div><button class="btn btn-teal" onclick="openAM('spkMedia')">+ Add media</button></div><div id="spkMediaList"><div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No media appearances yet</div></div></div>
+<div class="asec" id="spk-opportunities"><div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px"><div><div style="font-family:var(--font);font-size:18px;font-weight:600;margin-bottom:4px">Future Opportunities</div></div><button class="btn btn-teal" onclick="openAM('spkOpp')">+ Add opportunity</button></div><div id="spkOppList"><div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No opportunities yet</div></div></div>
+<div class="asec" id="spk-notes"><div style="font-family:var(--font);font-size:18px;font-weight:600;margin-bottom:20px">Notes</div><div id="spkNotes" contenteditable="true" class="afield" placeholder="Feedback, reflections, things to improve…" style="min-height:300px" onblur="saveAF('spkNotes')"></div></div>
 </section>
 <section class="page" id="page-backup">
   <div class="pg-head">
@@ -2732,7 +2781,8 @@ function renderTrainings(filter='all', search='') {
   });
   renderTrainAttendCards();
 }
-function updateTrainStats(){document.getElementById('trainTotal').textContent=trainings.length;document.getElementById('trainDone').textContent=trainings.filter(t=>t.status==='completed').length;document.getElementById('trainSched').textContent=trainings.filter(t=>t.status==='scheduled').length;document.getElementById('trainPax').textContent=trainings.reduce((s,t)=>s+(parseInt(t.participants)||0),0);}
+function _ts(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
+function updateTrainStats(){_ts('trainTotal',trainings.length);_ts('trainDone',trainings.filter(t=>t.status==='completed').length);_ts('trainSched',trainings.filter(t=>t.status==='scheduled').length);_ts('trainPax',trainings.reduce((s,t)=>s+(parseInt(t.participants)||0),0));}
 function filterTrainings(){renderTrainings(window._trainTab||'all',(document.getElementById('trainSearch')||{value:''}).value.toLowerCase());}
 function renderTrainAttendCards(){const c=document.getElementById('trainAttendCards');if(!c)return;c.innerHTML='';trainings.forEach((t,idx)=>{const rows=(t.attendees||[]).map((a,ai)=>`<div class="attend-row"><div class="attend-num">${ai+1}</div><div style="flex:1"><div class="attend-name">${a.name}</div><div class="attend-role">${a.role}${a.dept?' · '+a.dept:''}</div></div><div class="attend-sign" style="cursor:pointer;width:72px" onclick="this.textContent=this.textContent==='—'?'Signed':'—'">${a.signed?'Signed':'—'}</div></div>`).join('');c.innerHTML+=`<div class="card" id="trainCard-${idx}" style="margin-bottom:12px"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px"><div><div class="t-card-title">${t.hospital} — ${t.topic}</div><div class="t-meta" style="margin-top:2px">${t.date} · ${t.participants} participants</div></div><button class="btn btn-ghost" style="font-size:11px" onclick="openTrainAttendModal(${idx})">+ Attendee</button></div><div id="tAttendList-${idx}">${rows||'<div style="color:var(--hint);font-size:13px;padding:8px 0">No attendees added yet.</div>'}</div></div>`;});}
 let _openTrainIdx=null;
@@ -3048,7 +3098,7 @@ document.addEventListener('blur',function(e){
   var h=new Date().getHours();
   var g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
   var el=document.getElementById('dashGreeting');
-  if(el)el.textContent=g+', Pratiksha 🌿';
+  if(el)el.textContent=g+', Pratiksha';
 })();
 
 // ═══════════════════════════════════════ AAROH OS SPRINT 3 ═══════════════════
@@ -4119,7 +4169,7 @@ function renderDashDate(){
   if(greetEl){
     var h=d.getHours();
     var greet=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
-    greetEl.textContent=greet+', Pratiksha 🌿';
+    greetEl.textContent=greet+', Pratiksha';
   }
 }
 
