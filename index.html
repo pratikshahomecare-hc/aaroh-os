@@ -1349,6 +1349,53 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
   .em-live{margin-left:0}
 }
 
+
+/* ─── INBOX ──────────────────────────────────────────── */
+.mb-sec{margin-bottom:26px}
+.mb-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
+.mb-h span{font-size:15px;font-weight:600;color:var(--text)}
+.mb-h small{font-size:12px;color:var(--hint)}
+.mb-item{background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--border);
+  border-radius:var(--radius);margin-bottom:9px;overflow:hidden}
+.mb-item.urgent{border-left-color:var(--coral)}
+.mb-top{padding:15px 18px;cursor:pointer}
+.mb-top:hover{background:#FAFAF8}
+.mb-who{display:flex;align-items:baseline;gap:9px}
+.mb-who b{font-size:13.5px;font-weight:600;color:var(--text)}
+.mb-who span{font-size:11.5px;color:var(--hint)}
+.mb-subj{font-size:14px;color:var(--text);margin-top:4px;line-height:1.35}
+.mb-sum{font-size:12.5px;color:var(--text-2);margin-top:5px;line-height:1.5}
+.mb-why{font-size:12.5px;color:var(--muted);margin-top:5px;font-style:italic}
+.mb-tags{display:flex;align-items:center;gap:7px;margin-top:10px;flex-wrap:wrap}
+.mb-tag{font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:5px;background:var(--content-bg);color:var(--muted)}
+.mb-tag.ok{background:#E8F3EC;color:#1F6B45}
+.mb-tag.hot{background:var(--coral-light);color:var(--coral)}
+.mb-more{font-size:11.5px;color:var(--green);margin-left:auto}
+.mb-draft{border-top:1px solid var(--border-light);padding:15px 18px;background:#FCFCFB}
+.mb-draft pre{white-space:pre-wrap;font-family:var(--font);font-size:13px;line-height:1.6;color:var(--text);margin:0}
+.mb-acts{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}
+.mb-acts a.qt-btn{text-decoration:none;display:inline-block}
+.mb-note{font-size:11.5px;color:var(--hint);margin-top:10px}
+.mb-prow{grid-template-columns:110px minmax(0,1.6fr) minmax(0,1.2fr) 130px 70px;align-items:center}
+.mb-fyi{padding:11px 18px;border-bottom:1px solid var(--border-light);font-size:13px;color:var(--text-2);
+  display:flex;justify-content:space-between;gap:12px;line-height:1.5}
+.mb-fyi:last-child{border-bottom:none}
+.mb-fyi span{font-size:11.5px;color:var(--hint);flex-shrink:0}
+.mb-help{font-size:12.5px;color:var(--muted);line-height:1.55;margin-bottom:12px}
+.mb-err{font-size:12.5px;color:#C0392B;margin-top:8px;min-height:17px}
+.db-mail{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);
+  padding:16px 20px;cursor:pointer;transition:border-color .15s}
+.db-mail:hover{border-color:var(--text-2)}
+.db-mail-t{font-size:14px;font-weight:600;color:var(--text)}
+.db-mail-s{font-size:12.5px;color:var(--muted);margin-top:2px}
+.db-mail-n{display:flex;gap:26px;flex-wrap:wrap}
+.db-mail-n b{display:block;font-size:20px;font-weight:600;color:var(--text);line-height:1.1}
+.db-mail-n b.warn{color:var(--coral)}
+.db-mail-n b.good{color:var(--green)}
+.db-mail-n span{display:block;font-size:11.5px;color:var(--muted);margin-top:3px}
+@media(max-width:700px){.db-mail-n{gap:18px}.mb-prow{grid-template-columns:1fr auto}}
+
 /* ─── GROWTH ─────────────────────────────────────────── */
 .gw-sec{margin-bottom:26px}
 .gw-sec-t{font-size:15px;font-weight:600;color:var(--text);margin-bottom:12px}
@@ -1534,6 +1581,11 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
         Follow-ups
         <span class="sidebar-badge" id="sideNotifBadge">4</span>
       </button>
+      <button class="sidebar-item" onclick="showPage('mail',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M2 7l10 6 10-6"></path></svg>
+        Inbox
+        <span class="sidebar-badge" id="sideMailBadge" style="display:none">0</span>
+      </button>
       <button class="sidebar-item" onclick="showPage('ritual',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"></path></svg>
         Daily Ritual
@@ -1710,8 +1762,11 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
 
     <div class="db-sec">
       <div id="dashQuote"></div>
-      <div class="sec-lbl"><span>Today's thought</span><button onclick="showPage('thought',null)">Write →</button></div>
-      <div class="db-card"><div id="todaysThought" class="db-thought"></div></div>
+    </div>
+
+    <div class="db-sec">
+      <div class="sec-lbl"><span>Inbox</span><button onclick="showPage('mail',null)">Open →</button></div>
+      <div id="dashMail"></div>
     </div>
 
     <div class="db-stats">
@@ -2737,12 +2792,43 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
         <div id="emBody"></div>
       </div>
     </section>
+
+    <!-- ═══════════ INBOX ═══════════ -->
+    <section class="page" id="page-mail">
+      <div class="pg-head">
+        <div>
+          <h1 class="pg-title">Inbox</h1>
+          <p class="pg-sub" id="mbMeta">No briefing yet</p>
+        </div>
+        <div class="nw-actions">
+          <button class="btn btn-ghost btn-sm" onclick="mbClear()">Clear</button>
+          <button class="btn btn-ghost btn-sm" id="mbCheckBtn" onclick="mbCheckNow()">Check for new</button>
+          <button class="btn btn-teal btn-sm" onclick="mbImportOpen()">Update briefing</button>
+        </div>
+      </div>
+      <div class="em-privacy">Drafts are prepared for you to review. Nothing is ever sent from Aaroh — you send from Gmail.</div>
+      <div class="nw-stats" id="mbStats"></div>
+      <div id="mbBody"></div>
+    </section>
   </div><!-- /content -->
 </div><!-- /main -->
 </div><!-- /shell -->
 
 <!-- FAB -->
 <button class="fab" id="mainFab" title="Quick Capture">+</button>
+
+<div class="modal-overlay" id="modal-mbImport">
+  <div class="modal nw-modal" style="width:620px">
+    <div class="modal-hdr"><div class="modal-title">Update briefing</div><button class="close-btn" onclick="closeModal('mbImport')">×</button></div>
+    <div class="mb-help">Ask Claude for an inbox briefing, then paste the block it gives you here. Once your computer is linked, this arrives on its own and you will not need to paste anything.</div>
+    <textarea class="form-textarea" id="mbPaste" rows="10" placeholder="Paste the briefing block here…" style="font-family:ui-monospace,Menlo,monospace;font-size:12px"></textarea>
+    <div class="mb-err" id="mbErr"></div>
+    <div class="nw-foot"><div style="flex:1"></div>
+      <button class="btn btn-ghost" onclick="closeModal('mbImport')">Cancel</button>
+      <button class="btn btn-teal" onclick="mbImportSave()">Load briefing</button>
+    </div>
+  </div>
+</div>
 
 <!-- ═══════════════ NETWORK + LEARNING MODALS ═══════════════ -->
 <div class="modal-overlay" id="modal-hcEdit">
@@ -3440,7 +3526,7 @@ let meetings = [{"date":"","type":"nursing","title":"IEE discussion","org":"Nurs
 const pageTitles = {
   dashboard:'Today',colleges:'Colleges',hospitals:'Hospitals',
   training:'Training',tours:'Facility Tours',meetings:'Meetings',
-  gallery:'Knowledge',notifications:'Follow-ups',ritual:'Daily Ritual',learning:'Learning',growth:'Growth',emr:'EMR Audit',thought:"Today's Thought",priorities:'Priorities',followups:'Follow-ups',stories:'Stories',bookshelf:'Bookshelf',results:'Results & Analytics',backup:'Backup & Restore',hospitals:'Healthcare Ecosystem',colleges:'Education Ecosystem'
+  gallery:'Knowledge',notifications:'Follow-ups',ritual:'Daily Ritual',learning:'Learning',growth:'Growth',emr:'EMR Audit',mail:'Inbox',thought:"Today's Thought",priorities:'Priorities',followups:'Follow-ups',stories:'Stories',bookshelf:'Bookshelf',results:'Results & Analytics',backup:'Backup & Restore',hospitals:'Healthcare Ecosystem',colleges:'Education Ecosystem'
 };
 
 function showPage(id, clickedItem) {
@@ -4339,7 +4425,7 @@ function delSpk(i){if(!confirm('Delete?'))return;_spkEngs.splice(i,1);saveLS('aa
 function renderSpk(){var c=document.getElementById('spkEngList');if(!c)return;var q=((document.getElementById('spkSearch')||{}).value||'').toLowerCase();var sC={Upcoming:'var(--amber-dark)',Completed:'#3B6D11',Cancelled:'var(--coral)'};var sB={Upcoming:'var(--amber-light)',Completed:'#e8f5e9',Cancelled:'var(--coral-light)'};var list=_spkEngs.filter(function(e){return !q||JSON.stringify(e).toLowerCase().includes(q);});if(!list.length){c.innerHTML='<div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No engagements yet</div>';return;}c.innerHTML=list.map(function(e,i){var st=e.status||'Upcoming';var tags=(e.tags||'').split(',').filter(Boolean).map(function(t){return'<span class="wtag">'+t.trim()+'</span>';}).join('');return'<div class="spkcard"><div class="spkcard-hdr"><div><div class="spkcard-event">'+e.event+'</div>'+(e.org?'<div style="font-size:12px;color:var(--muted);margin-top:2px">'+e.org+'</div>':'')+'</div><div style="display:flex;gap:4px;align-items:center;flex-shrink:0"><span style="font-size:10px;font-weight:600;padding:2px 9px;border-radius:10px;background:'+(sB[st]||'var(--border)')+';color:'+(sC[st]||'var(--muted)')+'">'+st+'</span><button class="btn btn-ghost btn-sm" onclick="openSpkModal('+i+')">Edit</button><button class="btn btn-ghost btn-sm" style="color:var(--coral);border-color:var(--coral)" onclick="delSpk('+i+')">Del</button></div></div><div class="spkmeta">'+(e.date?'<div><div class="spkml">Date</div><div class="spkmv">'+e.date+'</div></div>':'')+(e.topic?'<div><div class="spkml">Topic</div><div class="spkmv">'+e.topic+'</div></div>':'')+(e.aud?'<div><div class="spkml">Audience</div><div class="spkmv">'+e.aud+(e.audSz?' ('+e.audSz+')':'')+'</div></div>':'')+(e.loc?'<div><div class="spkml">Location</div><div class="spkmv">'+e.loc+'</div></div>':'')+'</div>'+(e.msg?'<div style="font-size:12px;color:var(--text-2);font-style:italic;padding:6px 10px;background:var(--green-light);border-radius:4px;border-left:2px solid var(--green);margin-bottom:6px">'+e.msg+'</div>':'')+(e.notes?'<div style="font-size:12px;color:var(--muted);margin-bottom:6px">'+e.notes+'</div>':'')+(e.fu?'<div style="font-size:11px;font-weight:600;color:var(--amber-dark)">→ Follow-up: '+e.fu+'</div>':'')+(tags?'<div class="wtags" style="margin-top:6px">'+tags+'</div>':'')+'</div>';}).join('');}
 
 // EXTEND showPage
-var _origSP=showPage;showPage=function(id,clickedItem){document.querySelectorAll('[contenteditable="true"][id]').forEach(function(el){if(el.id)saveLS('ace_'+el.id,el.textContent);});_origSP(id,clickedItem);if(id==='priorities'){loadDaily();renderDaily();renderPris();updatePriStats();}if(id==='followups'){renderFUs();updateFUStats();}if(id==='govt'){renderGovt();updateGovtStats();}if(id==='heal'){renderOrgT('heal');updateOrgStats('heal');}if(id==='naman'){renderOrgT('naman');updateOrgStats('naman');}if(id==='stories'){renderWis('story');}if(id==='bookshelf'){renderWis('book');}if(id==='insights'){renderWis('insight');}if(id==='studio'){renderWis('studio');}if(id==='ritual'){renderRitualPage();}if(id==='learning'){renderLearning();}if(id==='growth'){renderGrowth();}if(id==='emr'){renderEMR();}if(id==='archive'){renderArchive();}if(id==='movement'){renderASection('mvGoals');renderASection('mvInits');renderASection('mvMiles');renderAList('mvPrinciples','Write a core principle…');}if(id==='book'){renderASection('bookChapters');}if(id==='speaking'){renderSpk();renderASection('spkSpeeches');renderASection('spkMedia');renderASection('spkOpps');renderAList('spkTopics','Add a speaking topic…');}if(id==='dashboard'){setTimeout(function(){if(typeof renderDashRitual==='function')renderDashRitual();},60);setTimeout(function(){if(typeof renderDashLearn==='function')renderDashLearn();},70);setTimeout(function(){if(typeof renderDashGrowth==='function')renderDashGrowth();},75);setTimeout(function(){if(typeof renderDashQuote==='function')renderDashQuote();},80);setTimeout(renderDashTop3,80);setTimeout(renderKeyRelationships,120);setTimeout(renderDashFollowUps,140);setTimeout(renderDashLibrary,160);setTimeout(restoreTodaysThought,180);setTimeout(renderDashFollowUps,120);setTimeout(renderKeyRelationships,150);setTimeout(renderDashLibrary,180);setTimeout(restoreTodaysThought,200);}setTimeout(function(){_notifs=buildLiveNotifs();_updateNotifBadge();},120);};
+var _origSP=showPage;showPage=function(id,clickedItem){document.querySelectorAll('[contenteditable="true"][id]').forEach(function(el){if(el.id)saveLS('ace_'+el.id,el.textContent);});_origSP(id,clickedItem);if(id==='priorities'){loadDaily();renderDaily();renderPris();updatePriStats();}if(id==='followups'){renderFUs();updateFUStats();}if(id==='govt'){renderGovt();updateGovtStats();}if(id==='heal'){renderOrgT('heal');updateOrgStats('heal');}if(id==='naman'){renderOrgT('naman');updateOrgStats('naman');}if(id==='stories'){renderWis('story');}if(id==='bookshelf'){renderWis('book');}if(id==='insights'){renderWis('insight');}if(id==='studio'){renderWis('studio');}if(id==='ritual'){renderRitualPage();}if(id==='learning'){renderLearning();}if(id==='growth'){renderGrowth();}if(id==='emr'){renderEMR();}if(id==='mail'){renderMail();}if(id==='archive'){renderArchive();}if(id==='movement'){renderASection('mvGoals');renderASection('mvInits');renderASection('mvMiles');renderAList('mvPrinciples','Write a core principle…');}if(id==='book'){renderASection('bookChapters');}if(id==='speaking'){renderSpk();renderASection('spkSpeeches');renderASection('spkMedia');renderASection('spkOpps');renderAList('spkTopics','Add a speaking topic…');}if(id==='dashboard'){setTimeout(function(){if(typeof renderDashRitual==='function')renderDashRitual();},60);setTimeout(function(){if(typeof renderDashLearn==='function')renderDashLearn();},70);setTimeout(function(){if(typeof renderDashGrowth==='function')renderDashGrowth();},75);setTimeout(function(){if(typeof renderDashQuote==='function')renderDashQuote();},80);setTimeout(function(){if(typeof renderDashMail==='function')renderDashMail();},85);setTimeout(renderDashTop3,80);setTimeout(renderKeyRelationships,120);setTimeout(renderDashFollowUps,140);setTimeout(renderDashLibrary,160);setTimeout(restoreTodaysThought,180);setTimeout(renderDashFollowUps,120);setTimeout(renderKeyRelationships,150);setTimeout(renderDashLibrary,180);setTimeout(restoreTodaysThought,200);}setTimeout(function(){_notifs=buildLiveNotifs();_updateNotifBadge();},120);};
 
 // EXPORT
 function exportSnapshot(){var a=document.createElement('a');a.href='data:text/html;charset=utf-8,'+encodeURIComponent(document.documentElement.outerHTML);a.download='AarohOS-'+new Date().toISOString().split('T')[0]+'.html';document.body.appendChild(a);a.click();document.body.removeChild(a);}
@@ -4821,10 +4907,17 @@ function startLive(){
   setTimeout(function(){if(typeof renderDashLearn==='function')renderDashLearn();},320);
   setTimeout(function(){if(typeof renderDashGrowth==='function')renderDashGrowth();},340);
   setTimeout(function(){if(typeof renderDashQuote==='function')renderDashQuote();},350);
+  setTimeout(function(){if(typeof renderDashMail==='function')renderDashMail();},360);
   setTimeout(function(){
     _cloudLoad().then(function(){
       loadPris();loadFUs();loadWis();loadOrgT();loadColleges();
       if(typeof netLoad==='function'){netLoad();renderHospitals();renderColleges();renderDashFollowUps();}
+      setTimeout(function(){
+        if(typeof renderGrowth==='function')renderGrowth();
+        if(typeof renderEMR==='function')renderEMR();
+        if(typeof renderMail==='function')renderMail();
+        if(typeof renderDashMail==='function')renderDashMail();
+      },240);
       if(typeof renderDashLearn==='function')renderDashLearn();
       if(typeof renderDashGrowth==='function')renderDashGrowth();
       setTimeout(renderDashTop3,100);
@@ -4834,6 +4927,10 @@ function startLive(){
     });
   },1000);
   setInterval(function(){if(typeof autoSyncToCloud==='function'&&_sb&&_sb.ready)autoSyncToCloud();},120000);
+  setInterval(function(){if(typeof pullInbound==='function')pullInbound();},240000);
+  document.addEventListener('visibilitychange',function(){
+    if(!document.hidden&&Date.now()-_inLast>60000&&typeof pullInbound==='function')pullInbound();
+  });
   setInterval(function(){if(typeof autoLocalBackup==='function')autoLocalBackup();},300000);
   console.log('Aaroh OS — live');
 }
@@ -6223,6 +6320,249 @@ function emCritReset(){
 }
 
 // ═══════════════════════════════════════════════════════════════════════
+// INBOUND SYNC — data written by automation, pulled while the app is open
+// ═══════════════════════════════════════════════════════════════════════
+// Aaroh already receives everything through the cloud store, so anything
+// that writes these keys for this account shows up here on its own. Only
+// keys on this list are pulled: they are written by automation and never
+// edited inside the app, so pulling them can never overwrite typing in
+// progress. Everything the user edits keeps the normal local-first path.
+
+var INBOUND_KEYS=['aaroh_mail_brief','aaroh_emr_inbound','aaroh_growth_inbound'];
+var _inLast=0,_inBusy=false;
+
+function pullInbound(){
+  if(_inBusy)return Promise.resolve(null);
+  if(typeof _sb==='undefined'||!_sb.ready)return Promise.resolve(null);
+  _inBusy=true;
+  return _sb.getAll().then(function(map){
+    var changed=[];
+    INBOUND_KEYS.forEach(function(k){
+      var cv=map[k];
+      if(!cv||cv==='null')return;
+      if(getLS(k)!==cv){
+        try{localStorage.setItem(k,cv);changed.push(k);}catch(e){}
+      }
+    });
+    _inLast=Date.now();
+    if(changed.length){
+      if(typeof renderMail==='function')renderMail();
+      if(typeof renderDashMail==='function')renderDashMail();
+      if(typeof renderMailBadge==='function')renderMailBadge();
+      if(typeof renderEMR==='function')renderEMR();
+      if(typeof renderGrowth==='function')renderGrowth();
+    }
+    return changed;
+  }).catch(function(){return null;})
+  .then(function(r){_inBusy=false;return r;});
+}
+
+function mbCheckNow(){
+  var btn=document.getElementById('mbCheckBtn');
+  if(btn){btn.disabled=true;btn.textContent='Checking\u2026';}
+  pullInbound().then(function(changed){
+    if(btn){btn.disabled=false;btn.textContent='Check for new';}
+    var meta=document.getElementById('mbMeta');
+    if(changed===null){
+      if(meta)meta.textContent='Cannot reach the cloud right now \u2014 showing what is stored on this device.';
+      return;
+    }
+    if(changed.length){if(typeof showSaveToast==='function')showSaveToast();}
+    else if(meta){
+      var b=_mbLoad();
+      meta.textContent=(b&&b.generated?('Briefing from '+_mbAge(b.generated)+(b.account?' \u00b7 '+b.account:'')):'No briefing yet')+' \u00b7 nothing new';
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// INBOX — mail briefing, prepared drafts, payments received
+// ═══════════════════════════════════════════════════════════════════════
+// This page DISPLAYS a briefing; it does not fetch mail. A static page has
+// no server and cannot hold mail credentials, so reading Gmail happens in
+// Claude (which has the mail connector) and the result is written here.
+//
+// Until the automatic route exists, "Update briefing" takes a pasted
+// briefing. Drafts are prepared but never sent from here — sending stays
+// a deliberate act in Gmail.
+
+function _mbLoad(){
+  try{var b=JSON.parse(getLS('aaroh_mail_brief')||'null');
+    if(b&&typeof b==='object')return b;}catch(e){}
+  return null;
+}
+function _mbSave(b){saveLS('aaroh_mail_brief',JSON.stringify(b));}
+function _mbMoney(n,cur){
+  var v=parseFloat(n);if(isNaN(v))return '—';
+  return (cur||'Rs')+' '+v.toLocaleString(undefined,{maximumFractionDigits:2});
+}
+function _mbAge(iso){
+  var d=_gwDaysSince?_gwDaysSince(String(iso||'').slice(0,10)):null;
+  if(d===null)return '';
+  return d===0?'today':(d===1?'yesterday':d+' days ago');
+}
+function _mbPayTotal(b,days){
+  var cut='';
+  if(days){var d=new Date();d.setDate(d.getDate()-days);cut=_rtDateStr(d);}
+  return ((b&&b.payments)||[]).filter(function(p){return !cut||String(p.date||'')>=cut;})
+    .reduce(function(a,p){return a+(parseFloat(p.amount)||0);},0);
+}
+
+var _mbOpen={};
+function mbToggle(i){_mbOpen[i]=!_mbOpen[i];renderMail();}
+
+function renderMail(){
+  var box=document.getElementById('mbBody');if(!box)return;
+  var b=_mbLoad();
+
+  var meta=document.getElementById('mbMeta');
+  if(meta)meta.textContent=b&&b.generated
+    ? ('Briefing from '+_mbAge(b.generated)+(b.account?' · '+b.account:''))
+    : 'No briefing yet';
+
+  if(!b){
+    _netStats('mbStats',[['—','Need a reply'],['—','Drafts ready'],['—','Payments in'],['—','Received']]);
+    box.innerHTML='<div class="nw-empty">No briefing loaded yet.<br><br>'+
+      'This page is already listening: anything that writes a briefing for your account appears here on its own, '+
+      'and it re-checks every few minutes while open.<br><br>Until the automation is running, ask Claude for a briefing '+
+      'and load it with <b>Update briefing</b>.</div>';
+    return;
+  }
+
+  var needs=b.needsReply||[],pays=b.payments||[],fyi=b.fyi||[];
+  var drafts=needs.filter(function(x){return (x.draft||'').trim();}).length;
+  _netStats('mbStats',[
+    [needs.length,'Need a reply'],
+    [drafts,'Drafts ready'],
+    [pays.length,'Payments in'],
+    [_mbMoney(_mbPayTotal(b,30),b.currency),'Received · 30 days']]);
+
+  var h='';
+
+  h+='<div class="mb-sec"><div class="mb-h"><span>Needs your reply</span>'+
+     (needs.length?'<small>'+drafts+' of '+needs.length+' have a draft ready</small>':'')+'</div>';
+  if(!needs.length){
+    h+='<div class="gw-clear">Nothing waiting on you.</div>';
+  }else{
+    h+=needs.map(function(m,i){
+      var open=_mbOpen['n'+i];
+      return '<div class="mb-item'+(m.urgent?' urgent':'')+'">'+
+        '<div class="mb-top" onclick="mbToggle(\'n'+i+'\')">'+
+          '<div class="mb-who"><b>'+_esc(m.from||'Unknown')+'</b>'+(m.at?'<span>'+_esc(_mbAge(m.at))+'</span>':'')+'</div>'+
+          '<div class="mb-subj">'+_esc(m.subject||'(no subject)')+'</div>'+
+          '<div class="mb-sum">'+_esc(m.summary||'')+'</div>'+
+          (m.why?'<div class="mb-why">'+_esc(m.why)+'</div>':'')+
+          '<div class="mb-tags">'+
+            ((m.draft||'').trim()?'<span class="mb-tag ok">Draft ready</span>':'<span class="mb-tag">No draft</span>')+
+            (m.urgent?'<span class="mb-tag hot">Urgent</span>':'')+
+            '<span class="mb-more">'+((m.draft||'').trim()?(open?'Hide draft':'Show draft'):(open?'Hide':'Details'))+'</span>'+
+          '</div>'+
+        '</div>'+
+        (open?'<div class="mb-draft">'+
+          ((m.draft||'').trim()?'<pre id="mbD'+i+'">'+_esc(m.draft)+'</pre>':'<div class="nw-none">No draft was prepared for this one.</div>')+
+          '<div class="mb-acts">'+
+            ((m.draft||'').trim()?'<button class="qt-btn" onclick="mbCopy('+i+')">Copy draft</button>':'')+
+            (m.link?'<a class="qt-btn" href="'+_esc(m.link)+'" target="_blank" rel="noopener">Open in Gmail</a>':'')+
+          '</div>'+
+          '<div class="mb-note">Nothing is sent from Aaroh — review and send it in Gmail.</div>'+
+        '</div>':'')+
+      '</div>';
+    }).join('');
+  }
+  h+='</div>';
+
+  h+='<div class="mb-sec"><div class="mb-h"><span>Payments received</span>'+
+     (pays.length?'<small>'+_mbMoney(_mbPayTotal(b),b.currency)+' in this briefing</small>':'')+'</div>';
+  if(!pays.length){
+    h+='<div class="gw-clear">No payment emails in this briefing.</div>';
+  }else{
+    h+='<div class="nw-list"><div class="nw-row mb-prow head"><div>Date</div><div>From</div><div>Reference</div><div>Amount</div><div></div></div>'+
+      pays.map(function(p){
+        return '<div class="nw-row mb-prow body">'+
+          '<div><div class="nw-name">'+_esc(p.date||'—')+'</div></div>'+
+          '<div><div class="nw-lbl">From</div><div class="nw-person">'+_esc(p.from||'—')+'</div>'+
+            (p.org?'<div class="nw-num">'+_esc(p.org)+'</div>':'')+'</div>'+
+          '<div><div class="nw-lbl">Reference</div><div class="lr-dates">'+_esc(p.ref||'—')+'</div></div>'+
+          '<div><div class="nw-lbl">Amount</div><div class="nw-big good">'+_mbMoney(p.amount,p.currency||b.currency)+'</div></div>'+
+          '<div>'+(p.link?'<a class="nw-edit" href="'+_esc(p.link)+'" target="_blank" rel="noopener">Open</a>':'')+'</div>'+
+        '</div>';
+      }).join('')+'</div>';
+  }
+  h+='</div>';
+
+  if(fyi.length){
+    h+='<div class="mb-sec"><div class="mb-h"><span>Everything else</span><small>no action needed</small></div>'+
+      '<div class="nw-list">'+fyi.map(function(f){
+        return '<div class="mb-fyi">'+_esc(typeof f==='string'?f:(f.summary||''))+
+          (f.from?'<span>'+_esc(f.from)+'</span>':'')+'</div>';
+      }).join('')+'</div></div>';
+  }
+  if(b.note)h+='<div class="mb-sec"><div class="em-privacy">'+_esc(b.note)+'</div></div>';
+  box.innerHTML=h;
+}
+
+function mbCopy(i){
+  var el=document.getElementById('mbD'+i);if(!el)return;
+  var t=el.textContent;
+  try{
+    navigator.clipboard.writeText(t).then(function(){showSaveToast&&showSaveToast();});
+  }catch(e){
+    var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);
+    ta.select();try{document.execCommand('copy');}catch(e2){}document.body.removeChild(ta);
+  }
+}
+
+function mbImportOpen(){
+  document.getElementById('mbPaste').value='';
+  document.getElementById('mbErr').textContent='';
+  openModal('mbImport');
+  setTimeout(function(){document.getElementById('mbPaste').focus();},60);
+}
+function mbImportSave(){
+  var raw=document.getElementById('mbPaste').value.trim();
+  var err=document.getElementById('mbErr');
+  if(!raw){err.textContent='Paste the briefing first.';return;}
+  var b;
+  try{b=JSON.parse(raw);}catch(e){err.textContent='That is not valid briefing data — paste the whole block Claude gave you, including the outer { }.';return;}
+  if(!b||typeof b!=='object'||Array.isArray(b)){err.textContent='The briefing should be a single block starting with {.';return;}
+  if(!b.needsReply&&!b.payments&&!b.fyi){err.textContent='No mail items found in that briefing.';return;}
+  if(!b.generated)b.generated=new Date().toISOString();
+  _mbSave(b);_mbOpen={};
+  closeModal('mbImport');renderMail();renderDashMail();
+  if(typeof showSaveToast==='function')showSaveToast();
+}
+function mbClear(){
+  if(!confirm('Remove the current briefing?'))return;
+  try{localStorage.removeItem('aaroh_mail_brief');}catch(e){}
+  saveLS('aaroh_mail_brief','null');
+  _mbOpen={};renderMail();renderDashMail();
+}
+
+function renderDashMail(){
+  var c=document.getElementById('dashMail');if(!c)return;
+  var b=_mbLoad();
+  if(!b){
+    c.innerHTML='<div class="db-mail" onclick="showPage(\'mail\',null)">'+
+      '<div class="db-mail-l"><div class="db-mail-t">Inbox</div>'+
+      '<div class="db-mail-s">No briefing yet — connect Gmail, then ask Claude for one.</div></div>'+
+      '<div class="db-mail-r"><span class="qt-btn">Open</span></div></div>';
+    return;
+  }
+  var needs=(b.needsReply||[]).length;
+  var drafts=(b.needsReply||[]).filter(function(x){return (x.draft||'').trim();}).length;
+  var pays=(b.payments||[]).length;
+  c.innerHTML='<div class="db-mail" onclick="showPage(\'mail\',null)">'+
+    '<div class="db-mail-l"><div class="db-mail-t">Inbox'+(b.account?' · '+_esc(b.account):'')+'</div>'+
+      '<div class="db-mail-s">'+_esc(_mbAge(b.generated))+'</div></div>'+
+    '<div class="db-mail-n">'+
+      '<div><b'+(needs?' class="warn"':'')+'>'+needs+'</b><span>need a reply</span></div>'+
+      '<div><b>'+drafts+'</b><span>drafts ready</span></div>'+
+      '<div><b class="good">'+pays+'</b><span>payments in</span></div>'+
+      '<div><b>'+_mbMoney(_mbPayTotal(b,30),b.currency)+'</b><span>received · 30d</span></div>'+
+    '</div></div>';
+}
+
+// ═══════════════════════════════════════════════════════════════════════
 // GROWTH — what each relationship actually returned, and what has slipped
 // ═══════════════════════════════════════════════════════════════════════
 // Effort was already tracked (visits, presentations). This adds outcome:
@@ -6533,6 +6873,12 @@ function gwLogSave(){
   if(typeof renderDashGrowth==='function')renderDashGrowth();
 }
 
+function renderMailBadge(){
+  var b=document.getElementById('sideMailBadge');if(!b)return;
+  var br=(typeof _mbLoad==='function')?_mbLoad():null;
+  var n=br?((br.needsReply||[]).length):0;
+  b.textContent=n;b.style.display=n?'':'none';
+}
 function renderEmrBadge(){
   var b=document.getElementById('sideEmrBadge');if(!b)return;
   var n=(typeof emOpenNeeds==='function')?emOpenNeeds():0;
@@ -6549,7 +6895,7 @@ function renderDashGrowth(){
     '<div class="db-stat" onclick="showPage(\'growth\',null)"><b>'+naman+'</b><span>Clients → Naman · 30d</span></div>'+
     '<div class="db-stat" onclick="showPage(\'growth\',null)"><b>'+hires+'</b><span>Caregivers hired · 30d</span></div>'+
     '<div class="db-stat'+(n?' warn':'')+'" onclick="showPage(\'growth\',null)"><b>'+n+'</b><span>Relationships need attention</span></div>';
-  renderEmrBadge();
+  renderEmrBadge();renderMailBadge();
   var badge=document.getElementById('sideGrowthBadge');
   if(badge){badge.textContent=n;badge.style.display=n?'':'none';}
 }
