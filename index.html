@@ -1246,6 +1246,162 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
 .nw-del{border:none;background:none;color:var(--coral);font-family:var(--font);font-size:13px;cursor:pointer;padding:0}
 .nw-del:hover{text-decoration:underline}
 
+
+
+/* ─── QUOTES ─────────────────────────────────────────── */
+.qt-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px 24px;margin-bottom:20px}
+.qt-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.qt-theme{font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  padding:3px 9px;border-radius:6px}
+.qt-theme.success{background:#E8F3EC;color:#1F6B45}
+.qt-theme.proactive{background:#E6EFF8;color:#1F5A8A}
+.qt-theme.consistency{background:#EEEBFA;color:#4D3FA3}
+.qt-theme.joy{background:#FBF1DF;color:#8A5A12}
+.qt-when{font-size:11.5px;color:var(--hint)}
+.qt-text{font-size:19px;line-height:1.5;color:var(--text);letter-spacing:-0.01em}
+.qt-acts{display:flex;align-items:center;gap:8px;margin-top:16px}
+.qt-btn{border:1px solid var(--border);background:var(--card-bg);border-radius:8px;padding:5px 11px;
+  font-family:var(--font);font-size:12px;color:var(--text-2);cursor:pointer;transition:.15s}
+.qt-btn:hover{border-color:var(--text-2);color:var(--text)}
+.qt-btn.on{border-color:var(--green);color:var(--green)}
+.qt-count{font-size:11.5px;color:var(--hint);margin-left:2px}
+.qt-list{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;margin-bottom:20px}
+.qt-item{padding:13px 18px;border-bottom:1px solid var(--border-light);font-size:13.5px;
+  line-height:1.5;color:var(--text-2)}
+.qt-item:last-child{border-bottom:none}
+.qt-item.now{background:var(--green-light);color:var(--text)}
+.qt-item .s{color:var(--amber-dark);margin-right:7px}
+.qt-item .tag{font-size:10.5px;color:var(--green);margin-left:8px;white-space:nowrap}
+.db-quote{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);
+  padding:16px 20px;margin-bottom:12px;cursor:pointer;transition:border-color .15s}
+.db-quote:hover{border-color:var(--text-2)}
+.db-quote-t{font-size:15px;line-height:1.5;color:var(--text);margin-top:9px}
+@media(max-width:700px){.qt-text{font-size:17px}.qt-card{padding:18px}}
+
+
+/* ─── EMR AUDIT ──────────────────────────────────────── */
+.em-privacy{background:#F4F7F5;border:1px solid var(--border);border-radius:var(--radius-sm);
+  padding:11px 15px;font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:20px}
+.em-run-top{display:flex;gap:18px;align-items:flex-end;flex-wrap:wrap;background:var(--card-bg);
+  border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:12px}
+.em-f{display:flex;flex-direction:column;gap:5px}
+.em-f.grow{flex:1;min-width:220px}
+.em-f label{font-size:11.5px;font-weight:500;color:var(--text-2)}
+.em-f input,.em-f select{padding:8px 11px;border:1px solid var(--border);border-radius:8px;
+  font-family:var(--font);font-size:13px;color:var(--text);background:var(--card-bg);outline:none;width:100%}
+.em-f input:focus{border-color:var(--green)}
+.em-live{text-align:right;margin-left:auto}
+.em-live b{display:block;font-size:24px;font-weight:600;color:var(--green);line-height:1}
+.em-live span{font-size:11px;color:var(--hint)}
+.em-help{font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.5}
+.em-help b{font-weight:600;color:var(--text-2)}
+.em-run{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.em-g{background:var(--content-bg);padding:9px 18px;font-size:11px;font-weight:600;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--hint)}
+.em-crow{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:11px 18px;
+  border-bottom:1px solid var(--border-light);flex-wrap:wrap}
+.em-crow:last-child{border-bottom:none}
+.em-ct{font-size:13.5px;color:var(--text);flex:1;min-width:200px;line-height:1.4}
+.em-tg{font-size:10.5px;color:var(--amber-dark);background:var(--amber-light);padding:2px 7px;border-radius:5px;margin-left:8px;white-space:nowrap}
+.em-cells{display:flex;gap:5px;flex-wrap:wrap}
+.em-cell{width:42px;border:1px solid var(--border);background:var(--card-bg);border-radius:7px;
+  padding:4px 0;cursor:pointer;font-family:var(--font);display:flex;flex-direction:column;align-items:center;gap:1px}
+.em-cell .ref{font-size:9px;color:var(--hint);line-height:1}
+.em-cell .mk{font-size:13px;line-height:1.1;color:var(--muted)}
+.em-cell.ok{border-color:#CBE5D5;background:#F2F9F5}
+.em-cell.ok .mk{color:#1F6B45}
+.em-cell.no{border-color:var(--coral);background:#FDF1EF}
+.em-cell.no .mk{color:var(--coral);font-weight:700}
+.em-cell.na{background:var(--content-bg)}
+.em-cell.na .mk{color:var(--hint)}
+.em-legend{font-size:12px;color:var(--muted);margin-bottom:12px}
+.em-res{display:grid;grid-template-columns:minmax(0,1fr) 180px 54px 116px;gap:16px;align-items:center;
+  background:var(--card-bg);border:1px solid var(--border);border-bottom:none;padding:12px 18px}
+.em-res:last-of-type{border-bottom:1px solid var(--border)}
+.em-res.fail{background:#FDF8F7}
+.em-res-t{font-size:13.5px;color:var(--text);line-height:1.4}
+.em-bar{position:relative;height:7px;background:var(--border-light);border-radius:4px;overflow:visible}
+.em-bar i{display:block;height:100%;background:var(--green);border-radius:4px}
+.em-bar u{position:absolute;top:-3px;width:2px;height:13px;background:var(--text-2);opacity:.5}
+.em-pct{font-size:14px;font-weight:600;color:var(--text);text-align:right;font-variant-numeric:tabular-nums}
+.em-pct.bad{color:var(--coral)}
+.em-of{font-size:11.5px;color:var(--hint);text-align:right}
+.em-srow{grid-template-columns:minmax(0,1fr) 120px 100px minmax(0,2fr)}
+.em-hrow{grid-template-columns:minmax(0,1.3fr) 110px 100px 120px minmax(0,1.6fr) 84px}
+.em-cfg{display:flex;gap:16px;align-items:flex-end;margin-bottom:14px;flex-wrap:wrap}
+.em-cedit-h{display:grid;grid-template-columns:28px minmax(0,1fr) 150px 74px 28px;gap:8px;padding:0 0 6px}
+.em-cedit-h span{font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--hint)}
+.em-cedit{display:grid;grid-template-columns:28px minmax(0,1fr) 150px 74px 28px;gap:8px;align-items:center;margin-bottom:7px}
+.em-cedit input[type=checkbox]{accent-color:var(--green);cursor:pointer}
+.em-cedit input,.em-cedit select{padding:7px 9px;border:1px solid var(--border);border-radius:7px;
+  font-family:var(--font);font-size:12.5px;color:var(--text);background:var(--card-bg);outline:none;width:100%}
+.em-cedit input:focus,.em-cedit select:focus{border-color:var(--green)}
+.em-cedit .rm{border:none;background:none;color:var(--hint);font-size:17px;cursor:pointer;padding:0}
+.em-cedit .rm:hover{color:var(--coral)}
+@media(max-width:900px){
+  .em-res{grid-template-columns:minmax(0,1fr) 54px;gap:8px 12px}
+  .em-res .em-bar{grid-column:1/-1;order:3}
+  .em-res .em-of{grid-column:1/-1;order:4;text-align:left}
+  .em-cedit,.em-cedit-h{grid-template-columns:24px minmax(0,1fr) 24px}
+  .em-cedit select,.em-cedit input[type=number],.em-cedit-h span:nth-child(3),.em-cedit-h span:nth-child(4){display:none}
+  .em-live{margin-left:0}
+}
+
+/* ─── GROWTH ─────────────────────────────────────────── */
+.gw-sec{margin-bottom:26px}
+.gw-sec-t{font-size:15px;font-weight:600;color:var(--text);margin-bottom:12px}
+.gw-clear{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;
+  font-size:13.5px;color:var(--text-2)}
+.gw-clear small{display:block;font-size:12px;color:var(--hint);margin-top:7px;line-height:1.55}
+.gw-att{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  background:var(--card-bg);border:1px solid var(--border);border-left:3px solid var(--border);
+  border-radius:var(--radius);padding:15px 18px;margin-bottom:9px}
+.gw-att.s1{border-left-color:var(--coral)}
+.gw-att.s2{border-left-color:var(--amber-dark)}
+.gw-att.s3{border-left-color:var(--blue)}
+.gw-att-b{flex:1;min-width:0}
+.gw-why{font-size:12.5px;color:var(--text-2);margin-top:3px}
+.gw-act{font-size:12.5px;color:var(--muted);margin-top:5px;font-style:italic}
+.gw-att-a{display:flex;gap:7px;align-items:center;flex-shrink:0}
+.gw-tabs{display:flex;gap:4px;padding:3px;background:var(--content-bg);border-radius:12px;margin-bottom:16px;width:max-content;max-width:100%}
+.gw-tab{border:none;background:transparent;padding:9px 18px;border-radius:9px;font-family:var(--font);font-size:13px;
+  color:var(--muted);cursor:pointer;white-space:nowrap}
+.gw-tab b{font-weight:500;opacity:.6;margin-left:3px}
+.gw-tab.on{background:var(--card-bg);color:var(--text);font-weight:500;box-shadow:0 1px 2px rgba(0,0,0,.07)}
+.gw-pipe{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;margin-bottom:26px}
+.gw-st{background:var(--card-bg);border:none;padding:14px 10px;cursor:pointer;text-align:center;font-family:var(--font);transition:.15s}
+.gw-st:hover{background:#FAFAF8}
+.gw-st.on{background:var(--green-light)}
+.gw-st b{display:block;font-size:20px;font-weight:600;color:var(--text);line-height:1.1}
+.gw-st span{display:block;font-size:11px;color:var(--muted);margin-top:4px;line-height:1.3}
+.gw-pill{display:inline-block;font-size:11.5px;font-weight:500;padding:3px 10px;border-radius:20px;white-space:nowrap}
+.gw-pill.new{background:#F0F0EE;color:#8A8A85}
+.gw-pill.contacted{background:#EDF1F5;color:#5A6B7A}
+.gw-pill.visited{background:#E6EFF8;color:#1F5A8A}
+.gw-pill.presented{background:#EEEBFA;color:#4D3FA3}
+.gw-pill.mou{background:#FBF1DF;color:#8A5A12}
+.gw-pill.referring{background:#E8F3EC;color:#1F6B45}
+.gw-pill.dormant{background:#F7E9E7;color:#96453A}
+.gw-row{grid-template-columns:minmax(0,2.2fr) 118px 78px 78px 88px 116px 64px;align-items:center}
+.nw-big.good{color:var(--green)}
+.db-stat.warn b{color:var(--coral)}
+.gw-note{font-size:12.5px;color:var(--muted);margin:-4px 0 10px}
+.gw-note .nw-add{font-size:12.5px}
+.gw-log-name{font-size:14px;font-weight:600;color:var(--text);margin:-4px 0 14px}
+.gw-hrow{display:flex;gap:10px;align-items:baseline;font-size:12.5px;color:var(--text-2);padding:6px 0;border-bottom:1px solid var(--border-light)}
+.gw-hrow:last-child{border-bottom:none}
+.gw-hrow .d{font-size:11.5px;color:var(--hint);min-width:74px;flex-shrink:0}
+.gw-hrow .n{color:var(--muted);font-size:11.5px}
+@media(max-width:900px){
+  .gw-pipe{grid-template-columns:repeat(2,1fr)}
+  .gw-tabs{width:100%}
+  .gw-tab{flex:1;padding:9px 8px;font-size:12px}
+  .gw-att-a{width:100%}
+}
+
 /* ─── LEARNING ───────────────────────────────────────── */
 .lr-now{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
 .lr-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;
@@ -1401,6 +1557,11 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
         Naman Care Home
       </button>
+      <button class="sidebar-item" onclick="showPage('emr',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2h6v4H9z"></path><path d="M5 6h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1z"></path><path d="M9 13h6M9 17h3"></path></svg>
+        EMR Audit
+        <span class="sidebar-badge" id="sideEmrBadge" style="display:none">0</span>
+      </button>
       <button class="sidebar-item" onclick="showPage('training',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg>
         Training Partners
@@ -1428,6 +1589,11 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3L2 9l10 6 10-6-10-6z"></path><path d="M2 17l10 6 10-6"></path><path d="M2 13l10 6 10-6"></path></svg>
         Education Ecosystem
         <span class="sidebar-badge" id="sideColBadge">22</span>
+      </button>
+      <button class="sidebar-item" onclick="showPage('growth',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+        Growth
+        <span class="sidebar-badge" id="sideGrowthBadge" style="display:none">0</span>
       </button>
     </div>
 
@@ -1543,6 +1709,7 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
     <div id="dashRitualPrompt"></div>
 
     <div class="db-sec">
+      <div id="dashQuote"></div>
       <div class="sec-lbl"><span>Today's thought</span><button onclick="showPage('thought',null)">Write →</button></div>
       <div class="db-card"><div id="todaysThought" class="db-thought"></div></div>
     </div>
@@ -1552,6 +1719,11 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
       <div class="db-stat" onclick="showPage('colleges',null)"><b id="snapPres">0</b><span>Presentations</span></div>
       <div class="db-stat" onclick="showPage('colleges',null)"><b id="snapPart">0</b><span>Participants</span></div>
       <div class="db-stat" onclick="showPage('followups',null)"><b id="snapFU">0</b><span>Pending follow-ups</span></div>
+    </div>
+
+    <div class="db-sec">
+      <div class="sec-lbl"><span>Network growth</span><button onclick="showPage('growth',null)">Growth →</button></div>
+      <div class="db-stats" id="dashGrowth"></div>
     </div>
 
     <div class="db-sec">
@@ -2300,6 +2472,9 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
       <div class="pg-sub">A few honest lines each day. Over time, this becomes your story.</div>
     </div>
   </div>
+  <div class="qt-card" id="qtCard"></div>
+  <div id="qtBrowse" style="display:none"></div>
+
   <div class="tj-wrap">
     <div>
       <div class="tj-today">
@@ -2501,6 +2676,67 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
       </div>
       <div class="nw-list" id="lrList"></div>
     </section>
+
+    <!-- ═══════════ GROWTH ═══════════ -->
+    <section class="page" id="page-growth">
+      <div class="pg-head">
+        <div>
+          <h1 class="pg-title">Growth</h1>
+          <p class="pg-sub">What each relationship actually returned — and what has gone quiet.</p>
+        </div>
+        <div class="chip-row nw-chips" id="gwPeriodRow"></div>
+      </div>
+
+      <div class="nw-stats" id="gwStats"></div>
+
+      <div class="gw-sec">
+        <div class="gw-sec-t">Needs attention</div>
+        <div id="gwAttention"></div>
+      </div>
+
+      <div class="gw-tabs" id="gwTabs"></div>
+      <div class="gw-pipe" id="gwPipe"></div>
+
+      <div class="lr-hist-h">
+        <div class="lr-hist-t">Return on relationships</div>
+        <div class="chip-row nw-chips" id="gwSortRow"></div>
+      </div>
+      <div class="gw-note" id="gwListNote"></div>
+      <div class="nw-list" id="gwList"></div>
+    </section>
+
+    <!-- ═══════════ EMR AUDIT ═══════════ -->
+    <section class="page" id="page-emr">
+      <div class="pg-head">
+        <div>
+          <h1 class="pg-title">EMR audit</h1>
+          <p class="pg-sub">Naman Care Home — is every entry there, and does it look right?</p>
+        </div>
+        <div class="nw-actions">
+          <button class="btn btn-ghost btn-sm" onclick="emCritOpen()">Criteria</button>
+          <button class="btn btn-teal btn-sm" id="emStartBtn" onclick="emStart()">Run spot audit</button>
+        </div>
+      </div>
+
+      <div class="em-privacy">Records bed or EMR references and met / missed marks only. No names, readings or clinical notes are stored here — those stay in the EMR.</div>
+
+      <div id="emRunWrap" style="display:none">
+        <div id="emRunHead"></div>
+        <div class="em-help">Everything starts marked done. Tap a resident cell to cycle: <b>&#10003;</b> recorded &rarr; <b>&#10007;</b> missing &rarr; <b>&ndash;</b> not applicable.</div>
+        <div class="em-run" id="emRunBody"></div>
+        <div class="form-row" style="margin-top:14px"><label class="form-label">Note <span class="nw-opt">optional</span></label><input class="form-input" id="emRunNote" placeholder="e.g. new staff on night shift this week"></div>
+        <div class="nw-foot"><div style="flex:1"></div>
+          <button class="btn btn-ghost" onclick="emCancelRun()">Cancel</button>
+          <button class="btn btn-teal" onclick="emSaveRun()">Save audit</button>
+        </div>
+      </div>
+
+      <div id="emResults">
+        <div class="nw-stats" id="emStats"></div>
+        <div class="gw-tabs" id="emViewTabs"></div>
+        <div id="emBody"></div>
+      </div>
+    </section>
   </div><!-- /content -->
 </div><!-- /main -->
 </div><!-- /shell -->
@@ -2595,6 +2831,56 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
 
 <datalist id="hcPurposeList"><option>Meeting</option><option>MOU signing</option><option>Presentation</option><option>Training</option><option>Follow-up</option><option>Referral discussion</option></datalist>
 <datalist id="eduTopicList"><option>Aging care</option><option>Elder care awareness</option><option>Dignity in care</option><option>Career in geriatrics</option><option>Dementia care</option><option>Palliative care</option></datalist>
+
+<div class="modal-overlay" id="modal-gwLog">
+  <div class="modal nw-modal" style="width:500px">
+    <div class="modal-hdr"><div class="modal-title">Log result</div><button class="close-btn" onclick="closeModal('gwLog')">×</button></div>
+    <input type="hidden" id="gwLogKind"><input type="hidden" id="gwLogIdx">
+    <div class="gw-log-name" id="gwLogName"></div>
+    <div class="form-row" id="gwLogTypeRow"><label class="form-label">What came out of it</label>
+      <select class="form-select" id="gwLogType" onchange="gwLogTypeChange()">
+        <option value="clients">Clients referred</option>
+        <option value="hires">Caregivers hired</option>
+      </select></div>
+    <div class="form-2col">
+      <div class="form-row"><label class="form-label">Month</label><input type="month" class="form-input" id="gwLogMonth"></div>
+      <div class="form-row"><label class="form-label" id="gwLogCountLbl">How many clients?</label><input type="number" class="form-input" id="gwLogCount" min="0" placeholder="e.g. 3"></div>
+    </div>
+    <div class="form-row" id="gwLogOrgRow"><label class="form-label">For which organisation</label>
+      <select class="form-select" id="gwLogOrg">
+        <option value="heal">Heal Home Care</option>
+        <option value="naman">Naman Care Home</option>
+      </select></div>
+    <div class="form-row"><label class="form-label">Stage</label><select class="form-select" id="gwLogStage"></select></div>
+    <div class="form-row"><label class="form-label">Note <span class="nw-opt">optional</span></label><input class="form-input" id="gwLogNote" placeholder="e.g. discharge coordinator started referring"></div>
+    <div class="nw-log-h"><span>Already logged</span></div>
+    <div id="gwLogHist"></div>
+    <div class="nw-foot"><div style="flex:1"></div>
+      <button class="btn btn-ghost" onclick="closeModal('gwLog')">Cancel</button>
+      <button class="btn btn-teal" onclick="gwLogSave()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-emCrit">
+  <div class="modal nw-modal" style="width:760px">
+    <div class="modal-hdr"><div class="modal-title">Audit criteria</div><button class="close-btn" onclick="closeModal('emCrit')">×</button></div>
+    <div class="em-cfg">
+      <div class="em-f"><label>Target compliance %</label><input type="number" id="emCfgTarget" min="1" max="100"></div>
+      <div class="em-f grow"><label>Shifts</label><input id="emCfgShifts" placeholder="Morning, Evening, Night"></div>
+    </div>
+    <div class="em-f" style="margin-bottom:14px"><label>Default resident sample <span class="nw-opt">bed or EMR references, comma separated</span></label><input id="emCfgRefs" placeholder="B1, B2, B3…"></div>
+    <div class="nw-log-h"><span>Criteria</span><button class="nw-link" onclick="emCritAdd()">+ Add criterion</button></div>
+    <div class="em-cedit-h"><span></span><span>Criterion</span><span>Group</span><span>Target</span><span></span></div>
+    <div id="emCritList"></div>
+    <div class="nw-foot">
+      <button class="nw-del" onclick="emCritReset()">Reset to standard list</button>
+      <div style="flex:1"></div>
+      <button class="btn btn-ghost" onclick="closeModal('emCrit')">Cancel</button>
+      <button class="btn btn-teal" onclick="emCritSave()">Save</button>
+    </div>
+  </div>
+</div>
 
 <!-- ═══════════════ ALL MODALS ═══════════════ -->
 
@@ -3154,7 +3440,7 @@ let meetings = [{"date":"","type":"nursing","title":"IEE discussion","org":"Nurs
 const pageTitles = {
   dashboard:'Today',colleges:'Colleges',hospitals:'Hospitals',
   training:'Training',tours:'Facility Tours',meetings:'Meetings',
-  gallery:'Knowledge',notifications:'Follow-ups',ritual:'Daily Ritual',learning:'Learning',hospitals:'Healthcare Ecosystem',colleges:'Education Ecosystem'
+  gallery:'Knowledge',notifications:'Follow-ups',ritual:'Daily Ritual',learning:'Learning',growth:'Growth',emr:'EMR Audit',thought:"Today's Thought",priorities:'Priorities',followups:'Follow-ups',stories:'Stories',bookshelf:'Bookshelf',results:'Results & Analytics',backup:'Backup & Restore',hospitals:'Healthcare Ecosystem',colleges:'Education Ecosystem'
 };
 
 function showPage(id, clickedItem) {
@@ -3171,7 +3457,7 @@ function showPage(id, clickedItem) {
   if(id==='colleges'){renderColleges(window._colTab||'pending'); updateStats();}
   if(id==='hospitals'){renderHospitals(window._hospTab||'all'); updateStats();}
 
-    if(id==='results'){setTimeout(renderResults,80);}if(id==='backup'){setTimeout(renderBackupPage,80);}if(id==='thought'){setTimeout(renderThoughtPage,80);}if(id==='stories'){setTimeout(renderStories,80);}if(id==='bookshelf'){setTimeout(renderBookshelf,80);}if(id==='colleges'){setTimeout(renderColleges,80);}  if(id==='training'){populateHospitalDropdown(); renderTrainings(window._trainTab||'all');}
+    if(id==='results'){setTimeout(renderResults,80);}if(id==='backup'){setTimeout(renderBackupPage,80);}if(id==='thought'){setTimeout(renderThoughtPage,80);setTimeout(renderQuote,80);}if(id==='stories'){setTimeout(renderStories,80);}if(id==='bookshelf'){setTimeout(renderBookshelf,80);}if(id==='colleges'){setTimeout(renderColleges,80);}  if(id==='training'){populateHospitalDropdown(); renderTrainings(window._trainTab||'all');}
   if(id==='tours'){renderTours(window._tourTab||'all');}
   if(id==='meetings'){renderMeetings(window._meetTab||'all');}
   if(id==='dashboard'){updateStats();}
@@ -4053,7 +4339,7 @@ function delSpk(i){if(!confirm('Delete?'))return;_spkEngs.splice(i,1);saveLS('aa
 function renderSpk(){var c=document.getElementById('spkEngList');if(!c)return;var q=((document.getElementById('spkSearch')||{}).value||'').toLowerCase();var sC={Upcoming:'var(--amber-dark)',Completed:'#3B6D11',Cancelled:'var(--coral)'};var sB={Upcoming:'var(--amber-light)',Completed:'#e8f5e9',Cancelled:'var(--coral-light)'};var list=_spkEngs.filter(function(e){return !q||JSON.stringify(e).toLowerCase().includes(q);});if(!list.length){c.innerHTML='<div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No engagements yet</div>';return;}c.innerHTML=list.map(function(e,i){var st=e.status||'Upcoming';var tags=(e.tags||'').split(',').filter(Boolean).map(function(t){return'<span class="wtag">'+t.trim()+'</span>';}).join('');return'<div class="spkcard"><div class="spkcard-hdr"><div><div class="spkcard-event">'+e.event+'</div>'+(e.org?'<div style="font-size:12px;color:var(--muted);margin-top:2px">'+e.org+'</div>':'')+'</div><div style="display:flex;gap:4px;align-items:center;flex-shrink:0"><span style="font-size:10px;font-weight:600;padding:2px 9px;border-radius:10px;background:'+(sB[st]||'var(--border)')+';color:'+(sC[st]||'var(--muted)')+'">'+st+'</span><button class="btn btn-ghost btn-sm" onclick="openSpkModal('+i+')">Edit</button><button class="btn btn-ghost btn-sm" style="color:var(--coral);border-color:var(--coral)" onclick="delSpk('+i+')">Del</button></div></div><div class="spkmeta">'+(e.date?'<div><div class="spkml">Date</div><div class="spkmv">'+e.date+'</div></div>':'')+(e.topic?'<div><div class="spkml">Topic</div><div class="spkmv">'+e.topic+'</div></div>':'')+(e.aud?'<div><div class="spkml">Audience</div><div class="spkmv">'+e.aud+(e.audSz?' ('+e.audSz+')':'')+'</div></div>':'')+(e.loc?'<div><div class="spkml">Location</div><div class="spkmv">'+e.loc+'</div></div>':'')+'</div>'+(e.msg?'<div style="font-size:12px;color:var(--text-2);font-style:italic;padding:6px 10px;background:var(--green-light);border-radius:4px;border-left:2px solid var(--green);margin-bottom:6px">'+e.msg+'</div>':'')+(e.notes?'<div style="font-size:12px;color:var(--muted);margin-bottom:6px">'+e.notes+'</div>':'')+(e.fu?'<div style="font-size:11px;font-weight:600;color:var(--amber-dark)">→ Follow-up: '+e.fu+'</div>':'')+(tags?'<div class="wtags" style="margin-top:6px">'+tags+'</div>':'')+'</div>';}).join('');}
 
 // EXTEND showPage
-var _origSP=showPage;showPage=function(id,clickedItem){document.querySelectorAll('[contenteditable="true"][id]').forEach(function(el){if(el.id)saveLS('ace_'+el.id,el.textContent);});_origSP(id,clickedItem);if(id==='priorities'){loadDaily();renderDaily();renderPris();updatePriStats();}if(id==='followups'){renderFUs();updateFUStats();}if(id==='govt'){renderGovt();updateGovtStats();}if(id==='heal'){renderOrgT('heal');updateOrgStats('heal');}if(id==='naman'){renderOrgT('naman');updateOrgStats('naman');}if(id==='stories'){renderWis('story');}if(id==='bookshelf'){renderWis('book');}if(id==='insights'){renderWis('insight');}if(id==='studio'){renderWis('studio');}if(id==='ritual'){renderRitualPage();}if(id==='learning'){renderLearning();}if(id==='archive'){renderArchive();}if(id==='movement'){renderASection('mvGoals');renderASection('mvInits');renderASection('mvMiles');renderAList('mvPrinciples','Write a core principle…');}if(id==='book'){renderASection('bookChapters');}if(id==='speaking'){renderSpk();renderASection('spkSpeeches');renderASection('spkMedia');renderASection('spkOpps');renderAList('spkTopics','Add a speaking topic…');}if(id==='dashboard'){setTimeout(function(){if(typeof renderDashRitual==='function')renderDashRitual();},60);setTimeout(function(){if(typeof renderDashLearn==='function')renderDashLearn();},70);setTimeout(renderDashTop3,80);setTimeout(renderKeyRelationships,120);setTimeout(renderDashFollowUps,140);setTimeout(renderDashLibrary,160);setTimeout(restoreTodaysThought,180);setTimeout(renderDashFollowUps,120);setTimeout(renderKeyRelationships,150);setTimeout(renderDashLibrary,180);setTimeout(restoreTodaysThought,200);}setTimeout(function(){_notifs=buildLiveNotifs();_updateNotifBadge();},120);};
+var _origSP=showPage;showPage=function(id,clickedItem){document.querySelectorAll('[contenteditable="true"][id]').forEach(function(el){if(el.id)saveLS('ace_'+el.id,el.textContent);});_origSP(id,clickedItem);if(id==='priorities'){loadDaily();renderDaily();renderPris();updatePriStats();}if(id==='followups'){renderFUs();updateFUStats();}if(id==='govt'){renderGovt();updateGovtStats();}if(id==='heal'){renderOrgT('heal');updateOrgStats('heal');}if(id==='naman'){renderOrgT('naman');updateOrgStats('naman');}if(id==='stories'){renderWis('story');}if(id==='bookshelf'){renderWis('book');}if(id==='insights'){renderWis('insight');}if(id==='studio'){renderWis('studio');}if(id==='ritual'){renderRitualPage();}if(id==='learning'){renderLearning();}if(id==='growth'){renderGrowth();}if(id==='emr'){renderEMR();}if(id==='archive'){renderArchive();}if(id==='movement'){renderASection('mvGoals');renderASection('mvInits');renderASection('mvMiles');renderAList('mvPrinciples','Write a core principle…');}if(id==='book'){renderASection('bookChapters');}if(id==='speaking'){renderSpk();renderASection('spkSpeeches');renderASection('spkMedia');renderASection('spkOpps');renderAList('spkTopics','Add a speaking topic…');}if(id==='dashboard'){setTimeout(function(){if(typeof renderDashRitual==='function')renderDashRitual();},60);setTimeout(function(){if(typeof renderDashLearn==='function')renderDashLearn();},70);setTimeout(function(){if(typeof renderDashGrowth==='function')renderDashGrowth();},75);setTimeout(function(){if(typeof renderDashQuote==='function')renderDashQuote();},80);setTimeout(renderDashTop3,80);setTimeout(renderKeyRelationships,120);setTimeout(renderDashFollowUps,140);setTimeout(renderDashLibrary,160);setTimeout(restoreTodaysThought,180);setTimeout(renderDashFollowUps,120);setTimeout(renderKeyRelationships,150);setTimeout(renderDashLibrary,180);setTimeout(restoreTodaysThought,200);}setTimeout(function(){_notifs=buildLiveNotifs();_updateNotifBadge();},120);};
 
 // EXPORT
 function exportSnapshot(){var a=document.createElement('a');a.href='data:text/html;charset=utf-8,'+encodeURIComponent(document.documentElement.outerHTML);a.download='AarohOS-'+new Date().toISOString().split('T')[0]+'.html';document.body.appendChild(a);a.click();document.body.removeChild(a);}
@@ -4533,11 +4819,14 @@ function startLive(){
   setTimeout(restoreTodaysThought,260);
   setTimeout(function(){if(typeof renderDashRitual==='function')renderDashRitual();},300);
   setTimeout(function(){if(typeof renderDashLearn==='function')renderDashLearn();},320);
+  setTimeout(function(){if(typeof renderDashGrowth==='function')renderDashGrowth();},340);
+  setTimeout(function(){if(typeof renderDashQuote==='function')renderDashQuote();},350);
   setTimeout(function(){
     _cloudLoad().then(function(){
       loadPris();loadFUs();loadWis();loadOrgT();loadColleges();
       if(typeof netLoad==='function'){netLoad();renderHospitals();renderColleges();renderDashFollowUps();}
       if(typeof renderDashLearn==='function')renderDashLearn();
+      if(typeof renderDashGrowth==='function')renderDashGrowth();
       setTimeout(renderDashTop3,100);
       setTimeout(renderDashFollowUps,150);
       setTimeout(renderDashLibrary,200);
@@ -5116,6 +5405,7 @@ function netLoad(){
   try{var b=JSON.parse(getLS('aaroh_edu')||'null');if(Array.isArray(b)&&b.length)colleges.splice.apply(colleges,[0,colleges.length].concat(b));}catch(e){}
   var fresh=!getLS('aaroh_hc')||!getLS('aaroh_edu');
   hospitals.forEach(_hcNorm);colleges.forEach(_eduNorm);
+  if(typeof _gwNorm==='function'){hospitals.forEach(function(h){_gwNorm(h,'hc');});colleges.forEach(function(c){_gwNorm(c,'edu');});}
   if(fresh)netSave(true);
 }
 function netSave(quiet){
@@ -5396,6 +5686,872 @@ function exportColleges(){
       L.map(function(p,i){return _ord(i+1)+': '+(p.topic||'Presentation')+(p.participants?' — '+p.participants+' people':'')+(p.date?' ('+p.date+')':'');}).join('; '),c.notes]);
   });
   _dl('education-ecosystem.csv',_csv(rows));
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// QUOTES — a new one every two days, cycling four themes
+// ═══════════════════════════════════════════════════════════════════════
+// These are original lines written for Aaroh, not sayings attributed to
+// anyone. The rotation is a pure function of the date, so it needs no
+// server and works offline: the same day always shows the same quote,
+// and it moves on by itself every 48 hours.
+
+var QT_THEMES=['success','proactive','consistency','joy'];
+var QT_LBL={success:'Success',proactive:'Proactive',consistency:'Consistency',joy:'Joy'};
+var QT_EPOCH='2026-01-01';
+var QUOTES={
+success:[
+ 'Success in care work is quiet. It looks like a family sleeping through the night without worrying.',
+ 'Build something that still stands when you are not in the room.',
+ 'The size of the organisation matters less than the standard it refuses to drop.',
+ 'You are not behind. You are early in something that takes years.',
+ 'Ambition without systems becomes exhaustion wearing a nice word.',
+ 'A business that serves the vulnerable is judged by its worst day, not its best.',
+ 'Chase the second client as carefully as you chased the first.',
+ 'What you measure, you improve. What you avoid measuring, you slowly excuse.',
+ 'Growth that outruns your training is not growth, it is risk.',
+ 'The reputation you build in a decade can be spent in an afternoon. Spend nothing.',
+ 'Do not confuse being busy with being chosen.',
+ 'Every system you write down is a day you buy back later.',
+ 'Being respected by nurses matters more than being admired by an audience.',
+ 'The market rewards those who are still there in year five.',
+ 'Ask not whether it worked, but whether it would work again without you.',
+ 'Big plans are cheap. Show me your Tuesday.',
+ 'You cannot scale warmth, but you can scale the conditions for it.',
+ 'Winning a contract is a beginning that looks like an ending.',
+ 'A full house means nothing if the staff are hollow.',
+ 'Success arrives dressed as more responsibility. Greet it anyway.',
+ 'The right no protects a hundred future yeses.',
+ 'Do the unglamorous thing while no one is watching. That is the whole secret.',
+ 'Your standards are only real on the days they are inconvenient.',
+ 'Build slowly enough that quality can keep up.'
+],
+proactive:[
+ 'The visit you make before you need something is the only one they remember.',
+ 'Problems announce themselves quietly first. Learn the sound.',
+ 'Call the family before they have a reason to call you.',
+ 'Prevention is invisible work. Do it anyway; the absence of crisis is the result.',
+ 'Waiting for clarity is a decision, and usually the expensive one.',
+ 'The best time to fix the roster is the week it almost broke.',
+ 'If you can predict the complaint, you can prevent it today.',
+ 'Do not wait to be ready. Ready is something you become on the way.',
+ 'Anticipation is a form of respect: it says I thought about you before you asked.',
+ 'Every fire you fight was once a spark you walked past.',
+ 'Ask the question you are avoiding. It is where the work is.',
+ 'Write the follow-up while the conversation is still warm.',
+ 'A relationship you do not tend becomes a name in an old list.',
+ 'Move first, and the terms are yours to set.',
+ 'Check on the resident who is doing fine. That is how you keep them fine.',
+ 'The second reminder should never have to come from them.',
+ 'Plan for the caregiver who calls in sick, because she will.',
+ 'Being early is the cheapest advantage available to anyone.',
+ 'When something feels slightly off, that feeling is data. Go and look.',
+ 'Do today the one thing that makes next month easier.',
+ 'Reach out with nothing to sell. That is what builds the network.',
+ 'Train for the emergency in the calm, or improvise in the storm.',
+ 'The strongest position is having already begun.',
+ 'Do not manage what you could have prevented.'
+],
+consistency:[
+ 'Showing up on the dull days is the whole discipline.',
+ 'One careful entry, every shift, is worth more than a perfect month once a year.',
+ 'Trust is built at the speed of repetition.',
+ 'You do not need more motivation. You need a smaller first step and a fixed time.',
+ 'The habit you keep when tired is the one that is actually yours.',
+ 'Standards are not announced, they are repeated.',
+ 'Progress you can sustain beats progress you can boast about.',
+ 'Miss once, it is an exception. Miss twice, it is the new rule. Never miss twice.',
+ 'The record you keep daily becomes the memory you can trust.',
+ 'Small and steady is not modest. It compounds, which is the strongest force you have.',
+ 'What gets done on your worst week defines your real capacity.',
+ 'Excellence is a habit wearing formal clothes.',
+ 'Do it the same way until someone can do it without you.',
+ 'You are not looking for a breakthrough. You are looking for a rhythm.',
+ 'A protocol followed nine times out of ten is not a protocol.',
+ 'Keep the promise that no one would notice you breaking.',
+ 'Rituals carry you through the days willpower cannot.',
+ 'Write it down at the time. Memory negotiates; notes do not.',
+ 'The unglamorous middle is where most people quit and most value is made.',
+ 'Be the same person in the second hour of a hard shift.',
+ 'Consistency is care, distributed across time.',
+ 'Close each day properly and tomorrow starts on solid ground.',
+ 'What you do daily, you become. Choose accordingly.',
+ 'Return to the practice without drama after you fall away from it.'
+],
+joy:[
+ 'Notice one good thing before the day gets loud.',
+ 'An old woman laughing is a clinical outcome. Record it as one.',
+ 'Dignity and delight are not separate goals.',
+ 'You are allowed to enjoy the work that is also hard.',
+ 'Joy is not the reward at the end. It is fuel, and it is needed now.',
+ 'Ask a resident about their twenties. You will both leave lighter.',
+ 'The point of building something is not only to build it.',
+ 'Rest is part of the work, not an interruption to it.',
+ 'Find the person who makes the team laugh, and protect them.',
+ 'A kind sentence costs nothing and changes the shape of someone’s afternoon.',
+ 'Celebrate the small win out loud, or your team will learn that nothing counts.',
+ 'Sit with someone for five minutes with no task in mind.',
+ 'There is a version of today you will one day miss. It is this one.',
+ 'Do not postpone gladness until the business is finished. It never finishes.',
+ 'Beauty in small things is not sentimental; it is how people endure.',
+ 'Let someone thank you properly. Receiving is a skill too.',
+ 'The work is heavy. Carry it with company.',
+ 'Some days the achievement is simply that everyone was treated gently.',
+ 'Play is not the opposite of seriousness. It is how the serious keep going.',
+ 'Look up from the list. The list is not the life.',
+ 'Be glad in the middle, not only at the milestone.',
+ 'Warmth is contagious in both directions; you catch it from those you care for.',
+ 'Keep one thing in your day that has no purpose but pleasure.',
+ 'Tenderness is a professional strength. Do not apologise for it.'
+]};
+
+function _qtIndex(){
+  var a=_dParse(QT_EPOCH),b=_dParse(_todayISO());
+  if(!a||!b)return 0;
+  return Math.max(0,Math.floor(_dDays(a,b)/2));
+}
+function _qtCurrent(){
+  var i=_qtIndex();
+  var theme=QT_THEMES[i%QT_THEMES.length];
+  var bank=QUOTES[theme];
+  var n=Math.floor(i/QT_THEMES.length)%bank.length;
+  return {theme:theme,text:bank[n],i:i,n:n};
+}
+function _qtNextChange(){
+  // Quotes turn over on even offsets from the epoch.
+  var a=_dParse(QT_EPOCH),days=_dDays(a,_dParse(_todayISO()));
+  var into=days%2;                       // 0 = changed today, 1 = changes tomorrow
+  return into===0?'Changes tomorrow':'New quote tomorrow morning';
+}
+function _qtFavs(){try{return JSON.parse(getLS('aaroh_quote_favs')||'[]')||[];}catch(e){return [];}}
+function qtFav(){
+  var q=_qtCurrent(),f=_qtFavs(),k=q.theme+':'+q.n;
+  var i=f.indexOf(k);
+  if(i>=0)f.splice(i,1);else f.push(k);
+  saveLS('aaroh_quote_favs',JSON.stringify(f));
+  renderQuote();renderDashQuote();
+}
+function _qtIsFav(){var q=_qtCurrent();return _qtFavs().indexOf(q.theme+':'+q.n)>=0;}
+
+var _qtBrowse=false,_qtBrowseTheme='success';
+function qtToggleBrowse(){_qtBrowse=!_qtBrowse;renderQuote();}
+function qtBrowseTheme(t){_qtBrowseTheme=t;renderQuote();}
+
+function renderQuote(){
+  var c=document.getElementById('qtCard');if(!c)return;
+  var q=_qtCurrent(),fav=_qtIsFav();
+  var favs=_qtFavs();
+  c.innerHTML='<div class="qt-top"><span class="qt-theme '+q.theme+'">'+QT_LBL[q.theme]+'</span>'+
+      '<span class="qt-when">'+_qtNextChange()+'</span></div>'+
+    '<div class="qt-text">'+_esc(q.text)+'</div>'+
+    '<div class="qt-acts">'+
+      '<button class="qt-btn'+(fav?' on':'')+'" onclick="qtFav()">'+(fav?'★ Saved':'☆ Save this')+'</button>'+
+      '<button class="qt-btn" onclick="qtToggleBrowse()">'+(_qtBrowse?'Hide all':'Browse all')+'</button>'+
+      (favs.length?'<span class="qt-count">'+favs.length+' saved</span>':'')+
+    '</div>';
+  var b=document.getElementById('qtBrowse');
+  if(!b)return;
+  if(!_qtBrowse){b.style.display='none';return;}
+  b.style.display='';
+  b.innerHTML='<div class="chip-row nw-chips" style="margin-bottom:12px">'+
+    QT_THEMES.map(function(t){return '<button class="chip'+(_qtBrowseTheme===t?' on':'')+'" onclick="qtBrowseTheme(\''+t+'\')">'+QT_LBL[t]+'<b>'+QUOTES[t].length+'</b></button>';}).join('')+
+    '</div>'+
+    '<div class="qt-list">'+QUOTES[_qtBrowseTheme].map(function(txt,i){
+      var isFav=favs.indexOf(_qtBrowseTheme+':'+i)>=0;
+      var isNow=(_qtBrowseTheme===q.theme&&i===q.n);
+      return '<div class="qt-item'+(isNow?' now':'')+'">'+(isFav?'<span class="s">★</span>':'')+_esc(txt)+
+        (isNow?'<span class="tag">showing now</span>':'')+'</div>';
+    }).join('')+'</div>';
+}
+
+function renderDashQuote(){
+  var c=document.getElementById('dashQuote');if(!c)return;
+  var q=_qtCurrent();
+  c.innerHTML='<div class="db-quote" onclick="showPage(\'thought\',null)">'+
+    '<span class="qt-theme '+q.theme+'">'+QT_LBL[q.theme]+'</span>'+
+    '<div class="db-quote-t">'+_esc(q.text)+'</div></div>';
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// EMR AUDIT (Naman) — is every entry there, and does it look right?
+// ═══════════════════════════════════════════════════════════════════════
+// Deliberately records only whether an entry EXISTED and whether it
+// LOOKED right — never what it said. No names, no readings, no clinical
+// notes leave the EMR; Aaroh holds bed references and met/missed marks.
+//
+// Method follows ordinary clinical audit: fixed criteria and a target set
+// in advance, a small sample each week, then re-audit to see whether a
+// change worked. Sampling is why this works with no EMR integration.
+
+var EM_DEFAULT_CRIT=[
+  {id:'v',  g:'shift', t:'Vitals recorded as per care plan'},
+  {id:'m',  g:'shift', t:'Every due medication signed on the MAR', target:100},
+  {id:'f',  g:'shift', t:'Food and fluid intake recorded'},
+  {id:'c',  g:'shift', t:'Continence / toileting recorded'},
+  {id:'r',  g:'shift', t:'Repositioning recorded for at-risk residents'},
+  {id:'n',  g:'shift', t:'Shift progress note written by the nurse'},
+  {id:'h',  g:'shift', t:'Handover completed and signed'},
+  {id:'b',  g:'period',t:'Bowel chart up to date'},
+  {id:'w',  g:'period',t:'Weekly weight recorded'},
+  {id:'s',  g:'period',t:'Skin check done per risk level'},
+  {id:'o',  g:'period',t:"Doctor's orders transcribed and signed"},
+  {id:'fam',g:'period',t:'Family contact logged where it happened'},
+  {id:'cp', g:'period',t:'Care plan review not overdue'},
+  {id:'q1', g:'quality',t:'Entry dated and timed'},
+  {id:'q2', g:'quality',t:'Entry signed by a named person'},
+  {id:'q3', g:'quality',t:'No blank mandatory fields'},
+  {id:'q4', g:'quality',t:'Values plausible and consistent with the previous entry'},
+  {id:'q5', g:'quality',t:'Late entries marked as late'},
+  {id:'q6', g:'quality',t:'Readings not identical across residents in the shift'},
+  {id:'q7', g:'quality',t:'Free text specific, not generic'}
+];
+var EM_GROUPS={shift:'Each shift',period:'Daily / weekly',quality:'Entry quality'};
+
+function _emCfg(){
+  var d={shifts:['Morning','Evening','Night'],target:95,sample:10,refs:['B1','B2','B3','B4','B5','B6','B7','B8','B9','B10']};
+  try{var c=JSON.parse(getLS('aaroh_emr_cfg')||'null');if(c)return Object.assign(d,c);}catch(e){}
+  return d;
+}
+function _emSaveCfg(c){saveLS('aaroh_emr_cfg',JSON.stringify(c));}
+function _emCrit(){
+  try{var c=JSON.parse(getLS('aaroh_emr_crit')||'null');
+    if(Array.isArray(c)&&c.length)return c;}catch(e){}
+  return EM_DEFAULT_CRIT.map(function(x){return Object.assign({on:true},x);});
+}
+function _emSaveCrit(c){saveLS('aaroh_emr_crit',JSON.stringify(c));}
+function _emAudits(){try{var a=JSON.parse(getLS('aaroh_emr_audits')||'null');return Array.isArray(a)?a:[];}catch(e){return [];}}
+function _emSaveAudits(a){saveLS('aaroh_emr_audits',JSON.stringify(a));}
+function _emTargetFor(c){var cfg=_emCfg();return c.target||cfg.target;}
+
+// met = 1, missed = 0, not applicable = -1
+function _emScore(audits,critId,shift){
+  var met=0,tot=0;
+  (audits||[]).forEach(function(a){
+    if(shift&&a.shift!==shift)return;
+    (a.rows||[]).forEach(function(row){
+      var v=row.r&&row.r[critId];
+      if(v===1){met++;tot++;}else if(v===0){tot++;}
+    });
+  });
+  return tot?{pct:Math.round(met/tot*100),met:met,tot:tot}:null;
+}
+function _emOverall(audits){
+  var met=0,tot=0;
+  (audits||[]).forEach(function(a){(a.rows||[]).forEach(function(row){
+    Object.keys(row.r||{}).forEach(function(k){if(row.r[k]===1){met++;tot++;}else if(row.r[k]===0){tot++;}});
+  });});
+  return tot?Math.round(met/tot*100):null;
+}
+function _emRecent(n){
+  return _emAudits().slice().sort(function(a,b){return String(b.date+b.shift).localeCompare(String(a.date+a.shift));}).slice(0,n||8);
+}
+
+// ─── failing criteria become training needs ───────────────────────────
+function _emFindings(){
+  var audits=_emRecent(6),crit=_emCrit().filter(function(c){return c.on!==false;}),out=[];
+  crit.forEach(function(c){
+    var s=_emScore(audits,c.id);
+    if(!s||s.tot<3)return;                       // too little data to judge
+    var target=_emTargetFor(c);
+    if(s.pct<target){
+      var worst=null;
+      _emCfg().shifts.forEach(function(sh){
+        var ss=_emScore(audits,c.id,sh);
+        if(ss&&ss.tot>=2&&(!worst||ss.pct<worst.pct))worst={shift:sh,pct:ss.pct};
+      });
+      out.push({crit:c,pct:s.pct,target:target,miss:s.tot-s.met,tot:s.tot,worst:worst});
+    }
+  });
+  return out.sort(function(a,b){return (a.pct-a.target)-(b.pct-b.target);});
+}
+function _emTrainState(){try{return JSON.parse(getLS('aaroh_emr_training')||'{}')||{};}catch(e){return {};}}
+function emTrainSet(id,st){
+  var s=_emTrainState();
+  if(st)s[id]={status:st,at:_todayISO()};else delete s[id];
+  saveLS('aaroh_emr_training',JSON.stringify(s));
+  renderEMR();
+}
+function emOpenNeeds(){return _emFindings().filter(function(f){
+  var st=_emTrainState()[f.crit.id];return !st||st.status==='open';}).length;}
+
+// ─── run an audit ─────────────────────────────────────────────────────
+var _emRun=null;
+function emStart(){
+  var cfg=_emCfg();
+  _emRun={date:_todayISO(),shift:cfg.shifts[0],refs:cfg.refs.slice(0,cfg.sample),rows:{},note:''};
+  // everything starts as met; you tap only what was missing
+  _emCrit().filter(function(c){return c.on!==false;}).forEach(function(c){
+    _emRun.rows[c.id]={};
+    _emRun.refs.forEach(function(r){_emRun.rows[c.id][r]=1;});
+  });
+  emRenderRun();
+  document.getElementById('emRunWrap').style.display='';
+  document.getElementById('emStartBtn').style.display='none';
+  document.getElementById('emResults').style.display='none';
+}
+function emCancelRun(){
+  _emRun=null;
+  document.getElementById('emRunWrap').style.display='none';
+  document.getElementById('emStartBtn').style.display='';
+  document.getElementById('emResults').style.display='';
+  renderEMR();
+}
+function emSetShift(s){_emRun.shift=s;emRenderRun();}
+function emSetDate(v){_emRun.date=v;}
+function emSetRefs(v){
+  var refs=v.split(',').map(function(x){return x.trim();}).filter(Boolean);
+  if(!refs.length)return;
+  var old=_emRun.rows;
+  _emRun.refs=refs;
+  Object.keys(old).forEach(function(cid){
+    var n={};refs.forEach(function(r){n[r]=old[cid][r]!==undefined?old[cid][r]:1;});
+    old[cid]=n;
+  });
+  emRenderRun();
+}
+function emCycle(cid,ref){
+  var v=_emRun.rows[cid][ref];
+  _emRun.rows[cid][ref]=v===1?0:(v===0?-1:1);
+  emRenderRun();
+}
+function _emRunPct(){
+  var met=0,tot=0;
+  Object.keys(_emRun.rows).forEach(function(cid){
+    _emRun.refs.forEach(function(r){
+      var v=_emRun.rows[cid][r];
+      if(v===1){met++;tot++;}else if(v===0){tot++;}
+    });
+  });
+  return tot?Math.round(met/tot*100):100;
+}
+function emRenderRun(){
+  var cfg=_emCfg(),crit=_emCrit().filter(function(c){return c.on!==false;});
+  var head=document.getElementById('emRunHead');
+  if(head)head.innerHTML=
+    '<div class="em-run-top">'+
+      '<div class="em-f"><label>Date</label><input type="date" value="'+_emRun.date+'" onchange="emSetDate(this.value)"></div>'+
+      '<div class="em-f"><label>Shift</label><div class="lr-seg">'+cfg.shifts.map(function(s){
+        return '<button type="button" class="'+(_emRun.shift===s?'on':'')+'" onclick="emSetShift(\''+_esc(s)+'\')">'+_esc(s)+'</button>';}).join('')+'</div></div>'+
+      '<div class="em-f grow"><label>Residents sampled <span class="nw-opt">bed or EMR reference only — no names</span></label>'+
+        '<input value="'+_esc(_emRun.refs.join(', '))+'" onchange="emSetRefs(this.value)"></div>'+
+      '<div class="em-live"><b id="emLivePct">'+_emRunPct()+'%</b><span>so far</span></div>'+
+    '</div>';
+  var body=document.getElementById('emRunBody');
+  if(!body)return;
+  var html='',lastG='';
+  crit.forEach(function(c){
+    if(c.g!==lastG){html+='<div class="em-g">'+EM_GROUPS[c.g]+'</div>';lastG=c.g;}
+    html+='<div class="em-crow"><div class="em-ct">'+_esc(c.t)+
+      (c.target?'<span class="em-tg">target '+c.target+'%</span>':'')+'</div><div class="em-cells">'+
+      _emRun.refs.map(function(r){
+        var v=_emRun.rows[c.id][r];
+        var cls=v===1?'ok':(v===0?'no':'na');
+        var lbl=v===1?'✓':(v===0?'✗':'–');
+        return '<button class="em-cell '+cls+'" title="'+_esc(r)+'" onclick="emCycle(\''+c.id+'\',\''+_esc(r)+'\')">'+
+          '<span class="ref">'+_esc(r)+'</span><span class="mk">'+lbl+'</span></button>';
+      }).join('')+'</div></div>';
+  });
+  body.innerHTML=html;
+  var lp=document.getElementById('emLivePct');if(lp)lp.textContent=_emRunPct()+'%';
+}
+function emSaveRun(){
+  if(!_emRun)return;
+  var rows=_emRun.refs.map(function(r){
+    var o={};Object.keys(_emRun.rows).forEach(function(cid){o[cid]=_emRun.rows[cid][r];});
+    return {ref:r,r:o};
+  });
+  var a=_emAudits();
+  a.push({id:'a'+Date.now().toString(36),date:_emRun.date,shift:_emRun.shift,
+    rows:rows,note:(document.getElementById('emRunNote')||{value:''}).value.trim(),
+    saved:new Date().toISOString()});
+  _emSaveAudits(a);
+  _emRun=null;
+  document.getElementById('emRunWrap').style.display='none';
+  document.getElementById('emStartBtn').style.display='';
+  document.getElementById('emResults').style.display='';
+  renderEMR();
+  if(typeof showSaveToast==='function')showSaveToast();
+}
+
+// ─── results ──────────────────────────────────────────────────────────
+var _emView='criteria';
+function emSetView(v){_emView=v;renderEMR();}
+
+function renderEMR(){
+  if(!document.getElementById('emResults'))return;
+  var cfg=_emCfg(),audits=_emAudits(),recent=_emRecent(6);
+  var overall=_emOverall(recent);
+  var records=audits.reduce(function(a,x){return a+(x.rows||[]).length;},0);
+  var needs=emOpenNeeds();
+  _netStats('emStats',[
+    [overall===null?'—':overall+'%','Compliance · last 6 audits'],
+    [records,'Records checked'],
+    [audits.length,'Audits run'],
+    [needs,'Training needs open']]);
+
+  var tabs=document.getElementById('emViewTabs');
+  if(tabs)tabs.innerHTML=[['criteria','By criterion'],['shift','By shift'],['history','Audit history'],['needs','Training needs']]
+    .map(function(v){return '<button class="gw-tab'+(_emView===v[0]?' on':'')+'" onclick="emSetView(\''+v[0]+'\')">'+v[1]+'</button>';}).join('');
+
+  var box=document.getElementById('emBody');
+  if(!box)return;
+  if(!audits.length){
+    box.innerHTML='<div class="nw-empty">No audits yet. Run your first spot check — ten residents, one shift, about two minutes.<br><br>'+
+      'Everything starts marked as done; you only tap what was missing.</div>';
+    return;
+  }
+
+  if(_emView==='criteria'){
+    var crit=_emCrit().filter(function(c){return c.on!==false;}),lastG='',h='';
+    crit.forEach(function(c){
+      var s=_emScore(recent,c.id),target=_emTargetFor(c);
+      if(c.g!==lastG){h+='<div class="em-g">'+EM_GROUPS[c.g]+'</div>';lastG=c.g;}
+      var pct=s?s.pct:null,fail=pct!==null&&pct<target;
+      h+='<div class="em-res'+(fail?' fail':'')+'">'+
+        '<div class="em-res-t">'+_esc(c.t)+'</div>'+
+        '<div class="em-bar"><i style="width:'+(pct===null?0:pct)+'%"></i><u style="left:'+target+'%"></u></div>'+
+        '<div class="em-pct'+(fail?' bad':'')+'">'+(pct===null?'—':pct+'%')+'</div>'+
+        '<div class="em-of">'+(s?(s.tot-s.met)+' of '+s.tot+' missed':'not sampled')+'</div>'+
+      '</div>';
+    });
+    box.innerHTML='<div class="em-legend">Bars show compliance across the last '+recent.length+
+      ' audit'+(recent.length===1?'':'s')+'. The line marks your target ('+cfg.target+'%).</div>'+h;
+    return;
+  }
+
+  if(_emView==='shift'){
+    var crit2=_emCrit().filter(function(c){return c.on!==false;});
+    box.innerHTML='<div class="nw-list"><div class="nw-row em-srow head"><div>Shift</div><div>Compliance</div><div>Records</div><div>Weakest criterion</div></div>'+
+      cfg.shifts.map(function(sh){
+        var shAudits=recent.filter(function(a){return a.shift===sh;});
+        var pct=_emOverall(shAudits);
+        var recs=shAudits.reduce(function(a,x){return a+(x.rows||[]).length;},0);
+        var worst=null;
+        crit2.forEach(function(c){var s=_emScore(shAudits,c.id);
+          if(s&&s.tot>=2&&(!worst||s.pct<worst.pct))worst={t:c.t,pct:s.pct};});
+        return '<div class="nw-row em-srow body"><div><div class="nw-name">'+_esc(sh)+'</div></div>'+
+          '<div><div class="nw-lbl">Compliance</div><div class="nw-big'+(pct!==null&&pct<cfg.target?'':' good')+'">'+(pct===null?'—':pct+'%')+'</div></div>'+
+          '<div><div class="nw-lbl">Records</div><div class="nw-big">'+(recs||'—')+'</div></div>'+
+          '<div><div class="nw-lbl">Weakest</div><div class="lr-dates">'+(worst?_esc(worst.t)+' ('+worst.pct+'%)':'—')+'</div></div></div>';
+      }).join('')+'</div>';
+    return;
+  }
+
+  if(_emView==='history'){
+    var sorted=audits.slice().sort(function(a,b){return String(b.date).localeCompare(String(a.date));});
+    box.innerHTML='<div class="nw-list"><div class="nw-row em-hrow head"><div>Date</div><div>Shift</div><div>Residents</div><div>Compliance</div><div>Note</div><div></div></div>'+
+      sorted.map(function(a,i){
+        var pct=_emOverall([a]);
+        return '<div class="nw-row em-hrow body"><div><div class="nw-name">'+_dFmt(a.date,true)+'</div></div>'+
+          '<div><div class="nw-lbl">Shift</div><div class="lr-dates">'+_esc(a.shift)+'</div></div>'+
+          '<div><div class="nw-lbl">Residents</div><div class="nw-big">'+(a.rows||[]).length+'</div></div>'+
+          '<div><div class="nw-lbl">Compliance</div><div class="nw-big'+(pct<cfg.target?'':' good')+'">'+pct+'%</div></div>'+
+          '<div><div class="nw-lbl">Note</div><div class="lr-dates">'+(a.note?_esc(a.note):'—')+'</div></div>'+
+          '<div><button class="nw-edit" onclick="emDelAudit(\''+a.id+'\')">Delete</button></div></div>';
+      }).join('')+'</div>';
+    return;
+  }
+
+  // training needs
+  var f=_emFindings(),st=_emTrainState();
+  if(!f.length){
+    box.innerHTML='<div class="gw-clear">Every criterion is meeting its target across the last '+recent.length+' audits.'+
+      '<small>Findings appear here automatically when a criterion falls below target, with the shift it is worst on.</small></div>';
+    return;
+  }
+  box.innerHTML=f.map(function(x){
+    var s=st[x.crit.id],status=s?s.status:'open';
+    return '<div class="gw-att s'+(x.pct<x.target-15?'1':'2')+'">'+
+      '<div class="gw-att-b"><div class="nw-name">'+_esc(x.crit.t)+'</div>'+
+      '<div class="gw-why">'+x.pct+'% against a '+x.target+'% target · '+x.miss+' of '+x.tot+' records missed'+
+        (x.worst?' · weakest on '+_esc(x.worst.shift)+' shift ('+x.worst.pct+'%)':'')+'</div>'+
+      '<div class="gw-act">'+(status==='planned'?'Training planned':status==='done'?'Training delivered — re-audit to confirm':'Needs training or a protocol change')+'</div></div>'+
+      '<div class="gw-att-a">'+
+        (status!=='planned'?'<button class="nw-edit" onclick="emTrainSet(\''+x.crit.id+'\',\'planned\')">Mark planned</button>':'')+
+        (status!=='done'?'<button class="btn btn-teal btn-sm" onclick="emTrainSet(\''+x.crit.id+'\',\'done\')">Trained</button>':
+          '<button class="nw-edit" onclick="emTrainSet(\''+x.crit.id+'\',\'open\')">Reopen</button>')+
+      '</div></div>';
+  }).join('');
+}
+function emDelAudit(id){
+  if(!confirm('Delete this audit?'))return;
+  _emSaveAudits(_emAudits().filter(function(a){return a.id!==id;}));
+  renderEMR();
+}
+
+// ─── criteria editor ──────────────────────────────────────────────────
+var _emCritDraft=null;
+function emCritOpen(){
+  _emCritDraft=JSON.parse(JSON.stringify(_emCrit()));
+  var cfg=_emCfg();
+  document.getElementById('emCfgTarget').value=cfg.target;
+  document.getElementById('emCfgShifts').value=cfg.shifts.join(', ');
+  document.getElementById('emCfgRefs').value=cfg.refs.join(', ');
+  emCritRender();openModal('emCrit');
+}
+function emCritRender(){
+  var c=document.getElementById('emCritList');if(!c)return;
+  c.innerHTML=_emCritDraft.map(function(x,i){
+    return '<div class="em-cedit"><input type="checkbox" '+(x.on!==false?'checked':'')+' onchange="_emCritDraft['+i+'].on=this.checked" title="Include in audits">'+
+      '<input value="'+_esc(x.t)+'" oninput="_emCritDraft['+i+'].t=this.value">'+
+      '<select onchange="_emCritDraft['+i+'].g=this.value">'+Object.keys(EM_GROUPS).map(function(g){
+        return '<option value="'+g+'"'+(x.g===g?' selected':'')+'>'+EM_GROUPS[g]+'</option>';}).join('')+'</select>'+
+      '<input type="number" min="1" max="100" placeholder="—" value="'+(x.target||'')+'" oninput="_emCritDraft['+i+'].target=parseInt(this.value)||null" title="Own target %">'+
+      '<button class="rm" onclick="_emCritDraft.splice('+i+',1);emCritRender()">×</button></div>';
+  }).join('');
+}
+function emCritAdd(){_emCritDraft.push({id:'c'+Date.now().toString(36),g:'shift',t:'',on:true});emCritRender();
+  var i=document.querySelectorAll('#emCritList .em-cedit input[type=text],#emCritList .em-cedit input:not([type])');
+  if(i.length)i[i.length-1].focus();}
+function emCritSave(){
+  var kept=_emCritDraft.filter(function(x){return (x.t||'').trim();});
+  if(!kept.length){alert('Keep at least one criterion.');return;}
+  _emSaveCrit(kept);
+  var cfg=_emCfg();
+  cfg.target=Math.max(1,Math.min(100,parseInt(document.getElementById('emCfgTarget').value)||95));
+  var sh=document.getElementById('emCfgShifts').value.split(',').map(function(x){return x.trim();}).filter(Boolean);
+  if(sh.length)cfg.shifts=sh;
+  var rf=document.getElementById('emCfgRefs').value.split(',').map(function(x){return x.trim();}).filter(Boolean);
+  if(rf.length){cfg.refs=rf;cfg.sample=rf.length;}
+  _emSaveCfg(cfg);
+  closeModal('emCrit');renderEMR();
+}
+function emCritReset(){
+  if(!confirm('Reset the criteria back to the standard list?'))return;
+  _emCritDraft=EM_DEFAULT_CRIT.map(function(x){return Object.assign({on:true},x);});
+  emCritRender();
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// GROWTH — what each relationship actually returned, and what has slipped
+// ═══════════════════════════════════════════════════════════════════════
+// Effort was already tracked (visits, presentations). This adds outcome:
+// clients referred per month, and caregivers hired from institutes. Both
+// organisations are tracked separately because they grow through
+// different channels.
+//
+// "Days since last contact" uses an explicit AD date (lastTouch), set
+// automatically whenever something is logged through Aaroh. Visit and
+// presentation dates are free text and often Bikram Sambat, so they
+// cannot be counted in days — a relationship with no lastTouch is left
+// unflagged rather than flagged on a guess.
+
+var GW_STAGES=['new','contacted','visited','presented','mou','referring','dormant'];
+var GW_STAGE_LBL={new:'Not contacted',contacted:'Contacted',visited:'Visited',presented:'Presented',mou:'MOU signed',referring:'Referring',dormant:'Dormant'};
+var _gwCfgDefaults={quietReferring:45,mouSilent:90,presFollow:30};
+function _gwCfg(){
+  try{var c=JSON.parse(getLS('aaroh_growth_cfg')||'null');if(c)return Object.assign({},_gwCfgDefaults,c);}catch(e){}
+  return _gwCfgDefaults;
+}
+var _gwTab='hc',_gwStageFilter='all',_gwPeriod=90,_gwSort='outcome';
+
+function _gwMonth(d){d=d||new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');}
+function _gwMonthLabel(m){
+  var p=String(m||'').split('-');if(p.length<2)return m||'';
+  return new Date(+p[0],+p[1]-1,1).toLocaleDateString('en-GB',{month:'short',year:'numeric'});
+}
+function _gwCutoffMonth(days){
+  if(!days)return '0000-00';
+  var d=new Date();d.setDate(d.getDate()-days);return _gwMonth(d);
+}
+function _gwSum(log,days){
+  var cut=_gwCutoffMonth(days);
+  return (log||[]).filter(function(r){return String(r.month||'')>=cut;})
+    .reduce(function(a,r){return a+(parseInt(r.count)||0);},0);
+}
+function _gwSumOrg(log,days,org){
+  var cut=_gwCutoffMonth(days);
+  return (log||[]).filter(function(r){return String(r.month||'')>=cut&&(!org||r.org===org);})
+    .reduce(function(a,r){return a+(parseInt(r.count)||0);},0);
+}
+function _gwLastMonth(log){
+  var m='';(log||[]).forEach(function(r){if(String(r.month||'')>m)m=String(r.month);});
+  return m;
+}
+function _gwDaysSince(iso){
+  var d=_dParse(iso);if(!d)return null;
+  return Math.max(0,_dDays(d,_dParse(_todayISO())));
+}
+// Months are coarse; treat "no referral since month X" as days from that
+// month's end so a partner logged this month never looks overdue.
+function _gwDaysSinceMonth(m){
+  if(!m)return null;
+  var p=String(m).split('-');if(p.length<2)return null;
+  var end=new Date(+p[0],+p[1],0);
+  return Math.max(0,_dDays(end,_dParse(_todayISO())));
+}
+
+function _gwDeriveStage(e,kind){
+  if(e.stage&&GW_STAGES.indexOf(e.stage)>=0)return e.stage;
+  var st=e.status||'';
+  if(st==='inactive')return 'dormant';
+  if((e.refLog||[]).length)return 'referring';
+  if(st==='mou')return 'mou';
+  if(kind==='edu')return (e.presLog||[]).length?'presented':'new';
+  var L=e.visitLog||[];
+  if(L.some(function(v){return /mou/i.test(v.purpose||'');}))return 'mou';
+  if(L.some(function(v){return /present/i.test(v.purpose||'');}))return 'presented';
+  if(L.length)return 'visited';
+  return st==='done'||st==='training'?'contacted':'new';
+}
+function _gwStatusFromStage(stage){
+  if(stage==='mou')return 'mou';
+  if(stage==='dormant')return 'inactive';
+  if(stage==='referring'||stage==='visited'||stage==='presented')return 'done';
+  return 'pending';
+}
+function _gwNorm(e,kind){
+  if(!Array.isArray(e.refLog))e.refLog=[];
+  if(kind==='edu'&&!Array.isArray(e.hireLog))e.hireLog=[];
+  e.stage=_gwDeriveStage(e,kind);
+  if(e.lastTouch===undefined){
+    // seed only from dates that are unambiguously AD (YYYY-MM-DD)
+    var dates=(kind==='edu'?(e.presLog||[]).map(function(p){return p.date;}):(e.visitLog||[]).map(function(v){return v.date;}));
+    var best='';
+    dates.forEach(function(d){
+      if(/^20[2-4]\d-\d{1,2}-\d{1,2}$/.test(String(d||''))&&_dParse(d)&&String(d)>best)best=String(d);
+    });
+    e.lastTouch=best||'';
+  }
+  return e;
+}
+function _gwTouch(e){e.lastTouch=_todayISO();}
+
+function _gwAll(kind){return kind==='edu'?(colleges||[]):(hospitals||[]);}
+function _gwEffort(e,kind){return kind==='edu'?(e.presLog||[]).length:(e.visitLog||[]).length;}
+function _gwReach(e){return (e.presLog||[]).reduce(function(a,p){return a+(parseInt(p.participants)||0);},0);}
+
+// ─── attention rules ──────────────────────────────────────────────────
+function _gwExceptions(){
+  var cfg=_gwCfg(),out=[];
+  [['hc','Hospital'],['edu','Institute']].forEach(function(k){
+    var kind=k[0];
+    _gwAll(kind).forEach(function(e,idx){
+      var stage=e.stage||_gwDeriveStage(e,kind);
+      var touch=_gwDaysSince(e.lastTouch);
+      var lastRef=_gwDaysSinceMonth(_gwLastMonth(e.refLog));
+      if(stage==='referring'&&touch!==null&&touch>cfg.quietReferring){
+        out.push({kind:kind,idx:idx,e:e,sev:1,why:'Referring partner, no contact in '+touch+' days',
+          act:'Reach out — this one is already sending you clients'});
+      }else if(stage==='mou'&&(lastRef===null||lastRef>cfg.mouSilent)){
+        var since=lastRef===null?'no referrals logged yet':'nothing in '+lastRef+' days';
+        out.push({kind:kind,idx:idx,e:e,sev:2,why:'MOU signed but '+since,
+          act:'Find out what is blocking referrals'});
+      }else if(kind==='edu'&&stage==='presented'&&touch!==null&&touch>cfg.presFollow){
+        out.push({kind:kind,idx:idx,e:e,sev:3,why:'Presented '+touch+' days ago, no follow-up since',
+          act:'Follow up while they still remember you'});
+      }
+    });
+  });
+  return out.sort(function(a,b){return a.sev-b.sev;});
+}
+function gwAttentionCount(){return _gwExceptions().length;}
+
+// ─── page ─────────────────────────────────────────────────────────────
+function gwSetTab(t){_gwTab=t;_gwStageFilter='all';renderGrowth();}
+function gwSetStage(s){_gwStageFilter=s;renderGrowth();}
+function gwSetPeriod(d){_gwPeriod=d;renderGrowth();}
+function gwSetSort(s){_gwSort=s;renderGrowth();}
+
+function renderGrowth(){
+  if(!document.getElementById('gwList'))return;
+  var kind=_gwTab,all=_gwAll(kind),P=_gwPeriod;
+
+  // headline numbers, both organisations separately
+  var heal=0,naman=0,hires=0,referring=0;
+  ['hc','edu'].forEach(function(k){
+    _gwAll(k).forEach(function(e){
+      heal+=_gwSumOrg(e.refLog,P,'heal');
+      naman+=_gwSumOrg(e.refLog,P,'naman');
+      hires+=_gwSum(e.hireLog,P);
+      if((e.stage||_gwDeriveStage(e,k))==='referring')referring++;
+    });
+  });
+  var exc=_gwExceptions();
+  _netStats('gwStats',[[heal,'Clients → Heal'],[naman,'Clients → Naman'],[hires,'Caregivers hired'],[exc.length,'Need attention']]);
+
+  var pl=document.getElementById('gwPeriodRow');
+  if(pl)pl.innerHTML=[[30,'30 days'],[90,'90 days'],[365,'1 year'],[0,'All time']].map(function(o){
+    return '<button class="chip'+(P===o[0]?' on':'')+'" onclick="gwSetPeriod('+o[0]+')">'+o[1]+'</button>';
+  }).join('');
+
+  var tabs=document.getElementById('gwTabs');
+  if(tabs)tabs.innerHTML=[['hc','Healthcare network',(hospitals||[]).length],['edu','Education network',(colleges||[]).length]]
+    .map(function(t){return '<button class="gw-tab'+(_gwTab===t[0]?' on':'')+'" onclick="gwSetTab(\''+t[0]+'\')">'+t[1]+' <b>'+t[2]+'</b></button>';}).join('');
+
+  // pipeline
+  var byStage={};GW_STAGES.forEach(function(s){byStage[s]=0;});
+  all.forEach(function(e){var s=e.stage||_gwDeriveStage(e,kind);byStage[s]=(byStage[s]||0)+1;});
+  var pipe=document.getElementById('gwPipe');
+  if(pipe)pipe.innerHTML=GW_STAGES.map(function(s){
+    return '<button class="gw-st'+(_gwStageFilter===s?' on':'')+'" onclick="gwSetStage(\''+(_gwStageFilter===s?'all':s)+'\')">'+
+      '<b>'+byStage[s]+'</b><span>'+GW_STAGE_LBL[s]+'</span></button>';
+  }).join('');
+
+  // attention list
+  var att=document.getElementById('gwAttention');
+  if(att){
+    if(!exc.length){
+      att.innerHTML='<div class="gw-clear">Nothing needs chasing right now.'+
+        '<small>Rules: a referring partner silent '+_gwCfg().quietReferring+' days, an MOU with no referrals in '+_gwCfg().mouSilent+
+        ' days, an institute presented at with no follow-up in '+_gwCfg().presFollow+' days.</small></div>';
+    }else{
+      att.innerHTML=exc.map(function(x){
+        return '<div class="gw-att s'+x.sev+'">'+
+          '<div class="gw-att-b"><div class="nw-name">'+_esc(x.e.name)+'</div>'+
+          '<div class="gw-why">'+_esc(x.why)+'</div>'+
+          '<div class="gw-act">'+_esc(x.act)+'</div></div>'+
+          '<div class="gw-att-a">'+
+            '<button class="btn btn-teal btn-sm" onclick="gwLogOpen(\''+x.kind+'\','+x.idx+')">Log result</button>'+
+            '<button class="nw-edit" onclick="'+(x.kind==='edu'?'eduOpen':'hcOpen')+'('+x.idx+',true)">Log contact</button>'+
+          '</div></div>';
+      }).join('');
+    }
+  }
+
+  // return-on-relationship table
+  var sortEl=document.getElementById('gwSortRow');
+  if(sortEl)sortEl.innerHTML=[['outcome','Most clients'],['effort','Most effort'],['noreturn','Effort, no return'],['quiet','Longest silent']]
+    .map(function(o){return '<button class="chip'+(_gwSort===o[0]?' on':'')+'" onclick="gwSetSort(\''+o[0]+'\')">'+o[1]+'</button>';}).join('');
+
+  var rows=all.map(function(e,i){
+    var stage=e.stage||_gwDeriveStage(e,kind);
+    return {e:e,i:i,stage:stage,
+      clients:_gwSum(e.refLog,P),hires:_gwSum(e.hireLog,P),
+      effort:_gwEffort(e,kind),reach:_gwReach(e),touch:_gwDaysSince(e.lastTouch)};
+  }).filter(function(r){
+    if(_gwStageFilter!=='all')return r.stage===_gwStageFilter;
+    // Untouched relationships are a prospecting list, not a return list —
+    // they live behind the "Not contacted" tile in the pipeline above.
+    return r.stage!=='new';
+  });
+
+  if(_gwSort==='noreturn')rows=rows.filter(function(r){return r.effort>0&&!r.clients&&!r.hires;});
+  rows.sort(function(a,b){
+    if(_gwSort==='effort')return b.effort-a.effort||b.clients-a.clients;
+    if(_gwSort==='quiet')return (b.touch===null?-1:b.touch)-(a.touch===null?-1:a.touch);
+    if(_gwSort==='noreturn')return b.effort-a.effort;
+    return (b.clients+b.hires)-(a.clients+a.hires)||b.effort-a.effort;
+  });
+
+  var note=document.getElementById('gwListNote');
+  if(note){
+    var untouched=all.filter(function(e){return (e.stage||_gwDeriveStage(e,kind))==='new';}).length;
+    note.innerHTML=(_gwStageFilter==='all'&&untouched)
+      ? 'Showing relationships you have worked. <button class="nw-add" style="display:inline" onclick="gwSetStage(\'new\')">'+untouched+' not contacted yet \u2192</button>'
+      : '';
+  }
+  var list=document.getElementById('gwList');
+  var eduCols=kind==='edu';
+  if(!rows.length){
+    list.innerHTML='<div class="nw-empty">'+(_gwSort==='noreturn'?'Every relationship you have worked has returned something.':'Nothing in this view yet \u2014 open \u201CNot contacted\u201D above to start working the list.')+'</div>';
+    return;
+  }
+  list.innerHTML='<div class="nw-row gw-row head"><div>Relationship</div><div>Stage</div><div>'+
+    (eduCols?'Presentations':'Visits')+'</div><div>Clients</div><div>'+(eduCols?'Hired':'Reach')+'</div><div>Last contact</div><div></div></div>'+
+  rows.map(function(r){
+    var e=r.e;
+    var last=r.touch===null?'<span class="nw-none">not recorded</span>':(r.touch===0?'today':r.touch+' days ago');
+    return '<div class="nw-row gw-row body">'+
+      '<div><div class="nw-name">'+_esc(e.name)+'</div>'+(e.addr?'<div class="nw-sub">'+_esc(e.addr)+'</div>':'')+'</div>'+
+      '<div><div class="nw-lbl">Stage</div><span class="gw-pill '+r.stage+'">'+GW_STAGE_LBL[r.stage]+'</span></div>'+
+      '<div><div class="nw-lbl">'+(eduCols?'Presentations':'Visits')+'</div><div class="nw-big">'+(r.effort||'—')+'</div></div>'+
+      '<div><div class="nw-lbl">Clients</div><div class="nw-big'+(r.clients?' good':'')+'">'+(r.clients||'—')+'</div></div>'+
+      '<div><div class="nw-lbl">'+(eduCols?'Hired':'Reach')+'</div><div class="nw-big'+(eduCols&&r.hires?' good':'')+'">'+
+        (eduCols?(r.hires||'—'):(r.reach?r.reach.toLocaleString():'—'))+'</div></div>'+
+      '<div><div class="nw-lbl">Last contact</div><div class="lr-dates">'+last+'</div></div>'+
+      '<div><button class="btn btn-teal btn-sm" onclick="gwLogOpen(\''+kind+'\','+r.i+')">Log</button></div>'+
+    '</div>';
+  }).join('');
+}
+
+// ─── log a result ─────────────────────────────────────────────────────
+function gwLogOpen(kind,idx){
+  var e=_gwAll(kind)[idx];if(!e)return;
+  document.getElementById('gwLogKind').value=kind;
+  document.getElementById('gwLogIdx').value=idx;
+  document.getElementById('gwLogName').textContent=e.name;
+  document.getElementById('gwLogMonth').value=_gwMonth();
+  document.getElementById('gwLogCount').value='';
+  document.getElementById('gwLogNote').value='';
+  document.getElementById('gwLogType').value='clients';
+  document.getElementById('gwLogOrg').value='heal';
+  document.getElementById('gwLogTypeRow').style.display=kind==='edu'?'':'none';
+  gwLogTypeChange();
+  var sel=document.getElementById('gwLogStage');
+  sel.innerHTML=GW_STAGES.map(function(s){return '<option value="'+s+'">'+GW_STAGE_LBL[s]+'</option>';}).join('');
+  sel.value=e.stage||_gwDeriveStage(e,kind);
+  document.getElementById('gwLogHist').innerHTML=_gwHistory(e);
+  openModal('gwLog');
+  setTimeout(function(){document.getElementById('gwLogCount').focus();},60);
+}
+function gwLogTypeChange(){
+  var t=document.getElementById('gwLogType').value;
+  document.getElementById('gwLogOrgRow').style.display=t==='clients'?'':'none';
+  document.getElementById('gwLogCountLbl').textContent=t==='clients'?'How many clients?':'How many hired?';
+}
+function _gwHistory(e){
+  var rows=[];
+  (e.refLog||[]).forEach(function(r){rows.push({m:r.month,t:(parseInt(r.count)||0)+' client'+((parseInt(r.count)||0)===1?'':'s')+' → '+(r.org==='naman'?'Naman':'Heal'),n:r.note});});
+  (e.hireLog||[]).forEach(function(r){rows.push({m:r.month,t:(parseInt(r.count)||0)+' caregiver'+((parseInt(r.count)||0)===1?'':'s')+' hired',n:r.note});});
+  if(!rows.length)return '<div class="nw-er-empty">Nothing logged yet.</div>';
+  return rows.sort(function(a,b){return String(b.m).localeCompare(String(a.m));}).map(function(r){
+    return '<div class="gw-hrow"><span class="d">'+_gwMonthLabel(r.m)+'</span><span>'+_esc(r.t)+'</span>'+
+      (r.n?'<span class="n">'+_esc(r.n)+'</span>':'')+'</div>';
+  }).join('');
+}
+function gwLogSave(){
+  var kind=document.getElementById('gwLogKind').value;
+  var idx=parseInt(document.getElementById('gwLogIdx').value);
+  var e=_gwAll(kind)[idx];if(!e)return;
+  var month=document.getElementById('gwLogMonth').value;
+  var n=parseInt(document.getElementById('gwLogCount').value);
+  var type=kind==='edu'?document.getElementById('gwLogType').value:'clients';
+  var note=document.getElementById('gwLogNote').value.trim();
+  var stage=document.getElementById('gwLogStage').value;
+
+  if(n>0){
+    if(!month){alert('Please choose the month.');return;}
+    var log=type==='hires'?(e.hireLog=e.hireLog||[]):(e.refLog=e.refLog||[]);
+    var org=document.getElementById('gwLogOrg').value;
+    var found=log.find(function(r){return r.month===month&&(type==='hires'||r.org===org);});
+    if(found){found.count=(parseInt(found.count)||0)+n;if(note)found.note=note;}
+    else{var rec={month:month,count:n};if(type!=='hires')rec.org=org;if(note)rec.note=note;log.push(rec);}
+    _gwTouch(e);
+    if(type==='clients'&&stage!=='dormant')stage='referring';
+  }else if(note){
+    // note only — still counts as contact
+    _gwTouch(e);
+  }
+  e.stage=stage;
+  e.status=_gwStatusFromStage(stage);
+  e.updated=new Date().toISOString();
+  netSave();
+  closeModal('gwLog');
+  renderGrowth();
+  if(kind==='edu')renderColleges();else renderHospitals();
+  if(typeof renderDashGrowth==='function')renderDashGrowth();
+}
+
+function renderEmrBadge(){
+  var b=document.getElementById('sideEmrBadge');if(!b)return;
+  var n=(typeof emOpenNeeds==='function')?emOpenNeeds():0;
+  b.textContent=n;b.style.display=n?'':'none';
+}
+function renderDashGrowth(){
+  var c=document.getElementById('dashGrowth');if(!c)return;
+  var heal=0,naman=0,hires=0;
+  ['hc','edu'].forEach(function(k){_gwAll(k).forEach(function(e){
+    heal+=_gwSumOrg(e.refLog,30,'heal');naman+=_gwSumOrg(e.refLog,30,'naman');hires+=_gwSum(e.hireLog,30);
+  });});
+  var n=gwAttentionCount();
+  c.innerHTML='<div class="db-stat" onclick="showPage(\'growth\',null)"><b>'+heal+'</b><span>Clients → Heal · 30d</span></div>'+
+    '<div class="db-stat" onclick="showPage(\'growth\',null)"><b>'+naman+'</b><span>Clients → Naman · 30d</span></div>'+
+    '<div class="db-stat" onclick="showPage(\'growth\',null)"><b>'+hires+'</b><span>Caregivers hired · 30d</span></div>'+
+    '<div class="db-stat'+(n?' warn':'')+'" onclick="showPage(\'growth\',null)"><b>'+n+'</b><span>Relationships need attention</span></div>';
+  renderEmrBadge();
+  var badge=document.getElementById('sideGrowthBadge');
+  if(badge){badge.textContent=n;badge.style.display=n?'':'none';}
 }
 
 // ═══════════════════════════════════════════════════════════════════════
