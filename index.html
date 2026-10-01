@@ -1591,10 +1591,6 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
         Daily Ritual
         <span class="sidebar-badge" id="sideRitualBadge" style="display:none">1</span>
       </button>
-      <button class="sidebar-item" onclick="showPage('thought',this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-        Today's Thought
-      </button>
     </div>
 
     <div class="sidebar-divider"></div>
@@ -2359,14 +2355,16 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
     <section class="page" id="page-followups">
   <div style="margin-bottom:20px">
     <div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Today · Actions</div>
-    <div style="display:flex;align-items:flex-end;justify-content:space-between">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:10px;flex-wrap:wrap">
       <div style="font-family:var(--font);font-size:22px;font-weight:600">Follow-ups &amp; Reminders</div>
-      <div style="display:flex;gap:8px;align-items:center">
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
         <select id="fuSort" onchange="renderFUs()" style="font-size:12px;padding:5px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:#fff;color:var(--text);font-family:'DM Sans',sans-serif;cursor:pointer">
+          <option value="new">Newest first</option>
           <option value="date">Sort by date</option>
           <option value="priority">Sort by priority</option>
           <option value="status">Sort by status</option>
         </select>
+        <button class="btn btn-ghost" onclick="impOpen('fu')">Paste a list</button>
         <button class="btn btn-teal" onclick="openFollowUpModal()">+ New follow-up</button>
       </div>
     </div>
@@ -2458,7 +2456,10 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
       <div style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Wisdom · Reading</div>
       <div style="font-size:24px;font-weight:600;color:var(--text)">Bookshelf</div>
     </div>
-    <button class="btn btn-teal" onclick="openWisdomModal('book')">+ Add book</button>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-ghost" onclick="impOpen('book')">Paste a list</button>
+      <button class="btn btn-teal" onclick="openWisdomModal('book')">+ Add book</button>
+    </div>
   </div>
   <div id="bookshelfPages" style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px"></div>
 </section>
@@ -2519,43 +2520,6 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
   </div>
 </section>
 
-<section class="page" id="page-thought">
-  <div class="pg-head">
-    <div>
-      <div class="pg-eyebrow">Daily · Reflection</div>
-      <div class="pg-title">Thought of the Day</div>
-      <div class="pg-sub">A few honest lines each day. Over time, this becomes your story.</div>
-    </div>
-  </div>
-  <div class="qt-card" id="qtCard"></div>
-  <div id="qtBrowse" style="display:none"></div>
-
-  <div class="tj-wrap">
-    <div>
-      <div class="tj-today">
-        <div class="tj-date" id="thoughtTodayDate">Today</div>
-        <div class="tj-prompt"><span id="tjPromptText"></span><button onclick="tjNextPrompt()" title="Another prompt">new prompt</button></div>
-        <textarea id="thoughtInput" class="tj-ta" placeholder="Write freely… what happened, what you noticed, what you want to remember."></textarea>
-        <div class="tj-bar">
-          <div style="font-size:11px;color:var(--hint)"><span id="tjWords">0 words</span> · saved with today's date</div>
-          <button class="btn btn-teal" style="font-size:12px;padding:6px 18px" onclick="saveThought()" id="tjSaveBtn">Save</button>
-        </div>
-      </div>
-      <div class="tj-list">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-          <div class="pg-eyebrow" style="margin:0">Previous thoughts</div>
-          <div class="search-pill" style="min-width:200px;padding:5px 12px"><input type="text" id="tjSearch" placeholder="Search thoughts…" oninput="renderThoughtPage()"></div>
-        </div>
-        <div id="thoughtsList"></div>
-      </div>
-    </div>
-    <div class="tj-side">
-      <div class="tj-card"><h4>Your rhythm</h4><div class="tj-streak"><div><b id="tjStreak">0</b><span>day streak</span></div><div><b id="tjTotal">0</b><span>entries</span></div><div><b id="tjMonth">0</b><span>this month</span></div></div></div>
-      <div class="tj-card"><div class="cal-head"><button onclick="tjCalMove(-1)">‹</button><b id="tjCalLabel"></b><button onclick="tjCalMove(1)">›</button></div><div class="cal-grid" id="tjCal"></div></div>
-    </div>
-  </div>
-</section>
-
 <section class="page" id="page-results">
   <div class="pg-head">
     <div>
@@ -2604,6 +2568,10 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
       </div>
 
       <div class="rt-consist" id="rtConsist"></div>
+
+      <!-- AUTOMATED QUOTE — changes every second day -->
+      <div class="qt-card" id="qtCard"></div>
+      <div id="qtBrowse" style="display:none"></div>
 
       <!-- TODAY'S THREE (live, tickable through the day) -->
       <div class="rt-block" id="rtTodayBlock" style="display:none">
@@ -2710,6 +2678,41 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
         <div class="rt-block-t">Being carried too long</div>
         <div class="rt-block-s">These keep rolling forward. Either make one of them today's number one, or let it go on purpose.</div>
         <div id="rtStickyList"></div>
+      </div>
+
+      <!-- ── REFLECTIONS — the journal, folded in from the old Thought page ── -->
+      <div class="rt-block" id="rtJournalBlock">
+        <div class="rt-block-h">
+          <div>
+            <div class="rt-block-t">Reflections</div>
+            <div class="rt-block-s">A few honest lines each day. Over time, this becomes your story.</div>
+          </div>
+        </div>
+
+        <div class="tj-wrap" style="margin-top:16px">
+          <div>
+            <div class="tj-today">
+              <div class="tj-date" id="thoughtTodayDate">Today</div>
+              <div class="tj-prompt"><span id="tjPromptText"></span><button onclick="tjNextPrompt()" title="Another prompt">new prompt</button></div>
+              <textarea id="thoughtInput" class="tj-ta" placeholder="Write freely… what happened, what you noticed, what you want to remember."></textarea>
+              <div class="tj-bar">
+                <div style="font-size:11px;color:var(--hint)"><span id="tjWords">0 words</span> · saved with today's date</div>
+                <button class="btn btn-teal" style="font-size:12px;padding:6px 18px" onclick="saveThought()" id="tjSaveBtn">Save</button>
+              </div>
+            </div>
+            <div class="tj-list">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:10px;flex-wrap:wrap">
+                <div class="pg-eyebrow" style="margin:0">Past reflections</div>
+                <div class="search-pill" style="min-width:180px;padding:5px 12px"><input type="text" id="tjSearch" placeholder="Search reflections…" oninput="renderThoughtPage()"></div>
+              </div>
+              <div id="thoughtsList"></div>
+            </div>
+          </div>
+          <div class="tj-side">
+            <div class="tj-card"><h4>Your rhythm</h4><div class="tj-streak"><div><b id="tjStreak">0</b><span>day streak</span></div><div><b id="tjTotal">0</b><span>entries</span></div><div><b id="tjMonth">0</b><span>this month</span></div></div></div>
+            <div class="tj-card"><div class="cal-head"><button onclick="tjCalMove(-1)">‹</button><b id="tjCalLabel"></b><button onclick="tjCalMove(1)">›</button></div><div class="cal-grid" id="tjCal"></div></div>
+          </div>
+        </div>
       </div>
 
     </section>
@@ -3254,6 +3257,18 @@ var _auth = {
 
 var _sb = {
   url:'', key:'', token:'', ready:false,
+  // Nothing may be written to the cloud until the cloud has been read once.
+  // Start-up seeds demo content into empty collections; before this guard
+  // existed, a fresh browser pushed those seeds up and overwrote the real
+  // data before the first read ever came back.
+  hydrated:false, pending:{},
+  flush:function(){
+    var self=this, keys=Object.keys(this.pending);
+    this.hydrated=true;
+    if(!keys.length)return;
+    var q=this.pending; this.pending={};
+    keys.forEach(function(k){ self.set(k,q[k]); });
+  },
   init:function(url,key){
     this.url=url;this.key=key;this.ready=!!(url&&key);
     console.log('Supabase init: URL set Key set ready:',this.ready);
@@ -3277,6 +3292,7 @@ var _sb = {
     if(!this.ready)return Promise.resolve(null);
     var self=this;
     var val=typeof v==='string'?v:JSON.stringify(v);
+    if(!this.hydrated){ this.pending[k]=val; return Promise.resolve(null); }
     var body=JSON.stringify({user_id:AAROH_CONFIG.userId,data_key:k,data_value:val,updated_at:new Date().toISOString()});
     var h={'Content-Type':'application/json','apikey':this.key,'Authorization':'Bearer '+this._auth_tok(),'Prefer':'resolution=merge-duplicates,return=minimal'};
     // Try upsert with on_conflict first
@@ -3323,14 +3339,17 @@ function _cloudLoad(){
   console.log('Aaroh OS: loading from localStorage...');
   if(!_sb.ready){
     console.log('Aaroh OS: offline mode');
+    _sb.hydrated=true;
     return Promise.resolve();
   }
+  // Safety net: never leave writes queued forever if the network hangs.
+  setTimeout(function(){ if(!_sb.hydrated)_sb.flush(); }, 9000);
   // Try Supabase in background with 5-second timeout
   var timeout = new Promise(function(resolve){setTimeout(resolve, 5000);});
   var supaFetch = _sb.getAll().then(function(cloudData){
     var count = Object.keys(cloudData).length;
     console.log('Supabase returned', count, 'keys');
-    if(count === 0) return;
+    if(count === 0){ _sb.flush(); return; }
     Object.keys(cloudData).forEach(function(k){
       try{
         var cv = cloudData[k];
@@ -3347,6 +3366,7 @@ function _cloudLoad(){
       }catch(e){}
     });
     console.log('Supabase sync complete:', count, 'keys');
+    _sb.flush();   // cloud has been read — queued writes may now go up
     // Re-render with fresh cloud data
     loadPris(); loadFUs(); loadWis(); loadOrgT(); loadColleges();
     setTimeout(renderDashTop3, 100);
@@ -3354,6 +3374,7 @@ function _cloudLoad(){
     setTimeout(renderDashLibrary, 200);
   }).catch(function(e){
     console.warn('Supabase unreachable - using localStorage only:', e.message||e);
+    _sb.flush();
   });
   // Return immediately - don't wait for Supabase
   return Promise.race([supaFetch, timeout]).then(function(){});
@@ -3526,7 +3547,7 @@ let meetings = [{"date":"","type":"nursing","title":"IEE discussion","org":"Nurs
 const pageTitles = {
   dashboard:'Today',colleges:'Colleges',hospitals:'Hospitals',
   training:'Training',tours:'Facility Tours',meetings:'Meetings',
-  gallery:'Knowledge',notifications:'Follow-ups',ritual:'Daily Ritual',learning:'Learning',growth:'Growth',emr:'EMR Audit',mail:'Inbox',thought:"Today's Thought",priorities:'Priorities',followups:'Follow-ups',stories:'Stories',bookshelf:'Bookshelf',results:'Results & Analytics',backup:'Backup & Restore',hospitals:'Healthcare Ecosystem',colleges:'Education Ecosystem'
+  gallery:'Knowledge',notifications:'Follow-ups',ritual:'Daily Ritual',learning:'Learning',growth:'Growth',emr:'EMR Audit',mail:'Inbox',priorities:'Priorities',followups:'Follow-ups',stories:'Stories',bookshelf:'Bookshelf',results:'Results & Analytics',backup:'Backup & Restore',hospitals:'Healthcare Ecosystem',colleges:'Education Ecosystem'
 };
 
 function showPage(id, clickedItem) {
@@ -3543,7 +3564,7 @@ function showPage(id, clickedItem) {
   if(id==='colleges'){renderColleges(window._colTab||'pending'); updateStats();}
   if(id==='hospitals'){renderHospitals(window._hospTab||'all'); updateStats();}
 
-    if(id==='results'){setTimeout(renderResults,80);}if(id==='backup'){setTimeout(renderBackupPage,80);}if(id==='thought'){setTimeout(renderThoughtPage,80);setTimeout(renderQuote,80);}if(id==='stories'){setTimeout(renderStories,80);}if(id==='bookshelf'){setTimeout(renderBookshelf,80);}if(id==='colleges'){setTimeout(renderColleges,80);}  if(id==='training'){populateHospitalDropdown(); renderTrainings(window._trainTab||'all');}
+    if(id==='results'){setTimeout(renderResults,80);}if(id==='backup'){setTimeout(renderBackupPage,80);}if(id==='stories'){setTimeout(renderStories,80);}if(id==='bookshelf'){setTimeout(renderBookshelf,80);}if(id==='colleges'){setTimeout(renderColleges,80);}  if(id==='training'){populateHospitalDropdown(); renderTrainings(window._trainTab||'all');}
   if(id==='tours'){renderTours(window._tourTab||'all');}
   if(id==='meetings'){renderMeetings(window._meetTab||'all');}
   if(id==='dashboard'){updateStats();}
@@ -4233,8 +4254,9 @@ function updatePriStats(){var s=function(id,v){var e=document.getElementById(id)
 
 // FOLLOW-UPS
 var _fus=[],_fuTab='all';
-function loadFUs(){var r=getLS('aaroh_followups');if(r){_fus=JSON.parse(r);return;}_fus=[{id:1,title:'MOU follow-up – Green Tara College of Health Science',date:'',pri:'urgent',cat:'MOU Follow-up',org:'Heal Home Care',contact:'9841392471 · Bhaisepati, Lalitpur',notes:'',status:'pending',overdue:true},{id:2,title:'Follow-up – Helping Hands Nursing College',date:'',pri:'high',cat:'College Visit',org:'Heal Home Care',contact:'Bharati Bhetwal · 9849655340 · Chabahil',notes:'Ashadh 1st week',status:'pending',overdue:false},{id:3,title:'Initial Visit – Kathmandu Model Hospital School of Nursing',date:'',pri:'normal',cat:'Hospital Visit',org:'Heal Home Care',contact:'Samjana Subedi · 9851101196',notes:'',status:'pending',overdue:false},{id:4,title:'Nursing Division Meeting – confirm date',date:'',pri:'high',cat:'Government Visit',org:'Heal Home Care',contact:'Nursing Division, Teku',notes:'',status:'pending',overdue:false}];saveLS('aaroh_followups',_fus);}
-function saveFUs(){saveLS('aaroh_followups',_fus);showToast();}
+var _fusAreSamples=false;
+function loadFUs(){var r=getLS('aaroh_followups');if(r){_fus=JSON.parse(r);return;}_fus=[{id:1,title:'MOU follow-up – Green Tara College of Health Science',date:'',pri:'urgent',cat:'MOU Follow-up',org:'Heal Home Care',contact:'9841392471 · Bhaisepati, Lalitpur',notes:'',status:'pending',overdue:true},{id:2,title:'Follow-up – Helping Hands Nursing College',date:'',pri:'high',cat:'College Visit',org:'Heal Home Care',contact:'Bharati Bhetwal · 9849655340 · Chabahil',notes:'Ashadh 1st week',status:'pending',overdue:false},{id:3,title:'Initial Visit – Kathmandu Model Hospital School of Nursing',date:'',pri:'normal',cat:'Hospital Visit',org:'Heal Home Care',contact:'Samjana Subedi · 9851101196',notes:'',status:'pending',overdue:false},{id:4,title:'Nursing Division Meeting – confirm date',date:'',pri:'high',cat:'Government Visit',org:'Heal Home Care',contact:'Nursing Division, Teku',notes:'',status:'pending',overdue:false}];_fusAreSamples=true;}
+function saveFUs(){_fusAreSamples=false;saveLS('aaroh_followups',_fus);showToast();}
 function openFollowUpModal(idx){
   var ie=typeof idx==='number'&&_fus[idx];
   document.getElementById('fuModalTitle').textContent=ie?'Edit Follow-up':'New Follow-up';
@@ -4255,8 +4277,10 @@ function saveFU(){
   var ei=parseInt(document.getElementById('fuEI').value);
   var today=new Date().toISOString().split('T')[0];
   var date=document.getElementById('fuDate').value;
+  var prev=(ei>=0&&_fus[ei])?_fus[ei]:null;
   var item={
-    id:Date.now(),title:t,
+    id:prev&&prev.id?prev.id:Date.now(),title:t,
+    created:(prev&&prev.created)||new Date().toISOString(),
     person:document.getElementById('fuPerson').value.trim(),
     orgName:document.getElementById('fuOrgName').value.trim(),
     contact:document.getElementById('fuPerson').value.trim(),
@@ -4279,7 +4303,7 @@ function renderFUs(){
   var q=(document.getElementById('fuSearch')||{value:''}).value.toLowerCase();
   var today=new Date().toISOString().split('T')[0];
   var we=new Date();we.setDate(we.getDate()+7);var ws=we.toISOString().split('T')[0];
-  var sort=(document.getElementById('fuSort')||{value:'date'}).value;
+  var sort=(document.getElementById('fuSort')||{value:'new'}).value;
   var pC={urgent:'var(--coral)',high:'var(--amber-dark)',normal:'var(--blue)',low:'var(--hint)'};
   var pB={urgent:'var(--coral-light)',high:'var(--amber-light)',normal:'var(--blue-light)',low:'var(--border)'};
   var pL={urgent:'Urgent',high:'High',normal:'Normal',low:'Low'};
@@ -4299,13 +4323,31 @@ function renderFUs(){
   });
 
   // Sort
+  // Stable ordering: _fus holds newest at index 0 (saveFU unshifts), so the
+  // array position is the tie-breaker for anything the chosen sort calls equal.
+  var _pos={}; _fus.forEach(function(f,i){_pos[f.id]=i;});
+  var _age=function(f){return f.created?Date.parse(f.created):null;};
   list.sort(function(a,b){
-    if(sort==='priority') return (prO[a.pri]||2)-(prO[b.pri]||2);
-    if(sort==='status') return a.status===b.status?0:a.status==='completed'?1:-1;
-    // date — overdue first, then by date
-    var ad=a.date||'9999',bd=b.date||'9999';
-    if(a.overdue&&!b.overdue)return -1;if(!a.overdue&&b.overdue)return 1;
-    return ad<bd?-1:ad>bd?1:0;
+    if(sort==='new'){
+      var aa=_age(a),ba=_age(b);
+      if(aa!==null&&ba!==null&&aa!==ba) return ba-aa;
+      return (_pos[a.id]||0)-(_pos[b.id]||0);
+    }
+    if(sort==='priority'){
+      var pd=(prO[a.pri]||2)-(prO[b.pri]||2);
+      return pd!==0?pd:(_pos[a.id]||0)-(_pos[b.id]||0);
+    }
+    if(sort==='status'){
+      if(a.status!==b.status) return a.status==='completed'?1:-1;
+      return (_pos[a.id]||0)-(_pos[b.id]||0);
+    }
+    // date — overdue first, then soonest; undated fall back to newest-added
+    if(a.overdue&&!b.overdue)return -1;
+    if(!a.overdue&&b.overdue)return 1;
+    if(a.date&&b.date) return a.date<b.date?-1:a.date>b.date?1:0;
+    if(a.date&&!b.date) return -1;
+    if(!a.date&&b.date) return 1;
+    return (_pos[a.id]||0)-(_pos[b.id]||0);
   });
 
   if(!list.length){c.innerHTML='<div style="padding:40px;text-align:center;color:var(--hint);font-size:13px">No follow-ups in this view</div>';return;}
@@ -4370,8 +4412,58 @@ function updateGovtStats(){var s=function(id,v){var e=document.getElementById(id
 var _orgT={heal:[],naman:[]},_orgTab={heal:'all',naman:'all'};
 function loadOrgT(){['heal','naman'].forEach(function(o){var r=getLS('aaroh_'+o+'_tasks');if(r)_orgT[o]=JSON.parse(r);});}
 function saveOrgT_(o){saveLS('aaroh_'+o+'_tasks',_orgT[o]);showToast();}
-function openOrgTaskModal(org,idx){var ie=typeof idx==='number'&&_orgT[org]&&_orgT[org][idx];var oN=org==='heal'?'Heal Home Care':'Naman Care Home';document.getElementById('orgTMT').textContent=(ie?'Edit':'New')+' Task — '+oN;document.getElementById('orgTOrg').value=org;document.getElementById('orgTEI').value=ie?idx:-1;var t=ie?_orgT[org][idx]:{};document.getElementById('orgTTitle').value=t.title||'';document.getElementById('orgTCat').value=t.cat||'Operations';document.getElementById('orgTPri').value=t.pri||'normal';document.getElementById('orgTDL').value=t.dl||'';document.getElementById('orgTSt').value=t.status||'open';document.getElementById('orgTNotes').value=t.notes||'';openModal('orgTask');}
-function saveOrgT(){var title=document.getElementById('orgTTitle').value.trim();if(!title){alert('Please enter a task.');return;}var org=document.getElementById('orgTOrg').value,ei=parseInt(document.getElementById('orgTEI').value);var item={title:title,cat:document.getElementById('orgTCat').value,pri:document.getElementById('orgTPri').value,dl:document.getElementById('orgTDL').value,status:document.getElementById('orgTSt').value,notes:document.getElementById('orgTNotes').value.trim()};if(!_orgT[org])_orgT[org]=[];if(ei>=0&&_orgT[org][ei])_orgT[org][ei]=item;else _orgT[org].unshift(item);saveOrgT_(org);closeModal('orgTask');renderOrgT(org);updateOrgStats(org);}
+function openOrgTaskModal(org,idx){var ie=typeof idx==='number'&&_orgT[org]&&_orgT[org][idx];var oN=org==='heal'?'Heal Home Care':'Naman Care Home';document.getElementById('orgTMT').textContent=(ie?'Edit':'New')+' Task — '+oN;var _t0=ie?_orgT[org][idx]:{};document.getElementById('orgTOrg').value=(_t0&&_t0.both)?'both':org;document.getElementById('orgTEI').value=ie?idx:-1;document.getElementById('orgTLink').value=(_t0&&_t0.linkId)||'';window._orgTFrom=org;var t=_t0;document.getElementById('orgTTitle').value=t.title||'';document.getElementById('orgTCat').value=t.cat||'Operations';document.getElementById('orgTPri').value=t.pri||'normal';document.getElementById('orgTDL').value=t.dl||'';document.getElementById('orgTSt').value=t.status||'open';document.getElementById('orgTNotes').value=t.notes||'';openModal('orgTask');}
+function saveOrgT(){
+  var title=document.getElementById('orgTTitle').value.trim();
+  if(!title){alert('Please enter a task.');return;}
+  var pick=document.getElementById('orgTOrg').value;              // heal | naman | both
+  var from=window._orgTFrom||'heal';                              // list the modal opened from
+  var ei=parseInt(document.getElementById('orgTEI').value);
+  var link=document.getElementById('orgTLink').value;
+  var prev=(ei>=0&&_orgT[from]&&_orgT[from][ei])?_orgT[from][ei]:null;
+
+  var item={
+    id:(prev&&prev.id)||Date.now(),
+    linkId:link||((prev&&prev.linkId)||''),
+    title:title,
+    cat:document.getElementById('orgTCat').value,
+    pri:document.getElementById('orgTPri').value,
+    dl:document.getElementById('orgTDL').value,
+    status:document.getElementById('orgTSt').value,
+    notes:document.getElementById('orgTNotes').value.trim(),
+    both:pick==='both'
+  };
+  if(item.both&&!item.linkId)item.linkId='L'+Date.now();
+
+  var targets = pick==='both' ? ['heal','naman'] : [pick];
+  ['heal','naman'].forEach(function(o){ if(!_orgT[o])_orgT[o]=[]; });
+
+  // An edit is applied wherever this task already lives, by its link id when
+  // it is shared, so the two copies of a "both" task never drift apart.
+  var findIdx=function(o){
+    if(prev&&o===from&&ei>=0&&!item.linkId)return ei;
+    if(item.linkId){
+      var k=_orgT[o].findIndex(function(t){return t.linkId&&t.linkId===item.linkId;});
+      if(k>=0)return k;
+    }
+    if(prev&&o===from&&ei>=0)return ei;
+    return -1;
+  };
+
+  ['heal','naman'].forEach(function(o){
+    var k=findIdx(o);
+    var wanted=targets.indexOf(o)>=0;
+    if(wanted){
+      var copy=JSON.parse(JSON.stringify(item));
+      if(k>=0)_orgT[o][k]=copy; else _orgT[o].unshift(copy);
+    }else if(k>=0){
+      _orgT[o].splice(k,1);                                       // no longer filed here
+    }
+  });
+
+  ['heal','naman'].forEach(function(o){saveOrgT_(o);renderOrgT(o);updateOrgStats(o);});
+  closeModal('orgTask');
+}
 function _doneOrgT(org,i){_orgT[org][i].status=_orgT[org][i].status==='completed'?'open':'completed';saveOrgT_(org);renderOrgT(org);updateOrgStats(org);}
 function delOrgT(org,i){if(!confirm('Delete?'))return;_orgT[org].splice(i,1);saveOrgT_(org);renderOrgT(org);updateOrgStats(org);}
 function setOrgTab(org,tab,btn){_orgTab[org]=tab;document.querySelectorAll('#'+org+'TabsRow .page-tab').forEach(function(b){b.classList.remove('active');});if(btn)btn.classList.add('active');renderOrgT(org);}
@@ -4425,7 +4517,7 @@ function delSpk(i){if(!confirm('Delete?'))return;_spkEngs.splice(i,1);saveLS('aa
 function renderSpk(){var c=document.getElementById('spkEngList');if(!c)return;var q=((document.getElementById('spkSearch')||{}).value||'').toLowerCase();var sC={Upcoming:'var(--amber-dark)',Completed:'#3B6D11',Cancelled:'var(--coral)'};var sB={Upcoming:'var(--amber-light)',Completed:'#e8f5e9',Cancelled:'var(--coral-light)'};var list=_spkEngs.filter(function(e){return !q||JSON.stringify(e).toLowerCase().includes(q);});if(!list.length){c.innerHTML='<div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No engagements yet</div>';return;}c.innerHTML=list.map(function(e,i){var st=e.status||'Upcoming';var tags=(e.tags||'').split(',').filter(Boolean).map(function(t){return'<span class="wtag">'+t.trim()+'</span>';}).join('');return'<div class="spkcard"><div class="spkcard-hdr"><div><div class="spkcard-event">'+e.event+'</div>'+(e.org?'<div style="font-size:12px;color:var(--muted);margin-top:2px">'+e.org+'</div>':'')+'</div><div style="display:flex;gap:4px;align-items:center;flex-shrink:0"><span style="font-size:10px;font-weight:600;padding:2px 9px;border-radius:10px;background:'+(sB[st]||'var(--border)')+';color:'+(sC[st]||'var(--muted)')+'">'+st+'</span><button class="btn btn-ghost btn-sm" onclick="openSpkModal('+i+')">Edit</button><button class="btn btn-ghost btn-sm" style="color:var(--coral);border-color:var(--coral)" onclick="delSpk('+i+')">Del</button></div></div><div class="spkmeta">'+(e.date?'<div><div class="spkml">Date</div><div class="spkmv">'+e.date+'</div></div>':'')+(e.topic?'<div><div class="spkml">Topic</div><div class="spkmv">'+e.topic+'</div></div>':'')+(e.aud?'<div><div class="spkml">Audience</div><div class="spkmv">'+e.aud+(e.audSz?' ('+e.audSz+')':'')+'</div></div>':'')+(e.loc?'<div><div class="spkml">Location</div><div class="spkmv">'+e.loc+'</div></div>':'')+'</div>'+(e.msg?'<div style="font-size:12px;color:var(--text-2);font-style:italic;padding:6px 10px;background:var(--green-light);border-radius:4px;border-left:2px solid var(--green);margin-bottom:6px">'+e.msg+'</div>':'')+(e.notes?'<div style="font-size:12px;color:var(--muted);margin-bottom:6px">'+e.notes+'</div>':'')+(e.fu?'<div style="font-size:11px;font-weight:600;color:var(--amber-dark)">→ Follow-up: '+e.fu+'</div>':'')+(tags?'<div class="wtags" style="margin-top:6px">'+tags+'</div>':'')+'</div>';}).join('');}
 
 // EXTEND showPage
-var _origSP=showPage;showPage=function(id,clickedItem){document.querySelectorAll('[contenteditable="true"][id]').forEach(function(el){if(el.id)saveLS('ace_'+el.id,el.textContent);});_origSP(id,clickedItem);if(id==='priorities'){loadDaily();renderDaily();renderPris();updatePriStats();}if(id==='followups'){renderFUs();updateFUStats();}if(id==='govt'){renderGovt();updateGovtStats();}if(id==='heal'){renderOrgT('heal');updateOrgStats('heal');}if(id==='naman'){renderOrgT('naman');updateOrgStats('naman');}if(id==='stories'){renderWis('story');}if(id==='bookshelf'){renderWis('book');}if(id==='insights'){renderWis('insight');}if(id==='studio'){renderWis('studio');}if(id==='ritual'){renderRitualPage();}if(id==='learning'){renderLearning();}if(id==='growth'){renderGrowth();}if(id==='emr'){renderEMR();}if(id==='mail'){renderMail();}if(id==='archive'){renderArchive();}if(id==='movement'){renderASection('mvGoals');renderASection('mvInits');renderASection('mvMiles');renderAList('mvPrinciples','Write a core principle…');}if(id==='book'){renderASection('bookChapters');}if(id==='speaking'){renderSpk();renderASection('spkSpeeches');renderASection('spkMedia');renderASection('spkOpps');renderAList('spkTopics','Add a speaking topic…');}if(id==='dashboard'){setTimeout(function(){if(typeof renderDashRitual==='function')renderDashRitual();},60);setTimeout(function(){if(typeof renderDashLearn==='function')renderDashLearn();},70);setTimeout(function(){if(typeof renderDashGrowth==='function')renderDashGrowth();},75);setTimeout(function(){if(typeof renderDashQuote==='function')renderDashQuote();},80);setTimeout(function(){if(typeof renderDashMail==='function')renderDashMail();},85);setTimeout(renderDashTop3,80);setTimeout(renderKeyRelationships,120);setTimeout(renderDashFollowUps,140);setTimeout(renderDashLibrary,160);setTimeout(restoreTodaysThought,180);setTimeout(renderDashFollowUps,120);setTimeout(renderKeyRelationships,150);setTimeout(renderDashLibrary,180);setTimeout(restoreTodaysThought,200);}setTimeout(function(){_notifs=buildLiveNotifs();_updateNotifBadge();},120);};
+var _origSP=showPage;showPage=function(id,clickedItem){document.querySelectorAll('[contenteditable="true"][id]').forEach(function(el){if(el.id)saveLS('ace_'+el.id,el.textContent);});_origSP(id,clickedItem);if(id==='priorities'){loadDaily();renderDaily();renderPris();updatePriStats();}if(id==='followups'){renderFUs();updateFUStats();}if(id==='govt'){renderGovt();updateGovtStats();}if(id==='heal'){renderOrgT('heal');updateOrgStats('heal');}if(id==='naman'){renderOrgT('naman');updateOrgStats('naman');}if(id==='stories'){renderWis('story');}if(id==='bookshelf'){renderWis('book');}if(id==='insights'){renderWis('insight');}if(id==='studio'){renderWis('studio');}if(id==='ritual'){renderRitualPage();setTimeout(renderThoughtPage,60);setTimeout(renderQuote,60);}if(id==='learning'){renderLearning();}if(id==='growth'){renderGrowth();}if(id==='emr'){renderEMR();}if(id==='mail'){renderMail();}if(id==='archive'){renderArchive();}if(id==='movement'){renderASection('mvGoals');renderASection('mvInits');renderASection('mvMiles');renderAList('mvPrinciples','Write a core principle…');}if(id==='book'){renderASection('bookChapters');}if(id==='speaking'){renderSpk();renderASection('spkSpeeches');renderASection('spkMedia');renderASection('spkOpps');renderAList('spkTopics','Add a speaking topic…');}if(id==='dashboard'){setTimeout(function(){if(typeof renderDashRitual==='function')renderDashRitual();},60);setTimeout(function(){if(typeof renderDashLearn==='function')renderDashLearn();},70);setTimeout(function(){if(typeof renderDashGrowth==='function')renderDashGrowth();},75);setTimeout(function(){if(typeof renderDashQuote==='function')renderDashQuote();},80);setTimeout(function(){if(typeof renderDashMail==='function')renderDashMail();},85);setTimeout(renderDashTop3,80);setTimeout(renderKeyRelationships,120);setTimeout(renderDashFollowUps,140);setTimeout(renderDashLibrary,160);setTimeout(restoreTodaysThought,180);setTimeout(renderDashFollowUps,120);setTimeout(renderKeyRelationships,150);setTimeout(renderDashLibrary,180);setTimeout(restoreTodaysThought,200);}setTimeout(function(){_notifs=buildLiveNotifs();_updateNotifBadge();},120);};
 
 // EXPORT
 function exportSnapshot(){var a=document.createElement('a');a.href='data:text/html;charset=utf-8,'+encodeURIComponent(document.documentElement.outerHTML);a.download='AarohOS-'+new Date().toISOString().split('T')[0]+'.html';document.body.appendChild(a);a.click();document.body.removeChild(a);}
@@ -5964,7 +6056,7 @@ function renderQuote(){
 function renderDashQuote(){
   var c=document.getElementById('dashQuote');if(!c)return;
   var q=_qtCurrent();
-  c.innerHTML='<div class="db-quote" onclick="showPage(\'thought\',null)">'+
+  c.innerHTML='<div class="db-quote" onclick="showPage(\'ritual\',null)">'+
     '<span class="qt-theme '+q.theme+'">'+QT_LBL[q.theme]+'</span>'+
     '<div class="db-quote-t">'+_esc(q.text)+'</div></div>';
 }
@@ -7242,7 +7334,7 @@ function renderResults(){
     tEl.innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+renderMini('Sessions',tr.length,'var(--text)')+renderMini('Completed',tComp,'var(--green)')+renderMini('Participants',trPax,'var(--purple)')+renderMini('All time',lms.length,'var(--hint)')+'</div>'+_rsRow('Open L&D centre','training');}}
   var thEl=document.getElementById('resultsThoughts');
   if(thEl){var days=all?Math.max(1,th.length):Math.max(1,Math.round((Math.min(r.end,Date.now())-r.start)/86400000));var rate=Math.min(100,Math.round(thN/days*100));
-    thEl.innerHTML='<div class="rs-bar"><div class="l"><span style="font-weight:600">Days with a thought</span><span style="font-weight:700;color:var(--green)">'+(all?th.length:thN+' / '+days)+'</span></div><div class="t"><div class="f" style="width:'+rate+'%"></div></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+renderMini('This period',thN,'var(--green)')+renderMini('Previous',all?'—':thPrev,'var(--hint)')+'</div>'+_rsRow('Write today\'s thought','thought');}
+    thEl.innerHTML='<div class="rs-bar"><div class="l"><span style="font-weight:600">Days with a thought</span><span style="font-weight:700;color:var(--green)">'+(all?th.length:thN+' / '+days)+'</span></div><div class="t"><div class="f" style="width:'+rate+'%"></div></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+renderMini('This period',thN,'var(--green)')+renderMini('Previous',all?'—':thPrev,'var(--hint)')+'</div>'+_rsRow('Write today\'s reflection','ritual');}
 
   var aEl=document.getElementById('resultsAlerts');
   if(aEl){var alerts=[];
@@ -7250,7 +7342,7 @@ function renderResults(){
     var noVisit=h.filter(function(x){return !(x.visitDates||[]).length&&!(parseInt(x.visits)||0);}).length;if(noVisit)alerts.push(['🟡',noVisit+' hospital'+(noVisit>1?'s':'')+' never visited','hospitals','Plan']);
     var stale=pris.filter(function(p){return p.status==='in_progress'&&(!p.updated||Date.now()-Date.parse(p.updated)>14*86400000);}).length;if(stale)alerts.push(['🟠',stale+' in-progress priorit'+(stale>1?'ies':'y')+' untouched for 2+ weeks','priorities','Update']);
     var dueSoon=pris.filter(function(p){return p.status!=='completed'&&p.dl&&Date.parse(p.dl)-Date.now()<7*86400000&&Date.parse(p.dl)>=Date.now()-86400000;}).length;if(dueSoon)alerts.push(['🟠',dueSoon+' priorit'+(dueSoon>1?'ies':'y')+' due within 7 days','priorities','Review']);
-    if(!all&&thN===0)alerts.push(['🟡','No reflection written in this period','thought','Write']);
+    if(!all&&thN===0)alerts.push(['🟡','No reflection written in this period','ritual','Write']);
     if(!lms.length)alerts.push(['🟡','No training sessions recorded yet','training','Log']);
     aEl.innerHTML=alerts.length?alerts.map(function(a){return '<div class="rs-row"><span style="font-size:15px">'+a[0]+'</span><span>'+a[1]+'</span><button class="go" onclick="showPage(\''+a[2]+'\',null)">'+a[3]+' →</button></div>';}).join(''):'<div style="color:var(--green);font-size:13px;font-weight:600">Everything is on track for this period.</div>';}
   var nmEl=document.getElementById('resultsNextMoves');
@@ -7569,6 +7661,123 @@ function restoreTodaysThought(){
     if(!el.textContent.trim())el.textContent=latest.thought;
   }
 }
+
+// ═══════════════════════ PASTE-IN IMPORTER ═══════════════════════
+// One entry per line, fields separated by |. Only the first field is
+// required; anything after it may be left out or left blank.
+var _impKind='fu';
+var _IMP={
+  fu:{
+    title:'Paste your follow-ups',
+    help:'One per line. Separate the parts with a vertical bar:<br><b>what it is | who | organisation | date | priority</b><br>'+
+         'Only the first part is needed. Date as 2026-10-14. Priority: urgent, high, normal or low.<br>'+
+         '<span style="color:var(--hint)">MOU follow-up – Green Tara College | Bhawana Rai 9841392471 | Heal Home Care | 2026-10-14 | urgent</span>',
+    btn:'Add follow-ups'
+  },
+  book:{
+    title:'Paste your bookshelf',
+    help:'One per line. Separate the parts with a vertical bar:<br><b>title | author | reading or read | rating 1-5 | one takeaway</b><br>'+
+         'Only the title is needed.<br>'+
+         '<span style="color:var(--hint)">Being Mortal | Atul Gawande | read | 5 | Autonomy matters more than safety alone</span>',
+    btn:'Add books'
+  }
+};
+function impOpen(kind){
+  _impKind=kind;
+  var cfg=_IMP[kind];
+  document.getElementById('impTitle').textContent=cfg.title;
+  document.getElementById('impHelp').innerHTML=cfg.help;
+  document.getElementById('impBtn').textContent=cfg.btn;
+  document.getElementById('impText').value='';
+  document.getElementById('impReplace').checked=false;
+  impPreview();
+  openModal('import');
+}
+function _impEsc(x){return String(x==null?'':x).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function _impParse(){
+  var raw=(document.getElementById('impText')||{}).value||'';
+  var out=[], bad=[];
+  raw.split(/\r?\n/).forEach(function(line,n){
+    var t=line.trim();
+    if(!t) return;
+    var f=t.split('|').map(function(x){return x.trim();});
+    if(!f[0]){ bad.push({n:n+1, why:'no title'}); return; }
+    out.push({fields:f, line:n+1});
+  });
+  return {rows:out, bad:bad};
+}
+function impPreview(){
+  var el=document.getElementById('impPrev'); if(!el) return;
+  var r=_impParse();
+  if(!r.rows.length && !r.bad.length){
+    el.innerHTML='<span style="color:var(--hint)">Nothing to add yet.</span>'; return;
+  }
+  var html=r.rows.map(function(x){
+    var f=x.fields;
+    if(_impKind==='fu'){
+      return '<div style="padding:4px 0;border-bottom:1px solid var(--border)"><b>'+_impEsc(f[0])+'</b>'+
+        (f[1]?' <span style="color:var(--muted)">· '+_impEsc(f[1])+'</span>':'')+
+        (f[2]?' <span style="color:var(--muted)">· '+_impEsc(f[2])+'</span>':'')+
+        (f[3]?' <span style="color:var(--blue)">· '+_impEsc(f[3])+'</span>':'')+
+        (f[4]?' <span style="color:var(--coral)">· '+_impEsc(f[4])+'</span>':'')+'</div>';
+    }
+    return '<div style="padding:4px 0;border-bottom:1px solid var(--border)"><b>'+_impEsc(f[0])+'</b>'+
+      (f[1]?' <span style="color:var(--muted)">by '+_impEsc(f[1])+'</span>':'')+
+      (f[2]?' <span style="color:var(--blue)">· '+_impEsc(f[2])+'</span>':'')+
+      (f[3]?' <span style="color:var(--amber-dark)">· '+_impEsc(f[3])+'/5</span>':'')+'</div>';
+  }).join('');
+  if(r.bad.length){
+    html+='<div style="color:var(--coral);margin-top:8px">'+r.bad.length+' line'+(r.bad.length===1?'':'s')+' skipped (no title): '+
+      r.bad.map(function(b){return 'line '+b.n;}).join(', ')+'</div>';
+  }
+  html+='<div style="margin-top:8px;color:var(--green);font-weight:600">'+r.rows.length+' to add</div>';
+  el.innerHTML=html;
+}
+function impRun(){
+  var r=_impParse();
+  if(!r.rows.length){ alert('Nothing to add — paste at least one line.'); return; }
+  var replace=document.getElementById('impReplace').checked;
+  if(replace && !confirm('This removes everything currently in the list and puts these '+r.rows.length+' in its place. Continue?')) return;
+  var today=new Date().toISOString().split('T')[0];
+  var stamp=new Date().toISOString();
+
+  if(_impKind==='fu'){
+    var items=r.rows.map(function(x,k){
+      var f=x.fields;
+      var pri=(f[4]||'normal').toLowerCase();
+      if(['urgent','high','normal','low'].indexOf(pri)<0)pri='normal';
+      var date=(f[3]||'');
+      if(date && !/^\d{4}-\d{2}-\d{2}$/.test(date)) date='';
+      return {
+        id:Date.now()+k, created:stamp,
+        title:f[0], person:f[1]||'', contact:f[1]||'',
+        orgName:f[2]||'', org:f[2]||'',
+        cat:'Follow-up', pri:pri, date:date, status:'pending',
+        notes:'', overdue:!!(date&&date<today)
+      };
+    });
+    _fus = replace ? items : items.concat(_fus);
+    saveFUs(); renderFUs(); updateFUStats();
+    if(typeof renderDashFollowUps==='function')renderDashFollowUps();
+  }else{
+    var books=r.rows.map(function(x){
+      var f=x.fields;
+      var st=(f[2]||'').toLowerCase();
+      st = st.indexOf('reading')>=0 ? 'reading' : 'read';
+      var rt=parseInt(f[3]||'0',10); if(isNaN(rt)||rt<0||rt>5)rt=0;
+      return {title:f[0], author:f[1]||'', type:'Book', status:st, start:'', end:'',
+              rating:rt, sum:'', take:f[4]||'', quote:'', apply:'', tags:''};
+    });
+    if(!_wis.book)_wis.book=[];
+    _wis.book = replace ? books : books.concat(_wis.book);
+    saveWis('book'); renderWis('book');
+    if(typeof renderBookshelf==='function')renderBookshelf();
+    if(typeof renderDashLibrary==='function')renderDashLibrary();
+  }
+  closeModal('import');
+  showToast();
+}
+
 </script>
 
 <div id="autoSaveToast" style="position:fixed;bottom:24px;right:24px;background:var(--green);color:#fff;padding:6px 14px;border-radius:20px;font-size:11px;font-weight:600;z-index:9999;opacity:0;transition:opacity 0.2s;pointer-events:none">✓ Saved</div>
@@ -7580,6 +7789,24 @@ function restoreTodaysThought(){
 
 <div class="modal-overlay" id="modal-priority"><div class="modal" style="width:600px"><div class="modal-hdr"><div class="modal-title" id="priModalTitle">New Priority</div><button class="close-btn" onclick="closeModal('priority')">×</button></div><input type="hidden" id="priEI" value="-1"><div class="form-row"><label class="form-label">Title</label><input class="form-input" id="priTitle" placeholder="e.g. Build Strategic Healthcare Network"></div><div class="form-2col"><div class="form-row"><label class="form-label">Organization</label><select class="form-select" id="priOrg"><option value="">Personal</option><option>Heal Home Care</option><option>Naman Care Home</option><option>Aaroh Movement</option></select></div><div class="form-row"><label class="form-label">Category</label><input class="form-input" id="priCat" placeholder="e.g. Networking, Systems…" list="priCatL"><datalist id="priCatL"><option>Networking</option><option>Systems</option><option>Training</option><option>Learning</option><option>Operations</option><option>Personal</option></datalist></div></div><div class="form-row"><label class="form-label">Goal</label><textarea class="form-textarea" id="priGoal" rows="2" placeholder="What does success look like?"></textarea></div><div class="form-row"><label class="form-label">Description</label><textarea class="form-textarea" id="priDesc" rows="2"></textarea></div><div class="form-2col"><div class="form-row"><label class="form-label">Priority Level</label><select class="form-select" id="priLevel"><option value="critical">Critical</option><option value="high">High</option><option value="medium" selected>Medium</option><option value="low">Low</option></select></div><div class="form-row"><label class="form-label">Status</label><select class="form-select" id="priStatus"><option value="not_started">Not started</option><option value="in_progress">In progress</option><option value="completed">Completed</option><option value="on_hold">On hold</option></select></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Deadline</label><input type="date" class="form-input" id="priDL"></div><div class="form-row"><label class="form-label">Progress %</label><input type="number" class="form-input" id="priProg" min="0" max="100" value="0"></div></div><div class="form-row"><label class="form-label">Notes</label><textarea class="form-textarea" id="priNotes" rows="2"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('priority')">Cancel</button><button class="btn btn-teal" onclick="savePri()">Save</button></div></div></div>
 
+<div class="modal-overlay" id="modal-import"><div class="modal" style="width:640px;max-width:calc(100vw - 32px)">
+  <div class="modal-hdr"><div class="modal-title" id="impTitle">Paste a list</div><button class="close-btn" onclick="closeModal('import')">&times;</button></div>
+  <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:10px" id="impHelp"></div>
+  <div class="form-row">
+    <textarea class="form-textarea" id="impText" style="min-height:150px;font-family:ui-monospace,Menlo,monospace;font-size:12px" placeholder="One per line…" oninput="impPreview()"></textarea>
+  </div>
+  <div style="font-size:12px;color:var(--muted);margin-bottom:6px">Preview</div>
+  <div id="impPrev" style="max-height:200px;overflow:auto;border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;font-size:12px;background:var(--content-bg)"></div>
+  <div style="display:flex;gap:10px;align-items:center;justify-content:space-between;margin-top:14px;flex-wrap:wrap">
+    <label style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px;cursor:pointer">
+      <input type="checkbox" id="impReplace"> Replace the whole list instead of adding to it
+    </label>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-ghost" onclick="closeModal('import')">Cancel</button>
+      <button class="btn btn-teal" id="impBtn" onclick="impRun()">Add them</button>
+    </div>
+  </div>
+</div></div>
 <div class="modal-overlay" id="modal-followup"><div class="modal" style="width:580px"><div class="modal-hdr"><div class="modal-title" id="fuModalTitle">New Follow-up</div><button class="close-btn" onclick="closeModal('followup')">×</button></div><input type="hidden" id="fuEI" value="-1">
 <div class="form-row"><label class="form-label">Title</label><input class="form-input" id="fuTitle" placeholder="e.g. Follow up with hospital director"></div>
 <div class="form-2col">
@@ -7599,7 +7826,7 @@ function restoreTodaysThought(){
 </div></div>
 
 
-<div class="modal-overlay" id="modal-orgTask"><div class="modal"><div class="modal-hdr"><div class="modal-title" id="orgTMT">New Task</div><button class="close-btn" onclick="closeModal('orgTask')">×</button></div><input type="hidden" id="orgTOrg" value="heal"><input type="hidden" id="orgTEI" value="-1"><div class="form-row"><label class="form-label">Task</label><input class="form-input" id="orgTTitle" placeholder="What needs to be done?"></div><div class="form-2col"><div class="form-row"><label class="form-label">Category</label><select class="form-select" id="orgTCat"><option>Operations</option><option>Staff</option><option>Service Development</option><option>Quality</option><option>Finance</option><option>Marketing</option><option>Compliance</option><option>Training</option><option>Partnership</option></select></div><div class="form-row"><label class="form-label">Priority</label><select class="form-select" id="orgTPri"><option value="urgent">Urgent</option><option value="high">High</option><option value="normal" selected>Normal</option><option value="low">Low</option></select></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Deadline</label><input type="date" class="form-input" id="orgTDL"></div><div class="form-row"><label class="form-label">Status</label><select class="form-select" id="orgTSt"><option value="open">Open</option><option value="in_progress">In Progress</option><option value="completed">Completed</option></select></div></div><div class="form-row"><label class="form-label">Notes</label><textarea class="form-textarea" id="orgTNotes"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('orgTask')">Cancel</button><button class="btn btn-teal" onclick="saveOrgT()">Save</button></div></div></div>
+<div class="modal-overlay" id="modal-orgTask"><div class="modal"><div class="modal-hdr"><div class="modal-title" id="orgTMT">New Task</div><button class="close-btn" onclick="closeModal('orgTask')">×</button></div><input type="hidden" id="orgTEI" value="-1"><input type="hidden" id="orgTLink" value=""><div class="form-row"><label class="form-label">Task</label><input class="form-input" id="orgTTitle" placeholder="What needs to be done?"></div><div class="form-row"><label class="form-label">Organisation</label><select class="form-select" id="orgTOrg"><option value="heal">Heal Home Care</option><option value="naman">Naman Care Home</option><option value="both">Both organisations</option></select></div><div class="form-2col"><div class="form-row"><label class="form-label">Category</label><select class="form-select" id="orgTCat"><option>Operations</option><option>Staff</option><option>Service Development</option><option>Quality</option><option>Finance</option><option>Marketing</option><option>Compliance</option><option>Training</option><option>Partnership</option></select></div><div class="form-row"><label class="form-label">Priority</label><select class="form-select" id="orgTPri"><option value="urgent">Urgent</option><option value="high">High</option><option value="normal" selected>Normal</option><option value="low">Low</option></select></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Deadline</label><input type="date" class="form-input" id="orgTDL"></div><div class="form-row"><label class="form-label">Status</label><select class="form-select" id="orgTSt"><option value="open">Open</option><option value="in_progress">In Progress</option><option value="completed">Completed</option></select></div></div><div class="form-row"><label class="form-label">Notes</label><textarea class="form-textarea" id="orgTNotes"></textarea></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('orgTask')">Cancel</button><button class="btn btn-teal" onclick="saveOrgT()">Save</button></div></div></div>
 
 <div class="modal-overlay" id="modal-story"><div class="modal" style="width:660px"><div class="modal-hdr"><div class="modal-title" id="storyMT">New Story</div><button class="close-btn" onclick="closeModal('story')">×</button></div><input type="hidden" id="storyEI" value="-1"><div class="form-2col"><div class="form-row"><label class="form-label">Name</label><input class="form-input" id="storyName" placeholder="Person's name (or anonymous)"></div><div class="form-row"><label class="form-label">Date</label><input type="date" class="form-input" id="storyDate"></div></div><div class="form-2col"><div class="form-row"><label class="form-label">Age</label><input class="form-input" id="storyAge" placeholder="e.g. 78"></div><div class="form-row"><label class="form-label">Profession</label><input class="form-input" id="storyProf"></div></div><div class="form-row"><label class="form-label">Organization</label><select class="form-select" id="storyOrg"><option value="">None</option><option>Heal Home Care</option><option>Naman Care Home</option><option>Aaroh Movement</option></select></div><div class="form-row"><label class="form-label">Story</label><textarea class="form-textarea" id="storyText" rows="5" style="font-size:13px;line-height:1.65"></textarea></div><div class="form-row"><label class="form-label">Key Life Lessons</label><textarea class="form-textarea" id="storyLess" rows="2"></textarea></div><div class="form-row"><label class="form-label">Memorable Quote</label><input class="form-input" id="storyQuote"></div><div class="form-row"><label class="form-label">My Reflection</label><textarea class="form-textarea" id="storyRefl" rows="2"></textarea></div><div class="form-row"><label class="form-label">Tags</label><input class="form-input" id="storyTags" placeholder="#aging #dignity #family"></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn btn-ghost" onclick="closeModal('story')">Cancel</button><button class="btn btn-teal" onclick="saveW('story')">Save story</button></div></div></div>
 
