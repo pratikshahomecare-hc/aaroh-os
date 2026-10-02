@@ -1502,6 +1502,112 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
   .nw-er.edu>:nth-child(4){grid-area:n}
   .nw-er.edu>:nth-child(5){grid-area:x}
 }
+
+/* ── Automated reports: one look for every scheduled job ───────────── */
+.ar-wrap{background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);
+  padding:16px;margin-bottom:16px;border-left:3px solid var(--green)}
+.ar-wrap.stale{border-left-color:var(--amber)}
+.ar-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+.ar-t{font-size:14px;font-weight:600;color:var(--text)}
+.ar-when{font-size:11px;color:var(--hint);white-space:nowrap}
+.ar-sum{font-size:13px;color:var(--text-2);line-height:1.6;margin:6px 0 10px}
+.ar-stats{display:flex;gap:18px;flex-wrap:wrap;margin:0 0 12px}
+.ar-stat b{display:block;font-size:19px;font-weight:600;color:var(--text);line-height:1.2}
+.ar-stat span{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ar-item{border-top:1px solid var(--border);padding:10px 0}
+.ar-item:last-child{padding-bottom:0}
+.ar-ihead{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
+.ar-ibody{font-size:12.5px;color:var(--text-2);line-height:1.6}
+.ar-inote{font-size:11.5px;color:var(--muted);margin-top:4px}
+.ar-flag{display:inline-block;font-size:10px;font-weight:600;padding:1px 7px;border-radius:10px;
+  background:var(--coral-light);color:var(--coral);margin-left:6px;vertical-align:1px}
+.ar-draft{margin-top:8px;background:var(--content-bg);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:10px}
+.ar-draft pre{margin:0;white-space:pre-wrap;font-family:'DM Sans',sans-serif;font-size:12.5px;
+  color:var(--text);line-height:1.6}
+.ar-acts{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.ar-none{font-size:12.5px;color:var(--hint);padding:6px 0}
+.ar-empty{font-size:12.5px;color:var(--hint);line-height:1.6}
+@media(max-width:900px){.ar-stats{gap:14px}.ar-wrap{padding:13px}}
+
+/* ── Inbox: list + reading pane ─────────────────────────────────────── */
+.mb-split{display:grid;grid-template-columns:minmax(280px,380px) 1fr;gap:16px;align-items:start}
+.mb-list{background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;min-width:0}
+.mb-read{min-width:0}
+.mb-day{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);
+  padding:9px 14px;background:var(--content-bg);border-bottom:1px solid var(--border)}
+.mb-row{display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--border);
+  padding:11px 14px;cursor:pointer;font-family:'DM Sans',sans-serif;position:relative}
+.mb-row:last-child{border-bottom:0}
+.mb-row:hover{background:var(--content-bg)}
+.mb-row.on{background:var(--green-light);box-shadow:inset 3px 0 0 var(--green)}
+.mb-row.un .mb-rs{font-weight:700;color:var(--text)}
+.mb-rh{display:flex;align-items:center;gap:7px;margin-bottom:2px}
+.mb-dot{width:6px;height:6px;border-radius:50%;background:var(--coral);flex:0 0 6px}
+.mb-row:not(.un) .mb-dot{background:transparent}
+.mb-rs{font-size:13px;font-weight:600;color:var(--text-2);flex:1;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mb-src{font-size:9px;font-weight:600;padding:1px 6px;border-radius:9px;background:var(--border);color:var(--muted);flex:0 0 auto}
+.mb-src.gmail{background:var(--coral-light);color:var(--coral)}
+.mb-src.outlook{background:var(--blue-light);color:var(--blue)}
+.mb-rf{font-size:11.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-left:13px}
+.mb-rd{font-size:10.5px;color:var(--hint);white-space:nowrap;flex:0 0 auto}
+.mb-none{padding:34px 16px;text-align:center;color:var(--hint);font-size:13px}
+.mb-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px;
+  border-left:3px solid var(--border)}
+.mb-card.hi{border-left-color:var(--coral)}
+.mb-ctop{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.mb-ct{font-size:16px;font-weight:600;color:var(--text);line-height:1.35;margin-bottom:5px}
+.mb-cf{font-size:12px;color:var(--muted);margin-bottom:12px}
+.mb-cb{font-size:13.5px;color:var(--text-2);line-height:1.65;margin-bottom:10px}
+.mb-why{font-size:12.5px;color:var(--text-2);background:var(--amber-light);border-radius:4px;padding:8px 11px;margin-bottom:12px}
+.mb-pri{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:14px;font-size:11.5px;color:var(--muted)}
+.mb-pb{font-size:11.5px;font-weight:600;padding:3px 12px;border-radius:14px;border:1px solid var(--border);
+  background:#fff;color:var(--text-2);cursor:pointer;font-family:'DM Sans',sans-serif}
+.mb-pb.on{background:var(--text);color:#fff;border-color:var(--text)}
+.mb-acts2{display:flex;gap:7px;flex-wrap:wrap}
+.mb-empty{background:#fff;border:1px dashed var(--border);border-radius:var(--radius-sm);
+  padding:44px 20px;text-align:center;color:var(--hint);font-size:13px}
+.mb-moved{font-size:12px;color:var(--muted);margin-bottom:12px}
+.mb-moved a{color:var(--green);font-weight:600;cursor:pointer;text-decoration:none}
+.mb-back{display:none}
+@media(max-width:900px){
+  .mb-split{grid-template-columns:1fr}
+  .mb-split.reading .mb-list{display:none}
+  .mb-split:not(.reading) .mb-read{display:none}
+  .mb-back{display:inline-block;margin-bottom:10px}
+}
+
+/* ── Sector news ─────────────────────────────────────────────────────── */
+.nx-wrap{display:grid;gap:14px}
+.nx-item{background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;
+  border-left:3px solid var(--blue)}
+.nx-item.doing{border-left-color:var(--green)}
+.nx-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:5px}
+.nx-t{font-size:14.5px;font-weight:600;color:var(--text);line-height:1.4}
+.nx-meta{font-size:10.5px;color:var(--hint);white-space:nowrap}
+.nx-b{font-size:13px;color:var(--text-2);line-height:1.65;margin-bottom:9px}
+.nx-tag{display:inline-block;font-size:9.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  padding:2px 8px;border-radius:10px;background:var(--blue-light);color:var(--blue);margin-right:6px}
+.nx-tag.doing{background:#e8f5e9;color:#3B6D11}
+.nx-take{font-size:12.5px;color:var(--text-2);background:var(--content-bg);border-radius:4px;padding:9px 11px;margin-bottom:9px}
+.nx-src{font-size:11px;color:var(--hint)}
+.nx-src a{color:var(--green);text-decoration:none;font-weight:600}
+
+/* ── Daily skill ─────────────────────────────────────────────────────── */
+.sk-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);
+  padding:18px;border-left:3px solid var(--amber);margin-bottom:18px}
+.sk-eye{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:6px}
+.sk-t{font-size:17px;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:7px}
+.sk-b{font-size:13.5px;color:var(--text-2);line-height:1.65;margin-bottom:11px}
+.sk-try{font-size:13px;color:var(--text);background:var(--amber-light);border-radius:4px;padding:11px 13px;line-height:1.6}
+.sk-try b{display:block;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--amber-dark);margin-bottom:3px}
+.db-skill{background:#fff;border:1px solid var(--border);border-left:3px solid var(--amber);
+  border-radius:var(--radius-sm);padding:14px 16px;cursor:pointer}
+.db-skill .e{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:4px}
+.db-skill .t{font-size:14px;font-weight:600;color:var(--text);line-height:1.35;margin-bottom:3px}
+.db-skill .s{font-size:12px;color:var(--muted);line-height:1.5}
 </style>
 </head>
 <body>
@@ -1661,6 +1767,11 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10L12 5 2 10l10 5 10-5z"></path><path d="M6 12v5c3 2 9 2 12 0v-5"></path></svg>
         Learning
       </button>
+      <button class="sidebar-item" onclick="showPage('news',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9h4"></path><path d="M18 14h-8M15 18h-5M10 6h8v4h-8V6z"></path></svg>
+        Sector News
+        <span class="sidebar-badge" id="sideNewsBadge" style="display:none">0</span>
+      </button>
       <button class="sidebar-item" onclick="showPage('insights',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
         Insights
@@ -1796,6 +1907,16 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
     <div class="db-sec">
       <div class="sec-lbl"><span>Human library</span><button onclick="showPage('stories',null)">View all →</button></div>
       <div id="dashLibraryContainer"></div>
+    </div>
+
+    <div class="db-sec">
+      <div class="sec-lbl"><span>New skill today</span><button onclick="showPage('learning',null)">Learning →</button></div>
+      <div id="dashSkill"></div>
+    </div>
+
+    <div class="db-sec">
+      <div class="sec-lbl"><span>Sector news</span><button onclick="showPage('news',null)">All news →</button></div>
+      <div id="dashNews"></div>
     </div>
 
     <div class="db-sec">
@@ -2717,6 +2838,23 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
 
     </section>
 
+
+    <!-- ═══════════ SECTOR NEWS ═══════════ -->
+    <section class="page" id="page-news">
+      <div class="pg-head">
+        <div>
+          <h1 class="pg-title">Sector news</h1>
+          <p class="pg-sub" id="nxMeta">Ageing, home health, long-term care and care homes — read for you.</p>
+        </div>
+        <div class="nw-actions">
+          <button class="btn btn-ghost btn-sm" id="nxCheckBtn" onclick="mbCheckNow()">Check for new</button>
+        </div>
+      </div>
+      <div class="nw-stats" id="nxStats"></div>
+      <div class="chip-row nw-chips" id="nxChips"></div>
+      <div class="nx-wrap" id="nxBody"></div>
+    </section>
+
     <!-- ═══════════ LEARNING ═══════════ -->
     <section class="page" id="page-learning">
       <div class="pg-head">
@@ -2726,6 +2864,7 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
         </div>
         <button class="btn btn-teal btn-sm" onclick="lrnOpen(null,'book')">+ Add</button>
       </div>
+      <div id="lrSkill"></div>
       <div class="lr-now" id="lrNow"></div>
       <div class="nw-stats" id="lrStats"></div>
       <div class="lr-hist-h">
@@ -2746,6 +2885,8 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
       </div>
 
       <div class="nw-stats" id="gwStats"></div>
+
+      <div id="arGrowth"></div>
 
       <div class="gw-sec">
         <div class="gw-sec-t">Needs attention</div>
@@ -2778,6 +2919,8 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
 
       <div class="em-privacy">Records bed or EMR references and met / missed marks only. No names, readings or clinical notes are stored here — those stay in the EMR.</div>
 
+      <div id="arEmr"></div>
+
       <div id="emRunWrap" style="display:none">
         <div id="emRunHead"></div>
         <div class="em-help">Everything starts marked done. Tap a resident cell to cycle: <b>&#10003;</b> recorded &rarr; <b>&#10007;</b> missing &rarr; <b>&ndash;</b> not applicable.</div>
@@ -2809,8 +2952,15 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
           <button class="btn btn-teal btn-sm" onclick="mbImportOpen()">Update briefing</button>
         </div>
       </div>
-      <div class="em-privacy">Drafts are prepared for you to review. Nothing is ever sent from Aaroh — you send from Gmail.</div>
+      <div class="em-privacy">Drafts are prepared for you to review. Nothing is ever sent from Aaroh — you send it yourself.</div>
+      <div class="chip-row nw-chips" id="mbFilters"></div>
+      <div class="mb-moved" id="mbMoved"></div>
       <div class="nw-stats" id="mbStats"></div>
+      <div id="arMoney"></div>
+      <div class="mb-split" id="mbSplit">
+        <div class="mb-list" id="mbList"></div>
+        <div class="mb-read" id="mbRead"></div>
+      </div>
       <div id="mbBody"></div>
     </section>
   </div><!-- /content -->
@@ -3547,7 +3697,7 @@ let meetings = [{"date":"","type":"nursing","title":"IEE discussion","org":"Nurs
 const pageTitles = {
   dashboard:'Today',colleges:'Colleges',hospitals:'Hospitals',
   training:'Training',tours:'Facility Tours',meetings:'Meetings',
-  gallery:'Knowledge',notifications:'Follow-ups',ritual:'Daily Ritual',learning:'Learning',growth:'Growth',emr:'EMR Audit',mail:'Inbox',priorities:'Priorities',followups:'Follow-ups',stories:'Stories',bookshelf:'Bookshelf',results:'Results & Analytics',backup:'Backup & Restore',hospitals:'Healthcare Ecosystem',colleges:'Education Ecosystem'
+  gallery:'Knowledge',notifications:'Follow-ups',ritual:'Daily Ritual',learning:'Learning',news:'Sector News',growth:'Growth',emr:'EMR Audit',mail:'Inbox',priorities:'Priorities',followups:'Follow-ups',stories:'Stories',bookshelf:'Bookshelf',results:'Results & Analytics',backup:'Backup & Restore',hospitals:'Healthcare Ecosystem',colleges:'Education Ecosystem'
 };
 
 function showPage(id, clickedItem) {
@@ -4517,7 +4667,7 @@ function delSpk(i){if(!confirm('Delete?'))return;_spkEngs.splice(i,1);saveLS('aa
 function renderSpk(){var c=document.getElementById('spkEngList');if(!c)return;var q=((document.getElementById('spkSearch')||{}).value||'').toLowerCase();var sC={Upcoming:'var(--amber-dark)',Completed:'#3B6D11',Cancelled:'var(--coral)'};var sB={Upcoming:'var(--amber-light)',Completed:'#e8f5e9',Cancelled:'var(--coral-light)'};var list=_spkEngs.filter(function(e){return !q||JSON.stringify(e).toLowerCase().includes(q);});if(!list.length){c.innerHTML='<div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No engagements yet</div>';return;}c.innerHTML=list.map(function(e,i){var st=e.status||'Upcoming';var tags=(e.tags||'').split(',').filter(Boolean).map(function(t){return'<span class="wtag">'+t.trim()+'</span>';}).join('');return'<div class="spkcard"><div class="spkcard-hdr"><div><div class="spkcard-event">'+e.event+'</div>'+(e.org?'<div style="font-size:12px;color:var(--muted);margin-top:2px">'+e.org+'</div>':'')+'</div><div style="display:flex;gap:4px;align-items:center;flex-shrink:0"><span style="font-size:10px;font-weight:600;padding:2px 9px;border-radius:10px;background:'+(sB[st]||'var(--border)')+';color:'+(sC[st]||'var(--muted)')+'">'+st+'</span><button class="btn btn-ghost btn-sm" onclick="openSpkModal('+i+')">Edit</button><button class="btn btn-ghost btn-sm" style="color:var(--coral);border-color:var(--coral)" onclick="delSpk('+i+')">Del</button></div></div><div class="spkmeta">'+(e.date?'<div><div class="spkml">Date</div><div class="spkmv">'+e.date+'</div></div>':'')+(e.topic?'<div><div class="spkml">Topic</div><div class="spkmv">'+e.topic+'</div></div>':'')+(e.aud?'<div><div class="spkml">Audience</div><div class="spkmv">'+e.aud+(e.audSz?' ('+e.audSz+')':'')+'</div></div>':'')+(e.loc?'<div><div class="spkml">Location</div><div class="spkmv">'+e.loc+'</div></div>':'')+'</div>'+(e.msg?'<div style="font-size:12px;color:var(--text-2);font-style:italic;padding:6px 10px;background:var(--green-light);border-radius:4px;border-left:2px solid var(--green);margin-bottom:6px">'+e.msg+'</div>':'')+(e.notes?'<div style="font-size:12px;color:var(--muted);margin-bottom:6px">'+e.notes+'</div>':'')+(e.fu?'<div style="font-size:11px;font-weight:600;color:var(--amber-dark)">→ Follow-up: '+e.fu+'</div>':'')+(tags?'<div class="wtags" style="margin-top:6px">'+tags+'</div>':'')+'</div>';}).join('');}
 
 // EXTEND showPage
-var _origSP=showPage;showPage=function(id,clickedItem){document.querySelectorAll('[contenteditable="true"][id]').forEach(function(el){if(el.id)saveLS('ace_'+el.id,el.textContent);});_origSP(id,clickedItem);if(id==='priorities'){loadDaily();renderDaily();renderPris();updatePriStats();}if(id==='followups'){renderFUs();updateFUStats();}if(id==='govt'){renderGovt();updateGovtStats();}if(id==='heal'){renderOrgT('heal');updateOrgStats('heal');}if(id==='naman'){renderOrgT('naman');updateOrgStats('naman');}if(id==='stories'){renderWis('story');}if(id==='bookshelf'){renderWis('book');}if(id==='insights'){renderWis('insight');}if(id==='studio'){renderWis('studio');}if(id==='ritual'){renderRitualPage();setTimeout(renderThoughtPage,60);setTimeout(renderQuote,60);}if(id==='learning'){renderLearning();}if(id==='growth'){renderGrowth();}if(id==='emr'){renderEMR();}if(id==='mail'){renderMail();}if(id==='archive'){renderArchive();}if(id==='movement'){renderASection('mvGoals');renderASection('mvInits');renderASection('mvMiles');renderAList('mvPrinciples','Write a core principle…');}if(id==='book'){renderASection('bookChapters');}if(id==='speaking'){renderSpk();renderASection('spkSpeeches');renderASection('spkMedia');renderASection('spkOpps');renderAList('spkTopics','Add a speaking topic…');}if(id==='dashboard'){setTimeout(function(){if(typeof renderDashRitual==='function')renderDashRitual();},60);setTimeout(function(){if(typeof renderDashLearn==='function')renderDashLearn();},70);setTimeout(function(){if(typeof renderDashGrowth==='function')renderDashGrowth();},75);setTimeout(function(){if(typeof renderDashQuote==='function')renderDashQuote();},80);setTimeout(function(){if(typeof renderDashMail==='function')renderDashMail();},85);setTimeout(renderDashTop3,80);setTimeout(renderKeyRelationships,120);setTimeout(renderDashFollowUps,140);setTimeout(renderDashLibrary,160);setTimeout(restoreTodaysThought,180);setTimeout(renderDashFollowUps,120);setTimeout(renderKeyRelationships,150);setTimeout(renderDashLibrary,180);setTimeout(restoreTodaysThought,200);}setTimeout(function(){_notifs=buildLiveNotifs();_updateNotifBadge();},120);};
+var _origSP=showPage;showPage=function(id,clickedItem){document.querySelectorAll('[contenteditable="true"][id]').forEach(function(el){if(el.id)saveLS('ace_'+el.id,el.textContent);});_origSP(id,clickedItem);if(id==='priorities'){loadDaily();renderDaily();renderPris();updatePriStats();}if(id==='followups'){renderFUs();updateFUStats();}if(id==='govt'){renderGovt();updateGovtStats();}if(id==='heal'){renderOrgT('heal');updateOrgStats('heal');}if(id==='naman'){renderOrgT('naman');updateOrgStats('naman');}if(id==='stories'){renderWis('story');}if(id==='bookshelf'){renderWis('book');}if(id==='insights'){renderWis('insight');}if(id==='studio'){renderWis('studio');}if(id==='ritual'){renderRitualPage();setTimeout(renderThoughtPage,60);setTimeout(renderQuote,60);}if(id==='learning'){renderLearning();renderSkill();}if(id==='news'){renderNews();}if(id==='growth'){renderGrowth();renderAutoReport('aaroh_growth_inbound');setTimeout(gwPublishExceptions,120);}if(id==='emr'){renderEMR();renderAutoReport('aaroh_emr_inbound');}if(id==='mail'){renderMail();renderAutoReport('aaroh_money_week');}if(id==='archive'){renderArchive();}if(id==='movement'){renderASection('mvGoals');renderASection('mvInits');renderASection('mvMiles');renderAList('mvPrinciples','Write a core principle…');}if(id==='book'){renderASection('bookChapters');}if(id==='speaking'){renderSpk();renderASection('spkSpeeches');renderASection('spkMedia');renderASection('spkOpps');renderAList('spkTopics','Add a speaking topic…');}if(id==='dashboard'){setTimeout(function(){if(typeof renderDashRitual==='function')renderDashRitual();},60);setTimeout(function(){if(typeof renderDashLearn==='function')renderDashLearn();},70);setTimeout(function(){if(typeof renderDashGrowth==='function')renderDashGrowth();},75);setTimeout(function(){if(typeof renderDashQuote==='function')renderDashQuote();},80);setTimeout(function(){if(typeof renderDashMail==='function')renderDashMail();},85);setTimeout(function(){if(typeof renderDashSkill==='function')renderDashSkill();},88);setTimeout(function(){if(typeof renderDashNews==='function')renderDashNews();},90);setTimeout(renderDashTop3,80);setTimeout(renderKeyRelationships,120);setTimeout(renderDashFollowUps,140);setTimeout(renderDashLibrary,160);setTimeout(restoreTodaysThought,180);setTimeout(renderDashFollowUps,120);setTimeout(renderKeyRelationships,150);setTimeout(renderDashLibrary,180);setTimeout(restoreTodaysThought,200);}setTimeout(function(){_notifs=buildLiveNotifs();_updateNotifBadge();},120);};
 
 // EXPORT
 function exportSnapshot(){var a=document.createElement('a');a.href='data:text/html;charset=utf-8,'+encodeURIComponent(document.documentElement.outerHTML);a.download='AarohOS-'+new Date().toISOString().split('T')[0]+'.html';document.body.appendChild(a);a.click();document.body.removeChild(a);}
@@ -4999,7 +5149,7 @@ function startLive(){
   setTimeout(function(){if(typeof renderDashLearn==='function')renderDashLearn();},320);
   setTimeout(function(){if(typeof renderDashGrowth==='function')renderDashGrowth();},340);
   setTimeout(function(){if(typeof renderDashQuote==='function')renderDashQuote();},350);
-  setTimeout(function(){if(typeof renderDashMail==='function')renderDashMail();},360);
+  setTimeout(function(){if(typeof renderDashMail==='function')renderDashMail();},360);setTimeout(function(){if(typeof renderDashSkill==='function')renderDashSkill();},365);setTimeout(function(){if(typeof renderDashNews==='function')renderDashNews();},370);setTimeout(function(){if(typeof renderNewsBadge==='function')renderNewsBadge();},375);
   setTimeout(function(){
     _cloudLoad().then(function(){
       loadPris();loadFUs();loadWis();loadOrgT();loadColleges();
@@ -6420,7 +6570,7 @@ function emCritReset(){
 // edited inside the app, so pulling them can never overwrite typing in
 // progress. Everything the user edits keeps the normal local-first path.
 
-var INBOUND_KEYS=['aaroh_mail_brief','aaroh_emr_inbound','aaroh_growth_inbound'];
+var INBOUND_KEYS=['aaroh_mail_brief','aaroh_emr_inbound','aaroh_growth_inbound','aaroh_learn_digest','aaroh_money_week','aaroh_news','aaroh_skill'];
 var _inLast=0,_inBusy=false;
 
 function pullInbound(){
@@ -6443,6 +6593,13 @@ function pullInbound(){
       if(typeof renderMailBadge==='function')renderMailBadge();
       if(typeof renderEMR==='function')renderEMR();
       if(typeof renderGrowth==='function')renderGrowth();
+      if(typeof renderLearning==='function')renderLearning();
+      if(typeof renderAllAutoReports==='function')renderAllAutoReports();
+      if(typeof renderNews==='function')renderNews();
+      if(typeof renderSkill==='function')renderSkill();
+      if(typeof renderDashNews==='function')renderDashNews();
+      if(typeof renderDashSkill==='function')renderDashSkill();
+      if(typeof renderNewsBadge==='function')renderNewsBadge();
     }
     return changed;
   }).catch(function(){return null;})
@@ -6503,6 +6660,105 @@ function _mbPayTotal(b,days){
 var _mbOpen={};
 function mbToggle(i){_mbOpen[i]=!_mbOpen[i];renderMail();}
 
+// ═══════════════════ INBOX ═══════════════════
+// The morning job replaces aaroh_mail_brief wholesale, so anything SHE does
+// to a message — read, priority, removed — lives in its own store keyed by a
+// stable message id. Yesterday's decisions survive tonight's briefing.
+var MB_SOURCES={gmail:'Gmail',outlook:'Outlook'};
+var _mbFilter='all', _mbSel=null;
+
+function _mbStateLoad(){
+  try{var r=JSON.parse(getLS('aaroh_mail_state')||'{}');return (r&&typeof r==='object'&&!Array.isArray(r))?r:{};}
+  catch(e){return {};}
+}
+function _mbStateSave(st){saveLS('aaroh_mail_state',JSON.stringify(st));}
+function _mbId(m,i){
+  if(m&&m.id)return String(m.id);
+  // No id from the job: derive one that is stable across briefings.
+  var base=((m&&m.from)||'')+'|'+((m&&m.subject)||'')+'|'+((m&&m.at)||'');
+  if(base.replace(/\|/g,'').length)return 'k'+base.toLowerCase().replace(/\s+/g,' ').trim();
+  return 'i'+i;
+}
+function _mbSource(m){
+  var s=((m&&m.source)||'').toLowerCase();
+  if(MB_SOURCES[s])return s;
+  if(/outlook|microsoft|office365|healhomecare/i.test((m&&m.from)||''))return 'outlook';
+  return 'gmail';
+}
+function _mbItems(){
+  var b=_mbLoad(); if(!b)return [];
+  var st=_mbStateLoad(), out=[];
+  (b.needsReply||[]).forEach(function(m,i){
+    var id=_mbId(m,i);
+    if(st.removed&&st.removed[id])return;
+    out.push({
+      id:id, m:m, src:_mbSource(m),
+      read:!!(st.read&&st.read[id]),
+      pri:(st.pri&&st.pri[id])||'',
+      suggested:m.urgent?'high':'medium'
+    });
+  });
+  return out;
+}
+function _mbDayLabel(iso){
+  var t=Date.parse(iso||''); if(isNaN(t))return 'Earlier';
+  var d=new Date(t), n=new Date();
+  var same=function(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate();};
+  if(same(d,n))return 'Today';
+  var y=new Date(); y.setDate(y.getDate()-1);
+  if(same(d,y))return 'Yesterday';
+  return d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+}
+
+function mbSetFilter(f){_mbFilter=f;_mbSel=null;renderMail();}
+function mbOpen(id){
+  _mbSel=id;
+  var st=_mbStateLoad(); st.read=st.read||{}; st.read[id]=true; _mbStateSave(st);
+  var sp=document.getElementById('mbSplit'); if(sp)sp.classList.add('reading');
+  renderMail(); renderMailBadge&&renderMailBadge(); renderDashMail&&renderDashMail();
+}
+function mbBack(){var sp=document.getElementById('mbSplit');if(sp)sp.classList.remove('reading');_mbSel=null;renderMail();}
+function mbUnread(id){
+  var st=_mbStateLoad(); st.read=st.read||{}; delete st.read[id]; _mbStateSave(st);
+  renderMail(); renderMailBadge&&renderMailBadge(); renderDashMail&&renderDashMail();
+}
+function mbSetPri(id,p){
+  var st=_mbStateLoad(); st.pri=st.pri||{};
+  if(st.pri[id]===p)delete st.pri[id]; else st.pri[id]=p;
+  _mbStateSave(st); renderMail();
+}
+function mbRemove(id){
+  if(!confirm('Remove this from the list? The email itself is untouched.'))return;
+  var st=_mbStateLoad(); st.removed=st.removed||{}; st.removed[id]=true; _mbStateSave(st);
+  _mbSel=null; renderMail(); renderMailBadge&&renderMailBadge(); renderDashMail&&renderDashMail();
+}
+function mbAddToday(id){
+  var it=_mbItems().filter(function(x){return x.id===id;})[0]; if(!it)return;
+  var title='Reply: '+(it.m.subject||'(no subject)');
+  if(typeof _rtToday==='function'&&typeof _rtDay==='function'&&typeof _rtSaveDay==='function'){
+    var ds=_rtToday(), day=_rtDay(ds)||[];
+    if(day.some(function(p){return (p.text||'')===title;})){alert('Already in today’s list.');return;}
+    day.push({text:title, org:'', cat:'Follow-up', goal:(it.m.from||''), done:false});
+    _rtSaveDay(ds,day);
+    if(typeof _daily!=='undefined')_daily=day;
+    if(typeof renderDaily==='function')renderDaily();
+    if(typeof renderDashTop3==='function')renderDashTop3();
+    if(typeof renderRitualPage==='function')renderRitualPage();
+    if(typeof showSaveToast==='function')showSaveToast();
+    var st=_mbStateLoad(); st.today=st.today||{}; st.today[id]=true; _mbStateSave(st);
+    renderMail();
+  }
+}
+function mbCopyDraft(id){
+  var el=document.getElementById('mbDraftTxt'); if(!el)return;
+  var t=el.textContent;
+  try{ navigator.clipboard.writeText(t).then(function(){showSaveToast&&showSaveToast();}); }
+  catch(e){
+    var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);
+    ta.select();try{document.execCommand('copy');}catch(e2){}document.body.removeChild(ta);
+  }
+}
+
 function renderMail(){
   var box=document.getElementById('mbBody');if(!box)return;
   var b=_mbLoad();
@@ -6512,8 +6768,17 @@ function renderMail(){
     ? ('Briefing from '+_mbAge(b.generated)+(b.account?' · '+b.account:''))
     : 'No briefing yet';
 
+  var listEl=document.getElementById('mbList'),
+      readEl=document.getElementById('mbRead'),
+      filtEl=document.getElementById('mbFilters'),
+      movedEl=document.getElementById('mbMoved');
+
   if(!b){
     _netStats('mbStats',[['—','Need a reply'],['—','Drafts ready'],['—','Payments in'],['—','Received']]);
+    if(filtEl)filtEl.innerHTML='';
+    if(movedEl)movedEl.innerHTML='';
+    if(listEl)listEl.innerHTML='';
+    if(readEl)readEl.innerHTML='';
     box.innerHTML='<div class="nw-empty">No briefing loaded yet.<br><br>'+
       'This page is already listening: anything that writes a briefing for your account appears here on its own, '+
       'and it re-checks every few minutes while open.<br><br>Until the automation is running, ask Claude for a briefing '+
@@ -6521,49 +6786,112 @@ function renderMail(){
     return;
   }
 
-  var needs=b.needsReply||[],pays=b.payments||[],fyi=b.fyi||[];
-  var drafts=needs.filter(function(x){return (x.draft||'').trim();}).length;
+  var items=_mbItems(), pays=b.payments||[], fyi=b.fyi||[];
+  var drafts=items.filter(function(x){return (x.m.draft||'').trim();}).length;
+  var unread=items.filter(function(x){return !x.read;}).length;
+  var counts={all:items.length, unread:unread,
+    gmail:items.filter(function(x){return x.src==='gmail';}).length,
+    outlook:items.filter(function(x){return x.src==='outlook';}).length};
+
   _netStats('mbStats',[
-    [needs.length,'Need a reply'],
+    [items.length,'Need a reply'],
     [drafts,'Drafts ready'],
     [pays.length,'Payments in'],
     [_mbMoney(_mbPayTotal(b,30),b.currency),'Received · 30 days']]);
 
-  var h='';
-
-  h+='<div class="mb-sec"><div class="mb-h"><span>Needs your reply</span>'+
-     (needs.length?'<small>'+drafts+' of '+needs.length+' have a draft ready</small>':'')+'</div>';
-  if(!needs.length){
-    h+='<div class="gw-clear">Nothing waiting on you.</div>';
-  }else{
-    h+=needs.map(function(m,i){
-      var open=_mbOpen['n'+i];
-      return '<div class="mb-item'+(m.urgent?' urgent':'')+'">'+
-        '<div class="mb-top" onclick="mbToggle(\'n'+i+'\')">'+
-          '<div class="mb-who"><b>'+_esc(m.from||'Unknown')+'</b>'+(m.at?'<span>'+_esc(_mbAge(m.at))+'</span>':'')+'</div>'+
-          '<div class="mb-subj">'+_esc(m.subject||'(no subject)')+'</div>'+
-          '<div class="mb-sum">'+_esc(m.summary||'')+'</div>'+
-          (m.why?'<div class="mb-why">'+_esc(m.why)+'</div>':'')+
-          '<div class="mb-tags">'+
-            ((m.draft||'').trim()?'<span class="mb-tag ok">Draft ready</span>':'<span class="mb-tag">No draft</span>')+
-            (m.urgent?'<span class="mb-tag hot">Urgent</span>':'')+
-            '<span class="mb-more">'+((m.draft||'').trim()?(open?'Hide draft':'Show draft'):(open?'Hide':'Details'))+'</span>'+
-          '</div>'+
-        '</div>'+
-        (open?'<div class="mb-draft">'+
-          ((m.draft||'').trim()?'<pre id="mbD'+i+'">'+_esc(m.draft)+'</pre>':'<div class="nw-none">No draft was prepared for this one.</div>')+
-          '<div class="mb-acts">'+
-            ((m.draft||'').trim()?'<button class="qt-btn" onclick="mbCopy('+i+')">Copy draft</button>':'')+
-            (m.link?'<a class="qt-btn" href="'+_esc(m.link)+'" target="_blank" rel="noopener">Open in Gmail</a>':'')+
-          '</div>'+
-          '<div class="mb-note">Nothing is sent from Aaroh — review and send it in Gmail.</div>'+
-        '</div>':'')+
-      '</div>';
-    }).join('');
+  // Filters
+  if(filtEl){
+    filtEl.innerHTML=[['all','All',counts.all],['gmail','Gmail',counts.gmail],
+                      ['outlook','Outlook',counts.outlook],['unread','Unread',counts.unread]]
+      .map(function(f){
+        return '<button class="chip'+(_mbFilter===f[0]?' on':'')+'" onclick="mbSetFilter(\''+f[0]+'\')">'+
+               f[1]+'<b>'+f[2]+'</b></button>';
+      }).join('');
   }
-  h+='</div>';
 
-  h+='<div class="mb-sec"><div class="mb-h"><span>Payments received</span>'+
+  // Newsletters live on their own page, not in here
+  if(movedEl){
+    movedEl.innerHTML = fyi.length
+      ? ('<span style="color:var(--amber-dark)">●</span> '+fyi.length+' update'+(fyi.length===1?'':'s')+
+         ' and newsletter'+(fyi.length===1?'':'s')+' moved to '+
+         '<a onclick="showPage(\'news\',null)">Sector News</a>.')
+      : '';
+  }
+
+  // ── List ──
+  var shown=items.filter(function(x){
+    if(_mbFilter==='unread')return !x.read;
+    if(_mbFilter==='gmail'||_mbFilter==='outlook')return x.src===_mbFilter;
+    return true;
+  });
+  if(listEl){
+    if(!shown.length){
+      listEl.innerHTML='<div class="mb-none">'+
+        (items.length?'Nothing in this view.':'Nothing is waiting on you.')+'</div>';
+    }else{
+      var day='', html='';
+      shown.forEach(function(x){
+        var d=_mbDayLabel(x.m.at);
+        if(d!==day){day=d;html+='<div class="mb-day">'+_esc(d)+'</div>';}
+        html+='<button class="mb-row'+(x.read?'':' un')+(_mbSel===x.id?' on':'')+'" onclick="mbOpen(\''+x.id+'\')">'+
+          '<div class="mb-rh"><span class="mb-dot"></span>'+
+            '<span class="mb-rs">'+_esc(x.m.subject||'(no subject)')+'</span>'+
+            '<span class="mb-src '+x.src+'">'+_esc(MB_SOURCES[x.src])+'</span>'+
+          '</div>'+
+          '<div class="mb-rf">'+_esc(x.m.from||'Unknown')+
+            (x.m.at?' · <span class="mb-rd">'+_esc(_mbAge(x.m.at))+'</span>':'')+'</div>'+
+        '</button>';
+      });
+      listEl.innerHTML=html;
+    }
+  }
+
+  // ── Reading pane ──
+  if(readEl){
+    var sel=shown.filter(function(x){return x.id===_mbSel;})[0];
+    if(!sel){
+      readEl.innerHTML='<div class="mb-empty">'+
+        (shown.length?'Pick a message to read it and see its draft.':'Nothing to show here.')+'</div>';
+    }else{
+      var m=sel.m, hasDraft=(m.draft||'').trim().length>0;
+      var st=_mbStateLoad(), inToday=!!(st.today&&st.today[sel.id]);
+      var link=m.link||'';
+      var openLabel=sel.src==='outlook'?'Open in Outlook':'Open in Gmail';
+      var r='<button class="btn btn-ghost btn-sm mb-back" onclick="mbBack()">‹ Back</button>'+
+        '<div class="mb-card'+(m.urgent?' hi':'')+'">'+
+        '<div class="mb-ctop">'+_esc(MB_SOURCES[sel.src])+(sel.read?' · read':'')+'</div>'+
+        '<div class="mb-ct">'+_esc(m.subject||'(no subject)')+'</div>'+
+        '<div class="mb-cf">'+_esc(m.from||'Unknown')+(m.at?' · '+_esc(_mbAge(m.at)):'')+'</div>'+
+        (m.summary?'<div class="mb-cb">'+_esc(m.summary)+'</div>':'')+
+        (m.why?'<div class="mb-why">'+_esc(m.why)+'</div>':'')+
+        '<div class="mb-pri"><span>Priority</span>'+
+          ['high','medium','low'].map(function(p){
+            return '<button class="mb-pb'+(sel.pri===p?' on':'')+'" onclick="mbSetPri(\''+sel.id+'\',\''+p+'\')">'+
+              p.charAt(0).toUpperCase()+p.slice(1)+'</button>';
+          }).join('')+
+          '<span style="margin-left:4px">Suggested: '+(sel.suggested==='high'?'High':'Medium')+'</span>'+
+        '</div>';
+      if(hasDraft){
+        r+='<div class="mb-cb" style="margin-bottom:6px;font-weight:600;font-size:12px;color:var(--muted)">Draft reply</div>'+
+           '<div class="ar-draft"><pre id="mbDraftTxt">'+_esc(m.draft)+'</pre></div>'+
+           '<div class="mb-inote" style="font-size:11.5px;color:var(--muted);margin:8px 0 12px">'+
+           'Nothing is sent from Aaroh — copy this and send it yourself.</div>';
+      }else{
+        r+='<div class="mb-cb" style="color:var(--hint)">No draft was prepared for this one.</div>';
+      }
+      r+='<div class="mb-acts2">'+
+        (link?'<a class="qt-btn" href="'+_esc(link)+'" target="_blank" rel="noopener">'+openLabel+'</a>':'')+
+        (hasDraft?'<button class="qt-btn" onclick="mbCopyDraft(\''+sel.id+'\')">Copy draft</button>':'')+
+        '<button class="qt-btn" onclick="mbAddToday(\''+sel.id+'\')">'+(inToday?'In today’s list':'Add to Today')+'</button>'+
+        '<button class="qt-btn" onclick="mbUnread(\''+sel.id+'\')">Mark unread</button>'+
+        '<button class="qt-btn" style="color:var(--coral);border-color:var(--coral)" onclick="mbRemove(\''+sel.id+'\')">Remove</button>'+
+      '</div></div>';
+      readEl.innerHTML=r;
+    }
+  }
+
+  // ── Payments (unchanged in substance) ──
+  var h='<div class="mb-sec"><div class="mb-h"><span>Payments received</span>'+
      (pays.length?'<small>'+_mbMoney(_mbPayTotal(b),b.currency)+' in this briefing</small>':'')+'</div>';
   if(!pays.length){
     h+='<div class="gw-clear">No payment emails in this briefing.</div>';
@@ -6581,14 +6909,6 @@ function renderMail(){
       }).join('')+'</div>';
   }
   h+='</div>';
-
-  if(fyi.length){
-    h+='<div class="mb-sec"><div class="mb-h"><span>Everything else</span><small>no action needed</small></div>'+
-      '<div class="nw-list">'+fyi.map(function(f){
-        return '<div class="mb-fyi">'+_esc(typeof f==='string'?f:(f.summary||''))+
-          (f.from?'<span>'+_esc(f.from)+'</span>':'')+'</div>';
-      }).join('')+'</div></div>';
-  }
   if(b.note)h+='<div class="mb-sec"><div class="em-privacy">'+_esc(b.note)+'</div></div>';
   box.innerHTML=h;
 }
@@ -6967,8 +7287,9 @@ function gwLogSave(){
 
 function renderMailBadge(){
   var b=document.getElementById('sideMailBadge');if(!b)return;
-  var br=(typeof _mbLoad==='function')?_mbLoad():null;
-  var n=br?((br.needsReply||[]).length):0;
+  var n=(typeof _mbItems==='function')
+    ? _mbItems().filter(function(x){return !x.read;}).length
+    : 0;
   b.textContent=n;b.style.display=n?'':'none';
 }
 function renderEmrBadge(){
@@ -7776,6 +8097,391 @@ function impRun(){
   }
   closeModal('import');
   showToast();
+}
+
+
+// ═══════════════════ AUTOMATED REPORTS ═══════════════════
+// Every scheduled job writes the same shape, so there is one format to
+// learn and one renderer to maintain:
+//   { generated:ISO, title?, summary?, stats:[[value,label]],
+//     items:[{head, body, note, flag, draft, link}], note? }
+// Nothing here can send anything. Drafts are copied out by hand.
+var AR_DEFS={
+  aaroh_growth_inbound:{el:'arGrowth', title:'Relationships needing attention',
+    empty:'No growth report yet. The weekly job writes this every Monday.'},
+  aaroh_emr_inbound:{el:'arEmr', title:'EMR completeness',
+    empty:'No completeness report yet. This arrives once the Naman nightly export is running.'},
+  aaroh_money_week:{el:'arMoney', title:'This week in payments',
+    empty:'No weekly money summary yet.'}
+};
+var _arOpen={};
+
+function _arLoad(key){
+  try{
+    var raw=getLS(key);
+    if(!raw||raw==='null')return null;
+    var b=JSON.parse(raw);
+    if(typeof b==='string')b=JSON.parse(b);          // tolerate a double-encoded write
+    if(!b||typeof b!=='object'||Array.isArray(b))return null;
+    return b;
+  }catch(e){return null;}
+}
+function _arAge(iso){
+  if(!iso)return '';
+  var t=Date.parse(iso); if(isNaN(t))return '';
+  var mins=Math.round((Date.now()-t)/60000);
+  if(mins<2)return 'just now';
+  if(mins<60)return mins+' min ago';
+  var h=Math.round(mins/60); if(h<24)return h+(h===1?' hour ago':' hours ago');
+  var d=Math.round(h/24); if(d<7)return d+(d===1?' day ago':' days ago');
+  var w=Math.round(d/7); return w+(w===1?' week ago':' weeks ago');
+}
+function _arStaleDays(iso){
+  var t=Date.parse(iso||''); if(isNaN(t))return 0;
+  return (Date.now()-t)/86400000;
+}
+function arToggle(k,i){ _arOpen[k+i]=!_arOpen[k+i]; renderAutoReport(k); }
+function arCopy(k,i){
+  var el=document.getElementById('arD-'+k+'-'+i); if(!el)return;
+  var t=el.textContent;
+  try{
+    navigator.clipboard.writeText(t).then(function(){if(typeof showSaveToast==='function')showSaveToast();});
+  }catch(e){
+    var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);
+    ta.select();try{document.execCommand('copy');}catch(e2){}document.body.removeChild(ta);
+  }
+}
+function renderAutoReport(key){
+  var def=AR_DEFS[key]; if(!def)return;
+  var box=document.getElementById(def.el); if(!box)return;
+  var b=_arLoad(key);
+
+  if(!b){
+    box.innerHTML='<div class="ar-wrap"><div class="ar-h"><div class="ar-t">'+_esc(def.title)+'</div></div>'+
+      '<div class="ar-empty">'+_esc(def.empty)+'</div></div>';
+    return;
+  }
+
+  var items=Array.isArray(b.items)?b.items:[];
+  var stats=Array.isArray(b.stats)?b.stats:[];
+  var stale=_arStaleDays(b.generated)>9;
+
+  var h='<div class="ar-wrap'+(stale?' stale':'')+'">';
+  h+='<div class="ar-h"><div class="ar-t">'+_esc(b.title||def.title)+'</div>'+
+     '<div class="ar-when">'+(stale?'possibly out of date · ':'')+_esc(_arAge(b.generated))+'</div></div>';
+  if(b.summary)h+='<div class="ar-sum">'+_esc(b.summary)+'</div>';
+
+  if(stats.length){
+    h+='<div class="ar-stats">'+stats.map(function(s){
+      var v=Array.isArray(s)?s[0]:s.value, l=Array.isArray(s)?s[1]:s.label;
+      return '<div class="ar-stat"><b>'+_esc(v)+'</b><span>'+_esc(l)+'</span></div>';
+    }).join('')+'</div>';
+  }
+
+  if(!items.length){
+    h+='<div class="ar-none">Nothing needs you in this report.</div>';
+  }else{
+    h+=items.map(function(it,i){
+      var hasDraft=((it.draft||'').trim().length>0);
+      var open=_arOpen[key+i];
+      var o='<div class="ar-item">';
+      o+='<div class="ar-ihead">'+_esc(it.head||'—')+(it.flag?'<span class="ar-flag">'+_esc(it.flag)+'</span>':'')+'</div>';
+      if(it.body)o+='<div class="ar-ibody">'+_esc(it.body)+'</div>';
+      if(it.note)o+='<div class="ar-inote">'+_esc(it.note)+'</div>';
+      if(hasDraft||it.link){
+        o+='<div class="ar-acts">';
+        if(hasDraft)o+='<button class="qt-btn" onclick="arToggle(\''+key+'\','+i+')">'+(open?'Hide draft':'Show draft')+'</button>';
+        if(it.link)o+='<a class="qt-btn" href="'+_esc(it.link)+'" target="_blank" rel="noopener">Open</a>';
+        o+='</div>';
+      }
+      if(hasDraft&&open){
+        o+='<div class="ar-draft"><pre id="arD-'+key+'-'+i+'">'+_esc(it.draft)+'</pre>'+
+           '<div class="ar-acts"><button class="qt-btn" onclick="arCopy(\''+key+'\','+i+')">Copy</button></div>'+
+           '<div class="ar-inote">Nothing is sent from Aaroh — you send it yourself.</div></div>';
+      }
+      o+='</div>';
+      return o;
+    }).join('');
+  }
+  if(b.note)h+='<div class="em-privacy" style="margin:12px 0 0">'+_esc(b.note)+'</div>';
+  h+='</div>';
+  box.innerHTML=h;
+}
+function renderAllAutoReports(){
+  Object.keys(AR_DEFS).forEach(function(k){
+    try{renderAutoReport(k);}catch(e){console.warn('report '+k+':',e);}
+  });
+}
+
+
+// ═══════════ GROWTH EXCEPTIONS, PUBLISHED FOR THE WEEKLY JOB ═══════════
+// The app derives stages and thresholds itself (_gwDeriveStage,
+// _gwExceptions). A scheduled job outside the app cannot do that without
+// reimplementing both badly, so the app publishes what it found and the
+// job only adds the drafted messages.
+//
+// Partner institutions are named here — they are organisations, not
+// clients, residents or staff, and they are already in Aaroh. No client
+// or clinical data crosses this boundary.
+function gwPublishExceptions(){
+  if(typeof _gwExceptions!=='function')return null;
+  var list;
+  try{ list=_gwExceptions(); }catch(e){ return null; }
+  var out={
+    generated:new Date().toISOString(),
+    thresholds:(typeof _gwCfg==='function')?_gwCfg():null,
+    items:list.map(function(x){
+      var e=x.e||{};
+      return {
+        kind:x.kind,                                  // 'hc' or 'edu'
+        name:e.name||e.inst||e.title||'',
+        stage:e.stage||'',
+        person:e.person||e.contact||'',
+        why:x.why||'',
+        suggested:x.act||'',
+        lastTouch:e.lastTouch||'',
+        lastVisit:(Array.isArray(e.visitLog)&&e.visitLog.length)
+          ? (e.visitLog[e.visitLog.length-1].purpose||'') : '',
+        lastPresentation:(Array.isArray(e.presLog)&&e.presLog.length)
+          ? (e.presLog[e.presLog.length-1].topic||'') : '',
+        referralsLogged:Array.isArray(e.refLog)?e.refLog.length:0,
+        severity:x.sev
+      };
+    })
+  };
+  // Compare on the findings only. 'generated' changes on every call, so
+  // including it would defeat the check and rewrite on every page open.
+  var fingerprint=JSON.stringify([out.thresholds,out.items]);
+  try{
+    var prev=JSON.parse(getLS('aaroh_growth_out')||'null');
+    if(prev&&JSON.stringify([prev.thresholds,prev.items])===fingerprint)return prev;
+  }catch(e){}
+  saveLS('aaroh_growth_out',JSON.stringify(out));
+  return out;
+}
+
+
+// ═══════════════ SECTOR NEWS ═══════════════
+// Written by the weekly world scan and by the newsletters the mail job pulls
+// out of her inbox. Same untrusted-data treatment as every other report.
+var _nxTab='all';
+var NX_TABS=[['all','Everything'],['doing','Worth doing'],['watch','Worth watching']];
+
+function _nxLoad(){
+  var b=null;
+  try{
+    var raw=getLS('aaroh_news');
+    if(raw&&raw!=='null'){
+      b=JSON.parse(raw); if(typeof b==='string')b=JSON.parse(b);
+      if(!b||typeof b!=='object'||Array.isArray(b))b=null;
+      else if(!Array.isArray(b.items))b.items=[];
+    }
+  }catch(e){b=null;}
+
+  // The weekly world scan writes the shared report shape to its own key. It
+  // used to render on Learning; that slot is now the daily skill, so its
+  // findings belong here rather than nowhere.
+  var scan=[];
+  try{
+    var dRaw=getLS('aaroh_learn_digest');
+    if(dRaw&&dRaw!=='null'){
+      var d=JSON.parse(dRaw); if(typeof d==='string')d=JSON.parse(d);
+      if(d&&typeof d==='object'&&Array.isArray(d.items)){
+        d.items.forEach(function(it){
+          if(!it||typeof it!=='object')return;
+          scan.push({
+            title:it.head||'', body:it.body||'',
+            takeaway:it.note||'',
+            kind:/worth doing/i.test(it.note||'')?'doing':'watch',
+            topic:'Weekly scan', at:'', source:it.flag||'', link:it.link||''
+          });
+        });
+        if(!b&&scan.length)b={generated:d.generated||new Date().toISOString(),
+                              summary:d.summary||'', items:[]};
+      }
+    }
+  }catch(e){}
+
+  // The Inbox tells her newsletters were moved here, so they must actually
+  // arrive. Until the mail job writes them into aaroh_news itself, carry the
+  // briefing's own 'everything else' items across rather than losing them.
+  var fromMail=[];
+  try{
+    var br=(typeof _mbLoad==='function')?_mbLoad():null;
+    (br&&br.fyi||[]).forEach(function(f){
+      if(typeof f==='string')f={summary:f};
+      if(!f||typeof f!=='object')return;
+      fromMail.push({
+        title:f.from||'From your inbox',
+        body:f.summary||'',
+        kind:f.kind||'watch',
+        topic:'From your inbox',
+        at:f.at||'',
+        source:f.from||'',
+        link:f.link||'',
+        takeaway:f.takeaway||''
+      });
+    });
+  }catch(e){}
+
+  if(!b&&!scan.length&&!fromMail.length)return null;
+  if(!b)b={generated:(function(){
+        try{var br=_mbLoad();return (br&&br.generated)||new Date().toISOString();}
+        catch(e){return new Date().toISOString();}
+      })(), items:[]};
+  // Scanned items first; they are the considered ones.
+  b.items=b.items.concat(scan).concat(fromMail);
+  return b;
+}
+function nxSetTab(t){_nxTab=t;renderNews();}
+function renderNews(){
+  var box=document.getElementById('nxBody'); if(!box)return;
+  var b=_nxLoad();
+  var meta=document.getElementById('nxMeta');
+  var chips=document.getElementById('nxChips');
+
+  if(!b){
+    if(meta)meta.textContent='Ageing, home health, long-term care and care homes — read for you.';
+    _netStats('nxStats',[['—','This edition'],['—','Worth doing'],['—','Sources'],['—','Updated']]);
+    if(chips)chips.innerHTML='';
+    box.innerHTML='<div class="nw-empty">No edition yet.<br><br>'+
+      'The weekly scan reads ageing and care news from around the world, and the mail job moves '+
+      'newsletters out of your inbox and into here, summarised against your work rather than left to read in full.'+
+      '<br><br>Nothing has run yet — that is all this means.</div>';
+    return;
+  }
+
+  var items=b.items;
+  var doing=items.filter(function(i){return (i.kind||'')==='doing';}).length;
+  var srcs={}; items.forEach(function(i){ if(i.source)srcs[i.source]=1; });
+
+  if(meta)meta.textContent=(b.summary||'Ageing, home health, long-term care and care homes — read for you.');
+  _netStats('nxStats',[
+    [items.length,'This edition'],
+    [doing,'Worth doing'],
+    [Object.keys(srcs).length,'Sources'],
+    [_arAge(b.generated)||'—','Updated']]);
+
+  if(chips){
+    chips.innerHTML=NX_TABS.map(function(t){
+      var n=t[0]==='all'?items.length:items.filter(function(i){return (i.kind||'watch')===t[0];}).length;
+      return '<button class="chip'+(_nxTab===t[0]?' on':'')+'" onclick="nxSetTab(\''+t[0]+'\')">'+t[1]+'<b>'+n+'</b></button>';
+    }).join('');
+  }
+
+  var shown=items.filter(function(i){return _nxTab==='all'||(i.kind||'watch')===_nxTab;});
+  if(!shown.length){
+    box.innerHTML='<div class="nw-empty">Nothing in this view.</div>';
+    return;
+  }
+  box.innerHTML=shown.map(function(i){
+    var doingIt=(i.kind||'')==='doing';
+    return '<div class="nx-item'+(doingIt?' doing':'')+'">'+
+      '<div class="nx-top"><div class="nx-t">'+_esc(i.title||'—')+'</div>'+
+        (i.at?'<div class="nx-meta">'+_esc(i.at)+'</div>':'')+'</div>'+
+      '<div style="margin-bottom:7px"><span class="nx-tag'+(doingIt?' doing':'')+'">'+
+        _esc(doingIt?'Worth doing':'Worth watching')+'</span>'+
+        (i.topic?'<span class="nx-tag">'+_esc(i.topic)+'</span>':'')+'</div>'+
+      (i.body?'<div class="nx-b">'+_esc(i.body)+'</div>':'')+
+      (i.takeaway?'<div class="nx-take">'+_esc(i.takeaway)+'</div>':'')+
+      (i.source||i.link
+        ? '<div class="nx-src">'+_esc(i.source||'')+
+          (i.link?' · <a href="'+_esc(i.link)+'" target="_blank" rel="noopener">Read the source</a>':'')+'</div>'
+        : '')+
+    '</div>';
+  }).join('');
+}
+function renderDashNews(){
+  var c=document.getElementById('dashNews'); if(!c)return;
+  var b=_nxLoad();
+  if(!b||!b.items.length){
+    c.innerHTML='<div class="db-mail" onclick="showPage(\'news\',null)">'+
+      '<div class="db-mail-l"><div class="db-mail-t">Sector news</div>'+
+      '<div class="db-mail-s">Nothing yet — the weekly scan writes here.</div></div>'+
+      '<div class="db-mail-r"><span class="qt-btn">Open</span></div></div>';
+    return;
+  }
+  var doing=b.items.filter(function(i){return (i.kind||'')==='doing';}).length;
+  var top=b.items[0];
+  c.innerHTML='<div class="db-mail" onclick="showPage(\'news\',null)">'+
+    '<div class="db-mail-l"><div class="db-mail-t">'+_esc(top.title||'Sector news')+'</div>'+
+    '<div class="db-mail-s">'+b.items.length+' this edition'+(doing?' · '+doing+' worth doing':'')+
+      ' · '+_esc(_arAge(b.generated))+'</div></div>'+
+    '<div class="db-mail-r"><span class="qt-btn">Open</span></div></div>';
+}
+function renderNewsBadge(){
+  var el=document.getElementById('sideNewsBadge'); if(!el)return;
+  var b=_nxLoad();
+  var n=b?b.items.filter(function(i){return (i.kind||'')==='doing';}).length:0;
+  el.textContent=n; el.style.display=n?'':'none';
+}
+
+// ═══════════════ DAILY SKILL ═══════════════
+// One skill a day. The job writes a small set and the app shows today's,
+// so the page still changes each morning if a write is ever missed.
+function _skLoad(){
+  try{
+    var raw=getLS('aaroh_skill'); if(!raw||raw==='null')return null;
+    var b=JSON.parse(raw); if(typeof b==='string')b=JSON.parse(b);
+    if(!b||typeof b!=='object')return null;
+    if(Array.isArray(b))b={items:b};
+    if(!Array.isArray(b.items))b.items=b.title?[b]:[];
+    return b.items.length?b:null;
+  }catch(e){return null;}
+}
+function _skToday(){
+  var b=_skLoad(); if(!b)return null;
+  var d=new Date();
+  var key=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  var exact=b.items.filter(function(i){return (i.date||'')===key;})[0];
+  if(exact)return exact;
+
+  // An entry written FOR a particular day belongs to that day. Only undated
+  // entries are free to rotate, or today's page would serve something stale
+  // as if it were new.
+  var free=b.items.filter(function(i){return !i.date;});
+  if(free.length){
+    var days=Math.floor(Date.parse(key+'T00:00:00')/86400000);
+    return free[((days%free.length)+free.length)%free.length];
+  }
+
+  // Everything is dated and none is today's: show the most recent one that
+  // has already come round, rather than one from the future.
+  var past=b.items.filter(function(i){return i.date&&i.date<=key;})
+                  .sort(function(a,c){return a.date<c.date?1:-1;});
+  return past[0]||null;
+}
+function renderSkill(){
+  var el=document.getElementById('lrSkill'); if(!el)return;
+  var sk=_skToday();
+  if(!sk){
+    el.innerHTML='<div class="sk-card"><div class="sk-eye">New skill today</div>'+
+      '<div class="sk-t">Nothing yet</div>'+
+      '<div class="sk-b">A skill a day lands here, chosen against the work you are doing — '+
+      'what it is, why it matters for Heal Home Care or Naman, and one thing to try today. '+
+      'Nothing has run yet.</div></div>';
+    return;
+  }
+  el.innerHTML='<div class="sk-card">'+
+    '<div class="sk-eye">New skill today'+(sk.area?' · '+_esc(sk.area):'')+'</div>'+
+    '<div class="sk-t">'+_esc(sk.title||'—')+'</div>'+
+    (sk.body?'<div class="sk-b">'+_esc(sk.body)+'</div>':'')+
+    (sk.tryIt?'<div class="sk-try"><b>Try today</b>'+_esc(sk.tryIt)+'</div>':'')+
+  '</div>';
+}
+function renderDashSkill(){
+  var c=document.getElementById('dashSkill'); if(!c)return;
+  var sk=_skToday();
+  if(!sk){
+    c.innerHTML='<div class="db-skill" onclick="showPage(\'learning\',null)">'+
+      '<div class="e">New skill today</div><div class="t">Nothing yet</div>'+
+      '<div class="s">A skill a day appears here once the daily job is running.</div></div>';
+    return;
+  }
+  c.innerHTML='<div class="db-skill" onclick="showPage(\'learning\',null)">'+
+    '<div class="e">New skill today'+(sk.area?' · '+_esc(sk.area):'')+'</div>'+
+    '<div class="t">'+_esc(sk.title||'—')+'</div>'+
+    '<div class="s">'+_esc(sk.tryIt||sk.body||'')+'</div></div>';
 }
 
 </script>
