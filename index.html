@@ -1608,6 +1608,33 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
 .db-skill .e{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:4px}
 .db-skill .t{font-size:14px;font-weight:600;color:var(--text);line-height:1.35;margin-bottom:3px}
 .db-skill .s{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* ── Team groups ─────────────────────────────────────────────────────── */
+.gp-sec{margin-bottom:20px}
+.gp-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:9px}
+.gp-h span{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.gp-h small{font-size:11px;color:var(--hint)}
+.gp-item{background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);
+  padding:14px 16px;margin-bottom:9px;border-left:3px solid var(--border)}
+.gp-item.act{border-left-color:var(--coral)}
+.gp-item.prob{border-left-color:var(--amber)}
+.gp-item.train{border-left-color:var(--blue)}
+.gp-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+.gp-t{font-size:13.5px;font-weight:600;color:var(--text);line-height:1.4}
+.gp-src{font-size:9.5px;font-weight:600;padding:1px 7px;border-radius:9px;background:var(--border);
+  color:var(--muted);white-space:nowrap}
+.gp-src.viber{background:#ede7f6;color:#5e35b1}
+.gp-src.whatsapp{background:#e8f5e9;color:#2e7d32}
+.gp-b{font-size:12.5px;color:var(--text-2);line-height:1.65}
+.gp-n{font-size:11.5px;color:var(--muted);margin-top:5px}
+.gp-cnt{display:inline-block;font-size:9.5px;font-weight:600;padding:1px 7px;border-radius:9px;
+  background:var(--amber-light);color:var(--amber-dark);margin-left:6px}
+.gp-clear{font-size:12.5px;color:var(--hint);padding:8px 0}
+.db-grp{background:#fff;border:1px solid var(--border);border-left:3px solid var(--coral);
+  border-radius:var(--radius-sm);padding:14px 16px;cursor:pointer}
+.db-grp .e{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.db-grp .t{font-size:14px;font-weight:600;color:var(--text);line-height:1.35;margin-bottom:3px}
+.db-grp .s{font-size:12px;color:var(--muted);line-height:1.5}
 </style>
 </head>
 <body>
@@ -1767,6 +1794,11 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10L12 5 2 10l10 5 10-5z"></path><path d="M6 12v5c3 2 9 2 12 0v-5"></path></svg>
         Learning
       </button>
+      <button class="sidebar-item" onclick="showPage('groups',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path></svg>
+        Team Groups
+        <span class="sidebar-badge" id="sideGrpBadge" style="display:none">0</span>
+      </button>
       <button class="sidebar-item" onclick="showPage('news',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9h4"></path><path d="M18 14h-8M15 18h-5M10 6h8v4h-8V6z"></path></svg>
         Sector News
@@ -1912,6 +1944,11 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
     <div class="db-sec">
       <div class="sec-lbl"><span>New skill today</span><button onclick="showPage('learning',null)">Learning →</button></div>
       <div id="dashSkill"></div>
+    </div>
+
+    <div class="db-sec">
+      <div class="sec-lbl"><span>From your team</span><button onclick="showPage('groups',null)">All groups →</button></div>
+      <div id="dashGroups"></div>
     </div>
 
     <div class="db-sec">
@@ -2698,7 +2735,7 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
       <div class="rt-block" id="rtTodayBlock" style="display:none">
         <div class="rt-block-h">
           <div>
-            <div class="rt-block-t">Today's three</div>
+            <div class="rt-block-t">Today's priorities</div>
             <div class="rt-block-s" id="rtTodayState"></div>
           </div>
         </div>
@@ -2728,8 +2765,8 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
           <div class="rt-step">
             <div class="rt-step-n">2</div>
             <div class="rt-step-b">
-              <div class="rt-step-t">Today's three</div>
-              <div class="rt-step-d">If everything else slipped, what three things would still make today count?</div>
+              <div class="rt-step-t">Today's priorities</div>
+              <div class="rt-step-d">If everything else slipped, what would still make today count? Three is a good discipline — add more when the day genuinely needs it.</div>
               <div id="rtThreeList"></div>
             </div>
           </div>
@@ -2838,6 +2875,20 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
 
     </section>
 
+
+
+    <!-- ═══════════ TEAM GROUPS ═══════════ -->
+    <section class="page" id="page-groups">
+      <div class="pg-head">
+        <div>
+          <h1 class="pg-title">Team groups</h1>
+          <p class="pg-sub" id="grpMeta">Viber and WhatsApp groups, read and summarised for you.</p>
+        </div>
+      </div>
+      <div class="nw-stats" id="grpStats"></div>
+      <div class="chip-row nw-chips" id="grpChips"></div>
+      <div id="grpBody"></div>
+    </section>
 
     <!-- ═══════════ SECTOR NEWS ═══════════ -->
     <section class="page" id="page-news">
@@ -3697,7 +3748,7 @@ let meetings = [{"date":"","type":"nursing","title":"IEE discussion","org":"Nurs
 const pageTitles = {
   dashboard:'Today',colleges:'Colleges',hospitals:'Hospitals',
   training:'Training',tours:'Facility Tours',meetings:'Meetings',
-  gallery:'Knowledge',notifications:'Follow-ups',ritual:'Daily Ritual',learning:'Learning',news:'Sector News',growth:'Growth',emr:'EMR Audit',mail:'Inbox',priorities:'Priorities',followups:'Follow-ups',stories:'Stories',bookshelf:'Bookshelf',results:'Results & Analytics',backup:'Backup & Restore',hospitals:'Healthcare Ecosystem',colleges:'Education Ecosystem'
+  gallery:'Knowledge',notifications:'Follow-ups',ritual:'Daily Ritual',learning:'Learning',news:'Sector News',groups:'Team Groups',growth:'Growth',emr:'EMR Audit',mail:'Inbox',priorities:'Priorities',followups:'Follow-ups',stories:'Stories',bookshelf:'Bookshelf',results:'Results & Analytics',backup:'Backup & Restore',hospitals:'Healthcare Ecosystem',colleges:'Education Ecosystem'
 };
 
 function showPage(id, clickedItem) {
@@ -4667,7 +4718,7 @@ function delSpk(i){if(!confirm('Delete?'))return;_spkEngs.splice(i,1);saveLS('aa
 function renderSpk(){var c=document.getElementById('spkEngList');if(!c)return;var q=((document.getElementById('spkSearch')||{}).value||'').toLowerCase();var sC={Upcoming:'var(--amber-dark)',Completed:'#3B6D11',Cancelled:'var(--coral)'};var sB={Upcoming:'var(--amber-light)',Completed:'#e8f5e9',Cancelled:'var(--coral-light)'};var list=_spkEngs.filter(function(e){return !q||JSON.stringify(e).toLowerCase().includes(q);});if(!list.length){c.innerHTML='<div style="padding:32px;text-align:center;color:var(--hint);font-size:13px">No engagements yet</div>';return;}c.innerHTML=list.map(function(e,i){var st=e.status||'Upcoming';var tags=(e.tags||'').split(',').filter(Boolean).map(function(t){return'<span class="wtag">'+t.trim()+'</span>';}).join('');return'<div class="spkcard"><div class="spkcard-hdr"><div><div class="spkcard-event">'+e.event+'</div>'+(e.org?'<div style="font-size:12px;color:var(--muted);margin-top:2px">'+e.org+'</div>':'')+'</div><div style="display:flex;gap:4px;align-items:center;flex-shrink:0"><span style="font-size:10px;font-weight:600;padding:2px 9px;border-radius:10px;background:'+(sB[st]||'var(--border)')+';color:'+(sC[st]||'var(--muted)')+'">'+st+'</span><button class="btn btn-ghost btn-sm" onclick="openSpkModal('+i+')">Edit</button><button class="btn btn-ghost btn-sm" style="color:var(--coral);border-color:var(--coral)" onclick="delSpk('+i+')">Del</button></div></div><div class="spkmeta">'+(e.date?'<div><div class="spkml">Date</div><div class="spkmv">'+e.date+'</div></div>':'')+(e.topic?'<div><div class="spkml">Topic</div><div class="spkmv">'+e.topic+'</div></div>':'')+(e.aud?'<div><div class="spkml">Audience</div><div class="spkmv">'+e.aud+(e.audSz?' ('+e.audSz+')':'')+'</div></div>':'')+(e.loc?'<div><div class="spkml">Location</div><div class="spkmv">'+e.loc+'</div></div>':'')+'</div>'+(e.msg?'<div style="font-size:12px;color:var(--text-2);font-style:italic;padding:6px 10px;background:var(--green-light);border-radius:4px;border-left:2px solid var(--green);margin-bottom:6px">'+e.msg+'</div>':'')+(e.notes?'<div style="font-size:12px;color:var(--muted);margin-bottom:6px">'+e.notes+'</div>':'')+(e.fu?'<div style="font-size:11px;font-weight:600;color:var(--amber-dark)">→ Follow-up: '+e.fu+'</div>':'')+(tags?'<div class="wtags" style="margin-top:6px">'+tags+'</div>':'')+'</div>';}).join('');}
 
 // EXTEND showPage
-var _origSP=showPage;showPage=function(id,clickedItem){document.querySelectorAll('[contenteditable="true"][id]').forEach(function(el){if(el.id)saveLS('ace_'+el.id,el.textContent);});_origSP(id,clickedItem);if(id==='priorities'){loadDaily();renderDaily();renderPris();updatePriStats();}if(id==='followups'){renderFUs();updateFUStats();}if(id==='govt'){renderGovt();updateGovtStats();}if(id==='heal'){renderOrgT('heal');updateOrgStats('heal');}if(id==='naman'){renderOrgT('naman');updateOrgStats('naman');}if(id==='stories'){renderWis('story');}if(id==='bookshelf'){renderWis('book');}if(id==='insights'){renderWis('insight');}if(id==='studio'){renderWis('studio');}if(id==='ritual'){renderRitualPage();setTimeout(renderThoughtPage,60);setTimeout(renderQuote,60);}if(id==='learning'){renderLearning();renderSkill();}if(id==='news'){renderNews();}if(id==='growth'){renderGrowth();renderAutoReport('aaroh_growth_inbound');setTimeout(gwPublishExceptions,120);}if(id==='emr'){renderEMR();renderAutoReport('aaroh_emr_inbound');}if(id==='mail'){renderMail();renderAutoReport('aaroh_money_week');}if(id==='archive'){renderArchive();}if(id==='movement'){renderASection('mvGoals');renderASection('mvInits');renderASection('mvMiles');renderAList('mvPrinciples','Write a core principle…');}if(id==='book'){renderASection('bookChapters');}if(id==='speaking'){renderSpk();renderASection('spkSpeeches');renderASection('spkMedia');renderASection('spkOpps');renderAList('spkTopics','Add a speaking topic…');}if(id==='dashboard'){setTimeout(function(){if(typeof renderDashRitual==='function')renderDashRitual();},60);setTimeout(function(){if(typeof renderDashLearn==='function')renderDashLearn();},70);setTimeout(function(){if(typeof renderDashGrowth==='function')renderDashGrowth();},75);setTimeout(function(){if(typeof renderDashQuote==='function')renderDashQuote();},80);setTimeout(function(){if(typeof renderDashMail==='function')renderDashMail();},85);setTimeout(function(){if(typeof renderDashSkill==='function')renderDashSkill();},88);setTimeout(function(){if(typeof renderDashNews==='function')renderDashNews();},90);setTimeout(renderDashTop3,80);setTimeout(renderKeyRelationships,120);setTimeout(renderDashFollowUps,140);setTimeout(renderDashLibrary,160);setTimeout(restoreTodaysThought,180);setTimeout(renderDashFollowUps,120);setTimeout(renderKeyRelationships,150);setTimeout(renderDashLibrary,180);setTimeout(restoreTodaysThought,200);}setTimeout(function(){_notifs=buildLiveNotifs();_updateNotifBadge();},120);};
+var _origSP=showPage;showPage=function(id,clickedItem){document.querySelectorAll('[contenteditable="true"][id]').forEach(function(el){if(el.id)saveLS('ace_'+el.id,el.textContent);});_origSP(id,clickedItem);if(id==='priorities'){loadDaily();renderDaily();renderPris();updatePriStats();}if(id==='followups'){renderFUs();updateFUStats();}if(id==='govt'){renderGovt();updateGovtStats();}if(id==='heal'){renderOrgT('heal');updateOrgStats('heal');}if(id==='naman'){renderOrgT('naman');updateOrgStats('naman');}if(id==='stories'){renderWis('story');}if(id==='bookshelf'){renderWis('book');}if(id==='insights'){renderWis('insight');}if(id==='studio'){renderWis('studio');}if(id==='ritual'){renderRitualPage();setTimeout(renderThoughtPage,60);setTimeout(renderQuote,60);}if(id==='learning'){renderLearning();renderSkill();}if(id==='news'){renderNews();}if(id==='groups'){renderGroups();}if(id==='growth'){renderGrowth();renderAutoReport('aaroh_growth_inbound');setTimeout(gwPublishExceptions,120);}if(id==='emr'){renderEMR();renderAutoReport('aaroh_emr_inbound');}if(id==='mail'){renderMail();renderAutoReport('aaroh_money_week');}if(id==='archive'){renderArchive();}if(id==='movement'){renderASection('mvGoals');renderASection('mvInits');renderASection('mvMiles');renderAList('mvPrinciples','Write a core principle…');}if(id==='book'){renderASection('bookChapters');}if(id==='speaking'){renderSpk();renderASection('spkSpeeches');renderASection('spkMedia');renderASection('spkOpps');renderAList('spkTopics','Add a speaking topic…');}if(id==='dashboard'){setTimeout(function(){if(typeof renderDashRitual==='function')renderDashRitual();},60);setTimeout(function(){if(typeof renderDashLearn==='function')renderDashLearn();},70);setTimeout(function(){if(typeof renderDashGrowth==='function')renderDashGrowth();},75);setTimeout(function(){if(typeof renderDashQuote==='function')renderDashQuote();},80);setTimeout(function(){if(typeof renderDashMail==='function')renderDashMail();},85);setTimeout(function(){if(typeof renderDashSkill==='function')renderDashSkill();},88);setTimeout(function(){if(typeof renderDashNews==='function')renderDashNews();},90);setTimeout(function(){if(typeof renderDashGroups==='function')renderDashGroups();},92);setTimeout(renderDashTop3,80);setTimeout(renderKeyRelationships,120);setTimeout(renderDashFollowUps,140);setTimeout(renderDashLibrary,160);setTimeout(restoreTodaysThought,180);setTimeout(renderDashFollowUps,120);setTimeout(renderKeyRelationships,150);setTimeout(renderDashLibrary,180);setTimeout(restoreTodaysThought,200);}setTimeout(function(){_notifs=buildLiveNotifs();_updateNotifBadge();},120);};
 
 // EXPORT
 function exportSnapshot(){var a=document.createElement('a');a.href='data:text/html;charset=utf-8,'+encodeURIComponent(document.documentElement.outerHTML);a.download='AarohOS-'+new Date().toISOString().split('T')[0]+'.html';document.body.appendChild(a);a.click();document.body.removeChild(a);}
@@ -5149,7 +5200,7 @@ function startLive(){
   setTimeout(function(){if(typeof renderDashLearn==='function')renderDashLearn();},320);
   setTimeout(function(){if(typeof renderDashGrowth==='function')renderDashGrowth();},340);
   setTimeout(function(){if(typeof renderDashQuote==='function')renderDashQuote();},350);
-  setTimeout(function(){if(typeof renderDashMail==='function')renderDashMail();},360);setTimeout(function(){if(typeof renderDashSkill==='function')renderDashSkill();},365);setTimeout(function(){if(typeof renderDashNews==='function')renderDashNews();},370);setTimeout(function(){if(typeof renderNewsBadge==='function')renderNewsBadge();},375);
+  setTimeout(function(){if(typeof renderDashMail==='function')renderDashMail();},360);setTimeout(function(){if(typeof renderDashSkill==='function')renderDashSkill();},365);setTimeout(function(){if(typeof renderDashNews==='function')renderDashNews();},370);setTimeout(function(){if(typeof renderNewsBadge==='function')renderNewsBadge();},375);setTimeout(function(){if(typeof renderDashGroups==='function')renderDashGroups();},378);setTimeout(function(){if(typeof renderGroupsBadge==='function')renderGroupsBadge();},380);
   setTimeout(function(){
     _cloudLoad().then(function(){
       loadPris();loadFUs();loadWis();loadOrgT();loadColleges();
@@ -5280,6 +5331,7 @@ var _rtRolls=[],_rtPicked={};
 
 function rtStartOpen(){
   _rtRolls=_rtRollovers();_rtPicked={};
+  _rtSlots=RT_MIN_SLOTS;_rtTyped=[];   // fresh start each morning
   // default: everything carries forward
   _rtRolls.forEach(function(r,i){_rtPicked[i]=true;});
   renderRtRolls();
@@ -5321,33 +5373,80 @@ function rtTogRoll(i){
   renderRtRolls();renderRtThree();
 }
 
+var RT_MIN_SLOTS=3, RT_MAX_SLOTS=12;
+var _rtSlots=RT_MIN_SLOTS;
+
+function rtAddSlot(){
+  // Keep what is already typed before the list is rebuilt.
+  _rtCaptureSlots();
+  if(_rtSlots<RT_MAX_SLOTS)_rtSlots++;
+  renderRtThree();
+  setTimeout(function(){
+    var el=document.getElementById('rtThree'+(_rtSlots-1));
+    if(el)el.focus();
+  },40);
+}
+var _rtTyped=[];
+function _rtCaptureSlots(){
+  _rtTyped=[];
+  for(var i=0;i<RT_MAX_SLOTS;i++){
+    var el=document.getElementById('rtThree'+i);
+    _rtTyped.push(el?el.value:'');
+  }
+}
+
 function renderRtThree(){
   var c=document.getElementById('rtThreeList');if(!c)return;
   var carried=_rtRolls.filter(function(r,i){return _rtPicked[i];});
   var existing=_rtDay(_rtToday())||[];
   var vals=[];
-  // carried items fill the slots first, then anything already set today
-  carried.forEach(function(r){if(vals.length<3)vals.push(r.text);});
+
+  // Every carried item gets a slot. Before, anything past the third was
+  // silently dropped — she ticked it and it vanished.
+  carried.forEach(function(r){vals.push(r.text);});
+
+  // Past the carried block, a slot keeps whatever she typed INTO THAT SLOT.
+  // Compacting entries upward would move line four to line two under her
+  // cursor, which is how you overwrite your own work.
+  var seen={}; vals.forEach(function(v){seen[v]=1;});
+  for(var i=carried.length;i<RT_MAX_SLOTS;i++){
+    var t=((_rtTyped[i]||'')).trim();
+    if(t&&!seen[t]){vals[i]=t;seen[t]=1;}
+    else if(vals[i]===undefined)vals[i]='';
+  }
+  // Anything already set for today that is not on screen yet fills the gaps.
   existing.forEach(function(p){
     var t=(p.text||'').trim();
-    if(t&&vals.indexOf(t)<0&&vals.length<3)vals.push(t);
+    if(!t||seen[t])return;
+    for(var j=carried.length;j<RT_MAX_SLOTS;j++){
+      if(!vals[j]){vals[j]=t;seen[t]=1;return;}
+    }
   });
-  while(vals.length<3)vals.push('');
-  c.innerHTML=vals.slice(0,3).map(function(v,i){
+
+  var filled=0;
+  for(var k=0;k<RT_MAX_SLOTS;k++){ if((vals[k]||'').trim())filled=k+1; }
+  _rtSlots=Math.min(RT_MAX_SLOTS,Math.max(RT_MIN_SLOTS,_rtSlots,carried.length,filled));
+  for(var m=0;m<_rtSlots;m++){ if(vals[m]===undefined)vals[m]=''; }
+  vals.length=_rtSlots;
+
+  c.innerHTML=vals.slice(0,_rtSlots).map(function(v,i){
     var locked=i<carried.length;
     return '<div class="rt-slot">'+
       '<div class="rt-slot-n">'+(i+1)+'</div>'+
       '<input class="rt-input" id="rtThree'+i+'" value="'+_esc(v)+'" '+
         (locked?'readonly title="Carried over — untick it above to change"':'')+
-        ' placeholder="Priority '+(i+1)+'…">'+
+        ' placeholder="'+(i<RT_MIN_SLOTS?'Priority '+(i+1)+'\u2026':'Something else\u2026')+'">'+
     '</div>';
-  }).join('');
+  }).join('')+
+  (_rtSlots<RT_MAX_SLOTS
+    ? '<button class="rt-prompt-btn" onclick="rtAddSlot()">+ Add another</button>'
+    : '<div class="rt-opt" style="margin-top:6px">That is twelve. Enough for one day.</div>');
 }
 
 function rtFinishOpen(){
   var carried=_rtRolls.filter(function(r,i){return _rtPicked[i];});
   var items=[];
-  for(var i=0;i<3;i++){
+  for(var i=0;i<_rtSlots;i++){
     var el=document.getElementById('rtThree'+i);
     var text=el?el.value.trim():'';
     var src=carried[i];
@@ -6570,7 +6669,7 @@ function emCritReset(){
 // edited inside the app, so pulling them can never overwrite typing in
 // progress. Everything the user edits keeps the normal local-first path.
 
-var INBOUND_KEYS=['aaroh_mail_brief','aaroh_emr_inbound','aaroh_growth_inbound','aaroh_learn_digest','aaroh_money_week','aaroh_news','aaroh_skill'];
+var INBOUND_KEYS=['aaroh_mail_brief','aaroh_emr_inbound','aaroh_growth_inbound','aaroh_learn_digest','aaroh_money_week','aaroh_news','aaroh_skill','aaroh_groups'];
 var _inLast=0,_inBusy=false;
 
 function pullInbound(){
@@ -6600,6 +6699,9 @@ function pullInbound(){
       if(typeof renderDashNews==='function')renderDashNews();
       if(typeof renderDashSkill==='function')renderDashSkill();
       if(typeof renderNewsBadge==='function')renderNewsBadge();
+      if(typeof renderGroups==='function')renderGroups();
+      if(typeof renderDashGroups==='function')renderDashGroups();
+      if(typeof renderGroupsBadge==='function')renderGroupsBadge();
     }
     return changed;
   }).catch(function(){return null;})
@@ -8482,6 +8584,136 @@ function renderDashSkill(){
     '<div class="e">New skill today'+(sk.area?' · '+_esc(sk.area):'')+'</div>'+
     '<div class="t">'+_esc(sk.title||'—')+'</div>'+
     '<div class="s">'+_esc(sk.tryIt||sk.body||'')+'</div></div>';
+}
+
+
+// ═══════════════ TEAM GROUPS ═══════════════
+// Written by a job on her Mac that reads the Viber / WhatsApp desktop apps
+// for the groups she names. There is no API for either, so this cannot run
+// unattended — the app has to be open.
+var GP_SECS=[
+  ['action','Needs you today','act'],
+  ['problem','Problems and complaints','prob'],
+  ['training','Training needs','train']
+];
+var _gpGroup='all';
+
+function _gpLoad(){
+  try{
+    var raw=getLS('aaroh_groups'); if(!raw||raw==='null')return null;
+    var b=JSON.parse(raw); if(typeof b==='string')b=JSON.parse(b);
+    if(!b||typeof b!=='object'||Array.isArray(b))return null;
+    if(!Array.isArray(b.items))b.items=[];
+    return b;
+  }catch(e){return null;}
+}
+function gpSetGroup(g){_gpGroup=g;renderGroups();}
+function _gpPlatform(it){
+  var p=((it&&it.platform)||'').toLowerCase();
+  return (p==='viber'||p==='whatsapp')?p:'';
+}
+function renderGroups(){
+  var box=document.getElementById('grpBody'); if(!box)return;
+  var b=_gpLoad();
+  var meta=document.getElementById('grpMeta'), chips=document.getElementById('grpChips');
+
+  if(!b){
+    if(meta)meta.textContent='Viber and WhatsApp groups, read and summarised for you.';
+    _netStats('grpStats',[['—','Needs you'],['—','Problems'],['—','Training'],['—','Updated']]);
+    if(chips)chips.innerHTML='';
+    box.innerHTML='<div class="nw-empty">No summary yet.<br><br>'+
+      'Neither Viber nor WhatsApp can be connected directly — there is no API for the groups you are '+
+      'a member of. Instead the session on your Mac opens the desktop app, reads the groups you have '+
+      'named, and writes the summary here.<br><br>That needs the app open, so it runs when you ask it '+
+      'to rather than overnight.</div>';
+    return;
+  }
+
+  var items=b.items;
+  var groups={}; items.forEach(function(i){ if(i.group)groups[i.group]=(groups[i.group]||0)+1; });
+  var names=Object.keys(groups);
+  // A filter left on a group that this summary does not mention would hide
+  // everything and look like an empty page.
+  if(_gpGroup!=='all'&&names.indexOf(_gpGroup)<0)_gpGroup='all';
+  var shown=items.filter(function(i){return _gpGroup==='all'||i.group===_gpGroup;});
+  var countBy=function(sec,list){return list.filter(function(i){return (i.section||'action')===sec;}).length;};
+
+  if(meta)meta.textContent=(b.summary||('Read from '+names.length+' group'+(names.length===1?'':'s')+'.'));
+  _netStats('grpStats',[
+    [countBy('action',items),'Needs you'],
+    [countBy('problem',items),'Problems'],
+    [countBy('training',items),'Training'],
+    [_arAge(b.generated)||'—','Updated']]);
+
+  if(chips){
+    chips.innerHTML=[['all','All groups',items.length]].concat(
+      names.map(function(n){return [n,n,groups[n]];})
+    ).map(function(g){
+      return '<button class="chip'+(_gpGroup===g[0]?' on':'')+'" onclick="gpSetGroup('+
+        JSON.stringify(g[0]).replace(/"/g,'&quot;')+')">'+_esc(g[1])+'<b>'+g[2]+'</b></button>';
+    }).join('');
+  }
+
+  var h='';
+  GP_SECS.forEach(function(sec){
+    var list=shown.filter(function(i){return (i.section||'action')===sec[0];});
+    h+='<div class="gp-sec"><div class="gp-h"><span>'+_esc(sec[1])+'</span>'+
+       (list.length?'<small>'+list.length+'</small>':'')+'</div>';
+    if(!list.length){
+      h+='<div class="gp-clear">'+(sec[0]==='action'?'Nothing waiting on you.':'Nothing recorded.')+'</div>';
+    }else{
+      h+=list.map(function(i){
+        var plat=_gpPlatform(i);
+        return '<div class="gp-item '+sec[2]+'">'+
+          '<div class="gp-top"><div class="gp-t">'+_esc(i.head||'—')+
+            (i.count>1?'<span class="gp-cnt">'+_esc(i.count)+'×</span>':'')+'</div>'+
+            '<div>'+(i.group?'<span class="gp-src'+(plat?' '+plat:'')+'">'+_esc(i.group)+'</span>':'')+'</div>'+
+          '</div>'+
+          (i.body?'<div class="gp-b">'+_esc(i.body)+'</div>':'')+
+          (i.note?'<div class="gp-n">'+_esc(i.note)+'</div>':'')+
+        '</div>';
+      }).join('');
+    }
+    h+='</div>';
+  });
+  if(b.note)h+='<div class="em-privacy">'+_esc(b.note)+'</div>';
+  box.innerHTML=h;
+  if(typeof renderGroupsBadge==='function')renderGroupsBadge();
+}
+function renderDashGroups(){
+  var c=document.getElementById('dashGroups'); if(!c)return;
+  var b=_gpLoad();
+  if(!b){
+    c.innerHTML='<div class="db-grp" onclick="showPage(\'groups\',null)" style="border-left-color:var(--border)">'+
+      '<div class="e">From your team</div><div class="t">No summary yet</div>'+
+      '<div class="s">Ask Claude on your Mac to read your Viber and WhatsApp groups.</div></div>';
+    if(typeof renderGroupsBadge==='function')renderGroupsBadge();
+    return;
+  }
+  if(!b.items.length){
+    // Read the groups and found nothing needing her. That is an answer.
+    c.innerHTML='<div class="db-grp" onclick="showPage(\'groups\',null)" style="border-left-color:var(--green)">'+
+      '<div class="e">From your team · '+_esc(_arAge(b.generated))+'</div>'+
+      '<div class="t">Nothing waiting on you</div>'+
+      '<div class="s">'+_esc(b.summary||'The groups were read and nothing needs you.')+'</div></div>';
+    if(typeof renderGroupsBadge==='function')renderGroupsBadge();
+    return;
+  }
+  var act=b.items.filter(function(i){return (i.section||'action')==='action';});
+  var prob=b.items.filter(function(i){return i.section==='problem';}).length;
+  c.innerHTML='<div class="db-grp" onclick="showPage(\'groups\',null)"'+
+    (act.length?'':' style="border-left-color:var(--green)"')+'>'+
+    '<div class="e">From your team · '+_esc(_arAge(b.generated))+'</div>'+
+    '<div class="t">'+_esc(act.length?(act[0].head||'Needs you today'):'Nothing waiting on you')+'</div>'+
+    '<div class="s">'+act.length+' need'+(act.length===1?'s':'')+' you'+
+      (prob?' · '+prob+' problem'+(prob===1?'':'s'):'')+'</div></div>';
+  if(typeof renderGroupsBadge==='function')renderGroupsBadge();
+}
+function renderGroupsBadge(){
+  var el=document.getElementById('sideGrpBadge'); if(!el)return;
+  var b=_gpLoad();
+  var n=b?b.items.filter(function(i){return (i.section||'action')==='action';}).length:0;
+  el.textContent=n; el.style.display=n?'':'none';
 }
 
 </script>
