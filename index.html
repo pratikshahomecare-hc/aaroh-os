@@ -7451,7 +7451,10 @@ function _lrnLoad(){
   if(b&&b.trim()){var p=b.split(/\s+[—–]\s+|\s+-\s+/);out.push({id:_lid(),type:'book',title:p[0].trim(),by:(p[1]||'').trim(),start:t,end:'',notes:''});}
   var r=getLS('ace_learnResearch')||getLS('aaroh_ce_learnResearch');
   if(r&&r.trim())out.push({id:_lid(),type:'research',title:r.trim(),by:'',start:t,end:'',notes:''});
-  _lrnSave(out);
+  // Only persist if something was actually carried over. Saving an empty list
+  // here wrote "[]" over real cloud data whenever the page opened before the
+  // cloud copy had arrived (26 Oct 2026).
+  if(out.length)_lrnSave(out);
   return out;
 }
 function _dParse(s){if(!s)return null;var p=String(s).split('-');if(p.length!==3)return null;var d=new Date(+p[0],+p[1]-1,+p[2]);return isNaN(d)?null:d;}
