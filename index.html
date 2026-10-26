@@ -3559,7 +3559,9 @@ function _cloudLoad(){
         try{
           var cp = JSON.parse(cv);
           var lp = lv ? JSON.parse(lv) : null;
-          if(Array.isArray(cp) && Array.isArray(lp) && lp.length > cp.length){
+          // Local wins only if it has more entries AND is not smaller overall;
+          // an old copy with more but shorter entries must not beat the cloud.
+          if(Array.isArray(cp) && Array.isArray(lp) && lp.length > cp.length && lv.length >= cv.length){
             _sb.set(k, lv); return; // local has more - push to cloud
           }
         }catch(e){}
@@ -7617,27 +7619,45 @@ function autoLocalBackup(){
 
 
 
+// Background push, every 2 minutes. It must never let an old copy on this
+// device replace a newer one in the cloud — that is what overwrote real data
+// on 2, 6 and 9 October 2026. So it (a) never pushes keys that only automation
+// writes, (b) reads the cloud first, and (c) never replaces a bigger cloud
+// value with a smaller local one. Deliberate edits still save immediately via
+// saveLS(), so deleting something on purpose is unaffected.
 function autoSyncToCloud(){
   if(!_sb||!_sb.ready)return;
-  var keys=[];
-  for(var i=0;i<localStorage.length;i++){
-    var k=localStorage.key(i);
-    if(k&&(k.startsWith('aaroh_')||k.startsWith('ace_'))){
-      var v=localStorage.getItem(k);
-      if(v&&v!=='null'&&v.length>2)keys.push({k:k,v:v});
+  var skip=(typeof INBOUND_KEYS!=='undefined'&&Array.isArray(INBOUND_KEYS))?INBOUND_KEYS:[];
+  _sb.getAll().then(function(cloud){
+    // Empty answer = cloud unreachable or not read; do nothing rather than guess.
+    if(!cloud||!Object.keys(cloud).length)return;
+    var keys=[];
+    for(var i=0;i<localStorage.length;i++){
+      var k=localStorage.key(i);
+      if(k&&(k.startsWith('aaroh_')||k.startsWith('ace_'))){
+        if(skip.indexOf(k)!==-1)continue;
+        var v=localStorage.getItem(k);
+        if(!v||v==='null'||v.length<=2)continue;
+        var cv=cloud[k];
+        if(cv&&cv!=='null'){
+          if(cv===v)continue;
+          if(cv.length>v.length)continue;
+        }
+        keys.push({k:k,v:v});
+      }
     }
-  }
-  var idx=0;
-  function next(){
-    if(idx>=keys.length){
-      var el=document.getElementById('syncStatus');
-      if(el){el.textContent='☁ Synced';el.style.opacity='1';clearTimeout(el._t);el._t=setTimeout(function(){el.style.opacity='0';},2000);}
-      return;
+    var idx=0;
+    function next(){
+      if(idx>=keys.length){
+        var el=document.getElementById('syncStatus');
+        if(el){el.textContent='☁ Synced';el.style.opacity='1';clearTimeout(el._t);el._t=setTimeout(function(){el.style.opacity='0';},2000);}
+        return;
+      }
+      var item=keys[idx++];
+      _sb.set(item.k,item.v).then(next).catch(next);
     }
-    var item=keys[idx++];
-    _sb.set(item.k,item.v).then(next).catch(next);
-  }
-  next();
+    next();
+  }).catch(function(){});
 }
 
 function bkSyncNow(){if(!_sb||!_sb.ready){alert('Cloud is not reachable right now. Your data is still safe in this browser — try again in a moment.');return;}
