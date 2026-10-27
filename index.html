@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aaroh OS · Pratiksha · safe-sync v3</title>
+<title>Aaroh OS · Pratiksha · safe-sync v4</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -2 40 42'%3E%3Ccircle cx='12' cy='28' r='9' stroke='%230F6E56' stroke-width='2' fill='none'/%3E%3Cline x1='12' y1='28' x2='12' y2='4' stroke='%230F6E56' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M12 10 Q19 6 17 0 Q8 4 12 10Z' fill='%231D9E75'/%3E%3Ccircle cx='12' cy='37' r='1.8' fill='%230F6E56' opacity='0.35'/%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -3547,17 +3547,30 @@ var _sb = {
     })
     .catch(function(e){console.warn('SB write:',e);return Promise.reject(e);});
   },
+  // Supabase returns at most 1,000 rows per request. This table passed 1,000
+  // rows in mid-September 2026, so a plain read silently dropped the last ones
+  // (priorities, stories, studio, follow-ups...). The page then thought those
+  // keys were empty, showed demo content, and saved it over the real data.
+  // So read in pages, in a fixed order, until a page comes back short.
+  // If any page fails, the whole read fails (returns {}) rather than returning
+  // a partial list that would make real keys look missing.
   getAll:function(){
     if(!this.ready)return Promise.resolve({});
-    return fetch(this.url+'/rest/v1/aaroh_store?user_id=eq.'+AAROH_CONFIG.userId+'&select=data_key,data_value',{headers:this._h()})
-    .then(function(r){return r.json();})
-    .then(function(rows){
-      var map={};
-      if(Array.isArray(rows))rows.forEach(function(r){map[r.data_key]=r.data_value;});
+    var self=this, map={}, PAGE=500;
+    function page(from){
+      return fetch(self.url+'/rest/v1/aaroh_store?user_id=eq.'+AAROH_CONFIG.userId+
+        '&select=data_key,data_value&order=data_key.asc&limit='+PAGE+'&offset='+from,{headers:self._h()})
+      .then(function(r){return r.json();})
+      .then(function(rows){
+        if(!Array.isArray(rows))throw new Error((rows&&(rows.message||rows.error))||'bad response');
+        rows.forEach(function(r){map[r.data_key]=r.data_value;});
+        if(rows.length===PAGE)return page(from+PAGE);
+      });
+    }
+    return page(0).then(function(){
       console.log('Cloud data received:',Object.keys(map).length,'keys');
       return map;
-    })
-    .catch(function(e){console.error('Supabase getAll failed:',e.message||e);return{};});
+    }).catch(function(e){console.error('Supabase getAll failed:',e.message||e);return{};});
   }
 };
 
