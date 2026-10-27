@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aaroh OS · Pratiksha · safe-sync v2</title>
+<title>Aaroh OS · Pratiksha · safe-sync v3</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -2 40 42'%3E%3Ccircle cx='12' cy='28' r='9' stroke='%230F6E56' stroke-width='2' fill='none'/%3E%3Cline x1='12' y1='28' x2='12' y2='4' stroke='%230F6E56' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M12 10 Q19 6 17 0 Q8 4 12 10Z' fill='%231D9E75'/%3E%3Ccircle cx='12' cy='37' r='1.8' fill='%230F6E56' opacity='0.35'/%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -1074,6 +1074,9 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
 .auth-msg.err{color:#C0392B}
 .auth-msg.ok{color:var(--green)}
 .auth-foot{font-size:11.5px;color:var(--hint);margin-top:18px;line-height:1.5}
+.auth-link{margin-top:14px;font-size:12.5px}
+.auth-link a{color:var(--green);text-decoration:none;cursor:pointer}
+.auth-link a:hover{text-decoration:underline}
 /* signed-in chip in header */
 .hdr-user{position:relative}
 .hdr-menu{position:absolute;right:0;top:calc(100% + 8px);min-width:210px;background:var(--card-bg);
@@ -1670,6 +1673,16 @@ h1,h2,h3,.pg-title,.sidebar-logo-name{letter-spacing:-0.02em}
       <div class="auth-msg" id="authMsg"></div>
 
       <button class="auth-btn" type="submit" id="authBtn">Sign in</button>
+    </form>
+
+    <div class="auth-link" id="authForgotWrap"><a onclick="return authForgot(event)">Forgot password?</a></div>
+
+    <form class="auth-form" id="authResetForm" onsubmit="return authResetSubmit(event)" style="display:none">
+      <label class="auth-label" for="authNewPass">New password</label>
+      <input class="auth-input" type="password" id="authNewPass" autocomplete="new-password" placeholder="At least 8 characters" required minlength="8">
+      <label class="auth-label" for="authNewPass2">Type it again</label>
+      <input class="auth-input" type="password" id="authNewPass2" autocomplete="new-password" required minlength="8">
+      <button class="auth-btn" type="submit" id="authResetBtn">Save new password</button>
     </form>
 
     <div class="auth-foot" id="authFoot">Your data is private to your account.</div>
@@ -3420,6 +3433,25 @@ var _auth = {
     try{localStorage.removeItem(this.SKEY);}catch(e){}
   },
   signUp:function(email,pass){return this._api('signup',{email:email,password:pass});},
+  // Forgot password: Supabase emails a link that comes back to this page with
+  // #access_token=...&type=recovery in the address.
+  recover:function(email){
+    var back=location.origin+location.pathname;
+    return this._api('recover?redirect_to='+encodeURIComponent(back),{email:email});
+  },
+  // Used only on the recovery screen, with the token from the emailed link.
+  setPassword:function(token,pass){
+    return fetch(AAROH_CONFIG.supabaseUrl+'/auth/v1/user',{
+      method:'PUT',
+      headers:{'Content-Type':'application/json','apikey':AAROH_CONFIG.supabaseKey,'Authorization':'Bearer '+token},
+      body:JSON.stringify({password:pass})
+    }).then(function(r){
+      return r.json().catch(function(){return{};}).then(function(d){
+        if(!r.ok)throw new Error(d.msg||d.error_description||d.error||d.message||('Request failed ('+r.status+')'));
+        return d;
+      });
+    });
+  },
   signIn:function(email,pass){
     var self=this;
     return this._api('token?grant_type=password',{email:email,password:pass}).then(function(d){
@@ -3600,6 +3632,7 @@ function authMode(m){
   document.getElementById('authBtn').textContent = isUp?'Create account':'Sign in';
   document.getElementById('authSub').textContent = isUp?'Set up your own private workspace':'Sign in to your workspace';
   document.getElementById('authPass').setAttribute('autocomplete',isUp?'new-password':'current-password');
+  var fw=document.getElementById('authForgotWrap');if(fw)fw.style.display=isUp?'none':'';
   document.getElementById('authFoot').textContent = isUp
     ? 'Your workspace starts empty and stays private to this account.'
     : 'Your data is private to your account.';
@@ -3657,8 +3690,69 @@ function authSubmit(ev){
   return false;
 }
 
+// ── Forgot password ─────────────────────────────────────────────────────────
+function authForgot(ev){
+  if(ev&&ev.preventDefault)ev.preventDefault();
+  var email=(document.getElementById('authEmail').value||'').trim();
+  if(!email){_authMsg('Type your email above first, then tap Forgot password.');return false;}
+  _authMsg('Sending…','ok');
+  _auth.recover(email).then(function(){
+    // Same wording whether or not the email has an account, so this cannot be
+    // used to find out who is registered.
+    _authMsg('If that email has an account, a reset link is on its way. Check your inbox and spam.','ok');
+  }).catch(function(e){_authMsg(_authErr(e));});
+  return false;
+}
+
+// Pure helper: pull the recovery token out of the address-bar hash, or null.
+function _authParseRecovery(hash){
+  try{
+    var p=new URLSearchParams(String(hash||'').replace(/^#/,''));
+    if(p.get('type')==='recovery'&&p.get('access_token'))
+      return {access:p.get('access_token'),refresh:p.get('refresh_token')||''};
+  }catch(e){}
+  return null;
+}
+
+var _authRec=null;
+function _authRecoveryBegin(rec){
+  _authRec=rec;
+  // Remove the token from the address bar straight away.
+  try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}
+  _authShowGate();
+  ['authForm','authForgotWrap'].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display='none';});
+  var tabs=document.querySelector('.auth-tabs');if(tabs)tabs.style.display='none';
+  var rf=document.getElementById('authResetForm');if(rf)rf.style.display='';
+  document.getElementById('authSub').textContent='Choose a new password';
+  document.getElementById('authFoot').textContent='This link works once. After saving, you will be signed in.';
+  var np=document.getElementById('authNewPass');if(np)setTimeout(function(){np.focus();},80);
+}
+
+function authResetSubmit(ev){
+  if(ev&&ev.preventDefault)ev.preventDefault();
+  if(_authBusy||!_authRec)return false;
+  var a=document.getElementById('authNewPass').value||'';
+  var b=document.getElementById('authNewPass2').value||'';
+  if(a.length<8){_authMsg('Use at least 8 characters.');return false;}
+  if(a!==b){_authMsg('The two passwords do not match.');return false;}
+  var btn=document.getElementById('authResetBtn');
+  _authBusy=true;btn.disabled=true;btn.textContent='Saving…';_authMsg('');
+  _auth.setPassword(_authRec.access,a).then(function(u){
+    _auth.save({access_token:_authRec.access,refresh_token:_authRec.refresh,user:u&&u.id?u:null});
+    _authRec=null;_authBusy=false;
+    location.replace(location.pathname);   // reload cleanly into the normal sign-in path
+  }).catch(function(e){
+    _authBusy=false;btn.disabled=false;btn.textContent='Save new password';
+    _authMsg(/expired|invalid|not found/i.test((e&&e.message)||'')
+      ?'This reset link has expired. Go back and tap Forgot password again.'
+      :_authErr(e));
+  });
+  return false;
+}
+
 function _authErr(e){
   var m=(e&&e.message)||'Something went wrong.';
+  if(/rate limit|too many|seconds/i.test(m))return 'Too many reset emails just now. Please wait a few minutes and try again.';
   if(/invalid login credentials/i.test(m))return 'That email and password do not match an account.';
   if(/email not confirmed/i.test(m))return 'Please confirm your email address first, then sign in.';
   if(/already registered|already been registered/i.test(m))return 'That email already has an account — try signing in instead.';
@@ -3704,6 +3798,16 @@ document.addEventListener('click',function(e){
 
 // Decide on load: signed in → straight to the app; otherwise → login screen.
 function _authBoot(){
+  // Arriving from a password-reset email: show only the "new password" screen,
+  // and do not start the app (so nothing syncs while resetting).
+  var rec=_authParseRecovery(location.hash);
+  if(rec){_authRecoveryBegin(rec);return;}
+  if(/error_code=otp_expired|error=access_denied/.test(location.hash||'')){
+    try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}
+    _authShowGate();
+    _authMsg('That reset link has expired or was already used. Tap Forgot password to get a new one.');
+    return;
+  }
   var s=_auth.load();
   if(s&&s.access_token&&s.user&&s.user.id){
     _authStart();
