@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aaroh OS · Pratiksha · safe-sync v5 · colour</title>
+<title>Aaroh OS · Pratiksha · safe-sync v6 · colour</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -2 40 42'%3E%3Ccircle cx='12' cy='28' r='9' stroke='%230F6E56' stroke-width='2' fill='none'/%3E%3Cline x1='12' y1='28' x2='12' y2='4' stroke='%230F6E56' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M12 10 Q19 6 17 0 Q8 4 12 10Z' fill='%231D9E75'/%3E%3Ccircle cx='12' cy='37' r='1.8' fill='%230F6E56' opacity='0.35'/%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -1821,6 +1821,11 @@ body{background:linear-gradient(180deg,#E9F4EF 0,#F3F6F4 340px) fixed;background
         Inbox
         <span class="sidebar-badge" id="sideMailBadge" style="display:none">0</span>
       </button>
+      <button class="sidebar-item" onclick="showPage('news',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9h4"></path><path d="M18 14h-8M15 18h-5M10 6h8v4h-8V6z"></path></svg>
+        Sector News
+        <span class="sidebar-badge" id="sideNewsBadge" style="display:none">0</span>
+      </button>
       <button class="sidebar-item" onclick="showPage('ritual',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"></path></svg>
         Daily Ritual
@@ -1901,18 +1906,9 @@ body{background:linear-gradient(180deg,#E9F4EF 0,#F3F6F4 340px) fixed;background
         Team Groups
         <span class="sidebar-badge" id="sideGrpBadge" style="display:none">0</span>
       </button>
-      <button class="sidebar-item" onclick="showPage('news',this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9h4"></path><path d="M18 14h-8M15 18h-5M10 6h8v4h-8V6z"></path></svg>
-        Sector News
-        <span class="sidebar-badge" id="sideNewsBadge" style="display:none">0</span>
-      </button>
       <button class="sidebar-item" onclick="showPage('insights',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
         Insights
-      </button>
-      <button class="sidebar-item" onclick="showPage('studio',this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-        Studio
       </button>
       <button class="sidebar-item" onclick="showPage('archive',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
