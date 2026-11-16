@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aaroh OS · Pratiksha · safe-sync v8 · stories</title>
+<title>Aaroh OS · Pratiksha · safe-sync v9 · quotes</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -2 40 42'%3E%3Ccircle cx='12' cy='28' r='9' stroke='%230F6E56' stroke-width='2' fill='none'/%3E%3Cline x1='12' y1='28' x2='12' y2='4' stroke='%230F6E56' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M12 10 Q19 6 17 0 Q8 4 12 10Z' fill='%231D9E75'/%3E%3Ccircle cx='12' cy='37' r='1.8' fill='%230F6E56' opacity='0.35'/%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -1740,6 +1740,14 @@ body{background:linear-gradient(180deg,#E9F4EF 0,#F3F6F4 340px) fixed;background
 .hl-st-draft{background:var(--t-sand,#F8EFD9);color:var(--t-sand-ink,#7A5A12)}
 .hl-st-idea{background:var(--t-lav,#ECE9F8);color:var(--t-lav-ink,#4B3F8F)}
 .hl-st-safe{background:var(--t-sky,#E3EFF9);color:var(--t-sky-ink,#1E5A8A)}
+
+/* QUOTES attribution */
+.qt-theme.spirituality{background:#F3EAF8;color:#6B3F8F}
+.qt-theme.promptness{background:#FDEBE6;color:#9A3E22}
+.qt-by{font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.5}
+.qt-by .qt-kind{font-weight:600;color:var(--text)}
+.qt-by .qt-src{color:var(--hint)}
+.db-quote .qt-by{font-size:11.5px;margin-top:6px}
 </style>
 </head>
 <body>
@@ -6362,8 +6370,8 @@ function exportColleges(){
 // server and works offline: the same day always shows the same quote,
 // and it moves on by itself every 48 hours.
 
-var QT_THEMES=['success','proactive','consistency','joy'];
-var QT_LBL={success:'Success',proactive:'Proactive',consistency:'Consistency',joy:'Joy'};
+var QT_THEMES=['consistency','success','spirituality','promptness','proactive'];
+var QT_LBL={success:'Success',proactive:'Proactiveness',consistency:'Consistency',spirituality:'Spirituality',promptness:'Promptness',joy:'Joy'};
 var QT_EPOCH='2026-01-01';
 var QUOTES={
 success:[
@@ -6471,6 +6479,75 @@ joy:[
  'Tenderness is a professional strength. Do not apologise for it.'
 ]};
 
+
+// Attributed bank. kind 'q' = a short, well-documented line from a public-domain
+// source, quoted as written. kind 'i' = an idea from a book, written in Aaroh's
+// own words (not a quotation). Format: [kind, text, author, source].
+var QUOTES_OWN=QUOTES;
+var QUOTES={
+consistency:[
+ ['q','We are what we repeatedly do. Excellence, then, is not an act, but a habit.','Will Durant','The Story of Philosophy, summing up Aristotle'],
+ ['q','The journey of a thousand li commences with a single step.','Lao Tzu','Tao Te Ching (Legge translation)'],
+ ['q','Diligence is the mother of good luck.','Benjamin Franklin','Poor Richard’s Almanack'],
+ ['i','Goals set the direction, but your daily systems decide where you actually end up.','James Clear','Atomic Habits'],
+ ['i','Every small action is a vote for the kind of person you are becoming.','James Clear','Atomic Habits'],
+ ['i','Missing once is an accident. The rule is to never miss twice.','James Clear','Atomic Habits'],
+ ['i','No single push turns the flywheel. Many steady turns, in the same direction, build the momentum.','Jim Collins','Good to Great'],
+ ['i','One small habit, well chosen, can quietly change many other parts of your day.','Charles Duhigg','The Power of Habit'],
+ ['i','Passion plus perseverance over years beats talent that does not keep going.','Angela Duckworth','Grit']
+],
+success:[
+ ['q','Nothing great was ever achieved without enthusiasm.','Ralph Waldo Emerson','Circles'],
+ ['q','Nothing will ever be attempted, if all possible objections must first be overcome.','Samuel Johnson','Rasselas'],
+ ['q','It is not enough to be industrious; so are the ants. What are you industrious about?','Henry David Thoreau','Letter to Harrison Blake, 1857'],
+ ['i','Decide what success means for you before you chase it, so the climb does not end at the wrong wall.','Stephen R. Covey','The 7 Habits of Highly Effective People'],
+ ['i','Put first things first: the important work is rarely the urgent work, so protect time for it.','Stephen R. Covey','The 7 Habits of Highly Effective People'],
+ ['i','The leaders who build lasting organisations pair personal humility with fierce resolve.','Jim Collins','Good to Great'],
+ ['i','Become genuinely interested in other people. Relationships are built from interest, not from pitching.','Dale Carnegie','How to Win Friends and Influence People'],
+ ['i','Good care is judged by what matters to the person at the end of life, not by safety alone.','Atul Gawande','Being Mortal'],
+ ['i','Do the right things before you worry about doing things right.','Peter Drucker','on effectiveness']
+],
+spirituality:[
+ ['q','Let life be beautiful like summer flowers and death like autumn leaves.','Rabindranath Tagore','Stray Birds'],
+ ['q','Hatred does not cease by hatred, but only by love; this is the eternal rule.','The Buddha','Dhammapada, verse 5 (Müller translation)'],
+ ['q','Arise, awake, and stop not till the goal is reached.','Swami Vivekananda','after the Katha Upanishad'],
+ ['i','Do the work with full attention, and let go of gripping the result. Your right is to the action.','Bhagavad Gita','chapter 2, verse 47 (paraphrased)'],
+ ['i','Everything can be taken from a person except the freedom to choose their attitude in any given moment.','Viktor Frankl','Man’s Search for Meaning'],
+ ['i','Wash the dishes to wash the dishes. Being fully here is itself the practice.','Thich Nhat Hanh','The Miracle of Mindfulness'],
+ ['i','The present moment is the only place where life is actually happening.','Eckhart Tolle','The Power of Now'],
+ ['i','You cannot control what happens, only how you meet it. Spend your effort there.','Marcus Aurelius','Meditations'],
+ ['i','When the mind races, return to the breath. It is the bridge back to the present moment.','Thich Nhat Hanh','Peace Is Every Step']
+],
+promptness:[
+ ['q','Kal kare so aaj kar, aaj kare so ab. Pal mein pralay hoyegi, bahuri karega kab? (What you would do tomorrow, do today; what you would do today, do now. Life can end in a moment, so when will you do it?)','Kabir','Doha'],
+ ['q','Lost time is never found again.','Benjamin Franklin','Poor Richard’s Almanack'],
+ ['q','You may delay, but time will not.','Benjamin Franklin','Poor Richard’s Almanack'],
+ ['q','Better three hours too soon than a minute too late.','William Shakespeare','The Merry Wives of Windsor'],
+ ['i','It is not that life is short, but that we waste much of it.','Seneca','On the Shortness of Life'],
+ ['i','Do your hardest, most important task first, before the day can talk you out of it.','Brian Tracy','Eat That Frog!'],
+ ['i','If it takes less than two minutes, do it now. Small open loops weigh more than they look.','David Allen','Getting Things Done'],
+ ['i','Show up and start. Most of the battle is simply sitting down to do the work.','Steven Pressfield','The War of Art'],
+ ['i','Win the morning and the day usually follows.','Robin Sharma','The 5 AM Club']
+],
+proactive:[
+ ['q','Do the thing, and you shall have the power.','Ralph Waldo Emerson','Self-Reliance'],
+ ['q','An ounce of prevention is worth a pound of cure.','Benjamin Franklin','on fire prevention, 1735'],
+ ['i','Between what happens and how you respond there is a choice. Proactive people use it.','Stephen R. Covey','The 7 Habits of Highly Effective People'],
+ ['i','Spend your energy where you can actually influence things, and your circle of influence will grow.','Stephen R. Covey','The 7 Habits of Highly Effective People'],
+ ['i','The obstacle in the path becomes the path. Meet it early and act.','Ryan Holiday','The Obstacle Is the Way'],
+ ['i','A simple checklist prevents the avoidable failures that skill alone does not.','Atul Gawande','The Checklist Manifesto'],
+ ['i','Build the system so the business runs well even when you are not in the room.','Michael Gerber','The E-Myth Revisited'],
+ ['i','Give first. A small kindness offered before it is asked for creates goodwill that tends to come back.','Robert Cialdini','Influence'],
+ ['i','Choose to act on what is in your hands today instead of waiting for perfect clarity.','Marcus Aurelius','Meditations']
+]
+};
+function _qtAttr(it){
+  if(!it)return '';
+  var by=_esc(it[2])+(it[3]?' <span class="qt-src">· '+_esc(it[3])+'</span>':'');
+  return '<div class="qt-by">'+(it[0]==='i'?'<span class="qt-kind">Idea from</span> ':'<span class="qt-kind">—</span> ')+by+'</div>';
+}
+function _qtTxt(it){return (it[0]==='q'?'“'+it[1]+'”':it[1]);}
+
 function _qtIndex(){
   var a=_dParse(QT_EPOCH),b=_dParse(_todayISO());
   if(!a||!b)return 0;
@@ -6481,7 +6558,7 @@ function _qtCurrent(){
   var theme=QT_THEMES[i%QT_THEMES.length];
   var bank=QUOTES[theme];
   var n=Math.floor(i/QT_THEMES.length)%bank.length;
-  return {theme:theme,text:bank[n],i:i,n:n};
+  return {theme:theme,text:bank[n][1],item:bank[n],i:i,n:n};
 }
 function _qtNextChange(){
   // Quotes turn over on even offsets from the epoch.
@@ -6489,12 +6566,12 @@ function _qtNextChange(){
   var into=days%2;                       // 0 = changed today, 1 = changes tomorrow
   return into===0?'Changes tomorrow':'New quote tomorrow morning';
 }
-function _qtFavs(){try{return JSON.parse(getLS('aaroh_quote_favs')||'[]')||[];}catch(e){return [];}}
+function _qtFavs(){try{return JSON.parse(getLS('aaroh_quote_favs2')||'[]')||[];}catch(e){return [];}}
 function qtFav(){
   var q=_qtCurrent(),f=_qtFavs(),k=q.theme+':'+q.n;
   var i=f.indexOf(k);
   if(i>=0)f.splice(i,1);else f.push(k);
-  saveLS('aaroh_quote_favs',JSON.stringify(f));
+  saveLS('aaroh_quote_favs2',JSON.stringify(f));
   renderQuote();renderDashQuote();
 }
 function _qtIsFav(){var q=_qtCurrent();return _qtFavs().indexOf(q.theme+':'+q.n)>=0;}
@@ -6509,7 +6586,7 @@ function renderQuote(){
   var favs=_qtFavs();
   c.innerHTML='<div class="qt-top"><span class="qt-theme '+q.theme+'">'+QT_LBL[q.theme]+'</span>'+
       '<span class="qt-when">'+_qtNextChange()+'</span></div>'+
-    '<div class="qt-text">'+_esc(q.text)+'</div>'+
+    '<div class="qt-text">'+_esc(_qtTxt(q.item))+'</div>'+_qtAttr(q.item)+
     '<div class="qt-acts">'+
       '<button class="qt-btn'+(fav?' on':'')+'" onclick="qtFav()">'+(fav?'★ Saved':'☆ Save this')+'</button>'+
       '<button class="qt-btn" onclick="qtToggleBrowse()">'+(_qtBrowse?'Hide all':'Browse all')+'</button>'+
@@ -6522,10 +6599,10 @@ function renderQuote(){
   b.innerHTML='<div class="chip-row nw-chips" style="margin-bottom:12px">'+
     QT_THEMES.map(function(t){return '<button class="chip'+(_qtBrowseTheme===t?' on':'')+'" onclick="qtBrowseTheme(\''+t+'\')">'+QT_LBL[t]+'<b>'+QUOTES[t].length+'</b></button>';}).join('')+
     '</div>'+
-    '<div class="qt-list">'+QUOTES[_qtBrowseTheme].map(function(txt,i){
+    '<div class="qt-list">'+QUOTES[_qtBrowseTheme].map(function(it,i){
       var isFav=favs.indexOf(_qtBrowseTheme+':'+i)>=0;
       var isNow=(_qtBrowseTheme===q.theme&&i===q.n);
-      return '<div class="qt-item'+(isNow?' now':'')+'">'+(isFav?'<span class="s">★</span>':'')+_esc(txt)+
+      return '<div class="qt-item'+(isNow?' now':'')+'">'+(isFav?'<span class="s">★</span>':'')+_esc(_qtTxt(it))+_qtAttr(it)+
         (isNow?'<span class="tag">showing now</span>':'')+'</div>';
     }).join('')+'</div>';
 }
@@ -6535,7 +6612,7 @@ function renderDashQuote(){
   var q=_qtCurrent();
   c.innerHTML='<div class="db-quote" onclick="showPage(\'ritual\',null)">'+
     '<span class="qt-theme '+q.theme+'">'+QT_LBL[q.theme]+'</span>'+
-    '<div class="db-quote-t">'+_esc(q.text)+'</div></div>';
+    '<div class="db-quote-t">'+_esc(_qtTxt(q.item))+'</div>'+_qtAttr(q.item)+'</div>';
 }
 
 // ═══════════════════════════════════════════════════════════════════════
